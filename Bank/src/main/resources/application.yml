@@ -15,6 +15,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+#  security:
+#     oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8081/realms/springboot
+#          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs    
 
 eureka:
   instance:
@@ -26,4 +32,9 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 server:
   port: 8092
+#jwt:
+#  auth:
+#    converter:
+#      resource-id: keycloak-springboot
+#      principle-attribute: preferred_username  
 
