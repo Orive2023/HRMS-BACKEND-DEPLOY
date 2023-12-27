@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Dto.GoodReceivedDto;
+import com.orive.Procurement.Entity.GoodReceivedEntity;
 import com.orive.Procurement.Entity.GoodReceivedListEntity;
+import com.orive.Procurement.Entity.QuotationEntity;
 import com.orive.Procurement.Service.GoodReceivedService;
 
 
@@ -39,47 +43,59 @@ public class GoodReceivedController {
     @Autowired
     private GoodReceivedService goodReceivedService;
     
-    
- // Create a new GoodReceived
-//    @PostMapping("/create/goodreceived")
-//    public ResponseEntity<GoodReceivedDto> createGoodReceived(@RequestBody GoodReceivedDto goodReceivedDto) {
-//    	GoodReceivedDto createdGoodReceived = goodReceivedService.createGoodReceived(goodReceivedDto);
-//        logger.info("Created GoodReceived with name: {}", createdGoodReceived.getPurchaseOrder());
-//        return new ResponseEntity<>(createdGoodReceived, HttpStatus.CREATED);
-//    }
+
     
     
-  	// Create a new GoodReceived
+    
+    //  Create a new GoodReceived
     @PostMapping("/create/goodreceived")
-    public ResponseEntity<?> uploadImage(
-            @RequestParam("purchaseOrder")  String purchaseOrder,
+//  @PreAuthorize("hasRole('client_admin')")
+    public ResponseEntity<String> saveGoodReceivedEntity(
+            @RequestParam("purchaseOrder") String purchaseOrder,
             @RequestParam("paymentSource") String paymentSource,
             @RequestParam("vendorName") String vendorName,
-            @RequestParam("date")  LocalDate date,
+            @RequestParam("date") LocalDate date,
             @RequestParam("receivedByName") String receivedByName,
             @RequestParam("title")  String title,
-            @RequestParam("goodReceivedListEntities") List<GoodReceivedListEntity> goodReceivedListEntities,
-            @RequestParam("signatureAndStamp") MultipartFile file) {
-                           try {
-                          String uploadImage = goodReceivedService.uploadImage(purchaseOrder,paymentSource
-                          		,vendorName,date,receivedByName,title,goodReceivedListEntities,file);
-                        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
-                         } catch (IOException e) {
-                            e.printStackTrace();
-         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading file");
-         }
-        }
+            @RequestParam(value = "signatureAndStamp", required = false) MultipartFile file){
+    	
+    	String result = goodReceivedService.saveGoodReceivedEntity( 
+    			purchaseOrder, paymentSource, vendorName, date, receivedByName, title, file );
+    
+    	if(result != null) {
+    		 return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to save GoodReceived entity", HttpStatus.INTERNAL_SERVER_ERROR);
+       
+    	}
+    }
+       
+    
+////Get GoodReceived signatureAndStamp by VendorName
+//    @GetMapping("/download/{vendorName}")
+//	public ResponseEntity<?> downloadImage(@PathVariable String vendorName){
+//		byte[] imageData=goodReceivedService.downloadImage(vendorName);
+//		return ResponseEntity.status(HttpStatus.OK)
+//				.contentType(MediaType.valueOf("image/png"))
+//				.body(imageData);
+//	}   
     
     
-    
-//Get GoodReceived signatureAndStamp by VendorName
+//Get GoodReceived signatureAndStamp by VendorName  
     @GetMapping("/download/{vendorName}")
-	public ResponseEntity<?> downloadImage(@PathVariable String vendorName){
-		byte[] imageData=goodReceivedService.downloadImage(vendorName);
-		return ResponseEntity.status(HttpStatus.OK)
-				.contentType(MediaType.valueOf("image/png"))
-				.body(imageData);
-	}   
+    public ResponseEntity<byte[]> downloadsPdf(@PathVariable String vendorName) {
+        byte[] pdf = goodReceivedService.downloadPdf(vendorName);
+
+        if (pdf != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.builder("signatureAndStamp").filename(vendorName + "vendorName.pdf").build());
+            return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
 
     // Get all GoodReceived   
     @GetMapping("/get/goodreceived")
@@ -88,18 +104,29 @@ public class GoodReceivedController {
         logger.info("Retrieved {} GoodReceived from the database", goodReceived.size());
         return new ResponseEntity<>(goodReceived, HttpStatus.OK);
     }
+    
 
     // Get GoodReceivedbyId
+//    @GetMapping("/get/{goodReceivedId}")
+//    public ResponseEntity<GoodReceivedDto> getGoodReceivedbyId(@PathVariable Long goodReceivedId) {
+//        Optional<GoodReceivedDto> goodReceived = goodReceivedService.getGoodReceivedById(goodReceivedId);
+//        if (goodReceived.isPresent()) {
+//            logger.info("Retrieved GoodReceived with ID: {}", goodReceivedId);
+//            return new ResponseEntity<>(goodReceived.get(), HttpStatus.OK);
+//        } else {
+//            logger.warn("GoodReceived with ID {} not found", goodReceivedId);
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+    
+    
+    // Get GoodReceivedbyId
     @GetMapping("/get/{goodReceivedId}")
-    public ResponseEntity<GoodReceivedDto> getGoodReceivedbyId(@PathVariable Long goodReceivedId) {
-        Optional<GoodReceivedDto> goodReceived = goodReceivedService.getGoodReceivedById(goodReceivedId);
-        if (goodReceived.isPresent()) {
-            logger.info("Retrieved GoodReceived with ID: {}", goodReceivedId);
-            return new ResponseEntity<>(goodReceived.get(), HttpStatus.OK);
-        } else {
-            logger.warn("GoodReceived with ID {} not found", goodReceivedId);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<GoodReceivedEntity> getGoodReceivedByGoodReceivedId(@PathVariable Long goodReceivedId) {
+  	  logger.info("Received GoodReceived to get GoodReceived by ID: {}", goodReceivedId);
+  	GoodReceivedEntity goodReceived = goodReceivedService.getByGoodReceivedId(goodReceivedId);
+        logger.info("Fetched goodReceived details: {}", goodReceived);
+        return ResponseEntity.ok(goodReceived);
     }
 
     // Update GoodReceived by ID

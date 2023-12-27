@@ -21,6 +21,10 @@
 
     <modules>
         <module>Organisation</module>
+        <module>Procurement</module>
+        <module>TimeSheet</module>
+        <module>Interview-scheduler</module>
+        <module>Accounts</module>
         <module>Employee</module>
         <module>Bank</module>
         <module>Loan</module>

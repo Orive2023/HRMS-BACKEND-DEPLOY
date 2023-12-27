@@ -89,7 +89,6 @@
 			<version>7.0.0</version> <!-- Use the same version as cucumber-java -->
 			<scope>test</scope>
 		</dependency>
-
 </dependencies>
 
 	<build>

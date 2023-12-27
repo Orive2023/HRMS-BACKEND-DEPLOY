@@ -43,7 +43,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
     public List<QuotationListEntity> getAllQuotationList() {
     	logger.info("Received request to fetch all QuotationList.");
         List<QuotationListEntity> quotationList = quotationListService.getQuotationListAllDetails();
-        logger.info("Fetched {} expenses.", quotationList.size());
+        logger.info("Fetched {} Quotation.", quotationList.size());
         return quotationList;
     }
 
@@ -51,15 +51,15 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
     public List<QuotationListEntity> getQuotationByQuotationId(@PathVariable Long quotationId) {
     	logger.info("Received request to fetch quotation for quotationId: {}", quotationId);
         List<QuotationListEntity> quotationList = quotationListService.getQuotationListByQuotationId(quotationId);
-        logger.info("Fetched {} expenses for expenceId: {}", quotationList.size(), quotationId);
+        logger.info("Fetched {} Quotation for quotationId: {}", quotationList.size(), quotationId);
         return quotationList;
     }
 
     @GetMapping("/detail/{quotationListId}")
     public QuotationListEntity getQuotationListDetails(@PathVariable Long quotationListId) {
-    	logger.info("Received request to fetch QuotationList details for expenceListId: {}", quotationListId);
+    	logger.info("Received request to fetch QuotationList details for quotationListId: {}", quotationListId);
     	QuotationListEntity quotationList = quotationListService.getQuotationListByquotationListId(quotationListId);
-        logger.info("Fetched expense details: {}", quotationList);
+        logger.info("Fetched Quotation details: {}", quotationList);
         return quotationList;
     }
     

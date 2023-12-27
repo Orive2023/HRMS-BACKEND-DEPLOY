@@ -25,12 +25,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "committee")
+@Table(name = "committee_list")
 public class CommitteeListEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long committeeId;
+	private Long committeeListId;
+	
+	private Long bidAnalysisId;
 	
 	@Column(name = "name")
 	private String name;
