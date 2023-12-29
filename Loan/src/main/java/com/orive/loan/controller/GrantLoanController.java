@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.loan.dto.GrantLoanDto;
 import com.orive.loan.service.GrantLoanService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "grantloan")
@@ -33,6 +34,7 @@ public class GrantLoanController {
 	
 	// Create a new GrantLoan
     @PostMapping("/create/grantloan")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<GrantLoanDto> createGrantLoan(@RequestBody GrantLoanDto grantLoanDto) {
     	GrantLoanDto createdGrantLoan = grantLoanService.createGrantLoan(grantLoanDto);
         logger.info("Created GrantLoan with name: {}", createdGrantLoan.getEmployeeName());
@@ -41,6 +43,7 @@ public class GrantLoanController {
 
     // Get all GrantLoan   
     @GetMapping("/get/grantloan")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<GrantLoanDto>> getAllGrantLoan() {
         List<GrantLoanDto> grantLoan = grantLoanService.getAllGrantLoan();
         logger.info("Retrieved {} GrantLoan from the database", grantLoan.size());
@@ -49,6 +52,7 @@ public class GrantLoanController {
 
     // Get GrantLoan by ID
     @GetMapping("/get/{grantLoanId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<GrantLoanDto> getGrantLoanById(@PathVariable Long grantLoanId) {
         Optional<GrantLoanDto> grantLoan = grantLoanService.getGrantLoanById(grantLoanId);
         if (grantLoan.isPresent()) {
@@ -62,6 +66,7 @@ public class GrantLoanController {
 
     // Update GrantLoan by ID
     @PutMapping("/update/{grantLoanId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<GrantLoanDto> updateGrantLoan(@PathVariable Long grantLoanId, @RequestBody GrantLoanDto updatedGrantLoanDto) {
     	GrantLoanDto updatedGrantLoan = grantLoanService.updateGrantLoan(grantLoanId, updatedGrantLoanDto);
         if (updatedGrantLoan != null) {
@@ -77,6 +82,7 @@ public class GrantLoanController {
 
     // Delete GrantLoan by ID
     @DeleteMapping("/delete/{grantLoanId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteGrantLoan(@PathVariable Long grantLoanId) {
     	grantLoanService.deleteGrantLoan(grantLoanId);
         logger.info("Deleted GrantLoan with ID: {}", grantLoanId);
@@ -85,6 +91,7 @@ public class GrantLoanController {
 	    
     // Count the total GrantLoan
 	    @GetMapping("/count/grantloan")
+	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countGrantLoan()
 	    {
 	    	return grantLoanService.countGrantLoan();

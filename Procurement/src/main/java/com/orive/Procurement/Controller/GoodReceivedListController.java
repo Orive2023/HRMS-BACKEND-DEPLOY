@@ -19,6 +19,7 @@ import com.orive.Procurement.Entity.GoodReceivedListEntity;
 import com.orive.Procurement.Entity.QuotationListEntity;
 import com.orive.Procurement.Service.GoodReceivedListService;
 import com.orive.Procurement.Service.QuotationListService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "goodreceivedlist")
@@ -31,6 +32,7 @@ private  static final Logger logger=LoggerFactory.getLogger(GoodReceivedListCont
 	private GoodReceivedListService goodReceivedListService ;
 	
 	@PostMapping("/add")
+	 // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> addGoodReceivedList(@RequestBody GoodReceivedListEntity goodReceivedList) {
 		logger.info("Received request to add GoodReceivedList: {}", goodReceivedList);
 		goodReceivedListService.saveGoodReceivedList(goodReceivedList);
@@ -39,6 +41,7 @@ private  static final Logger logger=LoggerFactory.getLogger(GoodReceivedListCont
     }
 
     @GetMapping("/all")
+    // @PreAuthorize("hasRole('client_admin')")
     public List<GoodReceivedListEntity> getAllGoodReceivedList() {
     	logger.info("Received request to fetch all GoodReceivedList.");
         List<GoodReceivedListEntity> goodReceivedList = goodReceivedListService.getGoodReceivedListAllDetails();
@@ -47,6 +50,7 @@ private  static final Logger logger=LoggerFactory.getLogger(GoodReceivedListCont
     }
 
     @GetMapping("/{goodReceivedId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public List<GoodReceivedListEntity> getGoodReceivedByGoodReceivedId(@PathVariable Long goodReceivedId) {
     	logger.info("Received request to fetch GoodReceived for goodReceivedId: {}", goodReceivedId);
         List<GoodReceivedListEntity> goodReceivedList = goodReceivedListService.getGoodReceivedListByGoodReceivedId(goodReceivedId);
@@ -55,6 +59,7 @@ private  static final Logger logger=LoggerFactory.getLogger(GoodReceivedListCont
     }
 
     @GetMapping("/detail/{goodReceivedListId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public GoodReceivedListEntity getGoodReceivedListDetails(@PathVariable Long goodReceivedListId) {
     	logger.info("Received request to fetch GoodReceivedList details for goodReceivedListId: {}", goodReceivedListId);
     	GoodReceivedListEntity goodReceivedList = goodReceivedListService.getGoodReceivedListByGoodReceivedListId(goodReceivedListId);
@@ -80,6 +85,7 @@ private  static final Logger logger=LoggerFactory.getLogger(GoodReceivedListCont
 //    }
 
     @DeleteMapping("/delete/{goodReceivedListId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> deleteGoodReceivedList(@PathVariable Long goodReceivedListId) {
     	logger.info("Received request to delete GoodReceivedList with ID: {}", goodReceivedListId);
     	goodReceivedListService.deleteGoodReceivedList(goodReceivedListId);

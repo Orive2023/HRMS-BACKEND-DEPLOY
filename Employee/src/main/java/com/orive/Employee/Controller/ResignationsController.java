@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.ResignationsDto;
 import com.orive.Employee.Service.ResignationsService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "resignations")
@@ -33,6 +34,7 @@ public class ResignationsController {
 	 
 	// Create a new Resignation
      @PostMapping("/create/resignations")
+     // @PreAuthorize("hasRole('client_admin')")
      public ResponseEntity<ResignationsDto> createResignations(@RequestBody ResignationsDto resignationsDto) {
     	 ResignationsDto createdResignation = resignationsService.createResignations(resignationsDto);
          logger.info("Created resignations with id: {}", createdResignation.getEmployeeName());
@@ -42,6 +44,7 @@ public class ResignationsController {
      // Get all Resignations
      
      @GetMapping("/get/resignations")
+     // @PreAuthorize("hasRole('client_admin')")
      public ResponseEntity<List<ResignationsDto>> getAllResignations() {
          List<ResignationsDto> resignations = resignationsService.getAllResignations();
          logger.info("Retrieved {} resignations from the database", resignations.size());
@@ -50,6 +53,7 @@ public class ResignationsController {
 
      // Get resignation by ID
      @GetMapping("/get/{resignationId}")
+     // @PreAuthorize("hasRole('client_admin')")
      public ResponseEntity<ResignationsDto> getResignationId(@PathVariable Long resignationId) {
          Optional<ResignationsDto> resignations = resignationsService.getResignationsById(resignationId);
          if (resignations.isPresent()) {
@@ -63,6 +67,7 @@ public class ResignationsController {
 
      // Update resignation by ID
      @PutMapping("/update/{resignationId}")
+     // @PreAuthorize("hasRole('client_admin')")
      public ResponseEntity<ResignationsDto> updateResignations(@PathVariable Long resignationId, @RequestBody ResignationsDto updatedResignationsDTO) {
     	 ResignationsDto updatedResignations = resignationsService.updateResignations(resignationId, updatedResignationsDTO);
          if (updatedResignations != null) {
@@ -78,6 +83,7 @@ public class ResignationsController {
 
      // Delete Resignation by ID
      @DeleteMapping("/delete/{resignationId}")
+     // @PreAuthorize("hasRole('client_admin')")
      public ResponseEntity<Void> deleteResignations(@PathVariable Long resignationId) {
     	 resignationsService.deleteResignations(resignationId);
          logger.info("Deleted Resignations with ID: {}", resignationId);
@@ -86,6 +92,7 @@ public class ResignationsController {
  	    
   // Count the total  Resignation
  	    @GetMapping("/count/resignations")
+ 	   // @PreAuthorize("hasRole('client_admin')")
  	    public long countResignations()
  	    {
  	    	return resignationsService.countResignations();

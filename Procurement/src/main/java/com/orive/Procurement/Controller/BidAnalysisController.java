@@ -30,6 +30,7 @@ import com.orive.Procurement.Entity.CommitteeListEntity;
 import com.orive.Procurement.Entity.CompanyListEntity;
 import com.orive.Procurement.Exceptions.ResourceNotFoundException;
 import com.orive.Procurement.Service.BidAnalysisService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -76,6 +77,7 @@ public class BidAnalysisController {
     
  // Get BidAnalysis pdf by id  
     @GetMapping("/download/{bidAnalysisId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long bidAnalysisId) {
         byte[] pdf = bidAnalysisService.downloadPdf(bidAnalysisId);
 
@@ -91,6 +93,7 @@ public class BidAnalysisController {
     		
     // Get all BidAnalysis    
     @GetMapping("/get/bidAnalysis")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<BidAnalysisDto>> getAllBidAnalysis() {
         List<BidAnalysisDto> bidAnalysis = bidAnalysisService.getAllBidAnalysis();
         logger.info("Retrieved {} BidAnalysis from the database", bidAnalysis.size());
@@ -110,7 +113,8 @@ public class BidAnalysisController {
 //        }
 //    }
 
-    @GetMapping("/{bidAnalysisId}/combined-data")
+    @GetMapping("/combined-data/{bidAnalysisId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<BidAnalysisEntity> getCombinedData(@PathVariable Long bidAnalysisId) {
         try {
             BidAnalysisEntity combinedData = bidAnalysisService.getCombinedDataByBidAnalysisId(bidAnalysisId);
@@ -125,6 +129,7 @@ public class BidAnalysisController {
     
     // Update BidAnalysis by ID
     @PutMapping("/update/{bidAnalysisId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<BidAnalysisDto> updateBidAnalysis(@PathVariable Long bidAnalysisId, @RequestBody BidAnalysisDto updatedBidAnalysisDto) {
     	BidAnalysisDto updatedBidAnalysis= bidAnalysisService.updateBidAnalysis(bidAnalysisId, updatedBidAnalysisDto);
         if (updatedBidAnalysis != null) {
@@ -140,6 +145,7 @@ public class BidAnalysisController {
 
     // Delete BidAnalysis by ID
     @DeleteMapping("/delete/{bidAnalysisId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteBidAnalysis(@PathVariable Long bidAnalysisId) {
   	  bidAnalysisService.deleteBidAnalysis(bidAnalysisId);
         logger.info("Deleted BidAnalysis with ID: {}", bidAnalysisId);
@@ -148,6 +154,7 @@ public class BidAnalysisController {
 	    
     //Count the total BidAnalysis
 	    @GetMapping("/count/bidAnalysis")
+	//  @PreAuthorize("hasRole('client_admin')")
 	    public long countBidAnalysis()
 	    {
 	    	return bidAnalysisService.countBidAnalysis();

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Organisation.Dto.AnnoucementDto;
 import com.orive.Organisation.Service.AnnoucementService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -35,6 +36,7 @@ public class AnnoucementsController {
   
   	// Create a new Annoucement
       @PostMapping("/create/announcement")
+       //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<AnnoucementDto> createAnnoucement(@RequestBody AnnoucementDto annoucementDto) {
     	  AnnoucementDto createdAnnoucement = annoucementService.createAnnouncements(annoucementDto);
           logger.info("Created Annoucement with name: {}", createdAnnoucement.getCompanyName());
@@ -44,6 +46,7 @@ public class AnnoucementsController {
       // Get all Annoucement
       
       @GetMapping("/get/announcement")
+       //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<AnnoucementDto>> getAllAnnoucement() {
           List<AnnoucementDto> announcement = annoucementService.getAllAnnouncements();
           logger.info("Retrieved {} Annoucement from the database", announcement.size());
@@ -52,6 +55,7 @@ public class AnnoucementsController {
 
       // Get Annoucement by ID
       @GetMapping("/get/{announcementId}")
+      // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<AnnoucementDto> getAnnoucementById(@PathVariable Long announcementId) {
           Optional<AnnoucementDto> announcement = annoucementService.getAnnouncementsById(announcementId);
           if (announcement.isPresent()) {
@@ -65,6 +69,7 @@ public class AnnoucementsController {
 
       // Update Annoucement by ID
       @PutMapping("/update/{announcementId}")
+       //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<AnnoucementDto> updateAnnoucement(@PathVariable Long announcementId, @RequestBody AnnoucementDto updatedAnnoucementDTO) {
     	  AnnoucementDto updatedAnnoucement= annoucementService.updateAnnouncement(announcementId, updatedAnnoucementDTO);
           if (updatedAnnoucement != null) {
@@ -80,6 +85,7 @@ public class AnnoucementsController {
 
       // Delete Annoucement by ID
       @DeleteMapping("/delete/{announcementId}")
+       //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteAnnoucement(@PathVariable Long announcementId) {
     	  annoucementService.deleteAnnouncement(announcementId);
           logger.info("Deleted Annoucement with ID: {}", announcementId);
@@ -88,6 +94,7 @@ public class AnnoucementsController {
   	    
       //Count the total Annoucement
   	    @GetMapping("/count/announcement")
+  	   //@PreAuthorize("hasRole('client_admin')")
   	    public long countAnnoucement()
   	    {
   	    	return annoucementService.countAnnouncement();

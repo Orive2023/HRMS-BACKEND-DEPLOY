@@ -1,10 +1,19 @@
 package com.orivesolutions.hrms.interviewscheduler.domain;
 
 import com.orivesolutions.hrms.interviewscheduler.enums.Role;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.persistence.*;
 
 @Data
 @Entity

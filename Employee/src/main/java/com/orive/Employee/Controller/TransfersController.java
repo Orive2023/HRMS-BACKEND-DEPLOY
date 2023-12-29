@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Service.TransfersService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -35,6 +36,7 @@ public class TransfersController {
   
   	// Create a new Transfers
       @PostMapping("/create/transfers")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<TransfersDto> createTransfers(@RequestBody TransfersDto transfersDto) {
     	  TransfersDto createdTransfer = transfersService.createTransfers(transfersDto);
           logger.info("Created Transfers with name: {}", createdTransfer.getEmployeeName());
@@ -43,6 +45,7 @@ public class TransfersController {
 
       // Get all Transfers
       @GetMapping("/get/transfers")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<TransfersDto>> getAllTransfers() {
           List<TransfersDto> transfer = transfersService.getAllTransfers();
           logger.info("Retrieved {} Transfers from the database", transfer.size());
@@ -51,6 +54,7 @@ public class TransfersController {
 
       // Get Transfers by ID
       @GetMapping("/get/{transferId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<TransfersDto> getTransfersById(@PathVariable Long transferId) {
           Optional<TransfersDto> transfer = transfersService.getTransfersById(transferId);
           if (transfer.isPresent()) {
@@ -64,6 +68,7 @@ public class TransfersController {
 
       // Update Transfers by ID
       @PutMapping("/update/{transferId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<TransfersDto> updateTransfers(@PathVariable Long transferId, @RequestBody TransfersDto updatedTransfersDto) {
     	  TransfersDto updatedTransfer = transfersService.updateTransfers(transferId, updatedTransfersDto);
           if (updatedTransfer != null) {
@@ -79,6 +84,7 @@ public class TransfersController {
 
       // Delete Transfers by ID
       @DeleteMapping("/delete/{transferId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteTransfers(@PathVariable Long transferId) {
     	  transfersService.deleteTransfers(transferId);
           logger.info("Deleted Transfers with ID: {}", transferId);
@@ -87,6 +93,7 @@ public class TransfersController {
   	    
    // Count the total Transfers
   	    @GetMapping("/count/transfers")
+  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countTransfers()
   	    {
   	    	return transfersService.countTransfers();

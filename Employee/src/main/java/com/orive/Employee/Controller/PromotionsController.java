@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.PromotionsDto;
 import com.orive.Employee.Service.PromotionsService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -35,6 +36,7 @@ public class PromotionsController {
 	 
 	// Create a new promotions
    @PostMapping("/create/promotions")
+   // @PreAuthorize("hasRole('client_admin')")
    public ResponseEntity<PromotionsDto> createPromotions(@RequestBody PromotionsDto promotionsDto) {
 	   PromotionsDto createdPromotions = promotionsService.createPromotions(promotionsDto);
        logger.info("Created Promotions with id: {}", createdPromotions.getEmployeeName());
@@ -44,6 +46,7 @@ public class PromotionsController {
    // Get all promotions
    
    @GetMapping("/get/promotions")
+   // @PreAuthorize("hasRole('client_admin')")
    public ResponseEntity<List<PromotionsDto>> getAllPromotions() {
        List<PromotionsDto> promotions = promotionsService.getAllPromotions();
        logger.info("Retrieved {} Promotions from the database", promotions.size());
@@ -52,6 +55,7 @@ public class PromotionsController {
 
    // Get promotions by ID
    @GetMapping("/get/{promotionsId}")
+   // @PreAuthorize("hasRole('client_admin')")
    public ResponseEntity<PromotionsDto> getPromotionsId(@PathVariable Long promotionsId) {
        Optional<PromotionsDto> promotions = promotionsService.getPromotionsById(promotionsId);
        if (promotions.isPresent()) {
@@ -65,6 +69,7 @@ public class PromotionsController {
 
    // Update promotions by ID
    @PutMapping("/update/{promotionsId}")
+   // @PreAuthorize("hasRole('client_admin')")
    public ResponseEntity<PromotionsDto> updatePromotions(@PathVariable Long promotionsId, @RequestBody PromotionsDto updatedPromotionsDTO) {
 	   PromotionsDto updatedPromotions = promotionsService.updatePromotions(promotionsId, updatedPromotionsDTO);
        if (updatedPromotions != null) {
@@ -78,6 +83,7 @@ public class PromotionsController {
    
    // Delete promotions by ID
    @DeleteMapping("/delete/{promotionsId}")
+   // @PreAuthorize("hasRole('client_admin')")
    public ResponseEntity<Void> deletePromotions(@PathVariable Long promotionsId) {
 	   promotionsService.deletePromotions(promotionsId);
        logger.info("Deleted Promotions with ID: {}", promotionsId);
@@ -86,6 +92,7 @@ public class PromotionsController {
 	    
    // Count the total promotions 
 	    @GetMapping("/count/promotions")
+	    // @PreAuthorize("hasRole('client_admin')")
 	    public long countPromotions()
 	    {
 	    	return promotionsService.countPromotions();

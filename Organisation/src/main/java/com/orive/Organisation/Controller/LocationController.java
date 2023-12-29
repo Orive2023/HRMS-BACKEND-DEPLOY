@@ -22,6 +22,7 @@ import com.orive.Organisation.Dto.LocationDto;
 import com.orive.Organisation.Entity.LocationEntity;
 import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Service.LocationService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "location")
@@ -36,6 +37,7 @@ public class LocationController {
   
   	// Create a new Location
       @PostMapping("/create/location")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<LocationDto> createLocation(@RequestBody LocationDto locationDto) {
     	  LocationDto createdLocation = locationService.createLocation(locationDto);
           logger.info("Created Location with name: {}", createdLocation.getCompanyName());
@@ -44,6 +46,7 @@ public class LocationController {
 
       // Get all Location  
       @GetMapping("/get/location")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<LocationDto>> getAllLocation() {
           List<LocationDto> location = locationService.getAllLocation();
           logger.info("Retrieved {} Location from the database", location.size());
@@ -52,6 +55,7 @@ public class LocationController {
 
       // Get Location by ID
       @GetMapping("/get/{locationId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<LocationDto> getLocationById(@PathVariable Long locationId) {
           Optional<LocationDto> location = locationService.getLocationById(locationId);
           if (location.isPresent()) {
@@ -65,6 +69,7 @@ public class LocationController {
       
       // Get the Location by company name
   	  @GetMapping("/{companyName}")
+  	// @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<LocationEntity>> getLocationsByCompanyName(@PathVariable String companyName) {
           try {
         	  logger.info("Request to get locations for company: " + companyName);
@@ -82,6 +87,7 @@ public class LocationController {
 
       // Update Location by ID
       @PutMapping("/update/{locationId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<LocationDto> updateLocation(@PathVariable Long locationId, @RequestBody LocationDto updatedLocationDto) {
     	  LocationDto updatedLocation = locationService.updateLocation(locationId, updatedLocationDto);
           if (updatedLocation != null) {
@@ -97,6 +103,7 @@ public class LocationController {
 
       // Delete Location by ID
       @DeleteMapping("/delete/{locationId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteLocation(@PathVariable Long locationId) {
     	  locationService.deleteLocation(locationId);
           logger.info("Deleted Location with ID: {}", locationId);
@@ -105,6 +112,7 @@ public class LocationController {
       
       //Count the total Location 
   	    @GetMapping("/count/location")
+  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countLocation()
   	    {
   	    	return locationService.countLocation();

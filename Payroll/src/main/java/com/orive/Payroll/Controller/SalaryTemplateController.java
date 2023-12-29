@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Payroll.Dto.SalaryTemplateDto;
 import com.orive.Payroll.Service.SalaryTemplateService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -37,6 +38,7 @@ public class SalaryTemplateController {
   
   	// Create a new SalaryTemplate
       @PostMapping("/create/salaryTemplate")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<SalaryTemplateDto> createSalaryTemplate(@RequestBody SalaryTemplateDto salaryTemplateDto) {
     	  SalaryTemplateDto createdSalaryTemplate = salaryTemplateService.createSalaryTemplate(salaryTemplateDto);
           logger.info("Created SalaryTemplate with name: {}", createdSalaryTemplate.getBasicSalery());
@@ -45,6 +47,7 @@ public class SalaryTemplateController {
 
       // Get all SalaryTemplate      
       @GetMapping("/get/salaryTemplate")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<SalaryTemplateDto>> getAllSalaryTemplate() {
           List<SalaryTemplateDto> salaryTemplate = salaryTemplateService.getAllSalaryTemplate();
           logger.info("Retrieved {} SalaryTemplate from the database", salaryTemplate.size());
@@ -53,6 +56,7 @@ public class SalaryTemplateController {
 
       // Get SalaryTemplate by ID
       @GetMapping("/get/{salaryTemplateId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<SalaryTemplateDto> getSalaryTemplateById(@PathVariable Long salaryTemplateId) {
           Optional<SalaryTemplateDto> salaryTemplate = salaryTemplateService.getSalaryTemplateById(salaryTemplateId);
           if (salaryTemplate.isPresent()) {
@@ -66,6 +70,7 @@ public class SalaryTemplateController {
 
       // Update SalaryTemplate by ID
       @PutMapping("/update/{salaryTemplateId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<SalaryTemplateDto> updateSalaryTemplate(@PathVariable Long salaryTemplateId, @RequestBody SalaryTemplateDto updatedSalaryTemplateDto) {
     	  SalaryTemplateDto updatedSalaryTemplate = salaryTemplateService.updateSalaryTemplate(salaryTemplateId, updatedSalaryTemplateDto);
           if (updatedSalaryTemplate != null) {
@@ -81,6 +86,7 @@ public class SalaryTemplateController {
 
       // Delete SalaryTemplate by ID
       @DeleteMapping("/delete/{salaryTemplateId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteSalaryTemplate(@PathVariable Long salaryTemplateId) {
     	  salaryTemplateService.deleteSalaryTemplate(salaryTemplateId);
           logger.info("Deleted SalaryTemplate with ID: {}", salaryTemplateId);
@@ -89,6 +95,7 @@ public class SalaryTemplateController {
   	   
       //Count the total SalaryTemplate
   	    @GetMapping("/count/payrolltemplate")
+  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countSalaryTemplate()
   	    {
   	    	return salaryTemplateService.countSalaryTemplate();

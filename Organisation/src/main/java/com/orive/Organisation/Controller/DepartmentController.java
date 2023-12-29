@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.orive.Organisation.Dto.DepartmentDto;
 import com.orive.Organisation.Entity.DepartmentEntity;
 import com.orive.Organisation.Service.DepartmentService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 import jakarta.validation.Valid;
 
@@ -39,6 +40,7 @@ public class DepartmentController {
   
   	// Create a new Department
       @PostMapping("/create/department")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<DepartmentDto> createDepartment(@Valid @RequestBody DepartmentDto departmentDto) {
     	  DepartmentDto createdDepartment = departmentService.createDepartment(departmentDto);
           logger.info("Created Department with name: {}", createdDepartment.getCompanyName());
@@ -47,6 +49,7 @@ public class DepartmentController {
 
       // Get all Department     
       @GetMapping("/get/department")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<DepartmentDto>> getAllDepartment() {
           List<DepartmentDto> department = departmentService.getAllDepartment();
           logger.info("Retrieved {} Department from the database", department.size());
@@ -55,6 +58,7 @@ public class DepartmentController {
 
       // Get Department by ID
       @GetMapping("/get/{departmentId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<DepartmentDto> getDepartmentById(@PathVariable Long departmentId) {
           Optional<DepartmentDto> department = departmentService.getDepartmentById(departmentId);
           if (department.isPresent()) {
@@ -68,6 +72,7 @@ public class DepartmentController {
 
       // Update Department by ID
       @PutMapping("/update/{departmentId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<DepartmentDto> updateDepartment(@PathVariable Long departmentId, @RequestBody DepartmentDto updatedDepartmentDto) {
     	  DepartmentDto updatedDepartment = departmentService.updateDepartment(departmentId, updatedDepartmentDto);
           if (updatedDepartment != null) {
@@ -83,6 +88,7 @@ public class DepartmentController {
 
       // Delete Department by ID
       @DeleteMapping("/delete/{departmentId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteDepartment(@PathVariable Long departmentId) {
     	  departmentService.deleteDepartment(departmentId);
           logger.info("Deleted Department with ID: {}", departmentId);
@@ -107,6 +113,7 @@ public class DepartmentController {
       
    // count the total Department    
   	    @GetMapping("/count/department")
+  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countDepartment()
   	    {
   	    	return departmentService.countDepartment();

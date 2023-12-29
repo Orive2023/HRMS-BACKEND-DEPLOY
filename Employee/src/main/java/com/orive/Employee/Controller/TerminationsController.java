@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.TerminationsDto;
 import com.orive.Employee.Service.TerminationsService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -35,6 +36,7 @@ public class TerminationsController {
 	 
 		// Create a new Terminations
      @PostMapping("/create/terminations")
+  // @PreAuthorize("hasRole('client_admin')")
      public ResponseEntity<TerminationsDto> createTerminations(@RequestBody TerminationsDto terminationsDto) {
     	 TerminationsDto createdTerminations = terminationsService.createTerminations(terminationsDto);
          logger.info("Created Terminations with name: {}", createdTerminations.getEmployeeName());
@@ -43,6 +45,7 @@ public class TerminationsController {
 
      // Get all Terminations  
      @GetMapping("/get/terminationsId")
+  // @PreAuthorize("hasRole('client_admin')")
      public ResponseEntity<List<TerminationsDto>> getAllTerminations  () {
          List<TerminationsDto> terminations = terminationsService.getAllTerminations();
          logger.info("Retrieved {} Terminations from the database", terminations.size());
@@ -51,6 +54,7 @@ public class TerminationsController {
 
      // Get Terminations by ID
      @GetMapping("/get/{terminationsId}")
+  // @PreAuthorize("hasRole('client_admin')")
      public ResponseEntity<TerminationsDto> getTerminationsById(@PathVariable Long terminationsId) {
          Optional<TerminationsDto> terminations = terminationsService.getTerminationsById(terminationsId);
          if (terminations.isPresent()) {
@@ -64,6 +68,7 @@ public class TerminationsController {
 
      // Update Terminations by ID
      @PutMapping("/update/{terminationsId}")
+  // @PreAuthorize("hasRole('client_admin')")
      public ResponseEntity<TerminationsDto> updateTerminations(@PathVariable Long terminationsId, @RequestBody TerminationsDto updatedTerminationsDto) {
     	 TerminationsDto updatedTerminations = terminationsService.updateTerminations(terminationsId, updatedTerminationsDto);
          if (updatedTerminations != null) {
@@ -79,6 +84,7 @@ public class TerminationsController {
 
      // Delete Terminations by ID
      @DeleteMapping("/delete/{terminationsId}")
+  // @PreAuthorize("hasRole('client_admin')")
      public ResponseEntity<Void> deleteTerminations(@PathVariable Long terminationsId) {
    	  terminationsService.deleteTerminations(terminationsId);
          logger.info("Deleted Terminations with ID: {}", terminationsId);
@@ -87,6 +93,7 @@ public class TerminationsController {
  	    
      // Count the total Terminations
  	    @GetMapping("/count/awards")
+ 	// @PreAuthorize("hasRole('client_admin')")
  	    public long countTerminations()
  	    {
  	    	return terminationsService.countTerminations();

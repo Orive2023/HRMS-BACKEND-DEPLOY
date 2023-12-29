@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Accounts.Dto.AccountListDto;
 import com.orive.Accounts.Service.AccountListService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -35,6 +36,7 @@ public class AccountListController {
 	
 	// Create a new AccountList
     @PostMapping("/create/accountlist")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AccountListDto> createAccountList(@RequestBody AccountListDto accountListDto) {
     	AccountListDto createdAccountList = accountListService.createAccountList(accountListDto);
         logger.info("Created AccountList with name: {}", createdAccountList.getEmployeeName());
@@ -43,6 +45,7 @@ public class AccountListController {
 
     // Get all AccountList   
     @GetMapping("/get/accountlist")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<AccountListDto>> getAllAccountList() {
         List<AccountListDto> accountList = accountListService.getAllAccountList();
         logger.info("Retrieved {} AccountList from the database", accountList.size());
@@ -51,6 +54,7 @@ public class AccountListController {
 
     // Get AccountList by ID
     @GetMapping("/get/{accountListId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AccountListDto> getAccountListById(@PathVariable Long accountListId) {
         Optional<AccountListDto> accountList = accountListService.getAccountListById(accountListId);
         if (accountList.isPresent()) {
@@ -64,6 +68,7 @@ public class AccountListController {
 
     // Update AccountList by ID
     @PutMapping("/update/{accountListId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AccountListDto> updateAccountList(@PathVariable Long accountListId, @RequestBody AccountListDto updatedAccountListDto) {
     	AccountListDto updatedAccountList = accountListService.updateAccountList(accountListId, updatedAccountListDto);
         if (updatedAccountList != null) {
@@ -79,6 +84,7 @@ public class AccountListController {
 
     // Delete AccountList by ID
     @DeleteMapping("/delete/{accountListId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteAccountList(@PathVariable Long accountListId) {
     	accountListService.deleteAccountList(accountListId);
         logger.info("Deleted AccountList with ID: {}", accountListId);
@@ -87,6 +93,7 @@ public class AccountListController {
 	    
     // Count the total AccountList 
 	    @GetMapping("/count/accountlist")
+	    // @PreAuthorize("hasRole('client_admin')")
 	    public long countAccountList()
 	    {
 	    	return accountListService.countAccountList();

@@ -31,6 +31,7 @@ import com.orive.TimeSheet.Dto.HolidaysDto;
 import com.orive.TimeSheet.Entity.AttendanceEntity;
 import com.orive.TimeSheet.ExcelToDataBase.Help.*;
 import com.orive.TimeSheet.Service.AttendanceService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "attendance")
@@ -44,6 +45,7 @@ public class AttendanceController {
 	
 	 //Create a new Attendance
     @PostMapping("/create/attendance")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
     	AttendanceDto createdAttendance = attendanceService.createsAttendances(attendanceDto);
         logger.info("Created Attendance with name: {}", createdAttendance.getEmployeeName());
@@ -94,6 +96,7 @@ public class AttendanceController {
     
     
     @PostMapping("/product/upload")
+ // @PreAuthorize("hasRole('client_admin')")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file)
 	{
 		if(ExcelHelper.chechExcelFormat(file))
@@ -107,6 +110,7 @@ public class AttendanceController {
 	
 	
 	@GetMapping("/get/product")
+	// @PreAuthorize("hasRole('client_admin')")
 	public List<AttendanceEntity> getAllAttendanceEntities()
 	{
 		return this.attendanceService.getAllAttendancesEntities();
@@ -116,6 +120,7 @@ public class AttendanceController {
 
     // Get all Attendance   
     @GetMapping("/get/attendance")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<AttendanceDto>> getAllAttendance() {
         List<AttendanceDto> attendance = attendanceService.getAllAttendances();
         logger.info("Retrieved {} Attendance from the database", attendance.size());
@@ -124,6 +129,7 @@ public class AttendanceController {
 
     // Get Attendance by ID
     @GetMapping("/get/{attendanceId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AttendanceDto> getAttendanceById(@PathVariable Long attendanceId) {
         Optional<AttendanceDto> attendance = attendanceService.getAttendanceById(attendanceId);
         if (attendance.isPresent()) {
@@ -137,6 +143,7 @@ public class AttendanceController {
 
     // Update Attendance by ID
     @PutMapping("/update/{attendanceId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AttendanceDto> updateAttendance(@PathVariable Long attendanceId, @RequestBody AttendanceDto updatedAttendanceDto) {
     	AttendanceDto updatedAttendance = attendanceService.updateAttendances(attendanceId, updatedAttendanceDto);
         if (updatedAttendance != null) {
@@ -152,6 +159,7 @@ public class AttendanceController {
 
     // Delete Attendance by ID
     @DeleteMapping("/delete/{attendanceId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteAttendance(@PathVariable Long attendanceId) {
   	  attendanceService.deleteAttendances(attendanceId);
         logger.info("Deleted Attendance with ID: {}", attendanceId);
@@ -160,6 +168,7 @@ public class AttendanceController {
 	    
     //count the total Attendance
 	    @GetMapping("/count/attendance")
+	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countAttendance()
 	    {
 	    	return attendanceService.countAttendances();
@@ -167,6 +176,7 @@ public class AttendanceController {
 
 	    //count the total Attendance of employees present today    
 	    @GetMapping("/count/present/attendance")
+	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countPresentEmployeesToday()
 	    {
 	    	return attendanceService.countPresentEmployeesToday();

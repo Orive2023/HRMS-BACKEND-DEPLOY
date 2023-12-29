@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.orive.Employee.Dto.CompanyStationaryDto;
 import com.orive.Employee.Service.AwardsService;
 import com.orive.Employee.Service.CompanyStationaryService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "companystationary")
@@ -35,6 +36,7 @@ public class CompanyStationaryController {
   
   	// Create a new CompanyStationary
       @PostMapping("/create/companystationary")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<CompanyStationaryDto> createCompanyStationary(@RequestBody CompanyStationaryDto companyStationaryDto) {
     	  CompanyStationaryDto createdCompanyStationary = companyStationaryService.createCompanyStationary(companyStationaryDto);
           logger.info("Created CompanyStationary with name: {}", createdCompanyStationary.getEmployeeName());
@@ -43,6 +45,7 @@ public class CompanyStationaryController {
 
       // Get all CompanyStationary      
       @GetMapping("/get/companystationary")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<CompanyStationaryDto>> getAllCompanyStationary() {
           List<CompanyStationaryDto> companyStationary = companyStationaryService.getAllCompanyStationary();
           logger.info("Retrieved {} CompanyStationary from the database", companyStationary.size());
@@ -51,6 +54,7 @@ public class CompanyStationaryController {
 
       // Get CompanyStationary by ID
       @GetMapping("/get/{companyStationaryId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<CompanyStationaryDto> getCompanyStationaryById(@PathVariable Long companyStationaryId) {
           Optional<CompanyStationaryDto> companyStationary = companyStationaryService.getCompanyStationaryById(companyStationaryId);
           if (companyStationary.isPresent()) {
@@ -64,6 +68,7 @@ public class CompanyStationaryController {
 
       // Update CompanyStationary by ID
       @PutMapping("/update/{companyStationaryId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<CompanyStationaryDto> updateCompanyStationary(@PathVariable Long companyStationaryId, @RequestBody CompanyStationaryDto updatedCompanyStationaryDto) {
     	  CompanyStationaryDto updatedCompanyStationary = companyStationaryService.updateCompanyStationary(companyStationaryId, updatedCompanyStationaryDto);
           if (updatedCompanyStationary != null) {
@@ -79,6 +84,7 @@ public class CompanyStationaryController {
 
       // Delete CompanyStationary by ID
       @DeleteMapping("/delete/{companyStationaryId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteCompanyStationary(@PathVariable Long companyStationaryId) {
     	  companyStationaryService.deleteCompanyStationary(companyStationaryId);
           logger.info("Deleted CompanyStationary with ID: {}", companyStationaryId);
@@ -87,6 +93,7 @@ public class CompanyStationaryController {
   	    
       //Count CompanyStationary
   	    @GetMapping("/count/companystationary")
+  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countCompanyStationary()
   	    {
   	    	return companyStationaryService.countCompanyStationary();

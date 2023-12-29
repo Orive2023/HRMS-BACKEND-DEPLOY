@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Organisation.Dto.PoliciesDto;
 import com.orive.Organisation.Service.PoliciesService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -43,6 +44,7 @@ public class PoliciesController {
     
  // Create a new policies
     @PostMapping("/create/policies")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> savePoliciesEntity(
     		 @RequestParam String companyName,
     		 @RequestParam String title,
@@ -63,6 +65,7 @@ public class PoliciesController {
     
  // Get Policies pdf by id  
     @GetMapping("/download/{policiesId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long policiesId) {
         byte[] pdf = policiesService.downloadPdf(policiesId);
 
@@ -79,6 +82,7 @@ public class PoliciesController {
 
       // Get all Policies  
       @GetMapping("/get/policies")
+      // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<PoliciesDto>> getAllPolicies() {
           List<PoliciesDto> policies = policiesService.getAllPolicies();
           logger.info("Retrieved {} Policies from the database", policies.size());
@@ -87,6 +91,7 @@ public class PoliciesController {
 
       // Get Policies by ID
       @GetMapping("/get/{policiesId}")
+      // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<PoliciesDto> getPoliciesById(@PathVariable Long policiesId) {
           Optional<PoliciesDto> policies = policiesService.getPoliciesById(policiesId);
           if (policies.isPresent()) {
@@ -100,6 +105,7 @@ public class PoliciesController {
 
       // Update Policies by ID
       @PutMapping("/update/{policiesId}")
+      // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<PoliciesDto> updatePolicies(@PathVariable Long policiesId, @RequestBody PoliciesDto updatedPoliciesDto) {
     	  PoliciesDto updatedPolicies = policiesService.updatePolicies(policiesId, updatedPoliciesDto);
           if (updatedPolicies != null) {
@@ -115,6 +121,7 @@ public class PoliciesController {
 
       // Delete Policies by ID
       @DeleteMapping("/delete/{policiesId}")
+      // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deletePolicies(@PathVariable Long policiesId) {
     	  policiesService.deletePolicies(policiesId);
           logger.info("Deleted Policies with ID: {}", policiesId);
@@ -123,6 +130,7 @@ public class PoliciesController {
   	    
       //Count the total Policies
   	    @GetMapping("/count/policies")
+  	  // @PreAuthorize("hasRole('client_admin')")
   	    public long countPolicies()
   	    {
   	    	return policiesService.countPolicies();

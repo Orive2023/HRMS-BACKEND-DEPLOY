@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.orive.Procurement.Dto.QuotationDto;
 import com.orive.Procurement.Entity.QuotationEntity;
 import com.orive.Procurement.Service.QuotationService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -64,6 +65,7 @@ public class QuotationController {
     
  // Get Quotation pdf by id  
     @GetMapping("/download/{quotationId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long quotationId) {
         byte[] pdf = quotationService.downloadPdf(quotationId);
 
@@ -79,6 +81,7 @@ public class QuotationController {
     		
       // Get all Quotation
       @GetMapping("/get/quotation")
+  //  @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<QuotationDto>> getAllQuotation() {
           List<QuotationDto> quotation = quotationService.getAllQuotation();
           logger.info("Retrieved {} Quotation from the database", quotation.size());
@@ -87,6 +90,7 @@ public class QuotationController {
 
       // Get quotationId
       @GetMapping("/get/{quotationId}")
+  //  @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<QuotationEntity> getQuotationByQuotationId(@PathVariable Long quotationId) {
     	  logger.info("Received Quotation to get Quotation by ID: {}", quotationId);
     	  QuotationEntity quotation = quotationService.getByQuotationId(quotationId);
@@ -99,6 +103,7 @@ public class QuotationController {
 
       // Delete Quotation by ID
       @DeleteMapping("/delete/{quotationId}")
+  //  @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteQuotation(@PathVariable Long quotationId) {
     	  quotationService.deleteQuotation(quotationId);
           logger.info("Deleted Quotation with ID: {}", quotationId);
@@ -107,6 +112,7 @@ public class QuotationController {
   	    
       //Count the total Quotation
   	    @GetMapping("/count/quotation")
+  	//  @PreAuthorize("hasRole('client_admin')")
   	    public long countQuotation()
   	    {
   	    	return quotationService.countQuotation();

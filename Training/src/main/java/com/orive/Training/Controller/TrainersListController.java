@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Training.Dto.TrainersListDto;
 import com.orive.Training.Service.TrainersListService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "trainerslist")
@@ -33,6 +34,7 @@ public class TrainersListController {
 	
 	// Create a new TrainersList
     @PostMapping("/create/trainerslist")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<TrainersListDto> createTrainersList(@RequestBody TrainersListDto trainersListDto) {
     	TrainersListDto createdTrainersList = trainersListService.createTrainersList(trainersListDto);
         logger.info("Created TrainersList with name: {}", createdTrainersList.getTrainersFullName());
@@ -41,6 +43,7 @@ public class TrainersListController {
 
     // Get all TrainersList   
     @GetMapping("/get/trainerslist")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<TrainersListDto>> getAllTrainersList() {
         List<TrainersListDto> trainersList = trainersListService.getAllTrainersList();
         logger.info("Retrieved {} TrainersList from the database", trainersList.size());
@@ -49,6 +52,7 @@ public class TrainersListController {
 
     // Get TrainersList by ID
     @GetMapping("/get/{trainersListId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<TrainersListDto> getTrainersListById(@PathVariable Long trainersListId) {
         Optional<TrainersListDto> trainersList = trainersListService.getTrainersListById(trainersListId);
         if (trainersList.isPresent()) {
@@ -62,6 +66,7 @@ public class TrainersListController {
 
     // Update TrainersList by ID
     @PutMapping("/update/{trainersListId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<TrainersListDto> updateTrainersList(@PathVariable Long trainersListId, @RequestBody TrainersListDto updatedTrainersListDto) {
     	TrainersListDto updatedTrainersList = trainersListService.updateTrainersList(trainersListId, updatedTrainersListDto);
         if (updatedTrainersList != null) {
@@ -77,6 +82,7 @@ public class TrainersListController {
 
     // Delete TrainersList by ID
     @DeleteMapping("/delete/{trainersListId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteTrainersList(@PathVariable Long trainersListId) {
   	  trainersListService.deleteTrainersList(trainersListId);
         logger.info("Deleted TrainersList with ID: {}", trainersListId);
@@ -84,6 +90,7 @@ public class TrainersListController {
     }
 	    
 	    @GetMapping("/count/trainerslist")
+	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countTrainersList()
 	    {
 	    	return trainersListService.countTrainersList();

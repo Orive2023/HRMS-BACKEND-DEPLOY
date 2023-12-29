@@ -22,6 +22,7 @@ import com.orive.Employee.Dto.ComplaintsDto;
 import com.orive.Employee.Dto.PromotionsDto;
 import com.orive.Employee.Service.ComplaintsService;
 import com.orive.Employee.Service.PromotionsService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "complaints")
@@ -35,6 +36,7 @@ public class ComplaintsController {
 	 
 	// Create a new Complaints
   @PostMapping("/create/complaints")
+//@PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<ComplaintsDto> createComplaints(@RequestBody ComplaintsDto complaintsDto) {
 	  ComplaintsDto createdComplaints = complaintsService.createComplaints(complaintsDto);
       logger.info("Created Complaints with id: {}", createdComplaints.getComplaintFrom());
@@ -43,6 +45,7 @@ public class ComplaintsController {
 
   // Get all Complaints
   @GetMapping("/get/complaints")
+//@PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<List<ComplaintsDto>> getAllComplaints() {
       List<ComplaintsDto> complaints = complaintsService.getAllComplaints();
       logger.info("Retrieved {} Complaints from the database", complaints.size());
@@ -51,6 +54,7 @@ public class ComplaintsController {
 
   // Get Complaints by ID
   @GetMapping("/get/{complaintsId}")
+//@PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<ComplaintsDto> getComplaintsDtoId(@PathVariable Long complaintsId) {
       Optional<ComplaintsDto> complaints = complaintsService.getComplaintsById(complaintsId);
       if (complaints.isPresent()) {
@@ -64,6 +68,7 @@ public class ComplaintsController {
 
   // Update Complaints by ID
   @PutMapping("/update/{complaintsId}")
+//@PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<ComplaintsDto> updateComplaints(@PathVariable Long complaintsId, @RequestBody ComplaintsDto updatedComplaintsDTO) {
 	  ComplaintsDto updatedComplaints = complaintsService.updateComplaints(complaintsId, updatedComplaintsDTO);
       if (updatedComplaints != null) {
@@ -77,6 +82,7 @@ public class ComplaintsController {
   
   // Delete Complaints by ID
   @DeleteMapping("/delete/{complaintsId}")
+//@PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<Void> deleteComplaints(@PathVariable Long complaintsId) {
 	   complaintsService.deleteComplaints(complaintsId);
       logger.info("Deleted Complaints with ID: {}", complaintsId);
@@ -85,6 +91,7 @@ public class ComplaintsController {
 	   
 //Count the total Complaints
 	    @GetMapping("/count/complaints")
+	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countComplaints()
 	    {
 	    	return complaintsService.countComplaints();

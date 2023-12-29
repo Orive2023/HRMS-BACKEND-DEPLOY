@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Procurement.Entity.QuotationListEntity;
 import com.orive.Procurement.Service.QuotationListService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -32,6 +33,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
 	private QuotationListService quotationListService;
 	
 	@PostMapping("/add")
+	 // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> addQuotationList(@RequestBody QuotationListEntity quotationList) {
 		logger.info("Received request to add QuotationList: {}", quotationList);
 		quotationListService.saveQuotationList(quotationList);
@@ -40,6 +42,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
     }
 
     @GetMapping("/all")
+    // @PreAuthorize("hasRole('client_admin')")
     public List<QuotationListEntity> getAllQuotationList() {
     	logger.info("Received request to fetch all QuotationList.");
         List<QuotationListEntity> quotationList = quotationListService.getQuotationListAllDetails();
@@ -48,6 +51,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
     }
 
     @GetMapping("/{quotationId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public List<QuotationListEntity> getQuotationByQuotationId(@PathVariable Long quotationId) {
     	logger.info("Received request to fetch quotation for quotationId: {}", quotationId);
         List<QuotationListEntity> quotationList = quotationListService.getQuotationListByQuotationId(quotationId);
@@ -56,6 +60,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
     }
 
     @GetMapping("/detail/{quotationListId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public QuotationListEntity getQuotationListDetails(@PathVariable Long quotationListId) {
     	logger.info("Received request to fetch QuotationList details for quotationListId: {}", quotationListId);
     	QuotationListEntity quotationList = quotationListService.getQuotationListByquotationListId(quotationListId);
@@ -81,6 +86,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
 //    }
 
     @DeleteMapping("/delete/{quotationListId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> deleteQuotationList(@PathVariable Long quotationListId) {
     	logger.info("Received request to delete QuotationList with ID: {}", quotationListId);
     	quotationListService.deleteQuotationList(quotationListId);

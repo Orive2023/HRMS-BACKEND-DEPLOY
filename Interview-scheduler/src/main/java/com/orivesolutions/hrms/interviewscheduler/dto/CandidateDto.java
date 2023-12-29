@@ -1,7 +1,6 @@
 package com.orivesolutions.hrms.interviewscheduler.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Lob;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

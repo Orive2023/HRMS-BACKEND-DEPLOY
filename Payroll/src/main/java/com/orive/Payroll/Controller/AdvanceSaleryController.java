@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Payroll.Dto.AdvanceSaleryDto;
 import com.orive.Payroll.Service.AdvanceSaleryService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -36,6 +37,7 @@ public class AdvanceSaleryController {
     
  // Create a new AdvanceSalery
     @PostMapping("/create/advancesalery")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AdvanceSaleryDto> createAdvanceSalery(@RequestBody AdvanceSaleryDto advanceSaleryDto ) {
     	AdvanceSaleryDto createdadvanceSalery = advanceSaleryService.createAdvanceSalery(advanceSaleryDto);
         logger.info("Created AdvanceSalery with name: {}", createdadvanceSalery.getEmployeeName());
@@ -45,6 +47,7 @@ public class AdvanceSaleryController {
     // Get all AdvanceSalery
     
     @GetMapping("/get/advancesalery")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<AdvanceSaleryDto>> getAllAdvanceSalery() {
         List<AdvanceSaleryDto> advanceSalery = advanceSaleryService.getAllAdvanceSalerys();
         logger.info("Retrieved {} AdvanceSalery from the database", advanceSalery.size());
@@ -53,6 +56,7 @@ public class AdvanceSaleryController {
 
     // Get AdvanceSalery by ID
     @GetMapping("/get/{advanceSaleryId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AdvanceSaleryDto> getAdvanceSaleryById(@PathVariable Long advanceSaleryId) {
         Optional<AdvanceSaleryDto> advanceSalery = advanceSaleryService.getAdvanceSaleryById(advanceSaleryId);
         if (advanceSalery.isPresent()) {
@@ -66,6 +70,7 @@ public class AdvanceSaleryController {
 
     // Update AdvanceSalery by ID
     @PutMapping("/update/{advanceSaleryId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AdvanceSaleryDto> updateAdvanceSalery(@PathVariable Long advanceSaleryId, @RequestBody AdvanceSaleryDto updatedAdvanceSaleryDto) {
     	AdvanceSaleryDto updatedAdvanceSalery = advanceSaleryService.updateAdvanceSalery(advanceSaleryId, updatedAdvanceSaleryDto);
         if (updatedAdvanceSalery != null) {
@@ -81,6 +86,7 @@ public class AdvanceSaleryController {
 
     // Delete AdvanceSalery by ID
     @DeleteMapping("/delete/{advanceSaleryId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteAdvanceSalery(@PathVariable Long advanceSaleryId) {
   	  advanceSaleryService.deleteAdvanceSalery(advanceSaleryId);
         logger.info("Deleted AdvanceSalery with ID: {}", advanceSaleryId);
@@ -88,6 +94,7 @@ public class AdvanceSaleryController {
     }
 	    
 	    @GetMapping("/count/advancesalery")
+	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countAdvanceSalery()
 	    {
 	    	return advanceSaleryService.countAdvanceSalery();

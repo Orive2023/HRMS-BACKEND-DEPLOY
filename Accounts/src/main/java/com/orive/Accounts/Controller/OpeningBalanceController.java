@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Accounts.Dto.OpeningBalanceDTo;
 import com.orive.Accounts.Service.OpeningBalanceService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "openingbalance")
@@ -34,6 +35,7 @@ private static final Logger logger=LoggerFactory.getLogger(OpeningBalanceControl
 	
 	// Create a new OpeningBalance
     @PostMapping("/create/openingBalance")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<OpeningBalanceDTo> createOpeningBalance(@RequestBody OpeningBalanceDTo openingBalanceDTo) {
     	OpeningBalanceDTo createdOpeningBalance = openingBalanceService.createOpeningBalance(openingBalanceDTo);
         logger.info("Created OpeningBalance with year: {}", createdOpeningBalance.getOpeningBalanceId());
@@ -42,6 +44,7 @@ private static final Logger logger=LoggerFactory.getLogger(OpeningBalanceControl
 
     // Get all OpeningBalance   
     @GetMapping("/get/openingBalance")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<OpeningBalanceDTo>> getAllOpeningBalance() {
         List<OpeningBalanceDTo> openingBalance = openingBalanceService.getAllOpeningBalance();
         logger.info("Retrieved {} OpeningBalance from the database", openingBalance.size());
@@ -50,6 +53,7 @@ private static final Logger logger=LoggerFactory.getLogger(OpeningBalanceControl
 
     // Get OpeningBalance by ID
     @GetMapping("/get/{openingBalanceId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<OpeningBalanceDTo> getOpeningBalanceById(@PathVariable Long openingBalanceId) {
         Optional<OpeningBalanceDTo> openingBalance = openingBalanceService.getOpeningBalanceById(openingBalanceId);
         if (openingBalance.isPresent()) {
@@ -63,6 +67,7 @@ private static final Logger logger=LoggerFactory.getLogger(OpeningBalanceControl
 
     // Update OpeningBalance by ID
     @PutMapping("/update/{openingBalanceId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<OpeningBalanceDTo> updateOpeningBalance(@PathVariable Long openingBalanceId, @RequestBody OpeningBalanceDTo updatedOpeningBalanceDTo) {
     	OpeningBalanceDTo updatedOpeningBalance = openingBalanceService.updateOpeningBalance(openingBalanceId, updatedOpeningBalanceDTo);
         if (updatedOpeningBalance != null) {
@@ -78,6 +83,7 @@ private static final Logger logger=LoggerFactory.getLogger(OpeningBalanceControl
 
     // Delete OpeningBalance by ID
     @DeleteMapping("/delete/{openingBalanceId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteOpeningBalance(@PathVariable Long openingBalanceId) {
     	openingBalanceService.deleteOpeningBalance(openingBalanceId);
         logger.info("Deleted OpeningBalance with ID: {}", openingBalanceId);
@@ -86,6 +92,7 @@ private static final Logger logger=LoggerFactory.getLogger(OpeningBalanceControl
 	    
     // Count the total OpeningBalance
 	    @GetMapping("/count/openingBalance")
+	    // @PreAuthorize("hasRole('client_admin')")
 	    public long countOpeningBalance()
 	    {
 	    	return openingBalanceService.countOpeningBalance();

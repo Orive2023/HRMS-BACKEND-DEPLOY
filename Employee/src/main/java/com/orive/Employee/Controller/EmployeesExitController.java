@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.orive.Employee.Dto.ComplaintsDto;
 import com.orive.Employee.Dto.EmployeesExitDto;
 import com.orive.Employee.Service.EmployeesExitService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -37,6 +38,7 @@ public class EmployeesExitController {
 	 
 	// Create a new EmployeeExit
 	  @PostMapping("/create/employee_exit")
+	// @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<EmployeesExitDto> createEmployeesExit(@RequestBody EmployeesExitDto employeesExitDto) {
 		  EmployeesExitDto createdEmployeesExit = employeesExitService.createEmployeesExit(employeesExitDto);
 	      logger.info("Created EmployeeExit with id: {}", createdEmployeesExit.getEmployeeToExit());
@@ -46,6 +48,7 @@ public class EmployeesExitController {
 	  // Get all EmployeeExit
 	  
 	  @GetMapping("/get/employee_exit")
+	// @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<List<EmployeesExitDto>> getAllEmployeeExit() {
 	      List<EmployeesExitDto> employeesExit = employeesExitService.getAllEmployeesExit();
 	      logger.info("Retrieved {} EmployeeExit from the database", employeesExit.size());
@@ -54,6 +57,7 @@ public class EmployeesExitController {
 
 	  // Get EmployeeExit by ID
 	  @GetMapping("/get/{employeesExitId}")
+	// @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<EmployeesExitDto> getEmployeesExitDtoId(@PathVariable Long employeesExitId) {
 	      Optional<EmployeesExitDto> employeesExit = employeesExitService.getEmployeesExitById(employeesExitId);
 	      if (employeesExit.isPresent()) {
@@ -67,6 +71,7 @@ public class EmployeesExitController {
 
 	  // Update EmployeeExit by ID
 	  @PutMapping("/update/{employeesExitId}")
+	// @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<EmployeesExitDto> updateEmployeesExit(@PathVariable Long employeesExitId, @RequestBody EmployeesExitDto updatedEmployeesExitDto) {
 		  EmployeesExitDto updatedEmployeesExit = employeesExitService.updateEmployeesExit(employeesExitId, updatedEmployeesExitDto);
 	      if (updatedEmployeesExit != null) {
@@ -80,6 +85,7 @@ public class EmployeesExitController {
 	  
 	  // Delete EmployeeExit by ID
 	  @DeleteMapping("/delete/{employeesExitId}")
+	// @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<Void> deleteEmployeesExits(@PathVariable Long employeesExitId) {
 		   employeesExitService.deleteEmployeeExit(employeesExitId);
 	      logger.info("Deleted EmployeeExit with ID: {}", employeesExitId);
@@ -88,6 +94,7 @@ public class EmployeesExitController {
 		    
 	  // Count the total EmployeeExit 
 		    @GetMapping("/count/employee_exit")
+		 // @PreAuthorize("hasRole('client_admin')")
 		    public long countEmployeeExit()
 		    {
 		    	return employeesExitService.countEmployeeExit();

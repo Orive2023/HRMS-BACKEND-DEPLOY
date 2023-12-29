@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.bank.dto.AddBankDto;
 import com.orive.bank.service.AddBankService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "addbank")
@@ -33,6 +34,7 @@ public class AddBankController {
 	
 	// Create a new AddBank
     @PostMapping("/create/addbank")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AddBankDto> createAddBank(@RequestBody AddBankDto addBankDto) {
     	AddBankDto createdAddBank = addBankService.createAddBank(addBankDto);
         logger.info("Created AddBank with name: {}", createdAddBank.getAccountName());
@@ -41,6 +43,7 @@ public class AddBankController {
 
     // Get all AddBank   
     @GetMapping("/get/addbank")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<AddBankDto>> getAllAddBank() {
         List<AddBankDto> addBank = addBankService.getAllAddBank();
         logger.info("Retrieved {} AddBank from the database", addBank.size());
@@ -49,6 +52,7 @@ public class AddBankController {
 
     // Get AddBank by ID
     @GetMapping("/get/{addBankId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AddBankDto> getAddBankById(@PathVariable Long addBankId) {
         Optional<AddBankDto> addBank = addBankService.getAddBankById(addBankId);
         if (addBank.isPresent()) {
@@ -62,6 +66,7 @@ public class AddBankController {
 
     // Update AddBank by ID
     @PutMapping("/update/{addBankId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AddBankDto> updateAddBank(@PathVariable Long addBankId, @RequestBody AddBankDto updatedAddBankDto) {
     	AddBankDto updatedAddBank = addBankService.updateAddBank(addBankId, updatedAddBankDto);
         if (updatedAddBank != null) {
@@ -77,6 +82,7 @@ public class AddBankController {
 
     // Delete AddBank by ID
     @DeleteMapping("/delete/{addBankId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteAddBank(@PathVariable Long addBankId) {
     	addBankService.deleteAddBank(addBankId);
         logger.info("Deleted AddBank with ID: {}", addBankId);
@@ -85,6 +91,7 @@ public class AddBankController {
     
    // count the total AddBank
 	    @GetMapping("/count/addbank")
+	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countAddBank()
 	    {
 	    	return addBankService.countAddBank();

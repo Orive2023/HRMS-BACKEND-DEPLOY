@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.orive.Procurement.Dto.CommitteesDto;
 import com.orive.Procurement.Entity.GoodReceivedListEntity;
 import com.orive.Procurement.Service.CommitteesService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "committees")
@@ -67,6 +68,7 @@ public class CommitteesController {
     
 //Get Committees signature by Name
     @GetMapping("/download/{name}")
+//  @PreAuthorize("hasRole('client_admin')")
 	public ResponseEntity<?> downloadImage(@PathVariable String name){
 		byte[] imageData=committeesService.downloadImage(name);
 		return ResponseEntity.status(HttpStatus.OK)
@@ -79,6 +81,7 @@ public class CommitteesController {
 
     // Get all Committees
     @GetMapping("/get/committees")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<CommitteesDto>> getAllCommittees() {
         List<CommitteesDto> committees = committeesService.getAllCommittees();
         logger.info("Retrieved {} Committees from the database", committees.size());
@@ -87,6 +90,7 @@ public class CommitteesController {
 
     // Get CommitteesbyId
     @GetMapping("/get/{committeesId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<CommitteesDto> getCommitteesbyId(@PathVariable Long committeesId) {
         Optional<CommitteesDto> committees = committeesService.getCommitteesById(committeesId);
         if (committees.isPresent()) {
@@ -100,6 +104,7 @@ public class CommitteesController {
 
     // Update Committees by ID
     @PutMapping("/update/{committeesId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<CommitteesDto> updateCommittees(@PathVariable Long committeesId, @RequestBody CommitteesDto updatedCommitteesDto) {
     	CommitteesDto updatedCommittees = committeesService.updateCommittees(committeesId, updatedCommitteesDto);
         if (updatedCommittees != null) {
@@ -115,6 +120,7 @@ public class CommitteesController {
 
     // Delete Committees by ID
     @DeleteMapping("/delete/{committeesId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteCommittees(@PathVariable Long committeesId) {
   	  committeesService.deleteCommittees(committeesId);
         logger.info("Deleted Committees with ID: {}", committeesId);
@@ -122,6 +128,7 @@ public class CommitteesController {
     }
 	    
 	    @GetMapping("/count/committees")
+//	    @PreAuthorize("hasRole('client_admin')")
 	    public long countCommittees()
 	    {
 	    	return committeesService.countCommittees();

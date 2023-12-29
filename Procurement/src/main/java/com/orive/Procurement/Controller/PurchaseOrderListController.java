@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Procurement.Entity.PurchaseOrderListEntity;
 import com.orive.Procurement.Service.PurchaseOrderListService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "purchaseorderlist")
@@ -29,6 +30,7 @@ private  static final Logger logger=LoggerFactory.getLogger(PurchaseOrderListCon
 	private PurchaseOrderListService purchaseOrderListService;
 	
 	@PostMapping("/add")
+	// @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> addPurchaseOrderList(@RequestBody PurchaseOrderListEntity purchaseOrderList) {
 		logger.info("Received request to add  PurchaseOrderList: {}", purchaseOrderList);
 		purchaseOrderListService.savePurchaseOrderList(purchaseOrderList);
@@ -37,6 +39,7 @@ private  static final Logger logger=LoggerFactory.getLogger(PurchaseOrderListCon
     }
 
     @GetMapping("/all")
+ // @PreAuthorize("hasRole('client_admin')")
     public List<PurchaseOrderListEntity> getAllPurchaseOrderList() {
     	logger.info("Received request to fetch all PurchaseOrderList.");
         List<PurchaseOrderListEntity> purchaseOrderList = purchaseOrderListService.getPurchaseOrderListAllDetails();
@@ -45,6 +48,7 @@ private  static final Logger logger=LoggerFactory.getLogger(PurchaseOrderListCon
     }
 
     @GetMapping("/{purchaseOrderId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public List<PurchaseOrderListEntity> getPurchaseOrderBypurchaseOrderId(@PathVariable Long purchaseOrderId) {
     	logger.info("Received request to fetch PurchaseOrder for purchaseOrderId: {}", purchaseOrderId);
         List<PurchaseOrderListEntity> purchaseOrderList = purchaseOrderListService.getPurchaseOrderListByPurchaseOrderId(purchaseOrderId);
@@ -53,6 +57,7 @@ private  static final Logger logger=LoggerFactory.getLogger(PurchaseOrderListCon
     }
 
     @GetMapping("/detail/{purchaseOrderListId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public PurchaseOrderListEntity getPurchaseOrderListDetails(@PathVariable Long purchaseOrderListId) {
     	logger.info("Received request to fetch PurchaseOrderList details for PurchaseOrderList: {}", purchaseOrderListId);
     	PurchaseOrderListEntity purchaseOrderList = purchaseOrderListService.getPurchaseOrderListByPurchaseOrderListId(purchaseOrderListId);
@@ -78,6 +83,7 @@ private  static final Logger logger=LoggerFactory.getLogger(PurchaseOrderListCon
 //    }
 
     @DeleteMapping("/delete/{purchaseOrderListId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> deletePurchaseOrderList(@PathVariable Long purchaseOrderListId) {
     	logger.info("Received request to delete PurchaseOrderList with ID: {}", purchaseOrderListId);
     	purchaseOrderListService.deletePurchaseOrderList(purchaseOrderListId);

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.project.Dto.ProjectDto;
 import com.orive.project.Service.ProjectService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -36,6 +37,7 @@ public class ProjectController {
     
  // Create a new Project
     @PostMapping("/create/projects")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<ProjectDto> createProject(@RequestBody ProjectDto projectDto) {
   	  ProjectDto createdProject = projectService.createProject(projectDto);
         logger.info("Created project with Id: {}", createdProject.getProjectTitle());
@@ -45,6 +47,7 @@ public class ProjectController {
     // Get all project
     
     @GetMapping("/get/projects")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<ProjectDto>> getAllProject() {
         List<ProjectDto> projects = projectService.getAllProject();
         logger.info("Retrieved {} projects from the database", projects.size());
@@ -53,6 +56,7 @@ public class ProjectController {
 
     // Get projects by ID
     @GetMapping("/get/{projectsId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<ProjectDto> getProjectById(@PathVariable Long projectsId) {
         Optional<ProjectDto> project = projectService.getProjectById(projectsId);
         if (project.isPresent()) {
@@ -66,6 +70,7 @@ public class ProjectController {
 
     // Update project by ID
     @PutMapping("/update/{projectsId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<ProjectDto> updateProject(@PathVariable Long projectsId, @RequestBody ProjectDto updatedProjectDTO) {
     	ProjectDto updatedProject = projectService.updateProject(projectsId, updatedProjectDTO);
         if (updatedProject != null) {
@@ -81,6 +86,7 @@ public class ProjectController {
 
     // Delete Project by ID
     @DeleteMapping("/delete/{projectsId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteProject(@PathVariable Long projectsId) {
   	  projectService.deleteProject(projectsId);
         logger.info("Deleted project with ID: {}", projectsId);
@@ -88,6 +94,7 @@ public class ProjectController {
     }
 	    
 	    @GetMapping("/count/projects")
+	    // @PreAuthorize("hasRole('client_admin')")
 	    public long countProject()
 	    {
 	    	return projectService.countProject();

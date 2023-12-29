@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.TimeSheet.Dto.LeaveDto;
 import com.orive.TimeSheet.Service.LeavesService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -36,6 +37,7 @@ public class LeavesController {
   
   	// Create a new Leaves
       @PostMapping("/create/leaves")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<LeaveDto> createLeaves(@RequestBody LeaveDto leaveDto) {
     	  LeaveDto createdLeaves = leavesService.createLeaves(leaveDto);
           logger.info("Created Leaves with name: {}", createdLeaves.getEmployeeName());
@@ -45,6 +47,7 @@ public class LeavesController {
       // Get all Leaves
       
       @GetMapping("/get/leaves")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<LeaveDto>> getAllLeaves() {
           List<LeaveDto> leaves = leavesService.getAllLeaves();
           logger.info("Retrieved {} Leaves from the database", leaves.size());
@@ -53,6 +56,7 @@ public class LeavesController {
 
       // Get Leaves by ID
       @GetMapping("/get/{leaveId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<LeaveDto> getLeavesById(@PathVariable Long leaveId) {
           Optional<LeaveDto> leave = leavesService.getLeavesById(leaveId);
           if (leave.isPresent()) {
@@ -66,6 +70,7 @@ public class LeavesController {
 
       // Update Leaves by ID
       @PutMapping("/update/{leaveId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<LeaveDto> updateLeaves(@PathVariable Long leaveId, @RequestBody LeaveDto updatedLeaveDto) {
     	  LeaveDto updatedLeave = leavesService.updateLeaves(leaveId, updatedLeaveDto);
           if (updatedLeave != null) {
@@ -81,6 +86,7 @@ public class LeavesController {
 
       // Delete Leaves by ID
       @DeleteMapping("/delete/{leaveId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteLeaves(@PathVariable Long leaveId) {
     	  leavesService.deleteLeaves(leaveId);
           logger.info("Deleted Leaves with ID: {}", leaveId);
@@ -88,6 +94,7 @@ public class LeavesController {
       }
   	    
   	    @GetMapping("/count/leaves")
+  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countLeaves()
   	    {
   	    	return leavesService.countLeaves();

@@ -30,6 +30,7 @@ import com.orive.Employee.Dto.EmployeesDto;
 import com.orive.Employee.Entity.EmployeesEntity;
 import com.orive.Employee.Exceptions.ResourceNotFoundException;
 import com.orive.Employee.Service.EmployeesService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -54,6 +55,7 @@ public class EmployeesController {
     
  // Create a new Employees  
     @PostMapping("/create/employee")
+ // @PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<?> uploadEmployeeData(
           @RequestParam("employeeName") String employeeName,
           @RequestParam("designationName") String designationName,
@@ -131,6 +133,7 @@ public class EmployeesController {
   
 //Get Employees logo by name
   @GetMapping("/downloadImage/{employeeId}")
+//@PreAuthorize("hasRole('client_admin')")
 	public ResponseEntity<?> downloadImage(@PathVariable Long employeeId){
 		byte[] imageData=employeesService.downloadImage(employeeId);
 		return ResponseEntity.status(HttpStatus.OK)
@@ -142,6 +145,7 @@ public class EmployeesController {
     
 //Get Employees pdf by id  
   @GetMapping("/downloadPdf/{employeeId}")
+//@PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long employeeId) {
       byte[] pdf = employeesService.downloadPdf(employeeId);
 
@@ -159,6 +163,7 @@ public class EmployeesController {
     
       // Get all Employees
       @GetMapping("/get/employee")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<EmployeesDto>> getAllEmployees() {
           List<EmployeesDto> employee = employeesService.getAllEmployees();
           logger.info("Retrieved {} Employees from the database", employee.size());
@@ -167,6 +172,7 @@ public class EmployeesController {
 
       // Get Employees by ID
       @GetMapping("/get/{employeeId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<EmployeesDto> getEmployeesById(@PathVariable Long employeeId) {
           Optional<EmployeesDto> employee = employeesService.getEmployeesById(employeeId);
           if (employee.isPresent()) {
@@ -182,6 +188,7 @@ public class EmployeesController {
       
       // Get Employees by EmployeeName
       @GetMapping("/byName/{employeeName}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<EmployeesEntity>> getEmployeesByName(@PathVariable String employeeName) {
           try {
               List<EmployeesEntity> employees = employeesService.getEmployeesByName(employeeName);
@@ -197,6 +204,7 @@ public class EmployeesController {
 
       // Update Employees by ID
       @PutMapping("/update/{employeeId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<EmployeesDto> updateEmployees(@PathVariable Long employeeId, @RequestBody EmployeesDto updatedEmployeesDto) {
     	  EmployeesDto updatedEmployees = employeesService.updateEmployees(employeeId, updatedEmployeesDto);
           if (updatedEmployees != null) {
@@ -212,6 +220,7 @@ public class EmployeesController {
 
       // Delete Employees by ID
       @DeleteMapping("/delete/{employeeId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteEmployees(@PathVariable Long employeeId) {
     	  employeesService.deleteEmployees(employeeId);
           logger.info("Deleted Employees with ID: {}", employeeId);
@@ -220,6 +229,7 @@ public class EmployeesController {
       
       // Count the total Employees 
   	    @GetMapping("/count/employee")
+  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countEmployees()
   	    {
   	    	return employeesService.countEmployees();
@@ -227,6 +237,7 @@ public class EmployeesController {
   	    
   	// Count the male from employee
   	    @GetMapping("/count/malemployee")
+  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countEmployeesByMale()
   	    {
   	    	return employeesService.countEmployeesByMale();
@@ -234,6 +245,7 @@ public class EmployeesController {
   	    
   		// Count the Female from employee
   	    @GetMapping("/count/femalemployee")
+  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countEmployeesByFemale()
   	    {
   	    	return employeesService.countEmployeesByFemale();

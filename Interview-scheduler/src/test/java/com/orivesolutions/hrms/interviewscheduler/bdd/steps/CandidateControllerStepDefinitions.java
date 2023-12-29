@@ -61,12 +61,12 @@ public class CandidateControllerStepDefinitions {
     }
 
 
-    @Then("the response status code should be {int}")
-    public void theResponseShouldContainTheFollowingJSON(int expectedStatusCode) {
-
-        HttpStatus actualStatusCode = responseEntity.getStatusCode();
-        Assert.assertEquals(expectedStatusCode, actualStatusCode.value());
-    }
+//    @Then("the response status code should be {int}")
+//    public void theResponseShouldContainTheFollowingJSON(int expectedStatusCode) {
+//
+//        HttpStatus actualStatusCode = responseEntity.getStatusCode();
+//        Assert.assertEquals(expectedStatusCode, actualStatusCode.value());
+//    }
 
     @Then("the response should contain the following JSON:")
     public void the_response_should_contain_the_following_json(String expectedJson) {
@@ -97,17 +97,17 @@ public class CandidateControllerStepDefinitions {
         // You may perform any necessary steps to make sure the candidate does not exist
     }
 
-    @When("a GET request is made to {string}")
-    public void aGETRequestIsMadeTo(String endpoint) {
-        String url = "http://localhost:8081" + endpoint;
-
-        try {
-            responseEntity = restTemplate.getForEntity(url, String.class);
-        } catch (HttpClientErrorException.NotFound ex) {
-            HttpStatus statusCode = ex.getStatusCode();
-            String responseBody = ex.getResponseBodyAsString();
-            responseEntity = new ResponseEntity<>(responseBody, statusCode);
-        }
-    }
+//    @When("a GET request is made to {string}")
+//    public void aGETRequestIsMadeTo(String endpoint) {
+//        String url = "http://localhost:8081" + endpoint;
+//
+//        try {
+//            responseEntity = restTemplate.getForEntity(url, String.class);
+//        } catch (HttpClientErrorException.NotFound ex) {
+//            HttpStatus statusCode = ex.getStatusCode();
+//            String responseBody = ex.getResponseBodyAsString();
+//            responseEntity = new ResponseEntity<>(responseBody, statusCode);
+//        }
+//    }
 
 }

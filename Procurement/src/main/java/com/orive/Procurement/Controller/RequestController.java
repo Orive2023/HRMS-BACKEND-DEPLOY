@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Procurement.Dto.RequestDto;
 import com.orive.Procurement.Service.RequestService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -36,6 +37,7 @@ public class RequestController {
     
  // Create a new Request
     @PostMapping("/create/request")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<RequestDto> createRequest(@RequestBody RequestDto requestDto) {
     	RequestDto createdRequest = requestService.createRequest(requestDto);
         logger.info("Created Request with name: {}", createdRequest.getRequestingPerson());
@@ -45,6 +47,7 @@ public class RequestController {
     // Get all Request
     
     @GetMapping("/get/request")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<RequestDto>> getAllRequest() {
         List<RequestDto> request = requestService.getAllRequest();
         logger.info("Retrieved {} Request from the database", request.size());
@@ -53,6 +56,7 @@ public class RequestController {
 
     // Get RequestbyId
     @GetMapping("/get/{requestId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<RequestDto> getRequestbyId(@PathVariable Long requestId) {
         Optional<RequestDto> request = requestService.getRequestById(requestId);
         if (request.isPresent()) {
@@ -66,6 +70,7 @@ public class RequestController {
 
     // Update Request by ID
     @PutMapping("/update/{requestId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<RequestDto> updateRequest(@PathVariable Long requestId, @RequestBody RequestDto updatedRequestDto) {
     	RequestDto updatedRequest = requestService.updateRequest(requestId, updatedRequestDto);
         if (updatedRequest != null) {
@@ -81,6 +86,7 @@ public class RequestController {
 
     // Delete Request by ID
     @DeleteMapping("/delete/{requestId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteRequest(@PathVariable Long requestId) {
   	  requestService.deleteRequest(requestId);
         logger.info("Deleted Request with ID: {}", requestId);
@@ -88,6 +94,7 @@ public class RequestController {
     }
 	    
 	    @GetMapping("/count/request")
+	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countRequest()
 	    {
 	    	return requestService.countRequest();

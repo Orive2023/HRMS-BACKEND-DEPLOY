@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.TimeSheet.Dto.HolidaysDto;
 import com.orive.TimeSheet.Service.HolidaysService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -35,6 +36,7 @@ public class HolidaysController {
   
   	// Create a new Holidays
       @PostMapping("/create/holidays")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<HolidaysDto> createHolidays(@RequestBody HolidaysDto holidaysDto) {
     	  HolidaysDto createdHoliday = holidaysService.createHolidays(holidaysDto);
           logger.info("Created Holidays with name: {}", createdHoliday.getEventName());
@@ -43,6 +45,7 @@ public class HolidaysController {
 
       // Get all Holidays   
       @GetMapping("/get/holidays")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<HolidaysDto>> getAllHolidays() {
           List<HolidaysDto> holidays = holidaysService.getAllHolidays();
           logger.info("Retrieved {} Holidays from the database", holidays.size());
@@ -51,6 +54,7 @@ public class HolidaysController {
 
       // Get Holidays by ID
       @GetMapping("/get/{holidaysId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<HolidaysDto> getHolidaysById(@PathVariable Long holidaysId) {
           Optional<HolidaysDto> holidays = holidaysService.getHolidaysById(holidaysId);
           if (holidays.isPresent()) {
@@ -64,6 +68,7 @@ public class HolidaysController {
 
       // Update Holidays by ID
       @PutMapping("/update/{holidaysId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<HolidaysDto> updateHolidays(@PathVariable Long holidaysId, @RequestBody HolidaysDto updatedHolidaysDto) {
     	  HolidaysDto updatedHolidays = holidaysService.updateHolidays(holidaysId, updatedHolidaysDto);
           if (updatedHolidays != null) {
@@ -79,6 +84,7 @@ public class HolidaysController {
 
       // Delete Holidays by ID
       @DeleteMapping("/delete/{holidaysId}")
+   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteHolidays(@PathVariable Long holidaysId) {
     	  holidaysService.deleteHolidays(holidaysId);
           logger.info("Deleted Holidays with ID: {}", holidaysId);
@@ -86,6 +92,7 @@ public class HolidaysController {
       }
   	    
   	    @GetMapping("/count/holidays")
+  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countHolidays()
   	    {
   	    	return holidaysService.countHolidays();

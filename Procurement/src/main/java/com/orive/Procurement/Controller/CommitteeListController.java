@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Entity.CommitteeListEntity;
 import com.orive.Procurement.Service.CommitteeListService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -68,6 +69,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListControl
     
  // Get CommitteeList Photo by bidAnalysisId  
     @GetMapping("/download/{bidAnalysisId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<byte[]> downloadsPhoto(@PathVariable Long bidAnalysisId) {
         byte[] photo = committeeListService.downloadImage(bidAnalysisId);
 
@@ -84,6 +86,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListControl
 	
 	
     @GetMapping("/all")
+//  @PreAuthorize("hasRole('client_admin')")
     public List<CommitteeListEntity> getAllCommitteeList() {
     	logger.info("Received request to fetch all CommitteeList.");
         List<CommitteeListEntity> committeeList = committeeListService.getCommitteeListAllDetails();
@@ -92,6 +95,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListControl
     }
 
     @GetMapping("/{bidAnalysisId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public List<CommitteeListEntity> getCommitteeByBidAnalysisId(@PathVariable Long bidAnalysisId) {
     	logger.info("Received request to fetch committee for bidAnalysisId: {}", bidAnalysisId);
         List<CommitteeListEntity> committeeList = committeeListService.getCommitteeListByBidAnalysisId(bidAnalysisId);
@@ -100,6 +104,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListControl
     }
 
     @GetMapping("/detail/{committeeListId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public CommitteeListEntity getCommitteeListDetails(@PathVariable Long committeeListId) {
     	logger.info("Received request to fetch committeeList details for committeeListId: {}", committeeListId);
     	CommitteeListEntity committeeList = committeeListService.getCommitteeListByCommitteeListId(committeeListId);
@@ -125,6 +130,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListControl
 //    }
 
     @DeleteMapping("/delete/{committeeListId}")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> deleteCommitteeList(@PathVariable Long committeeListId) {
     	logger.info("Received request to delete CommitteeList with ID: {}", committeeListId);
     	committeeListService.deleteCommitteeList(committeeListId);

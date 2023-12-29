@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.AwardsDto;
 import com.orive.Employee.Service.AwardsService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -35,6 +36,7 @@ public class AwardsController {
   
   	// Create a new Award
       @PostMapping("/create/awards")
+      // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<AwardsDto> createAwards(@RequestBody AwardsDto awardsDto) {
     	  AwardsDto createdAward = awardsService.createAwards(awardsDto);
           logger.info("Created Award with name: {}", createdAward.getAwardName());
@@ -43,6 +45,7 @@ public class AwardsController {
 
       // Get all Award      
       @GetMapping("/get/awards")
+      // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<AwardsDto>> getAllAwards() {
           List<AwardsDto> award = awardsService.getAllAwards();
           logger.info("Retrieved {} Award from the database", award.size());
@@ -51,6 +54,7 @@ public class AwardsController {
 
       // Get Award by ID
       @GetMapping("/get/{awardId}")
+      // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<AwardsDto> getAwardsById(@PathVariable Long awardId) {
           Optional<AwardsDto> award = awardsService.getAwardsById(awardId);
           if (award.isPresent()) {
@@ -64,6 +68,7 @@ public class AwardsController {
 
       // Update Award by ID
       @PutMapping("/update/{awardId}")
+      // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<AwardsDto> updateAwards(@PathVariable Long awardId, @RequestBody AwardsDto updatedAwardsDto) {
     	  AwardsDto updatedAward = awardsService.updateAwards(awardId, updatedAwardsDto);
           if (updatedAward != null) {
@@ -79,6 +84,7 @@ public class AwardsController {
 
       // Delete Award by ID
       @DeleteMapping("/delete/{awardId}")
+      // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteAwards(@PathVariable Long awardId) {
     	  awardsService.deleteAwards(awardId);
           logger.info("Deleted Award with ID: {}", awardId);
@@ -86,6 +92,7 @@ public class AwardsController {
       }
   	    
   	    @GetMapping("/count/awards")
+  	  // @PreAuthorize("hasRole('client_admin')")
   	    public long countAwards()
   	    {
   	    	return awardsService.countAwards();
