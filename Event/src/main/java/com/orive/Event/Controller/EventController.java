@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Event.Dto.EventDto;
 import com.orive.Event.Service.EventService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "event")
@@ -33,6 +34,7 @@ public class EventController {
 	
 	// Create a new Event
     @PostMapping("/create/event")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<EventDto> createEvent(@RequestBody EventDto eventDto) {
     	EventDto createdEvent = eventService.createEvent(eventDto);
         logger.info("Created Event with name: {}", createdEvent.getTitle());
@@ -41,6 +43,7 @@ public class EventController {
 
     // Get all Event      
     @GetMapping("/get/event")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<EventDto>> getAllEvent() {
         List<EventDto> event = eventService.getAllEvent();
         logger.info("Retrieved {} Event from the database", event.size());
@@ -49,6 +52,7 @@ public class EventController {
 
     // Get Event by ID
     @GetMapping("/get/{eventId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<EventDto> getEventById(@PathVariable Long eventId) {
         Optional<EventDto> event = eventService.getEventById(eventId);
         if (event.isPresent()) {
@@ -62,6 +66,7 @@ public class EventController {
 
     // Update Event by ID
     @PutMapping("/update/{eventId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<EventDto> updateEvent(@PathVariable Long eventId, @RequestBody EventDto updatedEventDto) {
     	EventDto updatedEvent = eventService.updateEvent(eventId, updatedEventDto);
         if (updatedEvent != null) {
@@ -77,6 +82,7 @@ public class EventController {
 
     // Delete Event by ID
     @DeleteMapping("/delete/{eventId}")
+ // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long eventId) {
     	eventService.deleteEvent(eventId);
         logger.info("Deleted Event with ID: {}", eventId);
@@ -84,6 +90,7 @@ public class EventController {
     }
 	    
 	    @GetMapping("/count/event")
+	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countEvent()
 	    {
 	    	return eventService.countEvent();
