@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -24,13 +25,15 @@ public class InterviewController {
     @Autowired
     private InterviewService interviewService;
 
-    @PostMapping
+    @PostMapping("/scheduleInterview")
+    // @PreAuthorize("hasRole('client_admin')")
     public HttpEntity<InterviewDto> scheduleInterview(@RequestBody InterviewDto interviewDto) {
         interviewDto = interviewService.scheduleInterview(interviewDto);
         return new ResponseEntity<>(interviewDto, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/getInterview")
+    // @PreAuthorize("hasRole('client_admin')")
     public HttpEntity<List<InterviewDto>> getInterview(@PathVariable String schedulerEmail) {
         List<InterviewDto> interviews = interviewService.getInterview(schedulerEmail);
         return new ResponseEntity<>(interviews, HttpStatus.OK);
