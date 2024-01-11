@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.orive.project.Dto.ProjectDto;
+import com.orive.project.Entity.EmployeeProjectManagementEntity;
+import com.orive.project.Entity.ProjectEntity;
 import com.orive.project.Service.ProjectService;
-//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -37,7 +39,6 @@ public class ProjectController {
     
  // Create a new Project
     @PostMapping("/create/projects")
-    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<ProjectDto> createProject(@RequestBody ProjectDto projectDto) {
   	  ProjectDto createdProject = projectService.createProject(projectDto);
         logger.info("Created project with Id: {}", createdProject.getProjectTitle());
@@ -47,7 +48,6 @@ public class ProjectController {
     // Get all project
     
     @GetMapping("/get/projects")
-    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<ProjectDto>> getAllProject() {
         List<ProjectDto> projects = projectService.getAllProject();
         logger.info("Retrieved {} projects from the database", projects.size());
@@ -56,7 +56,6 @@ public class ProjectController {
 
     // Get projects by ID
     @GetMapping("/get/{projectsId}")
-    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<ProjectDto> getProjectById(@PathVariable Long projectsId) {
         Optional<ProjectDto> project = projectService.getProjectById(projectsId);
         if (project.isPresent()) {
@@ -67,10 +66,44 @@ public class ProjectController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
+    
+    
+ // Get Manager by ID
+ 	  @GetMapping("/{managerEmployeeId}")
+ 	    public ResponseEntity<List<ProjectDto>> getProjectsByManagerEmployeeId(@PathVariable Long managerEmployeeId) {
+ 	        List<ProjectDto> projects = projectService.getManagerEmployeeId(managerEmployeeId);
 
+ 	        if (projects.isEmpty()) {
+ 	            return ResponseEntity.notFound().build();
+ 	        } else {
+ 	            return ResponseEntity.ok(projects);
+ 	        }
+ 	    }
+    
+ 	  
+// 	// Get Employee by ID
+// 	    @GetMapping("/employee/{employeeId}")
+// 	    public ResponseEntity<ProjectDto> getProjectsByEmployeeId(@PathVariable Long employeeId) {
+// 	        Optional<ProjectDto> projects = projectService.getProjectsByEmployeeId(employeeId);
+//
+// 	        return projects.map(ResponseEntity::ok)
+// 	                .orElse(ResponseEntity.notFound().build());
+// 	    }
+    
+
+ 	// Get employee details by employeeId
+ 	    @GetMapping("/employee/details/{employeeId}")
+ 	    public ResponseEntity<List<EmployeeProjectManagementEntity>> getEmployeeDetailsByEmployeeId(@PathVariable Long employeeId) {
+ 	        Optional<List<EmployeeProjectManagementEntity>> employeeDetails = projectService.getEmployeeDetailsByEmployeeId(employeeId);
+
+ 	        return employeeDetails.map(ResponseEntity::ok)
+ 	                .orElse(ResponseEntity.notFound().build());
+ 	    }
+ 	  
+ 	  
     // Update project by ID
     @PutMapping("/update/{projectsId}")
-    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<ProjectDto> updateProject(@PathVariable Long projectsId, @RequestBody ProjectDto updatedProjectDTO) {
     	ProjectDto updatedProject = projectService.updateProject(projectsId, updatedProjectDTO);
         if (updatedProject != null) {
@@ -82,11 +115,25 @@ public class ProjectController {
         }
     }
     
+    
+ // Update projects by managerEmployeeId
+    @PutMapping("/update/manager/{managerEmployeeId}")
+    public ResponseEntity<List<ProjectEntity>> updateProjectsByManagerEmployeeId(
+            @PathVariable long managerEmployeeId,
+            @RequestBody List<ProjectEntity> updatedProjects) {
+
+        List<ProjectEntity> updatedProjectEntities = projectService.updateProjectsByManagerEmployeeId(managerEmployeeId, updatedProjects);
+
+        if (!updatedProjectEntities.isEmpty()) {
+            return new ResponseEntity<>(updatedProjectEntities, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 
     // Delete Project by ID
     @DeleteMapping("/delete/{projectsId}")
-    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteProject(@PathVariable Long projectsId) {
   	  projectService.deleteProject(projectsId);
         logger.info("Deleted project with ID: {}", projectsId);
@@ -94,7 +141,6 @@ public class ProjectController {
     }
 	    
 	    @GetMapping("/count/projects")
-	    // @PreAuthorize("hasRole('client_admin')")
 	    public long countProject()
 	    {
 	    	return projectService.countProject();

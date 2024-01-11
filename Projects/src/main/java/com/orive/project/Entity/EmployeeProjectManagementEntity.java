@@ -1,13 +1,13 @@
-package com.orive.TimeSheet.Entity;
+package com.orive.project.Entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,39 +18,30 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "leaves")
-public class LeavesEntity {
-
+@Table(name = "employeeProjectManagement")
+public class EmployeeProjectManagementEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long leaveId;
+	private long employeeProjectManagementId;
 	
 	@Column(name = "employee_id")
 	private Long employeeId;
 	
+	@Column(name = "project_name")
+	private String projectName;
+	
 	@Column(name = "employee_name")
 	private String employeeName;
 	
-	@Column(name = "leave_type")
-	private String leaveType;
+	@Column(name = "task_assigned_for")
+	private String taskAssignedFor;
 	
-	@Column(name = "start_date")
-	private LocalDate startDate;
-	
-	@Column(name = "end_date")
-	private LocalDate endDate;
-	
-	@Column(name = "leave_reason")
-	private String leaveReason;
-	
-	@Column(name = "applied_on")
-	private LocalDate appliedOn;
-	
-	@Column(name = "approval")
-	private String approval;	
+	@Column(name = "type_the_task_here")
+	private String typeTheTaskHere;
 }

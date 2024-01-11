@@ -19,7 +19,7 @@ import com.orive.TimeSheet.Dto.AttendanceDto;
 import com.orive.TimeSheet.Dto.HolidaysDto;
 import com.orive.TimeSheet.Entity.AttendanceEntity;
 import com.orive.TimeSheet.Entity.HolidaysEntity;
-import com.orive.TimeSheet.ExcelToDataBase.Help.*;
+import com.orive.TimeSheet.ExcelToDataBase.Help.ExcelHelper;
 import com.orive.TimeSheet.Repository.AttendanceRepository;
 import com.orive.TimeSheet.Util.UploadDocUtil;
 
@@ -97,8 +97,7 @@ public class AttendanceService {
 //	}
     
     
-    //upload excelsheet
-    
+    //upload excelsheet   
     public void save(MultipartFile file)
 	{
 		try {
@@ -141,9 +140,10 @@ public class AttendanceService {
         Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findById(attendanceId);
         if (existingAttendanceOptional.isPresent()) {
         	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
-            existingAttendance.setClockIn(attendanceDto.getClockIn());
+//            existingAttendance.setClockIn(attendanceDto.getClockIn());
             existingAttendance.setClockOut(attendanceDto.getClockOut());
             existingAttendance.setDate(attendanceDto.getDate());
+            existingAttendance.setClockOutLocation(attendanceDto.getClockOutLocation());
         	modelMapper.map(attendanceDto, existingAttendanceOptional);
             AttendanceEntity updatedAttendance= attendanceRepository.save(existingAttendance);
             logger.info("Updated Attendance with ID: {}", updatedAttendance.getAttendanceId());
@@ -153,6 +153,48 @@ public class AttendanceService {
             return null;
         }
     }
+    
+    
+    
+    // Update list by Name And Date
+    public AttendanceDto updateAttendancesByEmployeeNameAndDate(String employeeName, LocalDate date, AttendanceDto attendanceDto) {
+        Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findByEmployeeNameAndDate(employeeName,date);
+        if (existingAttendanceOptional.isPresent()) {
+        	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
+//            existingAttendance.setClockIn(attendanceDto.getClockIn());
+            existingAttendance.setClockOut(attendanceDto.getClockOut());
+            existingAttendance.setDate(attendanceDto.getDate());
+            existingAttendance.setClockOutLocation(attendanceDto.getClockOutLocation());
+        	modelMapper.map(attendanceDto, existingAttendanceOptional);
+            AttendanceEntity updatedAttendance= attendanceRepository.save(existingAttendance);
+            logger.info("Updated Attendance with name and date: {}", updatedAttendance.getAttendanceId());
+            return convertToDTO(updatedAttendance);
+        } else {
+            logger.warn("Attendance with name and date {} not found for update", employeeName);
+            return null;
+        }
+    }
+    
+    
+    // Update list by EmployeeId And Date
+    public AttendanceDto updateAttendancesByEmployeeIdAndDate(Long employeeId, LocalDate date, AttendanceDto attendanceDto) {
+        Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findByEmployeeIdAndDate(employeeId,date);
+        if (existingAttendanceOptional.isPresent()) {
+        	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
+//            existingAttendance.setClockIn(attendanceDto.getClockIn());
+            existingAttendance.setClockOut(attendanceDto.getClockOut());
+            existingAttendance.setDate(attendanceDto.getDate());
+            existingAttendance.setClockOutLocation(attendanceDto.getClockOutLocation());
+        	modelMapper.map(attendanceDto, existingAttendanceOptional);
+            AttendanceEntity updatedAttendance= attendanceRepository.save(existingAttendance);
+            logger.info("Updated Attendance with name and date: {}", updatedAttendance.getAttendanceId());
+            return convertToDTO(updatedAttendance);
+        } else {
+            logger.warn("Attendance with name and date {} not found for update", employeeId);
+            return null;
+        }
+    }
+    
     
     // Delete
     public void deleteAttendances(Long attendanceId) {

@@ -1,15 +1,20 @@
 package com.orive.project.Entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,6 +38,9 @@ public class ProjectEntity {
 	
 	@Column(name = "project_title")
 	private String projectTitle;
+	
+	@Column(name = "manager_employee_id")
+	private Long managerEmployeeId;
 	
 	@Column(name = "client_name")
 	private String clientName;
@@ -60,4 +68,11 @@ public class ProjectEntity {
 	
 	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "work_update_sheet")
+	private String workUpdateSheet;
+	
+	@OneToMany(targetEntity = EmployeeProjectManagementEntity.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "projects_employeeProjectManagement_fk",referencedColumnName = "projectsId")
+    private List<EmployeeProjectManagementEntity> employeeProjectManagementEntities;
 }

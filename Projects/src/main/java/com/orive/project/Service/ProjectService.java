@@ -1,5 +1,6 @@
 package com.orive.project.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,8 +13,11 @@ import org.springframework.stereotype.Service;
 
 
 import com.orive.project.Dto.ProjectDto;
+import com.orive.project.Entity.EmployeeProjectManagementEntity;
 import com.orive.project.Entity.ProjectEntity;
 import com.orive.project.Repository.ProjectRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ProjectService {
@@ -54,6 +58,41 @@ public class ProjectService {
         }
     }
     
+    
+    //get by ManagerEmployeeId
+    public List<ProjectDto> getManagerEmployeeId(Long managerEmployeeId) {
+        List<ProjectEntity> manager = projectRepository.findByManagerEmployeeId(managerEmployeeId);
+
+        if (manager.isEmpty()) {
+            logger.warn("Project with ID {} not found", managerEmployeeId);
+            return Collections.emptyList();
+        }
+
+        return manager.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+    
+    
+//    //get by employeeId
+//    public Optional<ProjectDto> getProjectsByEmployeeId(Long employeeId) {
+//        List<ProjectEntity> projects = projectRepository.findByEmployeeProjectManagementEntities_EmployeeId(employeeId);
+//        if (projects.isEmpty()) {
+//            return Optional.empty();
+//        } else {
+//            // Assuming you want to return the first project for simplicity
+//            return Optional.of(convertToDTO(projects.get(0)));
+//        }
+//    }
+       
+    
+    // Get employee details by employeeId
+    public Optional<List<EmployeeProjectManagementEntity>> getEmployeeDetailsByEmployeeId(Long employeeId) {
+        return projectRepository.findEmployeeDetailsByEmployeeId(employeeId);
+    }
+    
+    
+    
  // Update list by id
     public ProjectDto updateProject(Long projectsId, ProjectDto projectDto) {
         Optional<ProjectEntity> existingProjectOptional =projectRepository.findById(projectsId);
@@ -72,6 +111,53 @@ public class ProjectService {
             return null;
         }
     }
+    
+    
+    
+ // Update projects by managerEmployeeId
+    public List<ProjectEntity> updateProjectsByManagerEmployeeId(long managerEmployeeId, List<ProjectEntity> updatedProjects) {
+        List<ProjectEntity> existingProjects = projectRepository.findByManagerEmployeeId(managerEmployeeId);
+
+        if (!existingProjects.isEmpty()) {
+            for (ProjectEntity existingProject : existingProjects) {
+                // Find the corresponding updated project
+                Optional<ProjectEntity> updatedProjectOptional = updatedProjects.stream()
+                        .filter(p -> p.getProjectsId() == existingProject.getProjectsId())
+                        .findFirst();
+
+                if (updatedProjectOptional.isPresent()) {
+                    ProjectEntity updatedProject = updatedProjectOptional.get();
+
+                    // Update fields based on your requirements
+                    existingProject.setProjectTitle(updatedProject.getProjectTitle());
+                    existingProject.setManagerEmployeeId(updatedProject.getManagerEmployeeId());
+                    existingProject.setClientName(updatedProject.getClientName());
+                    existingProject.setCompanyName(updatedProject.getCompanyName());
+                    existingProject.setStartDate(updatedProject.getStartDate());
+                    existingProject.setEndDate(updatedProject.getEndDate());
+                    existingProject.setPriority(updatedProject.getPriority());
+                    existingProject.setBudget(updatedProject.getBudget());
+                    existingProject.setProjectManagers(updatedProject.getProjectManagers());
+                    existingProject.setSummary(updatedProject.getSummary());
+                    existingProject.setDescription(updatedProject.getDescription());
+                    existingProject.setWorkUpdateSheet(updatedProject.getWorkUpdateSheet());
+
+                    // Update or merge the list of EmployeeProjectManagementEntities
+                    existingProject.setEmployeeProjectManagementEntities(updatedProject.getEmployeeProjectManagementEntities());
+
+                    // Save the updated project
+                    projectRepository.save(existingProject);
+                }
+            }
+
+            return existingProjects;
+        } else {
+            logger.warn("Projects with managerEmployeeId {} not found for update", managerEmployeeId);
+            throw new EntityNotFoundException("Projects not found with managerEmployeeId: " + managerEmployeeId);
+        }
+    }
+    
+    
     
     // Delete
     public void deleteProject(Long projectsId) {

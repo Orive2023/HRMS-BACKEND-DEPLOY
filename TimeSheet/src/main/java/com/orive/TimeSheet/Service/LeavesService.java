@@ -1,5 +1,6 @@
 package com.orive.TimeSheet.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,9 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.orive.TimeSheet.Dto.LeaveDto;
 import com.orive.TimeSheet.Entity.LeavesEntity;
 import com.orive.TimeSheet.Repository.LeavesRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class LeavesService {
@@ -54,14 +57,28 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
         }
     }
     
+    //get by employeeId
+    public List<LeaveDto> getLeavesByEmployeeId(Long employeeId) {
+        List<LeavesEntity> leaves = leavesRepository.findByEmployeeId(employeeId);
+
+        if (leaves.isEmpty()) {
+            logger.warn("Leaves with ID {} not found", employeeId);
+            return Collections.emptyList();
+        }
+        return leaves.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    } 
+    
+    
  // Update list by id
     public LeaveDto updateLeaves(Long leaveId, LeaveDto leaveDto) {
         Optional<LeavesEntity> existingLeavesOptional = leavesRepository.findById(leaveId);
         if (existingLeavesOptional.isPresent()) {
         	LeavesEntity existingLeave = existingLeavesOptional.get();
-            existingLeave.setEmployeeName(leaveDto.getEmployeeName());
-        	existingLeave.setStartDate(leaveDto.getStartDate());
-        	existingLeave.setEndDate(leaveDto.getEndDate());
+//            existingLeave.setEmployeeName(leaveDto.getEmployeeName());
+//        	existingLeave.setStartDate(leaveDto.getStartDate());
+//        	existingLeave.setEndDate(leaveDto.getEndDate());
         	modelMapper.map(leaveDto, existingLeavesOptional);
             LeavesEntity updatedLeave = leavesRepository.save(existingLeave);
             logger.info("Updated Leaves with ID: {}", updatedLeave.getLeaveId());
@@ -71,6 +88,38 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
             return null;
         }
     }
+    
+    
+    // Update projects by employeeId
+    public List<LeavesEntity> updateLeavesByEmployeeId(long employeeId, List<LeavesEntity> updatedLeaves) {
+        List<LeavesEntity> existingLeavesList = leavesRepository.findByEmployeeId(employeeId);
+
+        if (!existingLeavesList.isEmpty()) {
+            for (LeavesEntity existingLeaves : existingLeavesList) {
+                // Find the corresponding updated Leave
+                Optional<LeavesEntity> updatedLeaveOptional = updatedLeaves.stream()
+                        .filter(l -> l.getLeaveId() == existingLeaves.getLeaveId())
+                        .findFirst();
+
+                if (updatedLeaveOptional.isPresent()) {
+                	LeavesEntity updatedLeave = updatedLeaveOptional.get();
+
+                    // Update fields based on your requirements
+                    existingLeaves.setApproval(updatedLeave.getApproval());
+
+                    // Save the updated project
+                    leavesRepository.save(existingLeaves);
+                }
+            }
+
+            return updatedLeaves;
+        } else {
+            logger.warn("Leaves with EmployeeId {} not found for update", employeeId);
+            throw new EntityNotFoundException("Leaves not found with EmployeeId: " + employeeId);
+        }
+    }
+    
+       
     
     // Delete
     public void deleteLeaves(Long leaveId) {

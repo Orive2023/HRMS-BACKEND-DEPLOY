@@ -1,0 +1,93 @@
+package com.orive.Payroll.Controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.orive.Payroll.Dto.PaySlipGenerateDto;
+import com.orive.Payroll.Service.PaySlipGenerateService;
+
+
+
+@RestController
+@RequestMapping(value = "payslipgenerate")
+@CrossOrigin(origins = "*")
+public class PaySlipGenerateController {
+
+	private static final Logger logger = LoggerFactory.getLogger(PaySlipGenerateController.class);
+
+    @Autowired
+    private PaySlipGenerateService paySlipGenerateService;
+ // Create a new AdvanceSalery
+    @PostMapping("/create/paySlipGenerate")
+    public ResponseEntity<PaySlipGenerateDto> createAdvanceSalery(@RequestBody PaySlipGenerateDto advanceSaleryDto ) {
+    	PaySlipGenerateDto createdadvanceSalery = paySlipGenerateService.createPaySlipGenerate(advanceSaleryDto);
+        logger.info("Created AdvanceSalery with name: {}", createdadvanceSalery.getEmployeeName());
+        return new ResponseEntity<>(createdadvanceSalery, HttpStatus.CREATED);
+    }
+
+    // Get all AdvanceSalery
+    
+    @GetMapping("/get/paySlipGenerate")
+    public ResponseEntity<List<PaySlipGenerateDto>> getAllAdvanceSalery() {
+        List<PaySlipGenerateDto> advanceSalery = paySlipGenerateService.getAllPaySlipGenerate();
+        logger.info("Retrieved {} AdvanceSalery from the database", advanceSalery.size());
+        return new ResponseEntity<>(advanceSalery, HttpStatus.OK);
+    }
+
+    // Get AdvanceSalery by ID
+    @GetMapping("/get/{PaySlipGenerateId}")
+    public ResponseEntity<PaySlipGenerateDto> getAdvanceSaleryById(@PathVariable Long PaySlipGenerateId) {
+        Optional<PaySlipGenerateDto> advanceSalery = paySlipGenerateService.getPaySlipGenerateById(PaySlipGenerateId);
+        if (advanceSalery.isPresent()) {
+            logger.info("Retrieved AdvanceSalery with ID: {}", PaySlipGenerateId);
+            return new ResponseEntity<>(advanceSalery.get(), HttpStatus.OK);
+        } else {
+            logger.warn("AdvanceSalery with ID {} not found", PaySlipGenerateId);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+//    // Update AdvanceSalery by ID
+//    @PutMapping("/update/{PaySlipGenerateId}")
+//    public ResponseEntity<PaySlipGenerateDto> updateAdvanceSalery(@PathVariable Long PaySlipGenerateId, @RequestBody PaySlipGenerateDto updatedAdvanceSaleryDto) {
+//    	PaySlipGenerateDto updatedAdvanceSalery = paySlipGenerateService.update(PaySlipGenerateId, updatedAdvanceSaleryDto);
+//        if (updatedAdvanceSalery != null) {
+//            logger.info("Updated AdvanceSalery with ID: {}", PaySlipGenerateId);
+//            return new ResponseEntity<>(updatedAdvanceSalery, HttpStatus.OK);
+//        } else {
+//            logger.warn("AdvanceSalery with ID {} not found for update", PaySlipGenerateId);
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+    
+
+
+    // Delete AdvanceSalery by ID
+    @DeleteMapping("/delete/{PaySlipGenerateId}")
+    public ResponseEntity<Void> deletePaySlipGenerate(@PathVariable Long PaySlipGenerateId) {
+  	  paySlipGenerateService.deletePaySlipGenerate(PaySlipGenerateId);
+        logger.info("Deleted AdvanceSalery with ID: {}", PaySlipGenerateId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+	    
+	    @GetMapping("/count/paySlipGenerate")
+	    public long countPaySlipGenerate()
+	    {
+	    	return paySlipGenerateService.countPaySlipGenerate();
+	    }
+}
