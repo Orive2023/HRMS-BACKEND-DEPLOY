@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -25,13 +26,15 @@ public class TalentController {
     @Autowired
     private TalentService talentService;
 
-    @PostMapping
+    @PostMapping("/createTalent")
+    // @PreAuthorize("hasRole('client_admin')")
     public HttpEntity<ResponseDto> createTalent(@RequestBody TalentDto talentDto) {
         talentDto = talentService.createTalent(talentDto);
         return new ResponseEntity<>(ResponseUtil.getSuccessResponse(talentDto), HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
+    // @PreAuthorize("hasRole('client_admin')")
     public HttpEntity<ResponseDto> getAll() {
         List<TalentDto> talentDtos = talentService.findAll();
         return new ResponseEntity<>(ResponseUtil.getSuccessResponse(talentDtos), HttpStatus.OK);

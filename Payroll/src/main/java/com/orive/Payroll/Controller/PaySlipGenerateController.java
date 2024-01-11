@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Payroll.Dto.PaySlipGenerateDto;
 import com.orive.Payroll.Service.PaySlipGenerateService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 
@@ -34,6 +35,7 @@ public class PaySlipGenerateController {
     private PaySlipGenerateService paySlipGenerateService;
  // Create a new AdvanceSalery
     @PostMapping("/create/paySlipGenerate")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<PaySlipGenerateDto> createAdvanceSalery(@RequestBody PaySlipGenerateDto advanceSaleryDto ) {
     	PaySlipGenerateDto createdadvanceSalery = paySlipGenerateService.createPaySlipGenerate(advanceSaleryDto);
         logger.info("Created AdvanceSalery with name: {}", createdadvanceSalery.getEmployeeName());
@@ -43,6 +45,7 @@ public class PaySlipGenerateController {
     // Get all AdvanceSalery
     
     @GetMapping("/get/paySlipGenerate")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<PaySlipGenerateDto>> getAllAdvanceSalery() {
         List<PaySlipGenerateDto> advanceSalery = paySlipGenerateService.getAllPaySlipGenerate();
         logger.info("Retrieved {} AdvanceSalery from the database", advanceSalery.size());
@@ -51,6 +54,7 @@ public class PaySlipGenerateController {
 
     // Get AdvanceSalery by ID
     @GetMapping("/get/{PaySlipGenerateId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<PaySlipGenerateDto> getAdvanceSaleryById(@PathVariable Long PaySlipGenerateId) {
         Optional<PaySlipGenerateDto> advanceSalery = paySlipGenerateService.getPaySlipGenerateById(PaySlipGenerateId);
         if (advanceSalery.isPresent()) {
@@ -64,6 +68,7 @@ public class PaySlipGenerateController {
 
 //    // Update AdvanceSalery by ID
 //    @PutMapping("/update/{PaySlipGenerateId}")
+    // @PreAuthorize("hasRole('client_admin')")
 //    public ResponseEntity<PaySlipGenerateDto> updateAdvanceSalery(@PathVariable Long PaySlipGenerateId, @RequestBody PaySlipGenerateDto updatedAdvanceSaleryDto) {
 //    	PaySlipGenerateDto updatedAdvanceSalery = paySlipGenerateService.update(PaySlipGenerateId, updatedAdvanceSaleryDto);
 //        if (updatedAdvanceSalery != null) {
@@ -79,6 +84,7 @@ public class PaySlipGenerateController {
 
     // Delete AdvanceSalery by ID
     @DeleteMapping("/delete/{PaySlipGenerateId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deletePaySlipGenerate(@PathVariable Long PaySlipGenerateId) {
   	  paySlipGenerateService.deletePaySlipGenerate(PaySlipGenerateId);
         logger.info("Deleted AdvanceSalery with ID: {}", PaySlipGenerateId);
@@ -86,6 +92,7 @@ public class PaySlipGenerateController {
     }
 	    
 	    @GetMapping("/count/paySlipGenerate")
+	    // @PreAuthorize("hasRole('client_admin')")
 	    public long countPaySlipGenerate()
 	    {
 	    	return paySlipGenerateService.countPaySlipGenerate();

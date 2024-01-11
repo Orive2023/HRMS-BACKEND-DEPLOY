@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/candidates")
@@ -28,6 +29,7 @@ public class CandidateController {
     private CandidateService candidateService;
 
     @PostMapping("/create/candidates")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> savePoliciesEntity(
     		 @RequestParam String name,
     		 @RequestParam String address,
@@ -52,6 +54,7 @@ public class CandidateController {
     
     
     @GetMapping("/download/{id}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long id) {
         byte[] pdf = candidateService.downloadPdf(id);
 
@@ -66,7 +69,8 @@ public class CandidateController {
     }
     		
 
-    @GetMapping("/{email}")
+    @GetMapping("/getCandidate/{email}")
+    // @PreAuthorize("hasRole('client_admin')")
     public HttpEntity<CandidateDto> getCandidate(@PathVariable String email) {
         CandidateDto candidate = candidateService.getCandidate(email);
         return new ResponseEntity<>(candidate, HttpStatus.OK);

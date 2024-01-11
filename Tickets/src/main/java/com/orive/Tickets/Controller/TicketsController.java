@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.orive.Tickets.Dto.TicketsDto;
 import com.orive.Tickets.Entity.TicketsEntity;
 import com.orive.Tickets.Service.TicketsService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "tickets")
@@ -35,6 +36,7 @@ public class TicketsController {
 	
 	// Create a new Tickets
 	  @PostMapping("/create/tickets")
+	  // @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<TicketsDto> createTickets(@RequestBody TicketsDto ticketsDto) {
 		  TicketsDto createdTickets = ticketsService.createTickets(ticketsDto);
 	      logger.info("Created Tickets with id: {}", createdTickets.getTicketsCode());
@@ -44,6 +46,7 @@ public class TicketsController {
 	  
 	  // Get all Tickets  
 	  @GetMapping("/get/tickets")
+	  // @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<List<TicketsDto>> getAllTickets() {
 	      List<TicketsDto> tickets = ticketsService.getAllTickets();
 	      logger.info("Retrieved {} Tickets from the database", tickets.size());
@@ -52,6 +55,7 @@ public class TicketsController {
 
 	  // Get Tickets by ID
 	  @GetMapping("/get/{ticketsId}")
+	  // @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<TicketsDto> getTicketsId(@PathVariable Long ticketsId) {
 	      Optional<TicketsDto> tickets = ticketsService.getTicketsId(ticketsId);
 	      if (tickets.isPresent()) {
@@ -66,6 +70,7 @@ public class TicketsController {
 	  
 	// Get Employee by ID
 	  @GetMapping("/{employeeId}")
+	  // @PreAuthorize("hasRole('client_admin')")
 	    public ResponseEntity<List<TicketsDto>> getTicketsByEmployeeId(@PathVariable Long employeeId) {
 	        List<TicketsDto> tickets = ticketsService.getEmployeeId(employeeId);
 
@@ -79,6 +84,7 @@ public class TicketsController {
 	  
 	  // Update Tickets by ID
 	  @PutMapping("/update/{ticketsId}")
+	  // @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<TicketsDto> updateTickets(@PathVariable Long ticketsId, @RequestBody TicketsDto updatedTicketsDto) {
 		  TicketsDto updatedTickets = ticketsService.updateTickets(ticketsId, updatedTicketsDto);
 	      if (updatedTickets != null) {
@@ -92,6 +98,7 @@ public class TicketsController {
 	  
 	  // Delete Tickets by ID
 	  @DeleteMapping("/delete/{ticketsId}")
+	  // @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<Void> deleteTickets(@PathVariable Long ticketsId) {
 		   ticketsService.deleteTickets(ticketsId);
 	      logger.info("Deleted Tickets with ID: {}", ticketsId);
@@ -99,6 +106,7 @@ public class TicketsController {
 	  }
 		    
 		    @GetMapping("/count/tickets")
+		    // @PreAuthorize("hasRole('client_admin')")
 		    public long countTickets()
 		    {
 		    	return ticketsService.countTickets();
