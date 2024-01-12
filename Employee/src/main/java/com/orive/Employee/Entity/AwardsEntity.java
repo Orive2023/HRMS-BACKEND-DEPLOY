@@ -31,6 +31,9 @@ public class AwardsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long awardId;
 	
+	@Column(name = "employee_id")
+	private Long employeeId;
+	
 	@Column(name = "award_name")
 	private String awardName;
 	

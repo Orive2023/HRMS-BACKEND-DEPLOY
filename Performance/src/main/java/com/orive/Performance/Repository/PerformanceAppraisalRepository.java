@@ -1,9 +1,15 @@
 package com.orive.Performance.Repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.orive.Performance.Entity.PerformanceAppraisalEntity;
 
 public interface PerformanceAppraisalRepository extends JpaRepository<PerformanceAppraisalEntity, Long> {
+	
+	//Query for find by employeeId
+	 List<PerformanceAppraisalEntity> findPerformanceAppraisalByEmployeeId(Long employeeId);
+	//  @Query("SELECT p FROM PerformanceAppraisalEntity p WHERE p.employeeId = :employeeId")
+	//  List<PerformanceAppraisalEntity> findPerformanceAppraisalByEmployeeId(@Param("employeeId") Long employeeId);
 
 }

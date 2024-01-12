@@ -9,10 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import com.orive.Performance.Dto.PerformanceAppraisalDto;
 import com.orive.Performance.Entity.PerformanceAppraisalEntity;
+import com.orive.Performance.Exceptions.ResourceNotFoundException;
 import com.orive.Performance.Repository.PerformanceAppraisalRepository;
 
 @Service
@@ -53,6 +52,18 @@ public class PerformanceAppraisalService {
             return Optional.empty();
         }
     }
+    
+    
+   //get by EmployeeId
+    public List<PerformanceAppraisalEntity> getPerformanceAppraisalByEmployeeId(Long employeeId) {
+        List<PerformanceAppraisalEntity> performanceAppraisal = performanceAppraisalRepository.findPerformanceAppraisalByEmployeeId(employeeId);
+        if (performanceAppraisal.isEmpty()) {
+            logger.warn("No PerformanceAppraisal found with EmployeeID: {}", employeeId);
+            throw new ResourceNotFoundException("No PerformanceAppraisal found with EmployeeId: " + employeeId);
+        }
+        return performanceAppraisal;
+    }
+    
     
  // Update list by id
     public PerformanceAppraisalDto updatePerformanceAppraisal(Long performanceAppraisalId, PerformanceAppraisalDto performanceAppraisalDto) {
