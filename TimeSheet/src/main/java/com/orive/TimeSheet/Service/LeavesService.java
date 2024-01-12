@@ -79,6 +79,7 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
 //            existingLeave.setEmployeeName(leaveDto.getEmployeeName());
 //        	existingLeave.setStartDate(leaveDto.getStartDate());
 //        	existingLeave.setEndDate(leaveDto.getEndDate());
+        	existingLeave.setApproval(leaveDto.getApproval());
         	modelMapper.map(leaveDto, existingLeavesOptional);
             LeavesEntity updatedLeave = leavesRepository.save(existingLeave);
             logger.info("Updated Leaves with ID: {}", updatedLeave.getLeaveId());

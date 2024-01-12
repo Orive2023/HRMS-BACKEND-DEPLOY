@@ -33,6 +33,7 @@ public class EmployeesService {
 		private ModelMapper modelMapper;
 		
 		public String saveEmployeesEntity(
+			    Long employeeId,
 				String employeeName,
 				String designationName,
 				String email,
@@ -93,6 +94,7 @@ public class EmployeesService {
 			try {
 				EmployeesEntity employeeData = employeesRepository.save(EmployeesEntity.builder()
 						
+						.employeeId(employeeId)
 						.employeeName(employeeName)
 						.designationName(designationName)
 						.email(email)
@@ -162,29 +164,61 @@ public class EmployeesService {
 			
 			return null;
 		}
+			
 		
-		 //Download Logo
-		 public byte[] downloadImage(Long employeeId){
-		        Optional<EmployeesEntity> dbImageData = employeesRepository.findById(employeeId);
-		        byte[] images=ImageUploadUtils.decompressImage(dbImageData.get().getUploadPhoto());
-		        return images;
+	 //Download Logo	
+		
+//		 public byte[] downloadImage(Long employeeId){
+//		        Optional<EmployeesEntity> dbImageData = employeesRepository.findById(employeeId);
+//		        byte[] images=ImageUploadUtils.decompressImage(dbImageData.get().getUploadPhoto());
+//		        return images;
+//		    }
+		
+		public byte[] downloadImage(Long employeeId) {
+		    List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByEmployeeId(employeeId);
+
+		    if (!employeeList.isEmpty()) {
+		        EmployeesEntity dbImageData = employeeList.get(0);
+		        return ImageUploadUtils.decompressImage(dbImageData.getUploadPhoto());
+		    } else {
+		        // Handle the case where the employee with the specified ID is not found
+		        // You may choose to throw an exception or return a default image
+		        return null;
 		    }
-		 
-		//Download pdf
-			public byte[] downloadPdf(Long employeeId) {
-				 Optional<EmployeesEntity> dbPdfData = employeesRepository.findById(employeeId);
-			    
-			    if (dbPdfData.isPresent()) {
-			        return PdfUploadUtils.decompressPdf(dbPdfData.get().getUploadDocument());
-			    } else {
-			        // Handle the case where the candidate profile is not found
-			        return null;
-			    }
-			}
+		}
+
+		
+		
+        //Download pdf
+		
+//			public byte[] downloadPdf(Long employeeId) {
+//				 Optional<EmployeesEntity> dbPdfData = employeesRepository.findById(employeeId);
+//			    
+//			    if (dbPdfData.isPresent()) {
+//			        return PdfUploadUtils.decompressPdf(dbPdfData.get().getUploadDocument());
+//			    } else {
+//			        // Handle the case where the candidate profile is not found
+//			        return null;
+//			    }
+//			}
+		
+		
+		public byte[] downloadPdf(Long employeeId) {
+		    List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByEmployeeId(employeeId);
+
+		    if (!employeeList.isEmpty()) {
+		        EmployeesEntity dbPdfData = employeeList.get(0);
+		        return PdfUploadUtils.decompressPdf(dbPdfData.getUploadDocument());
+		    } else {
+		        // Handle the case where the employee with the specified ID is not found
+		        // You may choose to throw an exception or return a default PDF
+		        return null;
+		    }
+		}
 			
 		
 
-	    // Read
+	  // Read
 	    public List<EmployeesDto> getAllEmployees() {
 	        List<EmployeesEntity> employeesEntities = employeesRepository.findAll();
 	        logger.info("Retrieved {} Employees from the database", employeesEntities.size());
@@ -193,13 +227,13 @@ public class EmployeesService {
 	                .collect(Collectors.toList());
 	    }
 	    
-	    //get by EmployeesId
-	    public Optional<EmployeesDto> getEmployeesById(Long employeeId) {
-	        Optional<EmployeesEntity> employee = employeesRepository.findById(employeeId);
+	    //get by employeeSerialNo
+	    public Optional<EmployeesDto> getEmployeeSerialNo(Long employeeSerialNo) {
+	        Optional<EmployeesEntity> employee = employeesRepository.findById(employeeSerialNo);
 	        if (employee.isPresent()) {
 	            return Optional.of(convertToDTO(employee.get()));
 	        } else {
-	            logger.warn("Employees with ID {} not found", employeeId);
+	            logger.warn("Employees with ID {} not found", employeeSerialNo);
 	            return Optional.empty();
 	        }
 	    }
@@ -212,13 +246,24 @@ public class EmployeesService {
 	            logger.warn("No employees found with name: {}", employeeName);
 	            throw new ResourceNotFoundException("No employees found with name: " + employeeName);
 	        }
-
 	        return employees;
 	    }
 	    
-	 // Update list by id
-	    public EmployeesDto updateEmployees(Long employeeId, EmployeesDto employeesDto) {
-	        Optional<EmployeesEntity> existingEmployeesOptional = employeesRepository.findById(employeeId);
+	    
+	  //get by EmployeesId
+	    public List<EmployeesEntity> getEmployeesByEmployeeId(Long employeeId) {
+	        List<EmployeesEntity> employees = employeesRepository.findEmployeeByEmployeeId(employeeId);
+	        if (employees.isEmpty()) {
+	            logger.warn("No employees found with EmployeeID: {}", employeeId);
+	            throw new ResourceNotFoundException("No employees found with EmployeeId: " + employeeId);
+	        }
+	        return employees;
+	    }
+	    
+	    
+	 // Update list by EmployeeSerialNo
+	    public EmployeesDto updateEmployeeSerialNo(Long employeeSerialNo, EmployeesDto employeesDto) {
+	        Optional<EmployeesEntity> existingEmployeesOptional = employeesRepository.findById(employeeSerialNo);
 	        if (existingEmployeesOptional.isPresent()) {
 	        	EmployeesEntity existingEmployees = existingEmployeesOptional.get();
 	        	existingEmployees.setEmployeeName(employeesDto.getEmployeeName());
@@ -235,6 +280,36 @@ public class EmployeesService {
 	        	existingEmployees.setTax(employeesDto.getTax());
 	            modelMapper.map(employeesDto, existingEmployeesOptional);
 	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
+	            logger.info("Updated Employees with EmployeeSerialNo: {}", updatedEmployees.getEmployeeSerialNo());
+	            return convertToDTO(updatedEmployees);
+	        } else {
+	            logger.warn("Employees with EmployeeSerialNo {} not found for update", employeeSerialNo);
+	            return null;
+	        }
+	    }
+	    
+	    
+ //Update list by EmployeeId
+	    public EmployeesDto updateEmployees(Long employeeId, EmployeesDto employeesDto) {
+	        List<EmployeesEntity> existingEmployeesList = employeesRepository.findEmployeeByEmployeeId(employeeId);
+
+	        if (!existingEmployeesList.isEmpty()) {
+	            EmployeesEntity existingEmployees = existingEmployeesList.get(0);
+
+	            existingEmployees.setEmployeeName(employeesDto.getEmployeeName());
+	            existingEmployees.setPhone(employeesDto.getPhone());
+	            existingEmployees.setAccountNumber(employeesDto.getAccountNumber());
+	            existingEmployees.setBasicSalary(employeesDto.getBasicSalary());
+	            existingEmployees.setTransportAllowance(employeesDto.getTransportAllowance());
+	            existingEmployees.setHraAllowances(employeesDto.getHraAllowances());
+	            existingEmployees.setOtherAllowances(employeesDto.getOtherAllowances());
+	            existingEmployees.setPfAllowances(employeesDto.getPfAllowances());
+	            existingEmployees.setDaAllowances(employeesDto.getDaAllowances());
+	            existingEmployees.setMedicalAllowances(employeesDto.getMedicalAllowances());
+	            existingEmployees.setOtherInsurance(employeesDto.getOtherInsurance());
+	            existingEmployees.setTax(employeesDto.getTax());
+
+	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
 	            logger.info("Updated Employees with ID: {}", updatedEmployees.getEmployeeId());
 	            return convertToDTO(updatedEmployees);
 	        } else {
@@ -242,12 +317,29 @@ public class EmployeesService {
 	            return null;
 	        }
 	    }
+
 	    
-	    // Delete
-	    public void deleteEmployees(Long employeeId) {
-	    	employeesRepository.deleteById(employeeId);
-	        logger.info("Deleted Employees with ID: {}", employeeId);
+       // Delete Employee By Using EmployeeSerialNo
+	    public void deleteEmployeesBySerialNo(Long employeeSerialNo) {
+	    	employeesRepository.deleteById(employeeSerialNo);
+	        logger.info("Deleted Employees with ID: {}", employeeSerialNo);
 	    }
+	    
+	    
+       // Delete Employee By Using EmployeeId
+	    public void deleteEmployeeByEmployeeId(Long employeeId) {
+	        List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByEmployeeId(employeeId);
+	        if (!employeeList.isEmpty()) {
+	            EmployeesEntity employeeToDelete = employeeList.get(0);
+	            employeesRepository.delete(employeeToDelete);
+	            logger.info("Deleted Employee with EmployeeID: {}", employeeId);
+	        } else {
+	            logger.warn("Employee with EmployeeID {} not found for delete", employeeId);
+	            // You may choose to throw an exception or handle it according to your application logic
+	        }
+	    }
+	    
+	    
 
 	    //count the total Employees
 	    public long countEmployees()
@@ -271,14 +363,14 @@ public class EmployeesService {
 			 return employeesRepository.countEmployeeByFemale();
 		 }
 	    
-	    
-	    
+	    	    
 		// Helper method to convert EmployeesDTo to EmployeesEntity
 	    private EmployeesEntity convertToEntity(EmployeesDto employeesDto)
 	    {
 	    	return modelMapper.map(employeesDto, EmployeesEntity.class);
 	    }
 
+	    
 	    // Helper method to convert EmployeesEntity to EmployeesDTo
 	    private EmployeesDto convertToDTO(EmployeesEntity employeesEntity) {
 	        return modelMapper.map(employeesEntity, EmployeesDto.class);

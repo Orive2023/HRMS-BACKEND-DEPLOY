@@ -30,7 +30,6 @@ import com.orive.Employee.Dto.EmployeesDto;
 import com.orive.Employee.Entity.EmployeesEntity;
 import com.orive.Employee.Exceptions.ResourceNotFoundException;
 import com.orive.Employee.Service.EmployeesService;
-//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -55,8 +54,9 @@ public class EmployeesController {
     
  // Create a new Employees  
     @PostMapping("/create/employee")
- // @PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<?> uploadEmployeeData(
+		  
+		  @RequestParam("employeeId")Long employeeId,
           @RequestParam("employeeName") String employeeName,
           @RequestParam("designationName") String designationName,
           @RequestParam("email") String email,
@@ -113,7 +113,7 @@ public class EmployeesController {
           @RequestParam("userEmailOrName")  String userEmailOrName,
           @RequestParam("password") String password,
           @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument) throws IOException {
-                         String uploadEmployee = employeesService.saveEmployeesEntity(employeeName,designationName,email,phone,alternativePhone,
+                         String uploadEmployee = employeesService.saveEmployeesEntity(employeeId,employeeName,designationName,email,phone,alternativePhone,
                 		                        country,city,zipCode,employeeRole,companyType,attendanceTime,employeeType,createdDate,accountNumber,
                 		                        bankName,ifscNumber,branchName,basicSalary,transportAllowance,grossSalary,tinNumber,
                 		                        hraAllowances,otherAllowances,pfAllowances,daAllowances,medicalAllowances,otherInsurance,tax,
@@ -131,55 +131,94 @@ public class EmployeesController {
   
   
   
-//Get Employees logo by name
-  @GetMapping("/downloadImage/{employeeId}")
-//@PreAuthorize("hasRole('client_admin')")
-	public ResponseEntity<?> downloadImage(@PathVariable Long employeeId){
-		byte[] imageData=employeesService.downloadImage(employeeId);
-		return ResponseEntity.status(HttpStatus.OK)
-				.contentType(MediaType.valueOf("image/png"))
-				.body(imageData);
+    //Get Employees logo by name
+    
+//  @GetMapping("/downloadImage/{employeeId}")
+//	public ResponseEntity<?> downloadImage(@PathVariable Long employeeId){
+//		byte[] imageData=employeesService.downloadImage(employeeId);
+//		return ResponseEntity.status(HttpStatus.OK)
+//				.contentType(MediaType.valueOf("image/png"))
+//				.body(imageData);
+//
+//	}
+    
+    @GetMapping("/downloadImage/{employeeId}")
+    public ResponseEntity<byte[]> downloadImage(@PathVariable Long employeeId) {
+        byte[] imageData = employeesService.downloadImage(employeeId);
+        if (imageData != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG); 
+            
+            // Adjust the media type based on your image format
+            // Optional: Set additional headers if needed
 
-	}
+            return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
+        } else {
+            // Handle the case where the employee with the specified ID is not found
+            // You may choose to return a default image or a 404 Not Found response
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     
     
-//Get Employees pdf by id  
-  @GetMapping("/downloadPdf/{employeeId}")
-//@PreAuthorize("hasRole('client_admin')")
-  public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long employeeId) {
-      byte[] pdf = employeesService.downloadPdf(employeeId);
+     //Get Employees pdf by id  
+    
+    
+//  @GetMapping("/downloadPdf/{employeeId}")
+//  public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long employeeId) {
+//      byte[] pdf = employeesService.downloadPdf(employeeId);
+//
+//      if (pdf != null) {
+//          HttpHeaders headers = new HttpHeaders();
+//          headers.setContentType(MediaType.APPLICATION_PDF);
+//          headers.setContentDisposition(ContentDisposition.builder("attachment").filename(employeeId + "employee.pdf").build());
+//          return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
+//      } else {
+//          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//      }
+//  }
+    
+    
+    @GetMapping("/downloadPdf/{employeeId}")
+    public ResponseEntity<byte[]> downloadPdf(@PathVariable Long employeeId) {
+        byte[] pdfData = employeesService.downloadPdf(employeeId);
 
-      if (pdf != null) {
-          HttpHeaders headers = new HttpHeaders();
-          headers.setContentType(MediaType.APPLICATION_PDF);
-          headers.setContentDisposition(ContentDisposition.builder("attachment").filename(employeeId + "employee.pdf").build());
-          return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
-      } else {
-          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-      }
-  }
+        if (pdfData != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+//            headers.setContentDisposition(ContentDisposition.builder("attachment").filename(employeeId + "employee.pdf").build());
+            headers.setContentDispositionFormData("attachment", "employee_document.pdf"); // Adjust the filename
+
+            // Optional: Set additional headers if needed
+
+            return new ResponseEntity<>(pdfData, headers, HttpStatus.OK);
+        } else {
+            // Handle the case where the employee with the specified ID is not found
+            // You may choose to return a default PDF or a 404 Not Found response
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
     
     
     
       // Get all Employees
       @GetMapping("/get/employee")
-   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<EmployeesDto>> getAllEmployees() {
           List<EmployeesDto> employee = employeesService.getAllEmployees();
           logger.info("Retrieved {} Employees from the database", employee.size());
           return new ResponseEntity<>(employee, HttpStatus.OK);
       }
 
-      // Get Employees by ID
-      @GetMapping("/get/{employeeId}")
-   // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<EmployeesDto> getEmployeesById(@PathVariable Long employeeId) {
-          Optional<EmployeesDto> employee = employeesService.getEmployeesById(employeeId);
+      // Get Employees by employeeSerialNo
+      @GetMapping("/get/{employeeSerialNo}")
+      public ResponseEntity<EmployeesDto> getEmployeeSerialNo(@PathVariable Long employeeSerialNo) {
+          Optional<EmployeesDto> employee = employeesService.getEmployeeSerialNo(employeeSerialNo);
           if (employee.isPresent()) {
-              logger.info("Retrieved Employees with ID: {}", employeeId);
+              logger.info("Retrieved Employees with ID: {}", employeeSerialNo);
               return new ResponseEntity<>(employee.get(), HttpStatus.OK);
           } else {
-              logger.warn("Employees with ID {} not found", employeeId);
+              logger.warn("Employees with ID {} not found", employeeSerialNo);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
@@ -188,7 +227,6 @@ public class EmployeesController {
       
       // Get Employees by EmployeeName
       @GetMapping("/byName/{employeeName}")
-   // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<EmployeesEntity>> getEmployeesByName(@PathVariable String employeeName) {
           try {
               List<EmployeesEntity> employees = employeesService.getEmployeesByName(employeeName);
@@ -201,51 +239,88 @@ public class EmployeesController {
       }
       
       
-
-      // Update Employees by ID
-      @PutMapping("/update/{employeeId}")
-   // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<EmployeesDto> updateEmployees(@PathVariable Long employeeId, @RequestBody EmployeesDto updatedEmployeesDto) {
-    	  EmployeesDto updatedEmployees = employeesService.updateEmployees(employeeId, updatedEmployeesDto);
-          if (updatedEmployees != null) {
-              logger.info("Updated Employees with ID: {}", employeeId);
-              return new ResponseEntity<>(updatedEmployees, HttpStatus.OK);
-          } else {
-              logger.warn("Employees with ID {} not found for update", employeeId);
+      
+   // Get Employees by EmployeeId
+      @GetMapping("/byId/{employeeId}")
+      public ResponseEntity<List<EmployeesEntity>> getEmployeesByEmployeeId(@PathVariable Long employeeId) {
+          try {
+              List<EmployeesEntity> employees = employeesService.getEmployeesByEmployeeId(employeeId);
+              logger.info("Retrieved Employees with EmployeeId: {}", employeeId);
+              return new ResponseEntity<>(employees, HttpStatus.OK);
+          } catch (ResourceNotFoundException e) {
+        	  logger.warn("Employees with EmployeeID {} not found", employeeId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
+      
 
+      // Update Employees by EmployeeSerialNo
+      @PutMapping("/update/{employeeSerialNo}")
+      public ResponseEntity<EmployeesDto> updateEmployeesByEmployeeSerialno(@PathVariable Long employeeSerialNo, @RequestBody EmployeesDto updatedEmployeesDto) {
+    	  EmployeesDto updatedEmployees = employeesService.updateEmployeeSerialNo(employeeSerialNo, updatedEmployeesDto);
+          if (updatedEmployees != null) {
+              logger.info("Updated Employees with EmployeeSerialNo: {}", employeeSerialNo);
+              return new ResponseEntity<>(updatedEmployees, HttpStatus.OK);
+          } else {
+              logger.warn("Employees with EmployeeSerialNo {} not found for update", employeeSerialNo);
+              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+          }
+      }
+      
+      
+   // Update Employees by EmployeeID
+      @PutMapping("/update/ID/{employeeId}")
+      public ResponseEntity<EmployeesDto> updateEmployee(@PathVariable Long employeeId, @RequestBody EmployeesDto updatedEmployeesDto) {
+          EmployeesDto updatedEmployees = employeesService.updateEmployees(employeeId, updatedEmployeesDto);
 
-      // Delete Employees by ID
-      @DeleteMapping("/delete/{employeeId}")
-   // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<Void> deleteEmployees(@PathVariable Long employeeId) {
-    	  employeesService.deleteEmployees(employeeId);
-          logger.info("Deleted Employees with ID: {}", employeeId);
+          if (updatedEmployees != null) {
+        	  logger.info("Updated Employees with EmployeeID: {}", employeeId);
+              return new ResponseEntity<>(updatedEmployees, HttpStatus.OK);
+          } else {
+        	  logger.warn("Employees with EmployeeID {} not found for update", employeeId);
+              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+          }
+      }
+      
+      
+
+      // Delete Employees By EmployeeSerialNo
+      @DeleteMapping("/delete/{employeeSerialNo}")
+      public ResponseEntity<Void> deleteEmployeesBySerialNo(@PathVariable Long employeeSerialNo) {
+    	  employeesService.deleteEmployeesBySerialNo(employeeSerialNo);
+          logger.info("Deleted Employees with SerialNumber: {}", employeeSerialNo);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
       
+      
+      // Delete Employees By EmployeeId 
+      @DeleteMapping("/delete/ID/{employeeId}")
+      public ResponseEntity<Void> deleteEmployeeByemployeeId(@PathVariable Long employeeId) {
+          employeesService.deleteEmployeeByEmployeeId(employeeId);
+          logger.info("Deleted Employees with EmployeeID: {}", employeeId);
+          return ResponseEntity.ok().build();
+      }
+  
+      
       // Count the total Employees 
   	    @GetMapping("/count/employee")
-  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countEmployees()
   	    {
   	    	return employeesService.countEmployees();
   	    }
+  
   	    
   	// Count the male from employee
   	    @GetMapping("/count/malemployee")
-  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countEmployeesByMale()
   	    {
   	    	return employeesService.countEmployeesByMale();
   	    }
+ 
   	    
   		// Count the Female from employee
   	    @GetMapping("/count/femalemployee")
-  	// @PreAuthorize("hasRole('client_admin')")
   	    public long countEmployeesByFemale()
   	    {
   	    	return employeesService.countEmployeesByFemale();

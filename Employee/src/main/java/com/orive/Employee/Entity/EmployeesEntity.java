@@ -30,6 +30,9 @@ public class EmployeesEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long employeeSerialNo;
+	
+	@Column(name = "employee_id", unique = true)
 	private Long employeeId;
 	
 	@Column(name = "employee_name")
