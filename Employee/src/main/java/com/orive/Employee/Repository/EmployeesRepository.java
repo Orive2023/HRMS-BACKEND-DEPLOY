@@ -1,6 +1,8 @@
 package com.orive.Employee.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +27,11 @@ public interface EmployeesRepository extends JpaRepository<EmployeesEntity, Long
  //Query for count female employee
  @Query("SELECT COUNT(f) FROM EmployeesEntity f WHERE f.gender = 'FEMALE'")
  Long countEmployeeByFemale();
+ 
+ 
+//Query for find EmployeeCredentials using UserEmailOrName And Password
+	@Query("SELECT e FROM EmployeesEntity e WHERE e.userEmailOrName = :userEmailOrName AND e.password = :password")
+	Optional<EmployeesEntity> findByUserEmailOrNameAndPassword(@Param("userEmailOrName") String userEmailOrName, @Param("password") String password);
  
 }
 

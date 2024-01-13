@@ -166,14 +166,14 @@ public class EmployeesService {
 		}
 			
 		
-	 //Download Logo	
-		
+	 //Download Logo			
 //		 public byte[] downloadImage(Long employeeId){
 //		        Optional<EmployeesEntity> dbImageData = employeesRepository.findById(employeeId);
 //		        byte[] images=ImageUploadUtils.decompressImage(dbImageData.get().getUploadPhoto());
 //		        return images;
 //		    }
 		
+		//Download Logo
 		public byte[] downloadImage(Long employeeId) {
 		    List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByEmployeeId(employeeId);
 
@@ -189,8 +189,7 @@ public class EmployeesService {
 
 		
 		
-        //Download pdf
-		
+        //Download pdf		
 //			public byte[] downloadPdf(Long employeeId) {
 //				 Optional<EmployeesEntity> dbPdfData = employeesRepository.findById(employeeId);
 //			    
@@ -203,6 +202,7 @@ public class EmployeesService {
 //			}
 		
 		
+		//Download pdf	
 		public byte[] downloadPdf(Long employeeId) {
 		    List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByEmployeeId(employeeId);
 
@@ -259,6 +259,22 @@ public class EmployeesService {
 	        }
 	        return employees;
 	    }
+	 
+	   
+	    // Fetch employee details by userEmailOrName and password
+	    public EmployeesDto getEmployeeByCredentials(String userEmailOrName, String password) {
+	        Optional<EmployeesEntity> employeeOptional = employeesRepository
+	                .findByUserEmailOrNameAndPassword(userEmailOrName, password);
+
+	        if (employeeOptional.isPresent()) {
+	            EmployeesEntity employeeEntity = employeeOptional.get();
+	            return convertToDTO(employeeEntity);
+	        } else {
+	        	logger.warn("Employees with Credentials {} not found", userEmailOrName, password);
+	            return null;
+	        }
+	    }
+	 
 	    
 	    
 	 // Update list by EmployeeSerialNo
@@ -362,7 +378,6 @@ public class EmployeesService {
 		 {
 			 return employeesRepository.countEmployeeByFemale();
 		 }
-	    
 	    	    
 		// Helper method to convert EmployeesDTo to EmployeesEntity
 	    private EmployeesEntity convertToEntity(EmployeesDto employeesDto)

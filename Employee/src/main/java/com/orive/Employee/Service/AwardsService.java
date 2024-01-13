@@ -1,5 +1,6 @@
 package com.orive.Employee.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.orive.Employee.Dto.AwardsDto;
 import com.orive.Employee.Entity.AwardsEntity;
 import com.orive.Employee.Repository.AwardsRepository;
+
 
 
 
@@ -55,6 +57,21 @@ private static final Logger logger=LoggerFactory.getLogger(AwardsService.class);
             return Optional.empty();
         }
     }
+    
+    
+    //get by Awards By  employeeId
+    public List<AwardsDto> getAwardsByEmployeeId(Long employeeId) {
+        List<AwardsEntity> award = awardsRepository.findAwardsByEmployeeId(employeeId);
+
+        if (award.isEmpty()) {
+            logger.warn("Awards with employeeId {} not found", employeeId);
+            return Collections.emptyList();
+        }
+        return award.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    } 
+    
     
  // Update list by id
     public AwardsDto updateAwards(Long awardId, AwardsDto awardsDto) {

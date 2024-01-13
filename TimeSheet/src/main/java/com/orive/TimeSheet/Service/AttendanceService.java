@@ -214,6 +214,20 @@ public class AttendanceService {
 		 return attendanceRepository.countPresentEmployeesToday();
 	 }
     
+    
+  //count the total overtime for particular month and date fetch by employeeId
+    public Long getTotalOvertimeForMonth(int month, int year, Long employeeId) {
+        return attendanceRepository.getTotalOvertimeForMonth(month, year, employeeId);
+    }
+    
+    
+  //count total login times in a month
+    public int getNumberOfLoginDaysForMonth(int month, int year, Long employeeId) {
+        List<LocalDate> loginDates = attendanceRepository.getDistinctLoginDatesForMonth(month, year, employeeId);
+        return loginDates.size();
+    }
+    
+    
 	// Helper method to convert AttendanceDTo to AttendanceEntity
     private AttendanceEntity convertToEntity(AttendanceDto attendanceDto)
     {

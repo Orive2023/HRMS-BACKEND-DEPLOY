@@ -131,8 +131,7 @@ public class EmployeesController {
   
   
   
-    //Get Employees logo by name
-    
+    //Get Employees logo by Employee    
 //  @GetMapping("/downloadImage/{employeeId}")
 //	public ResponseEntity<?> downloadImage(@PathVariable Long employeeId){
 //		byte[] imageData=employeesService.downloadImage(employeeId);
@@ -142,6 +141,7 @@ public class EmployeesController {
 //
 //	}
     
+  //Get Employees logo by Employee 
     @GetMapping("/downloadImage/{employeeId}")
     public ResponseEntity<byte[]> downloadImage(@PathVariable Long employeeId) {
         byte[] imageData = employeesService.downloadImage(employeeId);
@@ -161,9 +161,7 @@ public class EmployeesController {
     }
     
     
-     //Get Employees pdf by id  
-    
-    
+     //Get Employees pdf by id    
 //  @GetMapping("/downloadPdf/{employeeId}")
 //  public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long employeeId) {
 //      byte[] pdf = employeesService.downloadPdf(employeeId);
@@ -179,6 +177,7 @@ public class EmployeesController {
 //  }
     
     
+  //Get Employees pdf by id  
     @GetMapping("/downloadPdf/{employeeId}")
     public ResponseEntity<byte[]> downloadPdf(@PathVariable Long employeeId) {
         byte[] pdfData = employeesService.downloadPdf(employeeId);
@@ -222,8 +221,7 @@ public class EmployeesController {
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
-      
-      
+           
       
       // Get Employees by EmployeeName
       @GetMapping("/byName/{employeeName}")
@@ -237,8 +235,7 @@ public class EmployeesController {
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
-      
-      
+            
       
    // Get Employees by EmployeeId
       @GetMapping("/byId/{employeeId}")
@@ -253,6 +250,22 @@ public class EmployeesController {
           }
       }
       
+      
+      
+      @GetMapping("/login")
+      public ResponseEntity<EmployeesDto> login(@RequestParam String userEmailOrName, @RequestParam String password) {
+          EmployeesDto employeeDto = employeesService.getEmployeeByCredentials(userEmailOrName, password);
+
+          if (employeeDto != null) {
+              // Login successful, return employee details
+        	  logger.info("Login successful with EmployeeCredentials: {}", userEmailOrName, password);
+              return new ResponseEntity<>(employeeDto, HttpStatus.OK);
+          } else {
+              // Handle the case where the credentials are incorrect or employee not found
+        	  logger.info("Invalid credentials: {}", userEmailOrName, password);
+              return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+          }
+      }
       
 
       // Update Employees by EmployeeSerialNo
