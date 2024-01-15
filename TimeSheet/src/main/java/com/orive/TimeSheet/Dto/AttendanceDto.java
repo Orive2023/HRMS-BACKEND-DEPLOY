@@ -5,6 +5,9 @@ import java.time.LocalTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,16 +24,19 @@ import lombok.ToString;
 @Builder
 public class AttendanceDto {
  	
+	
 	private Long attendanceId;
+	private String officeClockIn;
+	private String officeClockOut;
 	private String employeeName;
 	private Long employeeId;
 	private String clockIn;
 	private String clockOut;
-	private Long late;
-	private Long earlyLeaving;
-	private Long overTime;
-	private Long totalWork;
-	private Long totalRest;
+	private String late;
+	private String earlyLeaving;
+	private String overTime;
+	private String totalWork;
+	private String totalRest;
 	private LocalDate date;
 	private String clockInLocation;
 	private String clockOutLocation;

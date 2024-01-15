@@ -22,8 +22,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private long id;
+    private Long id;
 
     @Column
     private String name;
@@ -48,7 +47,7 @@ public class User {
     @Column
     private String profileUrl;
 
-    @Column(name = "forgetToken", unique = true, nullable = true)
+    @Column(name = "forgetToken")
     private String forgetToken;
 
     @Column

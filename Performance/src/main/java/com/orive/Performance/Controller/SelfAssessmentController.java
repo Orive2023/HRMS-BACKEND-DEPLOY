@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Performance.Dto.SelfAssessmentDto;
 import com.orive.Performance.Service.SelfAssessmentService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -34,6 +35,7 @@ public class SelfAssessmentController {
 	 
 	// Create a new SelfAssessment
    @PostMapping("/create/selfAssessment")
+   // @PreAuthorize("hasRole('client_admin')")
    public ResponseEntity<SelfAssessmentDto> createSelfAssessment(@RequestBody SelfAssessmentDto selfAssessmentDto) {
 	   SelfAssessmentDto createdSelfAssessment = selfAssessmentService.createSelfAssessment(selfAssessmentDto);
        logger.info("Created SelfAssessment with id: {}", createdSelfAssessment.getSelfAssessmentId());
@@ -43,6 +45,7 @@ public class SelfAssessmentController {
    
    // Get all SelfAssessment  
    @GetMapping("/get/selfAssessment")
+   // @PreAuthorize("hasRole('client_admin')")
    public ResponseEntity<List<SelfAssessmentDto>> getAllSelfAssessment() {
        List<SelfAssessmentDto> selfAssessment = selfAssessmentService.getAllSelfAssessment();
        logger.info("Retrieved {} SelfAssessment from the database", selfAssessment.size());
@@ -51,6 +54,7 @@ public class SelfAssessmentController {
 
    // Get SelfAssessment by ID
    @GetMapping("/get/{selfAssessmentId}")
+   // @PreAuthorize("hasRole('client_admin')")
    public ResponseEntity<SelfAssessmentDto> getSelfAssessmentId(@PathVariable Long selfAssessmentId) {
        Optional<SelfAssessmentDto> selfAssessment = selfAssessmentService.getSelfAssessmentById(selfAssessmentId);
        if (selfAssessment.isPresent()) {
@@ -64,6 +68,7 @@ public class SelfAssessmentController {
 
    // Update SelfAssessment by ID
    @PutMapping("/update/{selfAssessmentId}")
+   // @PreAuthorize("hasRole('client_admin')")
    public ResponseEntity<SelfAssessmentDto> updateSelfAssessment(@PathVariable Long selfAssessmentId, @RequestBody SelfAssessmentDto updatedSelfAssessmentDto) {
 	   SelfAssessmentDto updatedTravels = selfAssessmentService.updateSelfAssessment(selfAssessmentId, updatedSelfAssessmentDto);
        if (updatedTravels != null) {
@@ -77,14 +82,16 @@ public class SelfAssessmentController {
    
    // Delete SelfAssessment by ID
    @DeleteMapping("/delete/{selfAssessmentId}")
+   // @PreAuthorize("hasRole('client_admin')")
    public ResponseEntity<Void> deleteSelfAssessment(@PathVariable Long selfAssessmentId) {
 	   selfAssessmentService.deleteSelfAssessment(selfAssessmentId);
        logger.info("Deleted SelfAssessment with ID: {}", selfAssessmentId);
        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
    }
 	    
-// Count the total  SelfAssessment
+       // Count the total  SelfAssessment
 	    @GetMapping("/count/selfAssessment")
+	    // @PreAuthorize("hasRole('client_admin')")
 	    public long countSelfAssessment()
 	    {
 	    	return selfAssessmentService.CountSelfAssessment();

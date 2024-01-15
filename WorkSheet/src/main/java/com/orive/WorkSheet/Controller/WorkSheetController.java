@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.WorkSheet.Dto.WorkSheetDto;
 import com.orive.WorkSheet.Service.WorkSheetService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "worksheet")
@@ -34,6 +35,7 @@ public class WorkSheetController {
 	
 	// Create a new WorkSheet
 		  @PostMapping("/create/worksheet")
+		  // @PreAuthorize("hasRole('client_admin')")
 		  public ResponseEntity<WorkSheetDto> createWorkSheet(@RequestBody WorkSheetDto workSheetDto) {
 			  WorkSheetDto createdWorkSheet = workSheetService.createWorkSheet(workSheetDto);
 		      logger.info("Created WorkSheet with id: {}", createdWorkSheet.getWorkSheetTitle());
@@ -43,6 +45,7 @@ public class WorkSheetController {
 		  
 		  // Get all WorkSheet  
 		  @GetMapping("/get/worksheet")
+		  // @PreAuthorize("hasRole('client_admin')")
 		  public ResponseEntity<List<WorkSheetDto>> getAllWorkSheets() {
 		      List<WorkSheetDto> workSheet = workSheetService.getAllWorkSheets();
 		      logger.info("Retrieved {} WorkSheet from the database", workSheet.size());
@@ -51,6 +54,7 @@ public class WorkSheetController {
 
 		  // Get WorkSheet by ID
 		  @GetMapping("/get/{workSheetId}")
+		  // @PreAuthorize("hasRole('client_admin')")
 		  public ResponseEntity<WorkSheetDto> getWorkSheetDtoId(@PathVariable Long workSheetId) {
 		      Optional<WorkSheetDto> workSheet = workSheetService.getWorkSheetId(workSheetId);
 		      if (workSheet.isPresent()) {
@@ -65,6 +69,7 @@ public class WorkSheetController {
 		  
 		// Get Employee by ID
 		  @GetMapping("/{employeeId}")
+		  // @PreAuthorize("hasRole('client_admin')")
 		    public ResponseEntity<List<WorkSheetDto>> getWorkSheetsByEmployeeId(@PathVariable Long employeeId) {
 		        List<WorkSheetDto> workSheet = workSheetService.getEmployeeId(employeeId);
 
@@ -79,6 +84,7 @@ public class WorkSheetController {
 		  
 		  // Update WorkSheet by ID
 		  @PutMapping("/update/{workSheetId}")
+		  // @PreAuthorize("hasRole('client_admin')")
 		  public ResponseEntity<WorkSheetDto> updateWorkSheet(@PathVariable Long workSheetId, @RequestBody WorkSheetDto updatedWorkSheetDto) {
 			  WorkSheetDto updatedWorkSheet = workSheetService.updateWorkSheet(workSheetId, updatedWorkSheetDto);
 		      if (updatedWorkSheet != null) {
@@ -92,6 +98,7 @@ public class WorkSheetController {
 		  
 		  // Delete WorkSheet by ID
 		  @DeleteMapping("/delete/{workSheetId}")
+		  // @PreAuthorize("hasRole('client_admin')")
 		  public ResponseEntity<Void> deleteWorkSheet(@PathVariable Long workSheetId) {
 			   workSheetService.deleteWorkSheet(workSheetId);
 		      logger.info("Deleted WorkSheet with ID: {}", workSheetId);
@@ -99,6 +106,7 @@ public class WorkSheetController {
 		  }
 			    
 			    @GetMapping("/count/worksheet")
+			    // @PreAuthorize("hasRole('client_admin')")
 			    public long countWorkSheet()
 			    {
 			    	return workSheetService.countWorkSheet();

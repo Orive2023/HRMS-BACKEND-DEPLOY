@@ -124,7 +124,7 @@ public class ExcelHelper {
                         	  attendanceEntity.setTotalWork(getStringValue(currentCell));
                              break;
                              case 11:
-                        	  attendanceEntity.setTotalRest(getNumericValue(currentCell));
+                        	  attendanceEntity.setTotalRest(getStringValue(currentCell));
                              break;
                              case 12:
                         	  attendanceEntity.setDate(getLocalDateValue(currentCell));

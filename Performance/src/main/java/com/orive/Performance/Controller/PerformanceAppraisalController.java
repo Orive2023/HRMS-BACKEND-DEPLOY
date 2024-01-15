@@ -21,6 +21,7 @@ import com.orive.Performance.Dto.PerformanceAppraisalDto;
 import com.orive.Performance.Entity.PerformanceAppraisalEntity;
 import com.orive.Performance.Exceptions.ResourceNotFoundException;
 import com.orive.Performance.Service.PerformanceAppraisalService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "performanceappraisal")
@@ -36,6 +37,7 @@ public class PerformanceAppraisalController {
     
  // Create a new PerformanceAppraisal
     @PostMapping("/create/performanceappraisal")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<PerformanceAppraisalDto> createPerformanceAppraisal(@RequestBody PerformanceAppraisalDto performanceAppraisalDto) {
     	PerformanceAppraisalDto createdPerformanceAppraisal = performanceAppraisalService.createPerformanceAppraisal(performanceAppraisalDto);
         logger.info("Created PerformanceAppraisal with name: {}", createdPerformanceAppraisal.getEmployeeName());
@@ -45,6 +47,7 @@ public class PerformanceAppraisalController {
     // Get all PerformanceAppraisal
     
     @GetMapping("/get/performanceappraisal")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<PerformanceAppraisalDto>> getAllPerformanceAppraisal() {
         List<PerformanceAppraisalDto> performanceAppraisal = performanceAppraisalService.getAllPerformanceAppraisal();
         logger.info("Retrieved {} PerformanceAppraisal from the database", performanceAppraisal.size());
@@ -53,6 +56,7 @@ public class PerformanceAppraisalController {
 
     // Get PerformanceAppraisalbyId
     @GetMapping("/get/{performanceAppraisalId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<PerformanceAppraisalDto> getPerformanceAppraisalbyId(@PathVariable Long performanceAppraisalId) {
         Optional<PerformanceAppraisalDto> performanceAppraisal = performanceAppraisalService.getPerformanceAppraisalById(performanceAppraisalId);
         if (performanceAppraisal.isPresent()) {
@@ -68,6 +72,7 @@ public class PerformanceAppraisalController {
     
  // Get PerformanceAppraisal by EmployeeId
     @GetMapping("/byId/{employeeId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<PerformanceAppraisalEntity>> getPerformanceAppraisalByEmployeeId(@PathVariable Long employeeId) {
         try {
             List<PerformanceAppraisalEntity> performanceAppraisal = performanceAppraisalService.getPerformanceAppraisalByEmployeeId(employeeId);
@@ -82,6 +87,7 @@ public class PerformanceAppraisalController {
 
     // Update PerformanceAppraisal by PerformanceAppraisalbyId
     @PutMapping("/update/{performanceAppraisalId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<PerformanceAppraisalDto> updatePerformanceAppraisal(@PathVariable Long performanceAppraisalId, @RequestBody PerformanceAppraisalDto updatedPerformanceAppraisalDto) {
     	PerformanceAppraisalDto updatedPerformanceAppraisal = performanceAppraisalService.updatePerformanceAppraisal(performanceAppraisalId, updatedPerformanceAppraisalDto);
         if (updatedPerformanceAppraisal != null) {
@@ -97,6 +103,7 @@ public class PerformanceAppraisalController {
 
     // Delete PerformanceAppraisal by ID
     @DeleteMapping("/delete/{performanceAppraisalId}")
+    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deletePerformanceAppraisal(@PathVariable Long performanceAppraisalId) {
   	  performanceAppraisalService.deletePerformanceAppraisal(performanceAppraisalId);
         logger.info("Deleted PerformanceAppraisal with ID: {}", performanceAppraisalId);
@@ -104,6 +111,7 @@ public class PerformanceAppraisalController {
     }
 	    
 	    @GetMapping("/count/performanceappraisal")
+	    // @PreAuthorize("hasRole('client_admin')")
 	    public long countPerformanceAppraisal()
 	    {
 	    	return performanceAppraisalService.countPerformanceAppraisal();
