@@ -114,8 +114,7 @@ public class AttendanceController {
 
     // Get all Attendance   
     @GetMapping("/get/attendance")
-    public ResponseEntity<List<AttendanceDto>> getAllAttendance() 
-    {
+    public ResponseEntity<List<AttendanceDto>> getAllAttendance() {
         List<AttendanceDto> attendance = attendanceService.getAllAttendances();
         logger.info("Retrieved {} Attendance from the database", attendance.size());
         return new ResponseEntity<>(attendance, HttpStatus.OK);
@@ -123,8 +122,7 @@ public class AttendanceController {
 
     // Get Attendance by ID
     @GetMapping("/get/{attendanceId}")
-    public ResponseEntity<AttendanceDto> getAttendanceById(@PathVariable Long attendanceId) 
-    {
+    public ResponseEntity<AttendanceDto> getAttendanceById(@PathVariable Long attendanceId) {
         Optional<AttendanceDto> attendance = attendanceService.getAttendanceById(attendanceId);
         if (attendance.isPresent()) {
             logger.info("Retrieved Attendance with ID: {}", attendanceId);
@@ -134,12 +132,10 @@ public class AttendanceController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
 
     // Update Attendance by ID
     @PutMapping("/update/{attendanceId}")
-    public ResponseEntity<AttendanceDto> updateAttendance(@PathVariable Long attendanceId, @RequestBody AttendanceDto updatedAttendanceDto) 
-    {
+    public ResponseEntity<AttendanceDto> updateAttendance(@PathVariable Long attendanceId, @RequestBody AttendanceDto updatedAttendanceDto) {
     	AttendanceDto updatedAttendance = attendanceService.updateAttendances(attendanceId, updatedAttendanceDto);
         if (updatedAttendance != null) {
             logger.info("Updated Attendance with ID: {}", attendanceId);
@@ -153,8 +149,7 @@ public class AttendanceController {
 
     // Update Attendance by Name And Date
     @PutMapping("/update/{employeeName}/{date}")
-    public ResponseEntity<AttendanceDto> updateAttendanceByEmployeeNameAndDate(@PathVariable String employeeName, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) 
-    {
+    public ResponseEntity<AttendanceDto> updateAttendanceByEmployeeNameAndDate(@PathVariable String employeeName, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) {
     	AttendanceDto updatedAttendance = attendanceService.updateAttendancesByEmployeeNameAndDate(employeeName, date, updatedAttendanceDto);
         if (updatedAttendance != null) {
             logger.info("Updated Attendance with name and date: {}", employeeName,date);
@@ -168,8 +163,7 @@ public class AttendanceController {
     
  // Update Attendance by Id And Date
     @PutMapping("/update/Id/{employeeId}/{date}")
-    public ResponseEntity<AttendanceDto> updateAttendanceByEmployeeIdAndDate(@PathVariable Long employeeId, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) 
-    {
+    public ResponseEntity<AttendanceDto> updateAttendanceByEmployeeIdAndDate(@PathVariable Long employeeId, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) {
     	AttendanceDto updatedAttendance = attendanceService.updateAttendancesByEmployeeIdAndDate(employeeId, date, updatedAttendanceDto);
         if (updatedAttendance != null) {
             logger.info("Updated Attendance with name and date: {}", employeeId,date);
@@ -183,8 +177,7 @@ public class AttendanceController {
     
     // Delete Attendance by ID
     @DeleteMapping("/delete/{attendanceId}")
-    public ResponseEntity<Void> deleteAttendance(@PathVariable Long attendanceId) 
-    {
+    public ResponseEntity<Void> deleteAttendance(@PathVariable Long attendanceId) {
   	  attendanceService.deleteAttendances(attendanceId);
         logger.info("Deleted Attendance with ID: {}", attendanceId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -204,19 +197,25 @@ public class AttendanceController {
 	    	return attendanceService.countPresentEmployeesToday();
 	    }
 	    
-	  //count the totalOvertime on a particular month and year
-        @GetMapping("/total-overtime/{employeeId}/{month}/{year}")
-        public Long getTotalOvertimeForMonth(@PathVariable Long employeeId,@PathVariable int month,@PathVariable int year) 
-        {
-            return attendanceService.getTotalOvertimeForMonth(month, year, employeeId);
-        }
-        
-        
-      //count the total times login in a month
-        @GetMapping("/login-days/{employeeId}/{month}/{year}")
-        public int getNumberOfLoginDaysForMonth(@PathVariable Long employeeId,@PathVariable int month,@PathVariable int year) 
-        {
-            return attendanceService.getNumberOfLoginDaysForMonth(month, year, employeeId);
-        }
-}
+	    //count the totalOvertime on a particular month and year
+	    @GetMapping("/total-overtime/{employeeId}/{year}/{month}")
+	    public ResponseEntity<String> getTotalOvertimeInMonth(
+	            @PathVariable Long employeeId,
+	            @PathVariable int year,
+	            @PathVariable int month) {
 
+	        String totalOvertime = attendanceService.getTotalOvertimeInMonth(employeeId, year, month);
+	        return ResponseEntity.ok(totalOvertime);
+	    }
+
+	    
+	    //count the total times login in a month
+	    @GetMapping("/login-days/{employeeId}/{month}/{year}")
+	    public int getNumberOfLoginDaysForMonth(
+	            @PathVariable Long employeeId,
+	            @PathVariable int month,
+	            @PathVariable int year
+	    ) {
+	        return attendanceService.getNumberOfLoginDaysForMonth(month, year, employeeId);
+	    }
+}

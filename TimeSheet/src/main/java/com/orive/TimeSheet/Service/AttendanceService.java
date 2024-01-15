@@ -161,7 +161,7 @@ public class AttendanceService {
         Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findByEmployeeNameAndDate(employeeName,date);
         if (existingAttendanceOptional.isPresent()) {
         	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
-//            existingAttendance.setClockIn(attendanceDto.getClockIn());
+//          existingAttendance.setClockIn(attendanceDto.getClockIn());
             existingAttendance.setClockOut(attendanceDto.getClockOut());
             existingAttendance.setDate(attendanceDto.getDate());
             existingAttendance.setClockOutLocation(attendanceDto.getClockOutLocation());
@@ -214,18 +214,45 @@ public class AttendanceService {
 		 return attendanceRepository.countPresentEmployeesToday();
 	 }
     
-    
-  //count the total overtime for particular month and date fetch by employeeId
-    public Long getTotalOvertimeForMonth(int month, int year, Long employeeId) {
-        return attendanceRepository.getTotalOvertimeForMonth(month, year, employeeId);
+    //count the total overtime for particular month and date fetch by employeeId
+    public String getTotalOvertimeInMonth(Long employeeId, int year, int month) {
+        LocalDate startOfMonth = LocalDate.of(year, month, 1);
+        LocalDate endOfMonth = startOfMonth.plusMonths(1).minusDays(1);
+
+        List<AttendanceEntity> attendanceList = attendanceRepository.findByEmployeeIdAndDateBetween(employeeId, startOfMonth, endOfMonth);
+
+        long totalOvertimeMinutes = attendanceList.stream()
+                .filter(attendance -> attendance.getOverTime() != null)
+                .mapToLong(attendance -> {
+                    String[] overtimeParts = attendance.getOverTime().split("h ");
+                    long hours = Long.parseLong(overtimeParts[0]);
+                    long minutes = Long.parseLong(overtimeParts[1].replace("min", ""));
+                    return hours * 60 + minutes;
+                })
+                .sum();
+
+        long totalOvertimeHours = totalOvertimeMinutes / 60;
+        long totalOvertimeMinutesRemainder = totalOvertimeMinutes % 60;
+
+        return String.format("%dh %02dmin", totalOvertimeHours, totalOvertimeMinutesRemainder);
     }
     
-    
-  //count total login times in a month
+    //count total login times in a month
     public int getNumberOfLoginDaysForMonth(int month, int year, Long employeeId) {
         List<LocalDate> loginDates = attendanceRepository.getDistinctLoginDatesForMonth(month, year, employeeId);
         return loginDates.size();
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 	// Helper method to convert AttendanceDTo to AttendanceEntity
@@ -240,6 +267,3 @@ public class AttendanceService {
     } 
 
 }
-
-
-

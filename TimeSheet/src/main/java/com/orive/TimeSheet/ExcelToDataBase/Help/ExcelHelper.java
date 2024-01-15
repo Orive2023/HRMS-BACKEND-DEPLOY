@@ -97,27 +97,36 @@ public class ExcelHelper {
                     	        attendanceEntity.setEmployeeName(getStringValue(currentCell));
                              break;
                              case 2:
-                        	    attendanceEntity.setClockIn(getStringValue(currentCell));
+                            	 attendanceEntity.setEmployeeId(getNumericValue(currentCell));
                              break;
                              case 3:
-                        	   attendanceEntity.setClockOut(getStringValue(currentCell));
-                             break;       
+                         	    attendanceEntity.setOfficeClockIn(getStringValue(currentCell));
+                              break;
                              case 4:
-                        	   attendanceEntity.setLate(getNumericValue(currentCell));
-                             break;
+                         	    attendanceEntity.setOfficeClockOut(getStringValue(currentCell));
+                              break;
                              case 5:
-                        	   attendanceEntity.setEarlyLeaving(getNumericValue(currentCell));
+                        	    attendanceEntity.setClockIn(getStringValue(currentCell));
                              break;
                              case 6:
-                        	   attendanceEntity.setOverTime(getNumericValue(currentCell));
-                             break;
+                        	   attendanceEntity.setClockOut(getStringValue(currentCell));
+                             break;       
                              case 7:
-                        	  attendanceEntity.setTotalWork(getNumericValue(currentCell));
+                        	   attendanceEntity.setLate(getStringValue(currentCell));
                              break;
                              case 8:
-                        	  attendanceEntity.setTotalRest(getNumericValue(currentCell));
+                        	   attendanceEntity.setEarlyLeaving(getStringValue(currentCell));
                              break;
                              case 9:
+                        	   attendanceEntity.setOverTime(getStringValue(currentCell));
+                             break;
+                             case 10:
+                        	  attendanceEntity.setTotalWork(getStringValue(currentCell));
+                             break;
+                             case 11:
+                        	  attendanceEntity.setTotalRest(getNumericValue(currentCell));
+                             break;
+                             case 12:
                         	  attendanceEntity.setDate(getLocalDateValue(currentCell));
                              break;                               
                             default:
@@ -356,4 +365,4 @@ private static byte[] getByteArrayValue(Cell cell) {
 //	    }
 //	}
 //	
-//}	
+//}
