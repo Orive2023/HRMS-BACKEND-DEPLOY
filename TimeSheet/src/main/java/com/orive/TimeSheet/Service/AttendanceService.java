@@ -161,7 +161,7 @@ public class AttendanceService {
         Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findByEmployeeNameAndDate(employeeName,date);
         if (existingAttendanceOptional.isPresent()) {
         	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
-//          existingAttendance.setClockIn(attendanceDto.getClockIn());
+//            existingAttendance.setClockIn(attendanceDto.getClockIn());
             existingAttendance.setClockOut(attendanceDto.getClockOut());
             existingAttendance.setDate(attendanceDto.getDate());
             existingAttendance.setClockOutLocation(attendanceDto.getClockOutLocation());
@@ -241,20 +241,8 @@ public class AttendanceService {
     public int getNumberOfLoginDaysForMonth(int month, int year, Long employeeId) {
         List<LocalDate> loginDates = attendanceRepository.getDistinctLoginDatesForMonth(month, year, employeeId);
         return loginDates.size();
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    }                    
+      
 	// Helper method to convert AttendanceDTo to AttendanceEntity
     private AttendanceEntity convertToEntity(AttendanceDto attendanceDto)
     {
