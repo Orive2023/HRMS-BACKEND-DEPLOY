@@ -67,7 +67,7 @@ public class AttendanceEntity {
 	private String totalWork;
 	
 	@Column(name ="total_rest" )
-	private Long totalRest;
+	private String totalRest;
 	
 	@Column(name = "date")
 	private LocalDate date;
@@ -83,17 +83,16 @@ public class AttendanceEntity {
 //	private byte[] uploadDoc;
 	
 	
-	//prePersist method
 	 @PrePersist
 	    public void prePersist() {
 	        // Perform any logic or calculations before the entity is persisted (inserted into the database)
+		    
 	        calculateTotalWork(); // Call the method to calculate total work duration
 	        setOverTime(calculateOvertime());
 	        setLate(calculateLate());
 	        setEarlyLeaving(calculateEarlyLeaving());
 	    }
 
-	 //preUpdate method
 	    @PreUpdate
 	    public void preUpdate() {
 	        // Perform any logic or calculations before the entity is updated in the database
@@ -102,45 +101,70 @@ public class AttendanceEntity {
 	        setLate(calculateLate());
 	        setEarlyLeaving(calculateEarlyLeaving());
 	    }
+	    
+	    
 
-	    //calculateTotalWork method
 	    private void calculateTotalWork() {
 	        if (clockIn != null && clockOut != null) {
-	            // Calculate total work duration
-	            LocalTime startTime = LocalTime.parse(clockIn);
-	            LocalTime endTime = LocalTime.parse(clockOut);
-	            Duration totalWorkDuration = Duration.between(startTime, endTime);
+	            // Default values for clockIn and clockOut
+	            LocalTime startTime = LocalTime.parse("00:00:00");
+	            LocalTime endTime = LocalTime.parse("00:00:00");
 
-	            // Convert total work duration to hours and minutes
-	            long totalMinutes = totalWorkDuration.toMinutes();
-	            long hours = totalMinutes / 60;
-	            long minutes = totalMinutes % 60;
+	            // Parse the clock-in and clock-out times if available
+	            if (!clockIn.isEmpty() && !clockIn.equals("00:00:00")) {
+	                startTime = LocalTime.parse(clockIn);
+	            }
+	            if (!clockOut.isEmpty() && !clockOut.equals("00:00:00")) {
+	                endTime = LocalTime.parse(clockOut);
+	            }
+	            
+	            // Check if clockOut is "00:00:00"
+	            if (endTime.equals(LocalTime.parse("00:00:00"))) {
+	                // Update the totalWork field with zero if clockOut is "00:00:00"
+	                setTotalWork("0h 00min");
+	            } else {
+	                // Calculate total work duration
+	                Duration totalWorkDuration = Duration.between(startTime, endTime);
 
-	            // Update the totalWork field with the formatted result
-	            setTotalWork(String.format("%dh %02dmin", hours, minutes));
+	                // Convert total work duration to hours and minutes
+	                long totalMinutes = totalWorkDuration.toMinutes();
+	                long hours = totalMinutes / 60;
+	                long minutes = totalMinutes % 60;
+
+	                // Update the totalWork field with the formatted result
+	                setTotalWork(String.format("%dh %02dmin", hours, minutes));
+	            }
 	        }
 	    }
+
+
 	    
-	    //calculateOvertime method
 	    private String calculateOvertime() {
 	        if (clockOut != null && officeClockOut != null) {
-	            // Calculate overtime as the difference between clock-out and office clock-out time
 	            LocalTime endTime = LocalTime.parse(clockOut);
 	            LocalTime officeEndTime = LocalTime.parse(officeClockOut);
-	            Duration overtimeDuration = Duration.between(endTime, officeEndTime);
 
-	            // Convert overtime duration to hours and minutes
-	            long overtimeMinutes = overtimeDuration.toMinutes();
-	            long overtimeHours = overtimeMinutes / 60;
-	            long overtimeMinutesRemainder = overtimeMinutes % 60;
+	            // Check if the employee clocked out after the office clock-out time
+	            if (endTime.isAfter(officeEndTime)) {
+	                Duration overtimeDuration = Duration.between(endTime, officeEndTime);
 
-	            // Return the formatted result
-	            return String.format("%dh %02dmin", overtimeHours, overtimeMinutesRemainder);
+	                // Convert overtime duration to hours and minutes
+	                long overtimeMinutes = overtimeDuration.toMinutes();
+	                long overtimeHours = Math.abs(overtimeMinutes / 60); // Use Math.abs to get absolute value
+	                long overtimeMinutesRemainder = Math.abs(overtimeMinutes % 60);
+
+	                // Return the formatted result
+	                return String.format("%dh %02dmin", overtimeHours, overtimeMinutesRemainder);
+	            } else {
+	                // If clockOut is earlier than officeClockOut, return "0h 00min"
+	                return "0h 00min";
+	            }
 	        }
+
 	        return null; // Return null if clockOut or officeClockOut is not available
 	    }
+
 	    
-	    //calculateLate method
 	    private String calculateLate() {
 	        if (clockIn != null && officeClockIn != null) {
 	            // Calculate late as the difference between clock-in time and office clock-in time
@@ -159,27 +183,37 @@ public class AttendanceEntity {
 	        return null; // Return null if clockIn or officeClockIn is not available
 	    }
 	    
-	    //calculateEarlyLeaving method
 	    private String calculateEarlyLeaving() {
-	        if (clockOut != null && officeClockOut != null) {
-	            // Parse the clock-out times
-	            LocalTime endTime = LocalTime.parse(clockOut);
-	            LocalTime officeEndTime = LocalTime.parse(officeClockOut);
+	        // Default values for clockOut and officeClockOut
+	        LocalTime endTime = LocalTime.parse("00:00:00");
+	        LocalTime officeEndTime = LocalTime.parse("00:00:00");
 
-	            // Check if the employee clocked out before the office clock-out time
-	            if (endTime.isBefore(officeEndTime)) {
-	                // Calculate early leaving as the difference between office clock-out time and clock-out time
-	                Duration earlyLeavingDuration = Duration.between(endTime, officeEndTime);
-
-	                // Convert early leaving duration to hours and minutes
-	                long earlyLeavingMinutes = earlyLeavingDuration.toMinutes();
-	                long earlyLeavingHours = earlyLeavingMinutes / 60;
-	                long earlyLeavingMinutesRemainder = earlyLeavingMinutes % 60;
-
-	                // Return the formatted result
-	                return String.format("%dh %02dmin", earlyLeavingHours, earlyLeavingMinutesRemainder);
-	            }
+	        // Parse the clock-out times if available
+	        if (clockOut != null && !clockOut.isEmpty() && !clockOut.equals("00:00:00")) {
+	            endTime = LocalTime.parse(clockOut);
 	        }
-	        return null; // Return null if clockOut or officeClockOut is not available, or if there's no early leaving
+	        if (officeClockOut != null && !officeClockOut.isEmpty() && !officeClockOut.equals("00:00:00")) {
+	            officeEndTime = LocalTime.parse(officeClockOut);
+	        }
+
+	        // Check if clockOut is earlier than officeClockOut
+	        if (endTime.isBefore(officeEndTime)) {
+	            // Calculate early leaving as the difference between office clock-out time and clock-out time
+	            Duration earlyLeavingDuration = Duration.between(endTime, officeEndTime);
+
+	            // Convert early leaving duration to hours and minutes
+	            long earlyLeavingMinutes = earlyLeavingDuration.toMinutes();
+	            long earlyLeavingHours = earlyLeavingMinutes / 60;
+	            long earlyLeavingMinutesRemainder = earlyLeavingMinutes % 60;
+
+	            // Return the formatted result
+	            return String.format("%dh %02dmin", earlyLeavingHours, earlyLeavingMinutesRemainder);
+	        }
+
+	        // Return "0h 00min" if clockOut is not earlier than officeClockOut or if they are the same
+	        return "0h 00min";
 	    }
+
+
+
 }
