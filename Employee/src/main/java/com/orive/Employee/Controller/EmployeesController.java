@@ -30,6 +30,7 @@ import com.orive.Employee.Dto.EmployeesDto;
 import com.orive.Employee.Entity.EmployeesEntity;
 import com.orive.Employee.Exceptions.ResourceNotFoundException;
 import com.orive.Employee.Service.EmployeesService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController
@@ -54,6 +55,7 @@ public class EmployeesController {
     
  // Create a new Employees  
     @PostMapping("/create/employee")
+  //@PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<?> uploadEmployeeData(
 		  
 		  @RequestParam("employeeId")Long employeeId,
@@ -143,6 +145,7 @@ public class EmployeesController {
     
   //Get Employees logo by Employee 
     @GetMapping("/downloadImage/{employeeId}")
+  //@PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<byte[]> downloadImage(@PathVariable Long employeeId) {
         byte[] imageData = employeesService.downloadImage(employeeId);
         if (imageData != null) {
@@ -179,6 +182,7 @@ public class EmployeesController {
     
   //Get Employees pdf by id  
     @GetMapping("/downloadPdf/{employeeId}")
+  //@PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<byte[]> downloadPdf(@PathVariable Long employeeId) {
         byte[] pdfData = employeesService.downloadPdf(employeeId);
 
@@ -203,6 +207,7 @@ public class EmployeesController {
     
       // Get all Employees
       @GetMapping("/get/employee")
+    //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<EmployeesDto>> getAllEmployees() {
           List<EmployeesDto> employee = employeesService.getAllEmployees();
           logger.info("Retrieved {} Employees from the database", employee.size());
@@ -211,6 +216,7 @@ public class EmployeesController {
 
       // Get Employees by employeeSerialNo
       @GetMapping("/get/{employeeSerialNo}")
+    //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<EmployeesDto> getEmployeeSerialNo(@PathVariable Long employeeSerialNo) {
           Optional<EmployeesDto> employee = employeesService.getEmployeeSerialNo(employeeSerialNo);
           if (employee.isPresent()) {
@@ -225,6 +231,7 @@ public class EmployeesController {
       
       // Get Employees by EmployeeName
       @GetMapping("/byName/{employeeName}")
+    //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<EmployeesEntity>> getEmployeesByName(@PathVariable String employeeName) {
           try {
               List<EmployeesEntity> employees = employeesService.getEmployeesByName(employeeName);
@@ -239,6 +246,7 @@ public class EmployeesController {
       
    // Get Employees by EmployeeId
       @GetMapping("/byId/{employeeId}")
+    //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<List<EmployeesEntity>> getEmployeesByEmployeeId(@PathVariable Long employeeId) {
           try {
               List<EmployeesEntity> employees = employeesService.getEmployeesByEmployeeId(employeeId);
@@ -253,6 +261,7 @@ public class EmployeesController {
       
       
       @GetMapping("/login")
+    //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<EmployeesDto> login(@RequestParam String userEmailOrName, @RequestParam String password) {
           EmployeesDto employeeDto = employeesService.getEmployeeByCredentials(userEmailOrName, password);
 
@@ -270,6 +279,7 @@ public class EmployeesController {
 
       // Update Employees by EmployeeSerialNo
       @PutMapping("/update/{employeeSerialNo}")
+    //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<EmployeesDto> updateEmployeesByEmployeeSerialno(@PathVariable Long employeeSerialNo, @RequestBody EmployeesDto updatedEmployeesDto) {
     	  EmployeesDto updatedEmployees = employeesService.updateEmployeeSerialNo(employeeSerialNo, updatedEmployeesDto);
           if (updatedEmployees != null) {
@@ -284,6 +294,7 @@ public class EmployeesController {
       
    // Update Employees by EmployeeID
       @PutMapping("/update/ID/{employeeId}")
+    //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<EmployeesDto> updateEmployee(@PathVariable Long employeeId, @RequestBody EmployeesDto updatedEmployeesDto) {
           EmployeesDto updatedEmployees = employeesService.updateEmployees(employeeId, updatedEmployeesDto);
 
@@ -300,6 +311,7 @@ public class EmployeesController {
 
       // Delete Employees By EmployeeSerialNo
       @DeleteMapping("/delete/{employeeSerialNo}")
+    //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteEmployeesBySerialNo(@PathVariable Long employeeSerialNo) {
     	  employeesService.deleteEmployeesBySerialNo(employeeSerialNo);
           logger.info("Deleted Employees with SerialNumber: {}", employeeSerialNo);
@@ -309,6 +321,7 @@ public class EmployeesController {
       
       // Delete Employees By EmployeeId 
       @DeleteMapping("/delete/ID/{employeeId}")
+    //@PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<Void> deleteEmployeeByemployeeId(@PathVariable Long employeeId) {
           employeesService.deleteEmployeeByEmployeeId(employeeId);
           logger.info("Deleted Employees with EmployeeID: {}", employeeId);
@@ -318,6 +331,7 @@ public class EmployeesController {
       
       // Count the total Employees 
   	    @GetMapping("/count/employee")
+  	//@PreAuthorize("hasRole('client_admin')")
   	    public long countEmployees()
   	    {
   	    	return employeesService.countEmployees();
@@ -326,6 +340,7 @@ public class EmployeesController {
   	    
   	// Count the male from employee
   	    @GetMapping("/count/malemployee")
+  	//@PreAuthorize("hasRole('client_admin')")
   	    public long countEmployeesByMale()
   	    {
   	    	return employeesService.countEmployeesByMale();
@@ -334,6 +349,7 @@ public class EmployeesController {
   	    
   		// Count the Female from employee
   	    @GetMapping("/count/femalemployee")
+  	//@PreAuthorize("hasRole('client_admin')")
   	    public long countEmployeesByFemale()
   	    {
   	    	return employeesService.countEmployeesByFemale();

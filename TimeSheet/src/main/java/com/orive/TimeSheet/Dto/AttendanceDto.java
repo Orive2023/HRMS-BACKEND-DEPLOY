@@ -5,6 +5,9 @@ import java.time.LocalTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +24,7 @@ import lombok.ToString;
 @Builder
 public class AttendanceDto {
  	
+	
 	private Long attendanceId;
 	private String officeClockIn;
 	private String officeClockOut;
