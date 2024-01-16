@@ -61,6 +61,7 @@ public class EventService {
         if (existingEventOptional.isPresent()) {
         	EventEntity existingEvent = existingEventOptional.get();
         	existingEvent.setTitle(eventDto.getTitle());
+        	existingEvent.setStatus(eventDto.getStatus());
             modelMapper.map(eventDto, existingEventOptional);
             EventEntity updatedEvent = eventRepository.save(existingEvent);
             logger.info("Updated Event with ID: {}", updatedEvent.getEventId());

@@ -63,6 +63,7 @@ public class AddBankService {
         	existingAddBank.setAccountName(addBankDto.getAccountName());
         	existingAddBank.setAccountNumber(addBankDto.getAccountNumber());
         	existingAddBank.setStatus(addBankDto.getStatus());
+        	existingAddBank.setStatus(addBankDto.getStatus());
             modelMapper.map(addBankDto, existingAddBankOptional);
             AddBankEntity updatedAddBank = addBankRepository.save(existingAddBank);
             logger.info("Updated AddBank with ID: {}", updatedAddBank.getAddBankId());

@@ -63,6 +63,7 @@ public class AccountBalanceService {
         	existingAccountBalance.setEmployeeName(accountBalanceDto.getEmployeeName());
         	existingAccountBalance.setHsaBalance(accountBalanceDto.getHsaBalance());
         	existingAccountBalance.setFsaBalance(accountBalanceDto.getFsaBalance());
+        	existingAccountBalance.setStatus(accountBalanceDto.getStatus());
             modelMapper.map(accountBalanceDto, existingAccountBalanceOptional);
             AccountBalancesEntity updatedAccountBalance = accountBalanceRepository.save(existingAccountBalance);
             logger.info("Updated AccountBalance with ID: {}", updatedAccountBalance.getAccountBalancesId());

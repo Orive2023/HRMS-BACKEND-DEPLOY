@@ -4,8 +4,12 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import com.orive.loan.Enum.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -61,12 +65,13 @@ public class GrantLoanEntity {
 	@Column(name = "installment")
 	private double installment;
 	
-//	@Column(name = "status")
-//	private String status;
-	
 	@Column(name = "installment_cleared")
 	private int installmentCleared;
 	
 	@Column(name = "total_payment_cleared")
 	private double totalPaymentCleared;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 }

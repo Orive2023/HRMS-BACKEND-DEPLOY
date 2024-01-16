@@ -294,6 +294,7 @@ public class EmployeesService {
 	        	existingEmployees.setMedicalAllowances(employeesDto.getMedicalAllowances());
 	        	existingEmployees.setOtherInsurance(employeesDto.getOtherInsurance());
 	        	existingEmployees.setTax(employeesDto.getTax());
+	        	existingEmployees.setStatus(employeesDto.getStatus());
 	            modelMapper.map(employeesDto, existingEmployeesOptional);
 	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
 	            logger.info("Updated Employees with EmployeeSerialNo: {}", updatedEmployees.getEmployeeSerialNo());

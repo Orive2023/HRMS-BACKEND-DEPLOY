@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import com.orive.loan.Enum.Status;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +33,7 @@ public class GrantLoanDto {
 	private double installmentPeriod;
 	private double repaymentTotal;
 	private double installment;
-//	private String status;
 	private int installmentCleared;
 	private double totalPaymentCleared;
+	private Status status;
 }

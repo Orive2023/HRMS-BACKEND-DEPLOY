@@ -79,6 +79,7 @@ public class GrantLoanService {
         	existingGrantLoan.setAmount(grantLoanDto.getAmount());
         	existingGrantLoan.setInterestPersentage(grantLoanDto.getInterestPersentage());
         	existingGrantLoan.setInstallmentPeriod(grantLoanDto.getInstallmentPeriod());
+        	existingGrantLoan.setStatus(grantLoanDto.getStatus());
             modelMapper.map(grantLoanDto, existingGrantLoanOptional);
             GrantLoanEntity updatedGrantLoan = grantLoanRepository.save(existingGrantLoan);
             logger.info("Updated GrantLoan with ID: {}", updatedGrantLoan.getGrantLoanId());

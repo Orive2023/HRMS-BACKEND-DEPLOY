@@ -97,7 +97,8 @@ public class CommitteesService {
 		        Optional<CommitteesEntity> existingCommitteesOptional = committeesRepository.findById(committeesId);
 		        if (existingCommitteesOptional.isPresent()) {
 		        	CommitteesEntity existingCommittees = existingCommitteesOptional.get();
-//		            existingCommittees.setName(committeesDto.getName());   	
+//		            existingCommittees.setName(committeesDto.getName());
+		        	existingCommittees.setStatus(committeesDto.getStatus());
 		        	modelMapper.map(committeesDto, existingCommitteesOptional);
 		            CommitteesEntity updatedCommittees = committeesRepository.save(existingCommittees);
 		            logger.info("Updated Committees with ID: {}", updatedCommittees.getCommitteesId());

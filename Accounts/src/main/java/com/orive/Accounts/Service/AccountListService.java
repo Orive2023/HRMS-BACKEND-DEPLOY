@@ -63,6 +63,7 @@ public class AccountListService {
         	existingAccountList.setEmailAddress(accountListDto.getEmailAddress());
         	existingAccountList.setUserName(accountListDto.getUserName());
         	existingAccountList.setPassword(accountListDto.getPassword());
+        	existingAccountList.setStatus(accountListDto.getStatus());
             modelMapper.map(accountListDto, existingAccountListOptional);
             AccountListEntity updatedAccountList = accountListRepository.save(existingAccountList);
             logger.info("Updated AccountList with ID: {}", updatedAccountList.getAccountListId());

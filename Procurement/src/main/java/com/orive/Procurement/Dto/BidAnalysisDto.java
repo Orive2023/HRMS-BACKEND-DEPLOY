@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.orive.Procurement.Entity.CommitteeListEntity;
 import com.orive.Procurement.Entity.CompanyListEntity;
+import com.orive.Procurement.Enum.Status;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -37,6 +38,7 @@ public class BidAnalysisDto {
 	private LocalDate date;
 	private String quotation;
 	private byte[] attachment;
+	private Status status;
 	private List<CommitteeListDto> committeeListDtos = new ArrayList<>();
 	private List<CompanyListDto> companyListDtos= new ArrayList<>();
 }

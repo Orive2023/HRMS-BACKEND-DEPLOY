@@ -4,8 +4,12 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import com.orive.Employee.Enum.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,7 +36,7 @@ public class EmployeesEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long employeeSerialNo;
 	
-	@Column(name = "employee_id", unique = true)
+    @Column(name = "employee_id", unique = true)
 	private Long employeeId;
 	
 	@Column(name = "employee_name")
@@ -204,4 +208,9 @@ public class EmployeesEntity {
 	@Lob
 	@Column(name = "upload_document", length = 100000)
 	private byte[] uploadDocument;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
+	
 }

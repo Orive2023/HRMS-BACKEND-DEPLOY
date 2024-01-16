@@ -3,8 +3,12 @@ package com.orive.WorkSheet.Entity;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.orive.WorkSheet.Enum.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -68,4 +72,8 @@ public class WorkSheetEntity {
 	
 	@Column(name = "created_date")
 	private LocalDate createdDate;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="status")
+	private Status status;
 }

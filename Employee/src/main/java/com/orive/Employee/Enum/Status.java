@@ -1,4 +1,4 @@
-package com.orive.bank.Enum;
+package com.orive.Employee.Enum;
 
 public enum Status {
 	

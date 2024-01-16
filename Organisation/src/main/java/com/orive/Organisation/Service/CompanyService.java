@@ -164,6 +164,10 @@ public class CompanyService {
             if (companyEntity.getUan() != null) {
                 existingCompany.setUan(companyEntity.getUan());
             }
+            if (companyEntity.getStatus() != null) {
+                existingCompany.setStatus(companyEntity.getStatus());
+            }
+            
             // Save the updated entity
             companyRepository.save(existingCompany);
             logger.info("Updated company with ID: {}", existingCompany.getCompanyId());
