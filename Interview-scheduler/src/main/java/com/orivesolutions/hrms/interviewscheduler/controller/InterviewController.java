@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -32,10 +31,18 @@ public class InterviewController {
         return new ResponseEntity<>(interviewDto, HttpStatus.CREATED);
     }
 
+    
     @GetMapping("/getInterview")
     // @PreAuthorize("hasRole('client_admin')")
     public HttpEntity<List<InterviewDto>> getInterview(@PathVariable String schedulerEmail) {
         List<InterviewDto> interviews = interviewService.getInterview(schedulerEmail);
         return new ResponseEntity<>(interviews, HttpStatus.OK);
     }
+    
+    @GetMapping("/all")
+    public ResponseEntity<List<InterviewDto>> getAllInterviews() {
+        List<InterviewDto> interviews = interviewService.getAllInterviews();
+        return new ResponseEntity<>(interviews, HttpStatus.OK);
+    }
 }
+

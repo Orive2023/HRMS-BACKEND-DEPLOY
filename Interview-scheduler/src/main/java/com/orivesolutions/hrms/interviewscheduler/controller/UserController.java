@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -27,24 +26,21 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/createUser")
-    // @PreAuthorize("hasRole('client_admin')")
+    @PostMapping
     public HttpEntity<ResponseDto> createUser(@RequestBody UserDto userDto) {
         userDto = userService.createUser(userDto);
         return new ResponseEntity<>(ResponseUtil.getSuccessResponse(userDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/getUser/{id}")
-    // @PreAuthorize("hasRole('client_admin')")
+    @GetMapping("/{id}")
     public HttpEntity<ResponseDto> getUser(@PathVariable Long id) {
         UserDto userDto = userService.getUser(id);
         return new ResponseEntity<>(ResponseUtil.getSuccessResponse(userDto), HttpStatus.OK);
     }
 
-    @GetMapping("/getAll")
-    // @PreAuthorize("hasRole('client_admin')")
-    public HttpEntity<ResponseDto> getAll() {
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getAll() {
         List<UserDto> userDtos = userService.getUsers();
-        return new ResponseEntity<>(ResponseUtil.getSuccessResponse(userDtos), HttpStatus.OK);
+        return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
 }

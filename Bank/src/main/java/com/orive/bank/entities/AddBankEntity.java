@@ -1,10 +1,17 @@
 package com.orive.bank.entities;
 
+
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.orive.bank.Enum.Status;
 import com.orive.bank.configuration.AesEncryptor;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,6 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 
 @Getter
 @Setter
@@ -27,8 +35,9 @@ import lombok.ToString;
 public class AddBankEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long addBankId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.bank.entities.CustomIdGenerator")
+    private String addBankId;
 	
 	@Column(name = "bank_name")
 	@Convert(converter = AesEncryptor.class)
@@ -49,4 +58,8 @@ public class AddBankEntity {
 	@Column(name = "account_type")
 	@Convert(converter = AesEncryptor.class)
 	private String accountType;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="status")
+	private Status status;
 }
