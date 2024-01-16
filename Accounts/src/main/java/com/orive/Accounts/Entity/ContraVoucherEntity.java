@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import com.orive.Accounts.Config.AesEncryptor;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,15 +38,19 @@ public class ContraVoucherEntity {
 	private Long contraVoucherId;
 	
 	@Column(name = "voucher_type")
+	@Convert(converter = AesEncryptor.class)
 	private String voucherType;
 	
 	@Column(name = "reversed_account_head")
+	@Convert(converter = AesEncryptor.class)
 	private String reversedAccountHead;
 	
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
 	@Column(name = "remark")
+	@Convert(converter = AesEncryptor.class)
 	private String remark;
 
 	@OneToMany(targetEntity =  ContraVoucherListEntity.class,cascade = CascadeType.ALL)

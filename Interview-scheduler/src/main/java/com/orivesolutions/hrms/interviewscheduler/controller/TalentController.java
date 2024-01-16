@@ -33,10 +33,12 @@ public class TalentController {
         return new ResponseEntity<>(ResponseUtil.getSuccessResponse(talentDto), HttpStatus.CREATED);
     }
 
+   
+    
     @GetMapping("/getAll")
     // @PreAuthorize("hasRole('client_admin')")
-    public HttpEntity<ResponseDto> getAll() {
+    public ResponseEntity<List<TalentDto>> getAll() {
         List<TalentDto> talentDtos = talentService.findAll();
-        return new ResponseEntity<>(ResponseUtil.getSuccessResponse(talentDtos), HttpStatus.OK);
+        return new ResponseEntity<>(talentDtos, HttpStatus.OK);
     }
 }

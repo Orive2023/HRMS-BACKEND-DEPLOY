@@ -3,7 +3,10 @@ package com.orive.TimeSheet.Entity;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.orive.TimeSheet.Configuration.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,26 +34,34 @@ public class LeavesEntity {
 	private Long leaveId;
 	
 	@Column(name = "employee_id")
+	@Convert(converter = AesEncryptor.class)
 	private Long employeeId;
 	
 	@Column(name = "employee_name")
+	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
 	@Column(name = "leave_type")
+	@Convert(converter = AesEncryptor.class)
 	private String leaveType;
 	
 	@Column(name = "start_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate startDate;
 	
 	@Column(name = "end_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate endDate;
 	
 	@Column(name = "leave_reason")
+	@Convert(converter = AesEncryptor.class)
 	private String leaveReason;
 	
 	@Column(name = "applied_on")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate appliedOn;
 	
 	@Column(name = "approval")
+	@Convert(converter = AesEncryptor.class)
 	private String approval;	
 }

@@ -1,6 +1,9 @@
 package com.orive.Procurement.Entity;
 
+import com.orive.Procurement.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,26 +31,34 @@ public class VendorEntity {
 	private Long vendorId;
 	
 	@Column(name = "vendo_name")
+	@Convert(converter = AesEncryptor.class)
 	private String vendorName;
 	
 	@Column(name = "mobile_no")
+	@Convert(converter = AesEncryptor.class)
 	private Long mobileNo;
 	
 	@Column(name = "email_address")
+	@Convert(converter = AesEncryptor.class)
 	private String emailAddress;
 	
 	@Column(name = "address")
+	@Convert(converter = AesEncryptor.class)
 	private String address;
 	
 	@Column(name = "country")
+	@Convert(converter = AesEncryptor.class)
 	private String country;
 	
 	@Column(name = "city")
+	@Convert(converter = AesEncryptor.class)
 	private String city;
 	
 	@Column(name = "zip_code")
+	@Convert(converter = AesEncryptor.class)
 	private int zipCode;
 	
 	@Column(name = "previous_balance")
+	@Convert(converter = AesEncryptor.class)
 	private double previousBalance;
 }

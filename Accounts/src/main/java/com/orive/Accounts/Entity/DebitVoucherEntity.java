@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import com.orive.Accounts.Config.AesEncryptor;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,15 +37,19 @@ public class DebitVoucherEntity {
 	private Long debitVoucherId;
 	
 	@Column(name = "voucher_type")
+	@Convert(converter = AesEncryptor.class)
 	private String voucherType;
 	
 	@Column(name = "credit_account_head")
+	@Convert(converter = AesEncryptor.class)
 	private String creditAccountHead;
 	
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
 	@Column(name = "remark")
+	@Convert(converter = AesEncryptor.class)
 	private String remark;
 	
 	@OneToMany(targetEntity = DebitVoucherTableEntity.class,cascade = CascadeType.ALL)
@@ -50,5 +57,6 @@ public class DebitVoucherEntity {
 	private List<DebitVoucherTableEntity> debitVoucherTableEntities;
 	
 	@Column(name = "total")
+	@Convert(converter = AesEncryptor.class)
 	private double total;
 }

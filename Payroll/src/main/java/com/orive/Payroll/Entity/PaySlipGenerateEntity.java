@@ -34,17 +34,18 @@ public class PaySlipGenerateEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Convert(converter = AesEncryptor.class)
-
     private Long paySlipGenerateId;
     
 	@Column(name = "employee_name")
+	@Convert(converter = AesEncryptor.class)
     private String employeeName; 
 
 	@Column(name = "employee_id")
+	@Convert(converter = AesEncryptor.class)
     private Long employeeId; 
 
 	@Column(name = "designation")
+	@Convert(converter = AesEncryptor.class)
     private String designation;
 
 	@Column(name = "hourly_wages")

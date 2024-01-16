@@ -2,7 +2,10 @@ package com.orive.Performance.Entity;
 
 import java.time.LocalDate;
 
+import com.orive.Performance.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,32 +34,42 @@ public class SelfAssessmentEntity {
 	private Long selfAssessmentId;
 	
 	@Column(name = "performance_goal_rating")
+	@Convert(converter = AesEncryptor.class)
 	private int performanceGoalRating;
 	
 	@Column(name = "performance_goal_comments")
+	@Convert(converter = AesEncryptor.class)
 	private String performanceGoalComments;
 	
 	@Column(name = "new_skills_rating")
+	@Convert(converter = AesEncryptor.class)
 	private int newSkillsRating;
 	
 	@Column(name = "new_skills_comments")
+	@Convert(converter = AesEncryptor.class)
 	private String newSkillsComments;
 	
 	@Column(name = "collaboration_rating")
+	@Convert(converter = AesEncryptor.class)
 	private int collaborationRating;
 	
 	@Column(name = "collaboration_comments")
+	@Convert(converter = AesEncryptor.class)
 	private String collaborationComments;
 	
 	@Column(name = "managed_your_time_rating")
+	@Convert(converter = AesEncryptor.class)
 	private int managedYourTimeRating;
 	
 	@Column(name = "managed_your_time_comments")
+	@Convert(converter = AesEncryptor.class)
 	private String managedYourTimeComments;
 	
 	@Column(name = "improved_communication_skill_rating")
+	@Convert(converter = AesEncryptor.class)
 	private int improvedCommunicationSkillRating;
 	
 	@Column(name = "improved_communication_skill_comments")
+	@Convert(converter = AesEncryptor.class)
 	private String improvedCommunicationSkillComments;
 }

@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import com.orive.Organisation.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,17 +34,23 @@ public class ExpenseListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long expenceListId;
 	
+	@Convert(converter = AesEncryptor.class)
+	@Column(name = "expence_id")
 	private Long expenceId;
 	
 	@Column(name = "purchase_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate purchaseDate;
 	
 	@Column(name = "description")
+	@Convert(converter = AesEncryptor.class)
 	private String description;
 	
 	@Column(name = "purchased_by")
+	@Convert(converter = AesEncryptor.class)
 	private String purchasedBy;
 	
 	@Column(name = "amount")
+	@Convert(converter = AesEncryptor.class)
 	private double amount;	
 }

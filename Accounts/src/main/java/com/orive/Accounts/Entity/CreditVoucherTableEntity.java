@@ -1,6 +1,9 @@
 package com.orive.Accounts.Entity;
 
+import com.orive.Accounts.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,14 +29,18 @@ public class CreditVoucherTableEntity {
 	private Long creditVoucherTableId;
 	
 	@Column(name = "account_name")
+	@Convert(converter = AesEncryptor.class)
 	private String accountName;
 	
 	@Column(name = "sub_type")
+	@Convert(converter = AesEncryptor.class)
 	private String subType;
 	
 	@Column(name = "ledger_comment")
+	@Convert(converter = AesEncryptor.class)
 	private String ledgerComment;
 	
 	@Column(name = "amount")
+	@Convert(converter = AesEncryptor.class)
 	private double amount;
 }

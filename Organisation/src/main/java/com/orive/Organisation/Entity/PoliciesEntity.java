@@ -7,7 +7,10 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.orive.Organisation.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,15 +39,19 @@ public class PoliciesEntity {
 	private Long policiesId;
 	
 	@Column(name = "company_name")
+	@Convert(converter = AesEncryptor.class)
 	private String companyName;
 	
 	@Column(name = "title")
+	@Convert(converter = AesEncryptor.class)
 	private String title;
 	
 	@Column(name = "description", length = 100000 )
+	@Convert(converter = AesEncryptor.class)
 	private String description;
 	
 	@Column(name = "created_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
 	
 	@Lob

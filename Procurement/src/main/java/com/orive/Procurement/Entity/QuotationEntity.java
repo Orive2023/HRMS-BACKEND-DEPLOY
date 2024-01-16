@@ -3,7 +3,11 @@ package com.orive.Procurement.Entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.orive.Procurement.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,18 +37,23 @@ public class QuotationEntity {
 	private Long quotationId;
 	
 	@Column(name = "name_of_company")
+	@Convert(converter = AesEncryptor.class)
 	private String nameOfCompany;
 	
 	@Column(name = "address")
+	@Convert(converter = AesEncryptor.class)
 	private String address;
 	
 	@Column(name = "pin_or_equivalent")
+	@Convert(converter = AesEncryptor.class)
 	private Long pinOrEquivalent;
 	
 	@Column(name = "expected_date_of_delivery")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate expectedDateOfDelivery;
 	
 	@Column(name = "place_of_delivery")
+	@Convert(converter = AesEncryptor.class)
 	private String placeOfDelivery;
 	
 	@Lob
@@ -52,6 +61,7 @@ public class QuotationEntity {
 	private byte[] signatureAndStamp;
 	
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
 	@Transient

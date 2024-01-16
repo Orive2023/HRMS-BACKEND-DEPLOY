@@ -10,6 +10,7 @@ import com.orivesolutions.hrms.interviewscheduler.mapper.CandidateMapper;
 import com.orivesolutions.hrms.interviewscheduler.repository.CandidateRepository;
 import com.orivesolutions.hrms.interviewscheduler.service.CandidateService;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,5 +94,11 @@ public class CandidateServiceImpl implements CandidateService {
     public Candidate findCandidateByEmail(String email) {
         Candidate candidate = candidateRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Candidate not found", HttpStatus.NOT_FOUND));
         return candidate;
+    }
+    
+    @Override
+    public List<CandidateDto> getAllCandidates() {
+        List<Candidate> candidates = candidateRepository.findAll();
+        return candidateMapper.toCandidateDtoList(candidates);
     }
 }

@@ -44,7 +44,7 @@ public class AddBankService {
     }
     
     //get by AddBankId
-    public Optional<AddBankDto> getAddBankById(Long addBankId) {
+    public Optional<AddBankDto> getAddBankById(String addBankId) {
         Optional<AddBankEntity> addBank = addBankRepository.findById(addBankId);
         if (addBank.isPresent()) {
             return Optional.of(convertToDTO(addBank.get()));
@@ -55,7 +55,7 @@ public class AddBankService {
     }
     
  // Update list by id
-    public AddBankDto updateAddBank(Long addBankId, AddBankDto addBankDto) {
+    public AddBankDto updateAddBank(String addBankId, AddBankDto addBankDto) {
         Optional<AddBankEntity> existingAddBankOptional = addBankRepository.findById(addBankId);
         if (existingAddBankOptional.isPresent()) {
         	AddBankEntity existingAddBank = existingAddBankOptional.get();
@@ -73,7 +73,7 @@ public class AddBankService {
     }
     
     // Delete
-    public void deleteAddBank(Long addBankId) {
+    public void deleteAddBank(String addBankId) {
     	addBankRepository.deleteById(addBankId);
         logger.info("Deleted AddBank with ID: {}", addBankId);
     }

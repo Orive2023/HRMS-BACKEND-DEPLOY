@@ -2,7 +2,10 @@ package com.orive.project.Entity;
 
 import java.time.LocalDate;
 
+import com.orive.project.Configruration.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,20 +31,25 @@ public class EmployeeProjectManagementEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long employeeProjectManagementId;
+	private Long employeeProjectManagementId;
 	
 	@Column(name = "employee_id")
+	@Convert(converter = AesEncryptor.class)
 	private Long employeeId;
 	
 	@Column(name = "project_name")
+	@Convert(converter = AesEncryptor.class)
 	private String projectName;
 	
 	@Column(name = "employee_name")
+	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
 	@Column(name = "task_assigned_for")
+	@Convert(converter = AesEncryptor.class)
 	private String taskAssignedFor;
 	
 	@Column(name = "type_the_task_here")
+	@Convert(converter = AesEncryptor.class)
 	private String typeTheTaskHere;
 }

@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import com.orive.Organisation.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,39 +35,51 @@ public class LocationEntity {
 	private Long locationId;
 	
 	@Column(name = "company_name")
+	@Convert(converter = AesEncryptor.class)
 	private String companyName;
 	
 	@Column(name = "location_head")
+	@Convert(converter = AesEncryptor.class)
 	private String locationHead;
 	
 	@Column(name = "location_name")
+	@Convert(converter = AesEncryptor.class)
 	private String locationName;
 	
 	@Column(name = "address")
+	@Convert(converter = AesEncryptor.class)
 	private String address;	
 	
 	@Column(name = "email")
+	@Convert(converter = AesEncryptor.class)
 	private String email;
 	
 	@Column(name = "phone")
+	@Convert(converter = AesEncryptor.class)
 	private Long phone;
 	
 	@Column(name = "fax_number")
+	@Convert(converter = AesEncryptor.class)
 	private String faxNumber;
 	
 	@Column(name = "city")
+	@Convert(converter = AesEncryptor.class)
 	private String city;
 	
 	@Column(name = "state")
+	@Convert(converter = AesEncryptor.class)
 	private String state;
 	
 	@Column(name = "zip_code")
+	@Convert(converter = AesEncryptor.class)
 	private int zipCode;
 	
 	@Column(name = "country")
+	@Convert(converter = AesEncryptor.class)
 	private String country;
 	
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
 //	@Column(name = "status")

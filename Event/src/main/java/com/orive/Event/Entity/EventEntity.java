@@ -1,6 +1,11 @@
 package com.orive.Event.Entity;
 
+
+
+import com.orive.Event.Configuration.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,11 +33,14 @@ public class EventEntity {
 	private Long eventId;
 	
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private String date;
 	
 	@Column(name = "title")
+	@Convert(converter = AesEncryptor.class)
 	private String title;
 	
 	@Column(name = "class_name")
+	@Convert(converter = AesEncryptor.class)
 	private String className;
 }

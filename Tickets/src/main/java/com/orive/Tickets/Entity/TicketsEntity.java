@@ -3,7 +3,10 @@ package com.orive.Tickets.Entity;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.orive.Tickets.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,29 +35,38 @@ public class TicketsEntity {
 	private Long ticketsId;
 	
 	@Column(name = "tickets_code")
+	@Convert(converter = AesEncryptor.class)
 	private String ticketsCode;
 	
 	@Column(name = "subject")
+	@Convert(converter = AesEncryptor.class)
 	private String subject;
 	
 	@Column(name = "employee_name")
+	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
 	@Column(name = "employee_id")
+	@Convert(converter = AesEncryptor.class)
 	private Long employeeId;
 	
 	@Column(name = "priority")
+	@Convert(converter = AesEncryptor.class)
 	private String priority;
 	
 	@Column(name = "created_by")
+	@Convert(converter = AesEncryptor.class)
 	private String createdBy;
 	
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
 	@Column(name = "project_title")
+	@Convert(converter = AesEncryptor.class)
 	private String projectTitle;
 	
 	@Column(name = "description")
+	@Convert(converter = AesEncryptor.class)
 	private String description;
 }

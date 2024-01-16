@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.Organisation.Config.AesEncryptor;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,12 +42,15 @@ public class ExpenceEntity {
 	private Long expenceId;
 	
 	@Column(name = "expence_type")
+	@Convert(converter = AesEncryptor.class)
 	private String expenceType;
 	
 	@Column(name = "created_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
 	
 	@Column(name = "total")
+	@Convert(converter = AesEncryptor.class)
 	private Long total;
 	
 	@Lob

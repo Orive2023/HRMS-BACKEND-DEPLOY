@@ -2,7 +2,10 @@ package com.orive.Procurement.Entity;
 
 import java.time.LocalDate;
 
+import com.orive.Procurement.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,23 +32,30 @@ public class QuotationListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long quotationListId;
 	
+	@Convert(converter = AesEncryptor.class)
 	private Long quotationId;
 	
 	@Column(name = "description_of_materials")
+	@Convert(converter = AesEncryptor.class)
 	private String descriptionOfMaterials;
 	
 	@Column(name = "unit_name")
+	@Convert(converter = AesEncryptor.class)
 	private String unitName;
 	
 	@Column(name = "quantity")
+	@Convert(converter = AesEncryptor.class)
 	private Long quantity;
 	
 	@Column(name = "price")
+	@Convert(converter = AesEncryptor.class)
 	private double price;
 	
 	@Column(name = "total")
+	@Convert(converter = AesEncryptor.class)
 	private double total;
 	
 	@Column(name = "grand_total")
+	@Convert(converter = AesEncryptor.class)
 	private double grandTotal;
 }
