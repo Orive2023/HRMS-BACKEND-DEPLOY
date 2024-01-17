@@ -3,8 +3,13 @@ package com.orive.Procurement.Entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.orive.Procurement.Enum.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -53,6 +58,10 @@ public class QuotationEntity {
 	
 	@Column(name = "date")
 	private LocalDate date;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 	
 	@Transient
 	private List<QuotationListEntity> quotationListEntities=new ArrayList<>();

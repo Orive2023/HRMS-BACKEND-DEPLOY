@@ -102,6 +102,7 @@ public class ProjectService {
         	existingProject.setStartDate(projectDto.getStartDate());
         	existingProject.setEndDate(projectDto.getEndDate());
         	existingProject.setClientName(projectDto.getClientName());
+        	existingProject.setStatus(projectDto.getStatus());
             modelMapper.map(projectDto, existingProjectOptional);
            ProjectEntity updatedProject = projectRepository.save(existingProject);
             logger.info("Updated project with ID: {}", updatedProject.getProjectsId());

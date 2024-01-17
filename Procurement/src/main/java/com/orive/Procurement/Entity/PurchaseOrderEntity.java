@@ -5,9 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.Procurement.Enum.Status;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -63,7 +67,12 @@ public class PurchaseOrderEntity {
 	private byte[] signatureAndStamp;
 	
 	@Column(name = "date")
-	private LocalDate date;
+	private LocalDate date; 
+	
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 	
 	@Transient
 	private List<PurchaseOrderListEntity> purchaseOrderListEntities = new ArrayList<>();

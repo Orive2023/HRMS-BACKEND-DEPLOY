@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.Procurement.Enum.Status;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +41,8 @@ public class RequestDto {
 	private String reasonForRequesting;
 	
 	private LocalDate createdDate;
+	
+	private Status status;
 	
 	private List<DescriptionOfMaterialListDto> descriptionOfMaterialEntities;
 }

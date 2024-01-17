@@ -135,6 +135,7 @@ private static final Logger logger= LoggerFactory.getLogger(PurchaseOrderService
 	        	PurchaseOrderEntity existingPurchaseOrder = existingPurchaseOrderOptional.get();
 	            existingPurchaseOrder.setVendorName(purchaseOrderDto.getVendorName());
 	            existingPurchaseOrder.setLocation(purchaseOrderDto.getLocation());
+	            existingPurchaseOrder.setStatus(purchaseOrderDto.getStatus());
 	        	modelMapper.map(purchaseOrderDto, existingPurchaseOrder);
 	            PurchaseOrderEntity updatedPurchaseOrder = purchaseOrderRepository.save(existingPurchaseOrder);
 	            logger.info("Updated PurchaseOrder with ID: {}", updatedPurchaseOrder.getPurchaseOrderId());

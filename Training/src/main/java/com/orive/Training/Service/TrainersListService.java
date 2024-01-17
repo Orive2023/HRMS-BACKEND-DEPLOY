@@ -53,6 +53,7 @@ public class TrainersListService {
         }
     }
     
+    
  // Update list by id
     public TrainersListDto updateTrainersList(Long trainersListId, TrainersListDto trainersListDto) {
         Optional<TrainersListEntity> existingTrainersListOptional = trainersListRepository.findById(trainersListId);
@@ -61,6 +62,7 @@ public class TrainersListService {
         	existingTrainersList.setTrainersFullName(trainersListDto.getTrainersFullName());
         	existingTrainersList.setEmailAddress(trainersListDto.getEmailAddress());
         	existingTrainersList.setPhoneNo(trainersListDto.getPhoneNo());
+        	existingTrainersList.setStatus(trainersListDto.getStatus());
         	modelMapper.map(trainersListDto, existingTrainersListOptional);
             TrainersListEntity updatedTrainersList = trainersListRepository.save(existingTrainersList);
             logger.info("Updated TrainersList with ID: {}", updatedTrainersList.getTrainersListId());
@@ -70,6 +72,7 @@ public class TrainersListService {
             return null;
         }
     }
+    
     
     // Delete
     public void deleteTrainersList(Long trainersListId) {

@@ -5,9 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.project.Enum.Status;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -71,6 +75,10 @@ public class ProjectEntity {
 	
 	@Column(name = "work_update_sheet")
 	private String workUpdateSheet;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 	
 	@OneToMany(targetEntity = EmployeeProjectManagementEntity.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "projects_employeeProjectManagement_fk",referencedColumnName = "projectsId")

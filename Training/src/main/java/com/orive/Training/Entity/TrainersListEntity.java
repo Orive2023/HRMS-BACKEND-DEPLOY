@@ -75,6 +75,5 @@ public class TrainersListEntity {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
-	
+	private Status status;	
 }

@@ -64,6 +64,7 @@ public class VendorService {
 	        	existingVendor.setVendorName(vendorDto.getVendorName());
 	        	existingVendor.setMobileNo(vendorDto.getMobileNo());
 	        	existingVendor.setEmailAddress(vendorDto.getEmailAddress());
+	        	existingVendor.setStatus(vendorDto.getStatus());
 	            modelMapper.map(vendorDto, existingVendorOptional);
 	            VendorEntity updatedVendor = vendorRepository.save(existingVendor);
 	            logger.info("Updated Vendor with ID: {}", updatedVendor.getVendorId());

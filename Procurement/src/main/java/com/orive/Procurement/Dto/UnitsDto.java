@@ -1,5 +1,7 @@
 package com.orive.Procurement.Dto;
 
+import com.orive.Procurement.Enum.Status;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,5 +20,6 @@ public class UnitsDto {
 	
     private Long unitsId;
     private String unitName;
+    private Status status;
 
 }
