@@ -1,6 +1,9 @@
 package com.orive.Procurement.Entity;
 
+import com.orive.Procurement.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,32 +30,42 @@ public class CompanyListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long companyListId;
 	
+	@Convert(converter = AesEncryptor.class)
 	private Long bidAnalysisId;
 	
 	@Column(name = "company")
+	@Convert(converter = AesEncryptor.class)
 	private String company;
 	
 	@Column(name = "description")
+	@Convert(converter = AesEncryptor.class)
 	private String description;
 	
 	@Column(name = "reason_of_choosing")
+	@Convert(converter = AesEncryptor.class)
 	private String reasonOfChoosing;
 	
 	@Column(name = "remarks")
+	@Convert(converter = AesEncryptor.class)
 	private String remarks;
 	
 	@Column(name = "unit_name")
+	@Convert(converter = AesEncryptor.class)
 	private String unitName;
 	
 	@Column(name = "quantity")
+	@Convert(converter = AesEncryptor.class)
 	private int quantity;
 	
 	@Column(name = "price")
+	@Convert(converter = AesEncryptor.class)
 	private double price;
 	
 	@Column(name = "total")
+	@Convert(converter = AesEncryptor.class)
 	private double total;
 	
 	@Column(name = "grand_total")
+	@Convert(converter = AesEncryptor.class)
 	private double grandTotal;
 }

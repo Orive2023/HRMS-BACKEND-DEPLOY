@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.Procurement.Config.AesEncryptor;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -38,12 +41,15 @@ public class BidAnalysisEntity {
 	private Long bidAnalysisId;
 	
 	@Column(name = "location")
+	@Convert(converter = AesEncryptor.class)
 	private String location;
 
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
 	@Column(name = "quotation")
+	@Convert(converter = AesEncryptor.class)
 	private String quotation;
 	
 	@Lob

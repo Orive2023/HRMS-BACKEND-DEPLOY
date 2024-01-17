@@ -56,7 +56,7 @@ public class DesignationController {
       // Get Designation by ID
       @GetMapping("/get/{designationId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<DesignationDto> getDesignationById(@PathVariable Long designationId) {
+      public ResponseEntity<DesignationDto> getDesignationById(@PathVariable String designationId) {
           Optional<DesignationDto> designation = designationService.getDesignationById(designationId);
           if (designation.isPresent()) {
               logger.info("Retrieved Designation with ID: {}", designationId);
@@ -70,7 +70,7 @@ public class DesignationController {
       // Update Designation by ID
       @PutMapping("/update/{designationId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<DesignationDto> updateDesignation(@PathVariable Long designationId, @RequestBody DesignationDto updatedDesignationDto) {
+      public ResponseEntity<DesignationDto> updateDesignation(@PathVariable String designationId, @RequestBody DesignationDto updatedDesignationDto) {
     	  DesignationDto updatedDesignation = designationService.updateDesignation(designationId, updatedDesignationDto);
           if (updatedDesignation != null) {
               logger.info("Updated Designation with ID: {}", designationId);
@@ -85,7 +85,7 @@ public class DesignationController {
       // Delete Designation by ID
       @DeleteMapping("/delete/{designationId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<Void> deleteDesignation(@PathVariable Long designationId) {
+      public ResponseEntity<Void> deleteDesignation(@PathVariable String designationId) {
     	  designationService.deleteDesignation(designationId);
           logger.info("Deleted Designation with ID: {}", designationId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);

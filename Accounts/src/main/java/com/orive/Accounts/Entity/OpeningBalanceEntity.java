@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import com.orive.Accounts.Config.AesEncryptor;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,9 +38,11 @@ public class OpeningBalanceEntity {
 	private Long openingBalanceId;
 	
 	@Column(name = "financial_year")
+	@Convert(converter = AesEncryptor.class)
 	private String financialYear;
 	
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
 	@OneToMany(targetEntity = OpeningBalanceTableEntity.class,cascade = CascadeType.ALL)
@@ -45,8 +50,10 @@ public class OpeningBalanceEntity {
 	private List<OpeningBalanceTableEntity> openingBalanceTableEntities;
 	
 	@Column(name = "total_debit")
+	@Convert(converter = AesEncryptor.class)
 	private double totalDebit;
 	
 	@Column(name = "total_credit")
+	@Convert(converter = AesEncryptor.class)
 	private double totalCredit;
 }

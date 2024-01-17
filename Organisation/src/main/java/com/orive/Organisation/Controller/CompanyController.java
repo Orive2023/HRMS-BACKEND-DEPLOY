@@ -45,7 +45,8 @@ public class CompanyController {
 
   
  	// Create a new Company
-      @PostMapping("/create/company")
+      @PostMapping(value = "/create/company" , consumes = "multipart/form-data")
+      
 //      @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<?> saveCompanyEntity(
     		  @RequestParam("address") String address,
@@ -102,7 +103,7 @@ public class CompanyController {
 
       // Get company by ID
       @GetMapping("/get/{companyId}")
-      public ResponseEntity<CompanyEntity> getCompanyById(@PathVariable Long companyId) {
+      public ResponseEntity<CompanyEntity> getCompanyById(@PathVariable String companyId) {
           try {
               CompanyEntity company = companyService.getCompanyById(companyId);
               return ResponseEntity.ok(company);
@@ -117,7 +118,7 @@ public class CompanyController {
    // Update company by ID
       @PutMapping("/update/{companyId}")
       public ResponseEntity<Void> partialUpdateCompany(
-              @PathVariable Long companyId,
+              @PathVariable String companyId,
               @RequestBody CompanyEntity companyEntity) {
 
           companyService.partialUpdateCompany(companyId, companyEntity);
@@ -127,7 +128,7 @@ public class CompanyController {
 
       // Delete Company by ID
       @DeleteMapping("/delete/{companyId}")
-      public ResponseEntity<Void> deleteCompany(@PathVariable Long companyId) {
+      public ResponseEntity<Void> deleteCompany(@PathVariable String companyId) {
     	  companyService.deleteCompany(companyId);
           logger.info("Deleted company with ID: {}", companyId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);

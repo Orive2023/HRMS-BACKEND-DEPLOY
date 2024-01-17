@@ -55,7 +55,7 @@ public class PaySlipGenerateController {
     // Get AdvanceSalery by ID
     @GetMapping("/get/{PaySlipGenerateId}")
     // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<PaySlipGenerateDto> getAdvanceSaleryById(@PathVariable Long PaySlipGenerateId) {
+    public ResponseEntity<PaySlipGenerateDto> getAdvanceSaleryById(@PathVariable String PaySlipGenerateId) {
         Optional<PaySlipGenerateDto> advanceSalery = paySlipGenerateService.getPaySlipGenerateById(PaySlipGenerateId);
         if (advanceSalery.isPresent()) {
             logger.info("Retrieved AdvanceSalery with ID: {}", PaySlipGenerateId);
@@ -85,7 +85,7 @@ public class PaySlipGenerateController {
     // Delete AdvanceSalery by ID
     @DeleteMapping("/delete/{PaySlipGenerateId}")
     // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<Void> deletePaySlipGenerate(@PathVariable Long PaySlipGenerateId) {
+    public ResponseEntity<Void> deletePaySlipGenerate(@PathVariable String PaySlipGenerateId) {
   	  paySlipGenerateService.deletePaySlipGenerate(PaySlipGenerateId);
         logger.info("Deleted AdvanceSalery with ID: {}", PaySlipGenerateId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

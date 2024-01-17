@@ -18,7 +18,7 @@ import lombok.ToString;
 @Builder
 public class EventDto {
 
-    private Long eventId;
+    private String eventId;
 	private String date;
 	private String title;
 	private String className;

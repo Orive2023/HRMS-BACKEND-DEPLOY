@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.orive.Organisation.Entity.LocationEntity;
 
-public interface LocationRepository extends JpaRepository<LocationEntity, Long>{
+public interface LocationRepository extends JpaRepository<LocationEntity, String>{
 
 	@Query("SELECT l FROM LocationEntity l WHERE l.companyName = :companyName")
     List<LocationEntity> findAllByCompanyName(String companyName);

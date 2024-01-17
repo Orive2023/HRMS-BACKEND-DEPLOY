@@ -111,4 +111,11 @@ public class InterviewServiceImpl implements InterviewService {
         emails.add(interview.getInterviewer().getEmailId());
         return emails;
     }
+    
+    @Override
+    public List<InterviewDto> getAllInterviews() {
+        List<Interview> interviews = interviewRepository.findAll();
+        List<InterviewDto> interviewDtos = interviewMapper.toDtos(interviews);
+        return interviewDtos; 
+    }
 }

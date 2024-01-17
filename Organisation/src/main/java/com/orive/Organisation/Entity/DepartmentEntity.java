@@ -4,7 +4,12 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.orive.Organisation.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,23 +35,29 @@ import lombok.ToString;
 public class DepartmentEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long departmentId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "department-sequence")
+    @GenericGenerator(name = "department-sequence", strategy = "com.orive.Organisation.Entity.DepartmentIdGenerator")
+	private String departmentId;
 	
 //	@NotEmpty(message = "This field shouldn't be empty")
 	@Column(name = "department_name")
+	@Convert(converter = AesEncryptor.class)
 	private String departmentName;
 	
 	@Column(name = "company_name")
+	@Convert(converter = AesEncryptor.class)
 	private String companyName;
 	
 	@Column(name = "location_name")
+	@Convert(converter = AesEncryptor.class)
 	private String locationName;
 	
 	@Column(name = "department_head")
+	@Convert(converter = AesEncryptor.class)
 	private String departmentHead;
 	
 	@Column(name = "created_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
 	
 //	@Column(name = "status")

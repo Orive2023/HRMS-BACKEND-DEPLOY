@@ -3,7 +3,12 @@ package com.orive.TimeSheet.Entity;
 import java.time.LocalDate;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.orive.TimeSheet.Configuration.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,30 +32,39 @@ import lombok.ToString;
 public class LeavesEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long leaveId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "leaves-sequence")
+    @GenericGenerator(name = "leaves-sequence", strategy = "com.orive.TimeSheet.Entity.LeavesIdGenerator")
+	private String leaveId;
 	
 	@Column(name = "employee_id")
+	@Convert(converter = AesEncryptor.class)
 	private Long employeeId;
 	
 	@Column(name = "employee_name")
+	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
 	@Column(name = "leave_type")
+	@Convert(converter = AesEncryptor.class)
 	private String leaveType;
 	
 	@Column(name = "start_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate startDate;
 	
 	@Column(name = "end_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate endDate;
 	
 	@Column(name = "leave_reason")
+	@Convert(converter = AesEncryptor.class)
 	private String leaveReason;
 	
 	@Column(name = "applied_on")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate appliedOn;
 	
 	@Column(name = "approval")
+	@Convert(converter = AesEncryptor.class)
 	private String approval;	
 }

@@ -1,5 +1,7 @@
 package com.orive.bank.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.bank.configuration.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -27,8 +29,9 @@ import lombok.ToString;
 public class AddBankEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long addBankId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bank-sequence")
+    @GenericGenerator(name = "bank-sequence", strategy = "com.orive.bank.entities.BankIdGenerator")
+    private String addBankId;
 	
 	@Column(name = "bank_name")
 	@Convert(converter = AesEncryptor.class)
@@ -47,6 +50,8 @@ public class AddBankEntity {
 	private String branchName;
 	
 	@Column(name = "account_type")
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private String accountType;
+	
+	
 }

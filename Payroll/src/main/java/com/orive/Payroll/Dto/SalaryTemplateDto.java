@@ -18,7 +18,7 @@ import lombok.ToString;
 @Builder
 public class SalaryTemplateDto {
 
-	private Long salaryTemplateId;
+	private String salaryTemplateId;
 	private double basicSalery;
 	private double houseRentAllowance;
 	private double medicalAllowance;

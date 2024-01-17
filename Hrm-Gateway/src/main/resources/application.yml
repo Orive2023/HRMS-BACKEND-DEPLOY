@@ -53,7 +53,7 @@ spring:
       - id: TIMESHEET-SERVICE
         uri: lb://TIMESHEET-SERVICE
         predicates:
-          - Path=/attendance/**,/holidays/**/leaves/**,/officeshifts/**
+          - Path=/attendance/**,/holidays/**,/leaves/**,/officeshifts/**
       - id: TRAINING-SERVICE
         uri: lb://TRAINING-SERVICE
         predicates:

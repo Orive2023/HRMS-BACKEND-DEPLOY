@@ -1,6 +1,9 @@
 package com.orive.Procurement.Entity;
 
+import com.orive.Procurement.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +32,7 @@ public class CommitteesEntity {
 	private Long committeesId;
 	
 	@Column(name = "name")
+	@Convert(converter = AesEncryptor.class)
 	private String name;
 	
 	@Lob

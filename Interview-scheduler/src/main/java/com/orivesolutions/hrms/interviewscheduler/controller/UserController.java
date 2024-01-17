@@ -41,10 +41,12 @@ public class UserController {
         return new ResponseEntity<>(ResponseUtil.getSuccessResponse(userDto), HttpStatus.OK);
     }
 
+   
+    
     @GetMapping("/getAll")
     // @PreAuthorize("hasRole('client_admin')")
-    public HttpEntity<ResponseDto> getAll() {
+    public ResponseEntity<List<UserDto>> getAll() {
         List<UserDto> userDtos = userService.getUsers();
-        return new ResponseEntity<>(ResponseUtil.getSuccessResponse(userDtos), HttpStatus.OK);
+        return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
 }

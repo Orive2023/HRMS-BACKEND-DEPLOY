@@ -1,6 +1,9 @@
 package com.orive.Accounts.Entity;
 
+import com.orive.Accounts.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,9 +30,11 @@ public class SubTypeEntity {
 	private Long subTypeId;
 	
 	@Column(name = "subType")
+	@Convert(converter = AesEncryptor.class)
 	private String subType;
 	
 	@Column(name = "accountName")
+	@Convert(converter = AesEncryptor.class)
 	private String accountName;
 	
 //	@Column(name = "createDate")

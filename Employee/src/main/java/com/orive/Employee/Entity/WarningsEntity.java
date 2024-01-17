@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import com.orive.Employee.Configuration.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,20 +35,26 @@ public class WarningsEntity {
 	private Long warningsId;
 	
 	@Column(name = "warning_to_employee")
+	@Convert(converter = AesEncryptor.class)
 	private String warningToEmployee;
 	
 	@Column(name = "warning_type")
+	@Convert(converter = AesEncryptor.class)
 	private String warningType;
 	
 	@Column(name = "subject")
+	@Convert(converter = AesEncryptor.class)
 	private String subject;
 	
 	@Column(name = "warning_by_employee")
+	@Convert(converter = AesEncryptor.class)
 	private String warningByEmployee;
 	
 	@Column(name = "warning_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate warningDate;
 	
 	@Column(name = "description")
+	@Convert(converter = AesEncryptor.class)
 	private String description;
 }

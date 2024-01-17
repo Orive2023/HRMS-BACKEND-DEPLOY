@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.orive.Organisation.Entity.CompanyEntity;
 
-public interface CompanyRepository extends JpaRepository<CompanyEntity, Long>{
+public interface CompanyRepository extends JpaRepository<CompanyEntity, String>{
 
 	Optional<CompanyEntity> findByCompanyName(String companyName);
 	

@@ -6,8 +6,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.orive.Organisation.Config.AesEncryptor;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,16 +40,20 @@ import lombok.ToString;
 public class ExpenceEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long expenceId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expence-sequence")
+    @GenericGenerator(name = "expence-sequence", strategy = "com.orive.Organisation.Entity.ExpenceIdGenerator")
+	private String expenceId;
 	
 	@Column(name = "expence_type")
+	@Convert(converter = AesEncryptor.class)
 	private String expenceType;
 	
 	@Column(name = "created_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
 	
 	@Column(name = "total")
+	@Convert(converter = AesEncryptor.class)
 	private Long total;
 	
 	@Lob

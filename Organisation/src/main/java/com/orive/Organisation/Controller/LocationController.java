@@ -56,7 +56,7 @@ public class LocationController {
       // Get Location by ID
       @GetMapping("/get/{locationId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<LocationDto> getLocationById(@PathVariable Long locationId) {
+      public ResponseEntity<LocationDto> getLocationById(@PathVariable String locationId) {
           Optional<LocationDto> location = locationService.getLocationById(locationId);
           if (location.isPresent()) {
               logger.info("Retrieved Location with ID: {}", locationId);
@@ -88,7 +88,7 @@ public class LocationController {
       // Update Location by ID
       @PutMapping("/update/{locationId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<LocationDto> updateLocation(@PathVariable Long locationId, @RequestBody LocationDto updatedLocationDto) {
+      public ResponseEntity<LocationDto> updateLocation(@PathVariable String locationId, @RequestBody LocationDto updatedLocationDto) {
     	  LocationDto updatedLocation = locationService.updateLocation(locationId, updatedLocationDto);
           if (updatedLocation != null) {
               logger.info("Updated Location with ID: {}", locationId);
@@ -104,7 +104,7 @@ public class LocationController {
       // Delete Location by ID
       @DeleteMapping("/delete/{locationId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<Void> deleteLocation(@PathVariable Long locationId) {
+      public ResponseEntity<Void> deleteLocation(@PathVariable String locationId) {
     	  locationService.deleteLocation(locationId);
           logger.info("Deleted Location with ID: {}", locationId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -113,7 +113,7 @@ public class LocationController {
       //Count the total Location 
   	    @GetMapping("/count/location")
   	// @PreAuthorize("hasRole('client_admin')")
-  	    public long countLocation()
+  	    public Long countLocation()
   	    {
   	    	return locationService.countLocation();
   	    }

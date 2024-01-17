@@ -6,7 +6,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.orive.Organisation.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,56 +37,73 @@ import lombok.ToString;
 public class CompanyEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long companyId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company-sequence")
+    @GenericGenerator(name = "company-sequence", strategy = "com.orive.Organisation.Entity.CompanyIdGenerator")
+	private String companyId;
 
 	@Column(name = "company_name")
+	@Convert(converter = AesEncryptor.class)
 	private String companyName;
 	
 	
 	@Column(name = "company_type")
+	@Convert(converter = AesEncryptor.class)
 	private String companyType;
 	
 	@Column(name = "legal_or_trading_name")
+	@Convert(converter = AesEncryptor.class)
 	private String legalOrTradingName;
 	
 	@Column(name = "address")
+	@Convert(converter = AesEncryptor.class)
 	private String address;
 	
 	@Column(name = "registration_number")
+	@Convert(converter = AesEncryptor.class)
 	private String registrationNumber;
 	
 	@Column(name = "contact_number")
+	@Convert(converter = AesEncryptor.class)
 	private Long contactNumber;
 	
 	@Column(name = "email")
+	@Convert(converter = AesEncryptor.class)
 	private String email;
 	
 	@Column(name = "website")
+	@Convert(converter = AesEncryptor.class)
 	private String website;
 	
 	@Column(name = "city")
+	@Convert(converter = AesEncryptor.class)
 	private String city;
 	
 	@Column(name = "state")
+	@Convert(converter = AesEncryptor.class)
 	private String state;
 	
 	@Column(name = "zip_code")
+	@Convert(converter = AesEncryptor.class)
 	private int zipCode;
 	
 	@Column(name = "country")
+	@Convert(converter = AesEncryptor.class)
 	private String country;
 	
 	@Column(name = "cin")
+	@Convert(converter = AesEncryptor.class)
 	private String cin;
 	
 	@Column(name = "gst")
+	@Convert(converter = AesEncryptor.class)
 	private String gst;
 	
 	@Column(name = "uan")
+	@Convert(converter = AesEncryptor.class)
 	private String uan;
 	
 	@Column(name = "created_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
 	
 //	@Column(name = "status")

@@ -26,7 +26,7 @@ import lombok.ToString;
 public class PoliciesDto {
 
 	
-	private Long policiesId;
+	private String policiesId;
 	private String companyName;
 	private String title;
 	private String description;

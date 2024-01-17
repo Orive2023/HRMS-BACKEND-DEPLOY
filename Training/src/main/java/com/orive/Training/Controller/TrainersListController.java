@@ -53,7 +53,7 @@ public class TrainersListController {
     // Get TrainersList by ID
     @GetMapping("/get/{trainersListId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<TrainersListDto> getTrainersListById(@PathVariable Long trainersListId) {
+    public ResponseEntity<TrainersListDto> getTrainersListById(@PathVariable String trainersListId) {
         Optional<TrainersListDto> trainersList = trainersListService.getTrainersListById(trainersListId);
         if (trainersList.isPresent()) {
             logger.info("Retrieved TrainersList with ID: {}", trainersListId);
@@ -67,7 +67,7 @@ public class TrainersListController {
     // Update TrainersList by ID
     @PutMapping("/update/{trainersListId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<TrainersListDto> updateTrainersList(@PathVariable Long trainersListId, @RequestBody TrainersListDto updatedTrainersListDto) {
+    public ResponseEntity<TrainersListDto> updateTrainersList(@PathVariable String trainersListId, @RequestBody TrainersListDto updatedTrainersListDto) {
     	TrainersListDto updatedTrainersList = trainersListService.updateTrainersList(trainersListId, updatedTrainersListDto);
         if (updatedTrainersList != null) {
             logger.info("Updated TrainersList with ID: {}", trainersListId);
@@ -83,7 +83,7 @@ public class TrainersListController {
     // Delete TrainersList by ID
     @DeleteMapping("/delete/{trainersListId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<Void> deleteTrainersList(@PathVariable Long trainersListId) {
+    public ResponseEntity<Void> deleteTrainersList(@PathVariable String trainersListId) {
   	  trainersListService.deleteTrainersList(trainersListId);
         logger.info("Deleted TrainersList with ID: {}", trainersListId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

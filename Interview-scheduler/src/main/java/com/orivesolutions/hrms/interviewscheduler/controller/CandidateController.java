@@ -2,6 +2,9 @@ package com.orivesolutions.hrms.interviewscheduler.controller;
 
 import com.orivesolutions.hrms.interviewscheduler.dto.CandidateDto;
 import com.orivesolutions.hrms.interviewscheduler.service.CandidateService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpEntity;
@@ -74,5 +77,11 @@ public class CandidateController {
     public HttpEntity<CandidateDto> getCandidate(@PathVariable String email) {
         CandidateDto candidate = candidateService.getCandidate(email);
         return new ResponseEntity<>(candidate, HttpStatus.OK);
+    }
+    
+    @GetMapping("/getAllCandidate")
+    public ResponseEntity<List<CandidateDto>> getAllCandidates() {
+        List<CandidateDto> candidates = candidateService.getAllCandidates();
+        return new ResponseEntity<>(candidates, HttpStatus.OK);
     }
 }

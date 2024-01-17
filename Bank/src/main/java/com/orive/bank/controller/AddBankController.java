@@ -53,7 +53,7 @@ public class AddBankController {
     // Get AddBank by ID
     @GetMapping("/get/{addBankId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<AddBankDto> getAddBankById(@PathVariable Long addBankId) {
+    public ResponseEntity<AddBankDto> getAddBankById(@PathVariable String addBankId) {
         Optional<AddBankDto> addBank = addBankService.getAddBankById(addBankId);
         if (addBank.isPresent()) {
             logger.info("Retrieved AddBank with ID: {}", addBankId);
@@ -67,7 +67,7 @@ public class AddBankController {
     // Update AddBank by ID
     @PutMapping("/update/{addBankId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<AddBankDto> updateAddBank(@PathVariable Long addBankId, @RequestBody AddBankDto updatedAddBankDto) {
+    public ResponseEntity<AddBankDto> updateAddBank(@PathVariable String addBankId, @RequestBody AddBankDto updatedAddBankDto) {
     	AddBankDto updatedAddBank = addBankService.updateAddBank(addBankId, updatedAddBankDto);
         if (updatedAddBank != null) {
             logger.info("Updated AddBank with ID: {}", addBankId);
@@ -83,7 +83,7 @@ public class AddBankController {
     // Delete AddBank by ID
     @DeleteMapping("/delete/{addBankId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<Void> deleteAddBank(@PathVariable Long addBankId) {
+    public ResponseEntity<Void> deleteAddBank(@PathVariable String addBankId) {
     	addBankService.deleteAddBank(addBankId);
         logger.info("Deleted AddBank with ID: {}", addBankId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

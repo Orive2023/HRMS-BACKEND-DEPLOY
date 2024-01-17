@@ -22,7 +22,7 @@ import lombok.ToString;
 @Builder
 public class AnnoucementDto {
 
-	private Long announcementsId;
+	private String announcementsId;
 	private String title;
 	private LocalDate startDate;
 	private LocalDate endDate;

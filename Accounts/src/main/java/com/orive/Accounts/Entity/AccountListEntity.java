@@ -1,6 +1,9 @@
 package com.orive.Accounts.Entity;
 
+import com.orive.Accounts.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,53 +31,70 @@ public class AccountListEntity {
 	private Long accountListId;	
 	
 	@Column(name = "employee_name")
+	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
 	@Column(name = "employee_id")
+	@Convert(converter = AesEncryptor.class)
 	private Long employeeId;
 	
 	@Column(name = "department_name")
+	@Convert(converter = AesEncryptor.class)
 	private String departmentName;
 	
 	@Column(name = "position")
+	@Convert(converter = AesEncryptor.class)
 	private String position;
 	
 	@Column(name = "bank_name")
+	@Convert(converter = AesEncryptor.class)
 	private String bankName;
 	
 	@Column(name = "account_holder_name")
+	@Convert(converter = AesEncryptor.class)
 	private String accountHolderName;
 	
 	@Column(name = "account_number")
+	@Convert(converter = AesEncryptor.class)
 	private Long accountNumber;
 	
 	@Column(name = "routing_number")
+	@Convert(converter = AesEncryptor.class)
 	private Long routingNumber;
 	
 	@Column(name = "account_type")
+	@Convert(converter = AesEncryptor.class)
 	private String accountType;
 	
 	@Column(name = "email_address")
+	@Convert(converter = AesEncryptor.class)
 	private String emailAddress;
 	
 	@Column(name = "email_system")
+	@Convert(converter = AesEncryptor.class)
 	private String emailSystem;
 	
 	@Column(name = "user_name")
+	@Convert(converter = AesEncryptor.class)
 	private String userName;
 	
 	@Column(name = "password")
+	@Convert(converter = AesEncryptor.class)
 	private String password;
 	
 	@Column(name = "access_level")
+	@Convert(converter = AesEncryptor.class)
 	private String accessLevel;
 	
 	@Column(name = "additional_account_type")
+	@Convert(converter = AesEncryptor.class)
 	private String additionalAccountType;
 	
 	@Column(name = "additional_account_information")
+	@Convert(converter = AesEncryptor.class)
 	private String additionalAccountInformation;
 	
 	@Column(name = "comments")
+	@Convert(converter = AesEncryptor.class)
 	private String comments;
 }
