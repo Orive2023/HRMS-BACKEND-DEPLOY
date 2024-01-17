@@ -1,6 +1,8 @@
 package com.orive.Training.Entity;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Training.Config.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -28,8 +30,9 @@ import lombok.ToString;
 public class TrainersListEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long trainersListId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trainers-sequence")
+    @GenericGenerator(name = "trainers-sequence", strategy = "com.orive.Training.Entity.TrainingIdGenerator")
+	private String trainersListId;
 	
 	@Column(name = "trainers_full_name")
 	@Convert(converter = AesEncryptor.class)

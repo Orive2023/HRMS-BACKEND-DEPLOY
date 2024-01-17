@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Organisation.Config.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -35,8 +37,9 @@ import lombok.ToString;
 public class CompanyEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long companyId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company-sequence")
+    @GenericGenerator(name = "company-sequence", strategy = "com.orive.Organisation.Entity.CompanyIdGenerator")
+	private String companyId;
 
 	@Column(name = "company_name")
 	@Convert(converter = AesEncryptor.class)

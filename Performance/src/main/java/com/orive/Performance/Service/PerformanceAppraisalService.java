@@ -43,7 +43,7 @@ public class PerformanceAppraisalService {
     }
     
     //get by PerformanceAppraisalId
-    public Optional<PerformanceAppraisalDto> getPerformanceAppraisalById(Long performanceAppraisalId) {
+    public Optional<PerformanceAppraisalDto> getPerformanceAppraisalById(String performanceAppraisalId) {
         Optional<PerformanceAppraisalEntity> performanceAppraisal = performanceAppraisalRepository.findById(performanceAppraisalId);
         if (performanceAppraisal.isPresent()) {
             return Optional.of(convertToDTO(performanceAppraisal.get()));
@@ -66,7 +66,7 @@ public class PerformanceAppraisalService {
     
     
  // Update list by id
-    public PerformanceAppraisalDto updatePerformanceAppraisal(Long performanceAppraisalId, PerformanceAppraisalDto performanceAppraisalDto) {
+    public PerformanceAppraisalDto updatePerformanceAppraisal(String performanceAppraisalId, PerformanceAppraisalDto performanceAppraisalDto) {
         Optional<PerformanceAppraisalEntity> existingPerformanceAppraisalOptional = performanceAppraisalRepository.findById(performanceAppraisalId);
         if (existingPerformanceAppraisalOptional.isPresent()) {
         	PerformanceAppraisalEntity existingPerformanceAppraisal = existingPerformanceAppraisalOptional.get();
@@ -81,7 +81,7 @@ public class PerformanceAppraisalService {
     }
     
     // Delete
-    public void deletePerformanceAppraisal(Long performanceAppraisalId) {
+    public void deletePerformanceAppraisal(String performanceAppraisalId) {
     performanceAppraisalRepository.deleteById(performanceAppraisalId);
         logger.info("Deleted PerformanceAppraisal with ID: {}", performanceAppraisalId);
     }

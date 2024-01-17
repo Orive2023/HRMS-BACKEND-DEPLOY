@@ -3,6 +3,8 @@ package com.orive.TimeSheet.Entity;
 import java.time.LocalDate;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.TimeSheet.Configuration.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -30,8 +32,9 @@ import lombok.ToString;
 public class LeavesEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long leaveId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "leaves-sequence")
+    @GenericGenerator(name = "leaves-sequence", strategy = "com.orive.TimeSheet.Entity.LeavesIdGenerator")
+	private String leaveId;
 	
 	@Column(name = "employee_id")
 	@Convert(converter = AesEncryptor.class)

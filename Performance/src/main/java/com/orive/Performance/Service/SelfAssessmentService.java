@@ -48,7 +48,7 @@ private static final Logger logger=LoggerFactory.getLogger(SelfAssessmentService
     
     
     //get by selfAssessmentId
-    public Optional<SelfAssessmentDto> getSelfAssessmentById(Long selfAssessmentId) {
+    public Optional<SelfAssessmentDto> getSelfAssessmentById(String selfAssessmentId) {
         Optional<SelfAssessmentEntity> selfAssessment = selfAssessmentRepository.findById(selfAssessmentId);
         if (selfAssessment.isPresent()) {
             return Optional.of(convertToDTO(selfAssessment.get()));
@@ -60,7 +60,7 @@ private static final Logger logger=LoggerFactory.getLogger(SelfAssessmentService
     
     
  // Update list by selfAssessmentId
-    public SelfAssessmentDto updateSelfAssessment(Long selfAssessmentId, SelfAssessmentDto selfAssessmentDto) {
+    public SelfAssessmentDto updateSelfAssessment(String selfAssessmentId, SelfAssessmentDto selfAssessmentDto) {
         Optional<SelfAssessmentEntity> existingSelfAssessmentOptional = selfAssessmentRepository.findById(selfAssessmentId);
         if (existingSelfAssessmentOptional.isPresent()) {
         	SelfAssessmentEntity existingSelfAssessment = existingSelfAssessmentOptional.get();
@@ -76,7 +76,7 @@ private static final Logger logger=LoggerFactory.getLogger(SelfAssessmentService
     
     
     // Delete
-    public void deleteSelfAssessment(Long selfAssessmentId) {
+    public void deleteSelfAssessment(String selfAssessmentId) {
     	selfAssessmentRepository.deleteById(selfAssessmentId);
         logger.info("Deleted SelfAssessment with ID: {}", selfAssessmentId);
     }

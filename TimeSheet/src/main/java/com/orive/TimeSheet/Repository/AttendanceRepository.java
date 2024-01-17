@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.orive.TimeSheet.Entity.AttendanceEntity;
 
 
-public interface AttendanceRepository extends JpaRepository<AttendanceEntity, Long> {
+public interface AttendanceRepository extends JpaRepository<AttendanceEntity, String> {
 
 	//Count the employees present today
 	@Query("SELECT COUNT(a) FROM AttendanceEntity a WHERE a.date = CURRENT_DATE()")

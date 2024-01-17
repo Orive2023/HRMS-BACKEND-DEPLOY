@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.loan.configuration.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -31,8 +33,9 @@ import lombok.ToString;
 public class GrantLoanEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long grantLoanId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "loan-sequence")
+    @GenericGenerator(name = "loan-sequence", strategy = "com.orive.loan.entities.LoanIdGenerator")
+	private String grantLoanId;
 	
 	@Column(name = "employee_name")
 	@Convert(converter = AesEncryptor.class)

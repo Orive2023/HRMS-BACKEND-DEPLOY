@@ -3,6 +3,8 @@ package com.orive.WorkSheet.Entity;
 import java.time.LocalDate;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.WorkSheet.Config.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -30,8 +32,9 @@ import lombok.ToString;
 public class WorkSheetEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long workSheetId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "worksheet-sequence")
+    @GenericGenerator(name = "worksheet-sequence", strategy = "com.orive.WorkSheet.Entity.WorkSheetIdGenerator")
+	private String workSheetId;
 	
 	@Column(name = "work_sheet_title")
 	@Convert(converter = AesEncryptor.class)

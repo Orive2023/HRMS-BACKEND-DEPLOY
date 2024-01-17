@@ -5,6 +5,7 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Organisation.Config.AesEncryptor;
@@ -35,8 +36,9 @@ import lombok.ToString;
 public class PoliciesEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long policiesId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "policies-sequence")
+    @GenericGenerator(name = "policies-sequence", strategy = "com.orive.Organisation.Entity.PoliciesIdGenerator")
+	private String policiesId;
 	
 	@Column(name = "company_name")
 	@Convert(converter = AesEncryptor.class)

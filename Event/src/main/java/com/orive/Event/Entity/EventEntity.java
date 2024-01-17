@@ -2,6 +2,8 @@ package com.orive.Event.Entity;
 
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Event.Configuration.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -29,8 +31,9 @@ import lombok.ToString;
 public class EventEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long eventId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event-sequence")
+    @GenericGenerator(name = "event-sequence", strategy = "com.orive.Event.Entity.EventIdGenerator")
+	private String eventId;
 	
 	@Column(name = "date")
 	@Convert(converter = AesEncryptor.class)

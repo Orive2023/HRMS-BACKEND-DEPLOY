@@ -125,7 +125,7 @@ public class AttendanceService {
     }
     
     //get by AttendanceId
-    public Optional<AttendanceDto> getAttendanceById(Long attendanceId) {
+    public Optional<AttendanceDto> getAttendanceById(String attendanceId) {
         Optional<AttendanceEntity> attendances = attendanceRepository.findById(attendanceId);
         if (attendances.isPresent()) {
             return Optional.of(convertToDTO(attendances.get()));
@@ -136,7 +136,7 @@ public class AttendanceService {
     }
     
  // Update list by id
-    public AttendanceDto updateAttendances(Long attendanceId, AttendanceDto attendanceDto) {
+    public AttendanceDto updateAttendances(String attendanceId, AttendanceDto attendanceDto) {
         Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findById(attendanceId);
         if (existingAttendanceOptional.isPresent()) {
         	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
@@ -197,7 +197,7 @@ public class AttendanceService {
     
     
     // Delete
-    public void deleteAttendances(Long attendanceId) {
+    public void deleteAttendances(String attendanceId) {
     	attendanceRepository.deleteById(attendanceId);
         logger.info("Deleted Attendance with ID: {}", attendanceId);
     }

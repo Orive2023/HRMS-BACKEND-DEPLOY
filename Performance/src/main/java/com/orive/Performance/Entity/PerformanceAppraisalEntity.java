@@ -2,6 +2,8 @@ package com.orive.Performance.Entity;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Performance.Config.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -29,8 +31,9 @@ import lombok.ToString;
 public class PerformanceAppraisalEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long performanceAppraisalId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "performanceappraisal-sequence")
+    @GenericGenerator(name = "performanceappraisal-sequence", strategy = "com.orive.Performance.Entity.PerformanceIdGenerator")
+	private String performanceAppraisalId;
 	
 	@Column(name = "employee_name")
 	@Convert(converter = AesEncryptor.class)

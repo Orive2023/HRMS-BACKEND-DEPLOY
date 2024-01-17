@@ -59,7 +59,7 @@ public class LeavesController {
       // Get Leaves by ID
       @GetMapping("/get/{leaveId}")
       // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<LeaveDto> getLeavesById(@PathVariable Long leaveId) {
+      public ResponseEntity<LeaveDto> getLeavesById(@PathVariable String leaveId) {
           Optional<LeaveDto> leave = leavesService.getLeavesById(leaveId);
           if (leave.isPresent()) {
               logger.info("Retrieved Leaves with ID: {}", leaveId);
@@ -87,7 +87,7 @@ public class LeavesController {
       // Update Leaves by ID
       @PutMapping("/update/{leaveId}")
       // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<LeaveDto> updateLeaves(@PathVariable Long leaveId, @RequestBody LeaveDto updatedLeaveDto) {
+      public ResponseEntity<LeaveDto> updateLeaves(@PathVariable String leaveId, @RequestBody LeaveDto updatedLeaveDto) {
     	  LeaveDto updatedLeave = leavesService.updateLeaves(leaveId, updatedLeaveDto);
           if (updatedLeave != null) {
               logger.info("Updated Leaves with ID: {}", leaveId);
@@ -102,7 +102,7 @@ public class LeavesController {
    // Update projects by EmployeeId
       @PutMapping("/update/employee/{employeeId}")
       // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<List<LeavesEntity>> updateLeavesByEmployeeId( @PathVariable long employeeId,@RequestBody List<LeavesEntity> updatedLeaves) {
+      public ResponseEntity<List<LeavesEntity>> updateLeavesByEmployeeId( @PathVariable Long employeeId,@RequestBody List<LeavesEntity> updatedLeaves) {
 
           List<LeavesEntity> updatedLeaveEntities = leavesService.updateLeavesByEmployeeId(employeeId, updatedLeaves);
 
@@ -118,7 +118,7 @@ public class LeavesController {
       // Delete Leaves by ID
       @DeleteMapping("/delete/{leaveId}")
       // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<Void> deleteLeaves(@PathVariable Long leaveId) {
+      public ResponseEntity<Void> deleteLeaves(@PathVariable String leaveId) {
     	  leavesService.deleteLeaves(leaveId);
           logger.info("Deleted Leaves with ID: {}", leaveId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);

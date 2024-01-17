@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.orive.Event.Entity.EventEntity;
 
-public interface EventRepository extends JpaRepository<EventEntity, Long>{
+public interface EventRepository extends JpaRepository<EventEntity, String>{
 
 }

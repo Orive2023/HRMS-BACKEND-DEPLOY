@@ -19,7 +19,7 @@ import lombok.ToString;
 @Builder
 public class AdvanceSaleryDto {
 
-	private Long advanceSaleryId;
+	private String advanceSaleryId;
 	private LocalDate createdDate;
 	private String employeeName;
 	private double salary;

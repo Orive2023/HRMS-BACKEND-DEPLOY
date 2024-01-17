@@ -29,8 +29,8 @@ import lombok.ToString;
 public class AddBankEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
-    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.bank.entities.CustomIdGenerator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bank-sequence")
+    @GenericGenerator(name = "bank-sequence", strategy = "com.orive.bank.entities.BankIdGenerator")
     private String addBankId;
 	
 	@Column(name = "bank_name")

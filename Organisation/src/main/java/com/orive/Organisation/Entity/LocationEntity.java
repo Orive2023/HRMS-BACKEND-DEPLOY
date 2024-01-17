@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Organisation.Config.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -31,8 +33,9 @@ import lombok.ToString;
 public class LocationEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long locationId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "location-sequence")
+    @GenericGenerator(name = "location-sequence", strategy = "com.orive.Organisation.Entity.LocationIdGenerator")
+	private String locationId;
 	
 	@Column(name = "company_name")
 	@Convert(converter = AesEncryptor.class)

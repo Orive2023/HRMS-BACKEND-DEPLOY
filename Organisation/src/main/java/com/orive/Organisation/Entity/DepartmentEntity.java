@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Organisation.Config.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -33,8 +35,9 @@ import lombok.ToString;
 public class DepartmentEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long departmentId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "department-sequence")
+    @GenericGenerator(name = "department-sequence", strategy = "com.orive.Organisation.Entity.DepartmentIdGenerator")
+	private String departmentId;
 	
 //	@NotEmpty(message = "This field shouldn't be empty")
 	@Column(name = "department_name")

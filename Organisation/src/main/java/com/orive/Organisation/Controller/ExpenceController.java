@@ -48,7 +48,7 @@ public class ExpenceController {
 
  
     // Create a new Expence
-    @PostMapping("/create/expence")
+    @PostMapping(value = "/create/expence" , consumes = "multipart/form-data")
 //  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> saveExpenceEntity(
             @RequestParam("expenceType") String expenceType,
@@ -72,7 +72,7 @@ public class ExpenceController {
  // Get Expence pdf by id  
     @GetMapping("/download/{expenceId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long expenceId) {
+    public ResponseEntity<byte[]> downloadsPdf(@PathVariable String expenceId) {
         byte[] pdf = expenceService.downloadPdf(expenceId);
 
         if (pdf != null) {
@@ -96,7 +96,7 @@ public class ExpenceController {
 
       @GetMapping("/get/{expenceId}")
   //  @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<ExpenceEntity> getExpenceByExpenceId(@PathVariable Long expenceId) {
+      public ResponseEntity<ExpenceEntity> getExpenceByExpenceId(@PathVariable String expenceId) {
     	  logger.info("Received request to get expense by ID: {}", expenceId);
           ExpenceEntity expence = expenceService.getByCareerSiteId(expenceId);
           logger.info("Fetched expense details: {}", expence);
@@ -109,7 +109,7 @@ public class ExpenceController {
       // Delete Expence by ID
       @DeleteMapping("/delete/{expenceId}")
   //  @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<Void> deleteExpence(@PathVariable Long expenceId) {
+      public ResponseEntity<Void> deleteExpence(@PathVariable String expenceId) {
     	  expenceService.deleteExpence(expenceId);
           logger.info("Deleted Expence with ID: {}", expenceId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);

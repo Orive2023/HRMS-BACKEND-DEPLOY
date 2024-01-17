@@ -1,4 +1,4 @@
-package com.orive.bank.entities;
+package com.orive.project.Entity;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
@@ -6,9 +6,9 @@ import org.hibernate.id.IdentifierGenerator;
 
 import java.io.Serializable;
 
-public class CustomIdGenerator implements IdentifierGenerator {
+public class ProjectIdGenerator implements IdentifierGenerator {
 
-    private static final String PREFIX = "BA-";
+    private static final String PREFIX = "ORPROJECT";
     private static long sequence = 0;
 
     @Override

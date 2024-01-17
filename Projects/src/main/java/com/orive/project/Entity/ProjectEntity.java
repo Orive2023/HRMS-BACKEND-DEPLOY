@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.project.Configruration.AesEncryptor;
 
 import jakarta.persistence.CascadeType;
@@ -36,8 +38,9 @@ import lombok.ToString;
 public class ProjectEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long projectsId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project-sequence")
+    @GenericGenerator(name = "project-sequence", strategy = "com.orive.project.Entity.ProjectIdGenerator")
+	private String projectsId;
 	
 	@Column(name = "project_title")
 	@Convert(converter = AesEncryptor.class)

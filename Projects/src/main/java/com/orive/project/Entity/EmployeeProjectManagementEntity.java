@@ -2,6 +2,8 @@ package com.orive.project.Entity;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.project.Configruration.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -30,8 +32,9 @@ import lombok.ToString;
 public class EmployeeProjectManagementEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long employeeProjectManagementId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employeeprojectmanagement-sequence")
+    @GenericGenerator(name = "employeeprojectmanagement-sequence", strategy = "com.orive.project.Entity.EmployeeProjectmanagementIdGenerator")
+	private String employeeProjectManagementId;
 	
 	@Column(name = "employee_id")
 	@Convert(converter = AesEncryptor.class)

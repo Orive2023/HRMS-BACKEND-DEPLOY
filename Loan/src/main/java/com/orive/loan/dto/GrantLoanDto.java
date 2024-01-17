@@ -20,7 +20,7 @@ import lombok.ToString;
 @Builder
 public class GrantLoanDto {
 	
-	private Long grantLoanId;
+	private String grantLoanId;
 	private String employeeName;
 	private String permittedBy;
 	private String loanDetails;

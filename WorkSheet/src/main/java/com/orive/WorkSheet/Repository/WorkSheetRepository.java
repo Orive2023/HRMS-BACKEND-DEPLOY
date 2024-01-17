@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import com.orive.WorkSheet.Entity.WorkSheetEntity;
 
-public interface WorkSheetRepository extends JpaRepository<WorkSheetEntity, Long>{
+public interface WorkSheetRepository extends JpaRepository<WorkSheetEntity, String>{
 	
 	@Query("SELECT w FROM WorkSheetEntity w WHERE w.employeeId = :employeeId")
 	List<WorkSheetEntity> findByEmployeeId(@Param("employeeId") Long employeeId);

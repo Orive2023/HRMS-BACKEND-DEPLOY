@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.TimeSheet.Configuration.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -36,8 +38,9 @@ import lombok.ToString;
 public class AttendanceEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long attendanceId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attendance-sequence")
+    @GenericGenerator(name = "attendance-sequence", strategy = "com.orive.TimeSheet.Entity.AttendanceIdGenerator")
+	private String attendanceId;
 	
 	@Column(name = "office_clock_in")
 	@Convert(converter = AesEncryptor.class)
@@ -64,35 +67,35 @@ public class AttendanceEntity {
 	private String clockOut;
 	
 	@Column(name = "late")
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private String late;
 	
 	@Column(name = "early_leaving")
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private String earlyLeaving;
 	
 	@Column(name = "over_time")
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private String overTime;
 	
 	@Column(name = "total_work")
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private String totalWork;
 	
 	@Column(name ="total_rest")
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private String totalRest;
 	
 	@Column(name = "date")
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
 	@Column(name = "clock_in_location")
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private String clockInLocation;
 	
 	@Column(name = "clock_out_location")
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private String clockOutLocation;
 	
 //	@Lob

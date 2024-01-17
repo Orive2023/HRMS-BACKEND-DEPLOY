@@ -34,7 +34,7 @@ import lombok.ToString;
 @Builder
 public class ExpenceDto {
 	
-	private Long expenceId;		
+	private String expenceId;		
 	private String expenceType;
 	private LocalDate createdDate;
 	private Long total;

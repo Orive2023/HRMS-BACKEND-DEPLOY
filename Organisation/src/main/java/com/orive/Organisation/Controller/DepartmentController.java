@@ -59,7 +59,7 @@ public class DepartmentController {
       // Get Department by ID
       @GetMapping("/get/{departmentId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<DepartmentDto> getDepartmentById(@PathVariable Long departmentId) {
+      public ResponseEntity<DepartmentDto> getDepartmentById(@PathVariable String departmentId) {
           Optional<DepartmentDto> department = departmentService.getDepartmentById(departmentId);
           if (department.isPresent()) {
               logger.info("Retrieved Department with ID: {}", departmentId);
@@ -73,7 +73,7 @@ public class DepartmentController {
       // Update Department by ID
       @PutMapping("/update/{departmentId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<DepartmentDto> updateDepartment(@PathVariable Long departmentId, @RequestBody DepartmentDto updatedDepartmentDto) {
+      public ResponseEntity<DepartmentDto> updateDepartment(@PathVariable String departmentId, @RequestBody DepartmentDto updatedDepartmentDto) {
     	  DepartmentDto updatedDepartment = departmentService.updateDepartment(departmentId, updatedDepartmentDto);
           if (updatedDepartment != null) {
               logger.info("Updated Department with ID: {}", departmentId);
@@ -89,7 +89,7 @@ public class DepartmentController {
       // Delete Department by ID
       @DeleteMapping("/delete/{departmentId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<Void> deleteDepartment(@PathVariable Long departmentId) {
+      public ResponseEntity<Void> deleteDepartment(@PathVariable String departmentId) {
     	  departmentService.deleteDepartment(departmentId);
           logger.info("Deleted Department with ID: {}", departmentId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);

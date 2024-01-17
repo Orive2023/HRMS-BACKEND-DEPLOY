@@ -46,7 +46,7 @@ public class DepartmentService {
     }
     
     //get by DepartmentId
-    public Optional<DepartmentDto> getDepartmentById(Long departmentId) {
+    public Optional<DepartmentDto> getDepartmentById(String departmentId) {
         Optional<DepartmentEntity> department = departmentRepository.findById(departmentId);
         if (department.isPresent()) {
             return Optional.of(convertToDTO(department.get()));
@@ -57,7 +57,7 @@ public class DepartmentService {
     }
     
  // Update list by id
-    public DepartmentDto updateDepartment(Long departmentId, DepartmentDto departmentDto) {
+    public DepartmentDto updateDepartment(String departmentId, DepartmentDto departmentDto) {
         Optional<DepartmentEntity> existingDepartmentOptional = departmentRepository.findById(departmentId);
         if (existingDepartmentOptional.isPresent()) {
         	DepartmentEntity existingDepartment = existingDepartmentOptional.get();
@@ -75,7 +75,7 @@ public class DepartmentService {
     
     
     // Delete
-    public void deleteDepartment(Long departmentId) {
+    public void deleteDepartment(String departmentId) {
     	departmentRepository.deleteById(departmentId);
         logger.info("Deleted Department with ID: {}", departmentId);
     }

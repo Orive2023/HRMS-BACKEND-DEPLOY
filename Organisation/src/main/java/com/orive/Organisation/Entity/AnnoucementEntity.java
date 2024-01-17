@@ -7,6 +7,8 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Organisation.Config.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -34,8 +36,9 @@ import lombok.ToString;
 public class AnnoucementEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long announcementsId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "annoucement-sequence")
+    @GenericGenerator(name = "annoucement-sequence", strategy = "com.orive.Organisation.Entity.AnnoucementIdGenerator")
+	private String announcementsId;
 	
 	@Column(name = "title")
 	@Convert(converter = AesEncryptor.class)

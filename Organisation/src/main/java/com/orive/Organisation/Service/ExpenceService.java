@@ -75,7 +75,7 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
 	
 	
 	//Download pdf
-	public byte[] downloadPdf(Long expenceId) {
+	public byte[] downloadPdf(String expenceId) {
 		 Optional<ExpenceEntity> dbPdfData = expenceRepository.findById(expenceId);
 	    
 	    if (dbPdfData.isPresent()) {
@@ -96,7 +96,7 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
     }
     
     //get by AddBankId
-    public ExpenceEntity getByCareerSiteId(Long expenceId) {
+    public ExpenceEntity getByCareerSiteId(String expenceId) {
         //get user from database with the help  of user repository
     	ExpenceEntity user = expenceRepository.findById(expenceId).orElseThrow(() -> new ResourceNotFoundException("User with given id is not found on server !! : " + expenceId));
         // fetch rating of the above  user from RATING SERVICE
@@ -125,7 +125,7 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
  
     
     // Delete
-    public void deleteExpence(Long expenceId) {
+    public void deleteExpence(String expenceId) {
     	expenceRepository.deleteById(expenceId);
         logger.info("Deleted Expence with ID: {}", expenceId);
     }

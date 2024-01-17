@@ -3,6 +3,8 @@ package com.orive.Tickets.Entity;
 import java.time.LocalDate;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Tickets.Config.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -31,8 +33,9 @@ import lombok.ToString;
 public class TicketsEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long ticketsId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket-sequence")
+    @GenericGenerator(name = "ticket-sequence", strategy = "com.orive.Tickets.Entity.TicketsIdGenerator")
+	private String ticketsId;
 	
 	@Column(name = "tickets_code")
 	@Convert(converter = AesEncryptor.class)
