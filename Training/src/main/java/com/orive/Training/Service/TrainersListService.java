@@ -61,6 +61,7 @@ public class TrainersListService {
         	existingTrainersList.setTrainersFullName(trainersListDto.getTrainersFullName());
         	existingTrainersList.setEmailAddress(trainersListDto.getEmailAddress());
         	existingTrainersList.setPhoneNo(trainersListDto.getPhoneNo());
+        	existingTrainersList.setStatus(trainersListDto.getStatus());
         	modelMapper.map(trainersListDto, existingTrainersListOptional);
             TrainersListEntity updatedTrainersList = trainersListRepository.save(existingTrainersList);
             logger.info("Updated TrainersList with ID: {}", updatedTrainersList.getTrainersListId());

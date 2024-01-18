@@ -34,7 +34,6 @@ public class AccountBalanceController {
 	
 	// Create a new AccountBalance
     @PostMapping("/create/accountbalance")
-   // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AccountBalanceDto> createAccountBalance(@RequestBody AccountBalanceDto accountBalanceDto) {
     	AccountBalanceDto createdAccountBalance = accountBalanceService.createAccountBalance(accountBalanceDto);
         logger.info("Created AccountBalance with name: {}", createdAccountBalance.getEmployeeName());
@@ -43,7 +42,6 @@ public class AccountBalanceController {
 
     // Get all AccountBalance   
     @GetMapping("/get/accountbalance")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<AccountBalanceDto>> getAllAccountBalance() {
         List<AccountBalanceDto> accountBalance = accountBalanceService.getAllAccountBalance();
         logger.info("Retrieved {} AccountBalance from the database", accountBalance.size());
@@ -52,7 +50,6 @@ public class AccountBalanceController {
 
     // Get AccountBalance by ID
     @GetMapping("/get/{accountBalanceId}")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AccountBalanceDto> getAccountBalanceById(@PathVariable Long accountBalanceId) {
         Optional<AccountBalanceDto> accountBalance = accountBalanceService.getAccountBalanceById(accountBalanceId);
         if (accountBalance.isPresent()) {
@@ -66,7 +63,6 @@ public class AccountBalanceController {
 
     // Update AccountBalance by ID
     @PutMapping("/update/{accountBalanceId}")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<AccountBalanceDto> updateAccountBalance(@PathVariable Long accountBalanceId, @RequestBody AccountBalanceDto updatedAccountBalanceDto) {
     	AccountBalanceDto updatedAccountBalance = accountBalanceService.updateAccountBalance(accountBalanceId, updatedAccountBalanceDto);
         if (updatedAccountBalance != null) {
@@ -82,7 +78,6 @@ public class AccountBalanceController {
 
     // Delete AccountBalance by ID
     @DeleteMapping("/delete/{accountBalanceId}")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteAccountBalance(@PathVariable Long accountBalanceId) {
     	accountBalanceService.deleteAccountBalance(accountBalanceId);
         logger.info("Deleted AccountBalance with ID: {}", accountBalanceId);
@@ -91,10 +86,8 @@ public class AccountBalanceController {
     
  // Count the total AccountBalance
 	    @GetMapping("/count/accountbalance")
-	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countAccountBalance()
 	    {
 	    	return accountBalanceService.countAccountBalance();
 	    }
-
 }

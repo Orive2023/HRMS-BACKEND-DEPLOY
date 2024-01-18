@@ -111,6 +111,33 @@ public class QuotationService {
 	    }
 	    
 	    
+	 // Update QuotationEntity by quotationId using QuotationDto
+	    public QuotationDto updateQuotationEntity(Long quotationId, QuotationDto updatedQuotationDto) {
+	        try {
+	            Optional<QuotationEntity> optionalQuotationEntity = quotationRepository.findById(quotationId);
+
+	            if (optionalQuotationEntity.isPresent()) {
+	                QuotationEntity existingQuotation = optionalQuotationEntity.get();
+
+	                // Update the fields with the values from the updatedQuotationDto
+	                existingQuotation.setStatus(updatedQuotationDto.getStatus());
+	                // Save the updated QuotationEntity
+	                QuotationEntity savedQuotation = quotationRepository.save(existingQuotation);
+
+	                if (savedQuotation != null) {
+	                    return convertToDTO(savedQuotation); // Convert the updated entity to QuotationDto and return
+	                }
+	            } else {
+	                // You can throw an exception or return null based on your design
+	                throw new ResourceNotFoundException("Quotation not found with ID: " + quotationId);
+	            }
+	        } catch (Exception e) {
+	            // Handle the exception appropriately (e.g., log it, return an error message)
+	            throw new RuntimeException("Error updating quotation: " + e.getMessage());
+	        }
+			return updatedQuotationDto;
+	    }
+	    
 	    // Delete
 	    public void deleteQuotation(Long quotationId) {
 	    	quotationRepository.deleteById(quotationId);

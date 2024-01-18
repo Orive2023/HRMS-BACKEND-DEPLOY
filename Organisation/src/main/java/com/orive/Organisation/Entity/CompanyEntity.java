@@ -9,10 +9,13 @@ import java.util.List;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.orive.Organisation.Config.AesEncryptor;
+import com.orive.Organisation.Enum.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -106,15 +109,13 @@ public class CompanyEntity {
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
 	
-//	@Column(name = "status")
-//	private String status;
-//	
-//	@Column(name = "approved_by")
-//	private String approvedBy;
-	
 	@Lob
 	@Column(name = "file",length = 100000)
 	private byte[] file;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 	
 //	@Transient
 //	private List<LocationEntity> locationEntities=new ArrayList<>();

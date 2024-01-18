@@ -6,11 +6,14 @@ import java.util.Date;
 import java.util.List;
 
 import com.orive.Procurement.Config.AesEncryptor;
+import com.orive.Procurement.Enum.Status;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -64,6 +67,10 @@ public class GoodReceivedEntity {
 	@Column(name = "title")
 	@Convert(converter = AesEncryptor.class)
 	private String title;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 	
 	@Lob
 	@Column(name = "signature_and_stamp", length = 100000)

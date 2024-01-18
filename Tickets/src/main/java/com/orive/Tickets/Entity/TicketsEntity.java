@@ -6,10 +6,13 @@ import java.util.Date;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.orive.Tickets.Config.AesEncryptor;
+import com.orive.Tickets.Enum.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -72,4 +75,8 @@ public class TicketsEntity {
 	@Column(name = "description")
 	@Convert(converter = AesEncryptor.class)
 	private String description;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 }

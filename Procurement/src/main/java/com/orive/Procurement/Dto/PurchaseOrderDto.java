@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.Procurement.Enum.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
@@ -32,5 +34,6 @@ public class PurchaseOrderDto {
 	private String title;
 	private byte[] signatureAndStamp;
 	private LocalDate date;
+	private Status status;
 	private List<PurchaseOrderListDto> purchaseOrderListDtos=new ArrayList<>();
 }

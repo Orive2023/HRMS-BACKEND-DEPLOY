@@ -5,11 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 import com.orive.Procurement.Config.AesEncryptor;
+import com.orive.Procurement.Enum.Status;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -60,6 +63,10 @@ public class RequestEntity {
 	@Column(name = "created_date")
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 	
 	@OneToMany(targetEntity = DescriptionOfMaterialListEntity.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "request_description_fk",referencedColumnName = "requestId")

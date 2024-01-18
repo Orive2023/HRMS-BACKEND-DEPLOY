@@ -6,6 +6,8 @@ import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.orive.Employee.Enum.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
@@ -81,4 +83,5 @@ public class EmployeesDto {
 	private String userEmailOrName;
 	private String password;
 	private byte[] uploadDocument;
+	private Status status;
 }

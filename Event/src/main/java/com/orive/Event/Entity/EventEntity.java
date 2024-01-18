@@ -5,10 +5,13 @@ package com.orive.Event.Entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.orive.Event.Configuration.AesEncryptor;
+import com.orive.Event.Enum.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -46,4 +49,8 @@ public class EventEntity {
 	@Column(name = "class_name")
 	@Convert(converter = AesEncryptor.class)
 	private String className;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 }

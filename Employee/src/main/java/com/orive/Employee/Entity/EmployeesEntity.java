@@ -5,10 +5,13 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 import com.orive.Employee.Configuration.AesEncryptor;
+import com.orive.Employee.Enum.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -262,4 +265,8 @@ public class EmployeesEntity {
 	@Lob
 	@Column(name = "upload_document", length = 100000)
 	private byte[] uploadDocument;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 }

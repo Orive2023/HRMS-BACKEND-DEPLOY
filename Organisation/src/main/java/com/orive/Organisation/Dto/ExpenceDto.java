@@ -39,8 +39,6 @@ public class ExpenceDto {
 	private LocalDate createdDate;
 	private Long total;
 	private byte[] uploadDocument;
-//	private String status;
-//	private String approvedBy;
 	//private List<ExpenseListDto> expenseListEntities;
 	private List<ExpenseListDto> expenseListDtos=new ArrayList<>();
 	

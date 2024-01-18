@@ -1,5 +1,7 @@
 package com.orive.Accounts.Dto;
 
+import com.orive.Accounts.Enum.Status;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,4 +36,5 @@ public class AccountListDto {
 	private String additionalAccountType;
 	private String additionalAccountInformation;
 	private String comments;
+	private Status status;
 }

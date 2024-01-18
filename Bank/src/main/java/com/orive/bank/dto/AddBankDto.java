@@ -1,5 +1,6 @@
 package com.orive.bank.dto;
 
+import com.orive.bank.Enum.Status;
 import com.orive.bank.entities.AddBankEntity;
 
 import jakarta.persistence.Column;
@@ -25,4 +26,5 @@ public class AddBankDto {
 	private Long accountNumber;
 	private String branchName;
 	private String accountType;
+	private Status status;
 }

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import com.orive.Procurement.Entity.QuotationEntity;
+import com.orive.Procurement.Enum.Status;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,5 +30,6 @@ public class QuotationDto {
 	private String placeOfDelivery;
 	private byte[] signatureAndStamp;
 	private LocalDate date;
+	private Status status;
 	private List<QuotationListDto> quotationListDtos=new ArrayList<>();
 }

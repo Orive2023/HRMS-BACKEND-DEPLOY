@@ -78,7 +78,8 @@ public class TicketsService {
         if (existingTicketsOptional.isPresent()) {
         	TicketsEntity existingTickets= existingTicketsOptional.get();
         	existingTickets.setEmployeeName(ticketsDto.getEmployeeName());
-            modelMapper.map(ticketsDto, existingTicketsOptional);
+        	existingTickets.setStatus(ticketsDto.getStatus());
+        	modelMapper.map(ticketsDto, existingTicketsOptional);
             TicketsEntity updatedTickets = ticketsRepository.save(existingTickets);
             logger.info("Updated Tickets with ID: {}", updatedTickets.getTicketsId());
             return convertToDTO(updatedTickets);

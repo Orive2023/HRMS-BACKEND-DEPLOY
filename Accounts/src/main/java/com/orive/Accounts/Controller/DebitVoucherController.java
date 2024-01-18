@@ -37,7 +37,6 @@ public class DebitVoucherController {
 	
 	// Create a new DebitVoucher
     @PostMapping("/create/debitVoucher")
-    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<DebitVoucherDto> createDebitVoucher(@RequestBody DebitVoucherDto debitVoucherDto) {
     	DebitVoucherDto createdDebitVoucher = debitVoucherService.createDebitVoucher(debitVoucherDto);
         logger.info("Created DebitVoucher with year: {}", createdDebitVoucher.getDebitVoucherId());
@@ -46,7 +45,6 @@ public class DebitVoucherController {
 
     // Get all DebitVoucher   
     @GetMapping("/get/debitVoucher")
-    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<DebitVoucherDto>> getAllDebitVoucher() {
         List<DebitVoucherDto> debitVoucher = debitVoucherService.getAllDebitVoucher();
         logger.info("Retrieved {} DebitVoucher from the database", debitVoucher.size());
@@ -55,7 +53,6 @@ public class DebitVoucherController {
 
     // Get DebitVoucher by ID
     @GetMapping("/get/{debitVoucherId}")
-    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<DebitVoucherDto> getDebitVoucherById(@PathVariable Long debitVoucherId) {
         Optional<DebitVoucherDto> debitVoucher = debitVoucherService.getDebitVoucherById(debitVoucherId);
         if (debitVoucher.isPresent()) {
@@ -69,7 +66,6 @@ public class DebitVoucherController {
 
     // Update DebitVoucher by ID
     @PutMapping("/update/{debitVoucherId}")
-    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<DebitVoucherDto> updateDebitVoucher(@PathVariable Long debitVoucherId, @RequestBody DebitVoucherDto updatedDebitVoucherDto) {
     	DebitVoucherDto updatedDebitVoucher = debitVoucherService.updateDebitVoucher(debitVoucherId, updatedDebitVoucherDto);
         if (updatedDebitVoucher != null) {
@@ -85,7 +81,6 @@ public class DebitVoucherController {
 
     // Delete DebitVoucher by ID
     @DeleteMapping("/delete/{debitVoucherId}")
-    // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteDebitVoucher(@PathVariable Long debitVoucherId) {
     	debitVoucherService.deleteDebitVoucher(debitVoucherId);
         logger.info("Deleted DebitVoucher with ID: {}", debitVoucherId);
@@ -94,10 +89,8 @@ public class DebitVoucherController {
 	    
     // Count the total DebitVoucher 
 	    @GetMapping("/count/debitVoucher")
-	    // @PreAuthorize("hasRole('client_admin')")
 	    public long countDebitVoucherList()
 	    {
 	    	return debitVoucherService.countDebitVoucher();
 	    }
-
 }

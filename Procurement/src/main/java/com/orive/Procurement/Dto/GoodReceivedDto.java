@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.orive.Procurement.Entity.GoodReceivedEntity;
+import com.orive.Procurement.Enum.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Lob;
@@ -31,6 +32,7 @@ public class GoodReceivedDto {
 	private LocalDate date;
 	private String receivedByName;
 	private String title;
+	private Status status;
 	private byte[] signatureAndStamp;
 	private List<GoodReceivedListDto> goodReceivedListDtos=new ArrayList<>();
 }

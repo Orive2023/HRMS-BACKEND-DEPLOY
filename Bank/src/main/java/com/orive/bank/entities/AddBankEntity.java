@@ -2,11 +2,14 @@ package com.orive.bank.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.orive.bank.Enum.Status;
 import com.orive.bank.configuration.AesEncryptor;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -52,6 +55,9 @@ public class AddBankEntity {
 	@Column(name = "account_type")
 	//@Convert(converter = AesEncryptor.class)
 	private String accountType;
-	
+		
+	@Enumerated(EnumType.STRING)
+	@Column(name="status")
+	private Status status;
 	
 }
