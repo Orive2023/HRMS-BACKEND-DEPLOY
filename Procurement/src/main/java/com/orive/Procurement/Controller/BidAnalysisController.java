@@ -28,6 +28,7 @@ import com.orive.Procurement.Dto.BidAnalysisDto;
 import com.orive.Procurement.Entity.BidAnalysisEntity;
 import com.orive.Procurement.Entity.CommitteeListEntity;
 import com.orive.Procurement.Entity.CompanyListEntity;
+import com.orive.Procurement.Enum.Status;
 import com.orive.Procurement.Exceptions.ResourceNotFoundException;
 import com.orive.Procurement.Service.BidAnalysisService;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -55,16 +56,17 @@ public class BidAnalysisController {
 
     
  // Create a new BidAnalysis
-    @PostMapping("/create/bidAnalysis")
+    @PostMapping(value = "/create/bidAnalysis", consumes = "multipart/form-data")
 //  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> saveBidAnalysisEntity(
     		@RequestParam String location,
    		    @RequestParam LocalDate date,
    		    @RequestParam String quotation,
-            @RequestParam(value = "attachment", required = false) MultipartFile file){
+            @RequestParam(value = "attachment", required = false) MultipartFile file,
+            @RequestParam Status status){
     	
     	String result = bidAnalysisService.saveBidAnalysisEntity( 
-    			location, date, quotation, file );
+    			location, date, quotation, file, status);
     
     	if(result != null) {
     		 return new ResponseEntity<>(result, HttpStatus.OK);

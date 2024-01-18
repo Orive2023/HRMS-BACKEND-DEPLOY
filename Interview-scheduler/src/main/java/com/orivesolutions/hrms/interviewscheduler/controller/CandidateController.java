@@ -31,7 +31,7 @@ public class CandidateController {
     @Autowired
     private CandidateService candidateService;
 
-    @PostMapping("/create/candidates")
+    @PostMapping(value = "/create/candidates", consumes = "multipart/form-data")
     // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> savePoliciesEntity(
     		 @RequestParam String name,
@@ -42,7 +42,7 @@ public class CandidateController {
     		 @RequestParam Integer ectc,
     		 @RequestParam String location,
     		 @RequestParam String notice,
-    		 @RequestParam("file") MultipartFile file){
+    		 @RequestParam(value = "file") MultipartFile file){
     	
     	String result = candidateService.saveCandidate( 
     			name, address, email, mobile, ctc, ectc, location, notice, file );
