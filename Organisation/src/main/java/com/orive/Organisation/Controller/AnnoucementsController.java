@@ -56,7 +56,7 @@ public class AnnoucementsController {
       // Get Annoucement by ID
       @GetMapping("/get/{announcementId}")
       // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<AnnoucementDto> getAnnoucementById(@PathVariable Long announcementId) {
+      public ResponseEntity<AnnoucementDto> getAnnoucementById(@PathVariable String announcementId) {
           Optional<AnnoucementDto> announcement = annoucementService.getAnnouncementsById(announcementId);
           if (announcement.isPresent()) {
               logger.info("Retrieved Annoucement with ID: {}", announcementId);
@@ -70,7 +70,7 @@ public class AnnoucementsController {
       // Update Annoucement by ID
       @PutMapping("/update/{announcementId}")
        //@PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<AnnoucementDto> updateAnnoucement(@PathVariable Long announcementId, @RequestBody AnnoucementDto updatedAnnoucementDTO) {
+      public ResponseEntity<AnnoucementDto> updateAnnoucement(@PathVariable String announcementId, @RequestBody AnnoucementDto updatedAnnoucementDTO) {
     	  AnnoucementDto updatedAnnoucement= annoucementService.updateAnnouncement(announcementId, updatedAnnoucementDTO);
           if (updatedAnnoucement != null) {
               logger.info("Updated Annoucement with ID: {}", announcementId);
@@ -86,7 +86,7 @@ public class AnnoucementsController {
       // Delete Annoucement by ID
       @DeleteMapping("/delete/{announcementId}")
        //@PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<Void> deleteAnnoucement(@PathVariable Long announcementId) {
+      public ResponseEntity<Void> deleteAnnoucement(@PathVariable String announcementId) {
     	  annoucementService.deleteAnnouncement(announcementId);
           logger.info("Deleted Annoucement with ID: {}", announcementId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);

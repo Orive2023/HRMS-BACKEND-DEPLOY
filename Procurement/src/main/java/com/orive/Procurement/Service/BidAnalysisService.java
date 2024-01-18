@@ -151,7 +151,8 @@ public class BidAnalysisService {
 	        	BidAnalysisEntity existingBidAnalysis = existingBidAnalysisOptional.get();
 	        	existingBidAnalysis.setLocation(bidAnalysisDto.getLocation());
                 existingBidAnalysis.setDate(bidAnalysisDto.getDate());	          
-	        	modelMapper.map(bidAnalysisDto, existingBidAnalysis);
+                existingBidAnalysis.setStatus(bidAnalysisDto.getStatus());
+                modelMapper.map(bidAnalysisDto, existingBidAnalysis);
 	            BidAnalysisEntity updatedBidAnalysis = bidAnalysisRepository.save(existingBidAnalysis);
 	            logger.info("Updated BidAnalysis with ID: {}", updatedBidAnalysis.getBidAnalysisId());
 	            return convertToDTO(updatedBidAnalysis);

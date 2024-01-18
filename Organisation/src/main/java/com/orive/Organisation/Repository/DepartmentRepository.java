@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.orive.Organisation.Entity.DepartmentEntity;
 
-public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Long>{
+public interface DepartmentRepository extends JpaRepository<DepartmentEntity, String>{
 
 }

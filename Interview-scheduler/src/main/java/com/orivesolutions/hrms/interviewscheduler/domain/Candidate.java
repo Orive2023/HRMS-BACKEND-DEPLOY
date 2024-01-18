@@ -1,6 +1,9 @@
 package com.orivesolutions.hrms.interviewscheduler.domain;
 
+import com.orivesolutions.hrms.interviewscheduler.config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,27 +36,35 @@ public class Candidate {
     private Long id;
     
     @Column(name = "name")
+    //@Convert(converter = AesEncryptor.class)
     private String name;
     
     @Column(name = "address")
+    //@Convert(converter = AesEncryptor.class)
     private String address;
     
     @Column(name = "emailId", unique = true, nullable = false)
+   // @Convert(converter = AesEncryptor.class)
     private String email;
     
     @Column(name = "mobile")
+    //@Convert(converter = AesEncryptor.class)
     private String mobile;
     
     @Column(name = "ctc")
+   // @Convert(converter = AesEncryptor.class)
     private Integer ctc;
     
     @Column(name = "ectc")
+    //@Convert(converter = AesEncryptor.class)
     private Integer ectc;
     
     @Column(name = "location")
+    //@Convert(converter = AesEncryptor.class)
     private String location;
     
     @Column(name = "notice")
+    @Convert(converter = AesEncryptor.class)
     private String notice;
     
     @Lob

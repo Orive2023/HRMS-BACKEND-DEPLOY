@@ -1,6 +1,7 @@
 package com.orive.Event.Dto;
 
 import com.orive.Event.Entity.EventEntity;
+import com.orive.Event.Enum.Status;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
@@ -18,8 +19,9 @@ import lombok.ToString;
 @Builder
 public class EventDto {
 
-    private Long eventId;
+    private String eventId;
 	private String date;
 	private String title;
 	private String className;
+	private Status status;
 }

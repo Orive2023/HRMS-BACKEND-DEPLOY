@@ -1,6 +1,9 @@
 package com.orive.Accounts.Entity;
 
+import com.orive.Accounts.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,15 +31,19 @@ public class OpeningBalanceTableEntity {
 	private Long openingBalanceTableId;
 	
 	@Column(name = "account_name")
+	@Convert(converter = AesEncryptor.class)
 	private String accountName;
 	
 	@Column(name = "sub_type")
+	@Convert(converter = AesEncryptor.class)
 	private String subType;
 	
 	@Column(name = "debit")
+	@Convert(converter = AesEncryptor.class)
 	private double debit;
 	
 	@Column(name = "credit")
+	@Convert(converter = AesEncryptor.class)
 	private double credit;
 	
 	

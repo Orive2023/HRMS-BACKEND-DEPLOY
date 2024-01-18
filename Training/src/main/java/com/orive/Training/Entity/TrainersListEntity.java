@@ -1,7 +1,16 @@
 package com.orive.Training.Entity;
 
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.orive.Training.Config.AesEncryptor;
+import com.orive.Training.Enum.Status;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,48 +33,67 @@ import lombok.ToString;
 public class TrainersListEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long trainersListId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trainers-sequence")
+    @GenericGenerator(name = "trainers-sequence", strategy = "com.orive.Training.Entity.TrainingIdGenerator")
+	private String trainersListId;
 	
 	@Column(name = "trainers_full_name")
+	@Convert(converter = AesEncryptor.class)
 	private String trainersFullName;
 	
 	@Column(name = "email_address")
+	@Convert(converter = AesEncryptor.class)
 	private String emailAddress;
 	
 	@Column(name = "phone_no")
+	@Convert(converter = AesEncryptor.class)
 	private Long phoneNo;
 	
 	@Column(name = "technical_skills")
+	@Convert(converter = AesEncryptor.class)
 	private String technicalSkills;
 	
 	@Column(name = "soft_skills")
+	@Convert(converter = AesEncryptor.class)
 	private String softSkills;
 	
 	@Column(name = "industries")
+	@Convert(converter = AesEncryptor.class)
 	private String industries;
 	
 	@Column(name = "certifications")
+	@Convert(converter = AesEncryptor.class)
 	private String certifications;
 	
 	@Column(name = "training_programs_offered")
+	@Convert(converter = AesEncryptor.class)
 	private String trainingProgramsOffered;
 	
 	@Column(name = "preferred_training_audienece")
+	@Convert(converter = AesEncryptor.class)
 	private String preferredTrainingAudienece;
 	
 	@Column(name = "training_languages")
+	@Convert(converter = AesEncryptor.class)
 	private String trainingLanguages;
 	
 	@Column(name = "availability")
+	@Convert(converter = AesEncryptor.class)
 	private String availability;
 	
 	@Column(name = "previous_clients")
+	@Convert(converter = AesEncryptor.class)
 	private String previousClients;
 	
 	@Column(name = "training_materials_provided")
+	@Convert(converter = AesEncryptor.class)
 	private String trainingMaterialsProvided;
 	
 	@Column(name = "additional_notes")
+	@Convert(converter = AesEncryptor.class)
 	private String additionalNotes;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 }

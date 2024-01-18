@@ -5,9 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.Procurement.Config.AesEncryptor;
+import com.orive.Procurement.Enum.Status;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,17 +44,24 @@ public class BidAnalysisEntity {
 	private Long bidAnalysisId;
 	
 	@Column(name = "location")
+	@Convert(converter = AesEncryptor.class)
 	private String location;
 
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
 	@Column(name = "quotation")
+	@Convert(converter = AesEncryptor.class)
 	private String quotation;
 	
 	@Lob
 	@Column(name = "attachment", length = 100000)
 	private byte[] attachment;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 	
 	@Transient
 	private List<CommitteeListEntity> committeeListEntities = new ArrayList<>();

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.orive.Organisation.Entity.ExpenseListEntity;
 
-public interface ExpenseListRepository extends JpaRepository<ExpenseListEntity, Long>{
+public interface ExpenseListRepository extends JpaRepository<ExpenseListEntity, String>{
 
-	List<ExpenseListEntity> findByexpenceId(Long expenceId);
+	List<ExpenseListEntity> findByexpenceId(String expenceId);
 }

@@ -6,6 +6,8 @@ import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.orive.Organisation.Enum.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +29,7 @@ import lombok.ToString;
 public class CompanyDto {
 
 	
-	private Long companyId;
+	private String companyId;
 	private String companyName;
 	private String companyType;
 	private String legalOrTradingName;
@@ -44,8 +46,7 @@ public class CompanyDto {
 	private String gst;
 	private String uan;
 	private LocalDate createdDate;
-//	private String status;
-//	private String approvedBy;
 	private byte[] file;
+	private Status status;
 //	private List<LocationEntity> locationEntities=new ArrayList<>();
 }

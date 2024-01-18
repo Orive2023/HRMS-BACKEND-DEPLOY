@@ -1,5 +1,7 @@
 package com.orivesolutions.hrms.interviewscheduler.service;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.orivesolutions.hrms.interviewscheduler.domain.Candidate;
@@ -17,6 +19,8 @@ public interface CandidateService {
     Candidate findCandidateByEmail(String email);
 
 	byte[] downloadPdf(Long id);
+	
+	 List<CandidateDto> getAllCandidates();
 
     
 

@@ -3,7 +3,12 @@ package com.orive.Payroll.Entity;
 import java.time.LocalDate;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.orive.Payroll.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,24 +31,31 @@ import lombok.ToString;
 public class AdvanceSaleryEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long advanceSaleryId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "advancesalary-sequence")
+    @GenericGenerator(name = "advancesalary-sequence", strategy = "com.orive.Payroll.Entity.AdvanceSalaryIdGenerator")
+	private String advanceSaleryId;
 	
 	@Column(name = "created_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
 	
 	@Column(name = "employee_name")
+	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
 	@Column(name = "salary")
+	@Convert(converter = AesEncryptor.class)
 	private double salary;
 	
 	@Column(name = "advance_amount")
+	@Convert(converter = AesEncryptor.class)
 	private double advanceAmount;
 	
 	@Column(name = "salary_due")
+	@Convert(converter = AesEncryptor.class)
 	private double salaryDue;
 	
 	@Column(name = "month_and_year")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate monthAndYear;
 }

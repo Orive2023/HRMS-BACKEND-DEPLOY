@@ -48,7 +48,7 @@ public class AnnoucementService {
     }
     
     //get by AnnoucementsId
-    public Optional<AnnoucementDto> getAnnouncementsById(Long announcementId) {
+    public Optional<AnnoucementDto> getAnnouncementsById(String announcementId) {
         Optional<AnnoucementEntity> announcement = annoucementsRepository.findById(announcementId);
         if (announcement.isPresent()) {
             return Optional.of(convertToDTO(announcement.get()));
@@ -59,7 +59,7 @@ public class AnnoucementService {
     }
     
  // Update list by id
-    public AnnoucementDto updateAnnouncement(Long announcementId, AnnoucementDto annoucementDto) {
+    public AnnoucementDto updateAnnouncement(String announcementId, AnnoucementDto annoucementDto) {
         Optional<AnnoucementEntity> existingAnnoucementOptional = annoucementsRepository.findById(announcementId);
         if (existingAnnoucementOptional.isPresent()) {
         	AnnoucementEntity existingAnnoucement = existingAnnoucementOptional.get();
@@ -78,7 +78,7 @@ public class AnnoucementService {
     }
     
     // Delete
-    public void deleteAnnouncement(Long announcementId) {
+    public void deleteAnnouncement(String announcementId) {
     	annoucementsRepository.deleteById(announcementId);
         logger.info("Deleted Annoucement with ID: {}", announcementId);
     }

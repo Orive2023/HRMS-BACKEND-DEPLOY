@@ -22,16 +22,24 @@ public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+    
     @OneToOne
     @JoinColumn(name = "candidate_id", referencedColumnName = "id")
     private Candidate candidate;
+    
     @OneToOne
     @JoinColumn(name = "interview_id", referencedColumnName = "id")
     private Interview interview;
+    
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private InterviewStatus status;
+    
+    @Column(name = "remarks")
     private String remarks;
+    
+    @Column(name = "rating")
     private Integer rating;
 
 }

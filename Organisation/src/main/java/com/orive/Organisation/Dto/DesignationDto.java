@@ -20,7 +20,7 @@ import lombok.ToString;
 @Builder
 public class DesignationDto {
 
-	private Long designationId;
+	private String designationId;
 	private String departmentName;
 	private String designationName;
 	private LocalDate createdDate;

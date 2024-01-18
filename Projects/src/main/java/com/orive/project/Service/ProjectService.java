@@ -48,7 +48,7 @@ public class ProjectService {
     }
     
     //get by ProjectId
-    public Optional<ProjectDto> getProjectById(Long projectsId) {
+    public Optional<ProjectDto> getProjectById(String projectsId) {
         Optional<ProjectEntity> project = projectRepository.findById(projectsId);
         if (project.isPresent()) {
             return Optional.of(convertToDTO(project.get()));
@@ -94,7 +94,7 @@ public class ProjectService {
     
     
  // Update list by id
-    public ProjectDto updateProject(Long projectsId, ProjectDto projectDto) {
+    public ProjectDto updateProject(String projectsId, ProjectDto projectDto) {
         Optional<ProjectEntity> existingProjectOptional =projectRepository.findById(projectsId);
         if (existingProjectOptional.isPresent()) {
         	ProjectEntity existingProject = existingProjectOptional.get();
@@ -102,7 +102,8 @@ public class ProjectService {
         	existingProject.setStartDate(projectDto.getStartDate());
         	existingProject.setEndDate(projectDto.getEndDate());
         	existingProject.setClientName(projectDto.getClientName());
-            modelMapper.map(projectDto, existingProjectOptional);
+        	existingProject.setStatus(projectDto.getStatus());
+        	modelMapper.map(projectDto, existingProjectOptional);
            ProjectEntity updatedProject = projectRepository.save(existingProject);
             logger.info("Updated project with ID: {}", updatedProject.getProjectsId());
             return convertToDTO( updatedProject);
@@ -141,7 +142,7 @@ public class ProjectService {
                     existingProject.setSummary(updatedProject.getSummary());
                     existingProject.setDescription(updatedProject.getDescription());
                     existingProject.setWorkUpdateSheet(updatedProject.getWorkUpdateSheet());
-
+                    existingProject.setStatus(updatedProject.getStatus());
                     // Update or merge the list of EmployeeProjectManagementEntities
                     existingProject.setEmployeeProjectManagementEntities(updatedProject.getEmployeeProjectManagementEntities());
 
@@ -160,7 +161,7 @@ public class ProjectService {
     
     
     // Delete
-    public void deleteProject(Long projectsId) {
+    public void deleteProject(String projectsId) {
     	projectRepository.deleteById(projectsId);
         logger.info("Deleted project with ID: {}", projectsId);
     }

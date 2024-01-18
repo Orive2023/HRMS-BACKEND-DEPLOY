@@ -3,7 +3,10 @@ package com.orive.Accounts.Entity;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
+import com.orive.Accounts.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,11 +33,14 @@ public class FinancialYearEntity {
 	private Long financialYearId;
 	
 	@Column(name = "financial_year")
+	@Convert(converter = AesEncryptor.class)
 	private String financialYear;
 	
 	@Column(name = "financial_year_start_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate financialYearStartDate;
 	
 	@Column(name = "financial_year_end_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate financialYearEndDate;
 }

@@ -5,9 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.Procurement.Config.AesEncryptor;
+import com.orive.Procurement.Enum.Status;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,24 +44,31 @@ public class PurchaseOrderEntity {
 	private Long purchaseOrderId;
 	
 	@Column(name = "quotation")
+	@Convert(converter = AesEncryptor.class)
 	private String quotation;
 	
 	@Column(name = "location")
+	@Convert(converter = AesEncryptor.class)
 	private String location;
 
 	@Column(name = "vendor_name")
+	@Convert(converter = AesEncryptor.class)
 	private String vendorName;
 	
 	@Column(name = "address")
+	@Convert(converter = AesEncryptor.class)
 	private String address;
 	
 	@Column(name = "notes")
+	@Convert(converter = AesEncryptor.class)
 	private String notes;
 	
 	@Column(name = "authorized_by_name")
+	@Convert(converter = AesEncryptor.class)
 	private String authorizedByName;
 	
 	@Column(name = "title")
+	@Convert(converter = AesEncryptor.class)
 	private String title;
 	
 	@Lob
@@ -63,7 +76,12 @@ public class PurchaseOrderEntity {
 	private byte[] signatureAndStamp;
 	
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 	
 	@Transient
 	private List<PurchaseOrderListEntity> purchaseOrderListEntities = new ArrayList<>();

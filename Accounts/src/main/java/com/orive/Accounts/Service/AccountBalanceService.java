@@ -28,7 +28,7 @@ public class AccountBalanceService {
 	private ModelMapper modelMapper;
 	
 	// Create
-    public AccountBalanceDto createAccountBalance(AccountBalanceDto accountBalanceDto) {
+	public AccountBalanceDto createAccountBalance(AccountBalanceDto accountBalanceDto) {
     	AccountBalancesEntity accountBalancesEntity = convertToEntity(accountBalanceDto);
     	AccountBalancesEntity savedAccountBalance = accountBalanceRepository.save(accountBalancesEntity);
         logger.info("Created AccountBalance with ID: {}", savedAccountBalance.getAccountBalancesId());
@@ -36,7 +36,7 @@ public class AccountBalanceService {
     }
 
     // Read
-    public List<AccountBalanceDto> getAllAccountBalance() {
+	public List<AccountBalanceDto> getAllAccountBalance() {
         List<AccountBalancesEntity> accountBalancesEntities = accountBalanceRepository.findAll();
         logger.info("Retrieved {} AccountBalance from the database", accountBalancesEntities.size());
         return accountBalancesEntities.stream()
@@ -45,55 +45,56 @@ public class AccountBalanceService {
     }
     
     //get by AccountBalanceId
-    public Optional<AccountBalanceDto> getAccountBalanceById(Long accountBalanceId) {
-        Optional<AccountBalancesEntity> accountBalance = accountBalanceRepository.findById(accountBalanceId);
-        if (accountBalance.isPresent()) {
-            return Optional.of(convertToDTO(accountBalance.get()));
-        } else {
-            logger.warn("AccountBalance with ID {} not found", accountBalanceId);
-            return Optional.empty();
-        }
-    }
+	 public Optional<AccountBalanceDto> getAccountBalanceById(Long accountBalanceId) {
+	        Optional<AccountBalancesEntity> accountBalance = accountBalanceRepository.findById(accountBalanceId);
+	        if (accountBalance.isPresent()) {
+	            return Optional.of(convertToDTO(accountBalance.get()));
+	        } else {
+	            logger.warn("AccountBalance with ID {} not found", accountBalanceId);
+	            return Optional.empty();
+	        }
+	    }
     
  // Update list by id
-    public AccountBalanceDto updateAccountBalance(Long accountBalanceId, AccountBalanceDto accountBalanceDto) {
-        Optional<AccountBalancesEntity> existingAccountBalanceOptional = accountBalanceRepository.findById(accountBalanceId);
-        if (existingAccountBalanceOptional.isPresent()) {
-        	AccountBalancesEntity existingAccountBalance = existingAccountBalanceOptional.get();
-        	existingAccountBalance.setEmployeeName(accountBalanceDto.getEmployeeName());
-        	existingAccountBalance.setHsaBalance(accountBalanceDto.getHsaBalance());
-        	existingAccountBalance.setFsaBalance(accountBalanceDto.getFsaBalance());
-            modelMapper.map(accountBalanceDto, existingAccountBalanceOptional);
-            AccountBalancesEntity updatedAccountBalance = accountBalanceRepository.save(existingAccountBalance);
-            logger.info("Updated AccountBalance with ID: {}", updatedAccountBalance.getAccountBalancesId());
-            return convertToDTO(updatedAccountBalance);
-        } else {
-            logger.warn("AccountBalance with ID {} not found for update", accountBalanceId);
-            return null;
-        }
-    }
+	 public AccountBalanceDto updateAccountBalance(Long accountBalanceId, AccountBalanceDto accountBalanceDto) {
+	        Optional<AccountBalancesEntity> existingAccountBalanceOptional = accountBalanceRepository.findById(accountBalanceId);
+	        if (existingAccountBalanceOptional.isPresent()) {
+	        	AccountBalancesEntity existingAccountBalance = existingAccountBalanceOptional.get();
+	        	existingAccountBalance.setEmployeeName(accountBalanceDto.getEmployeeName());
+	        	existingAccountBalance.setHsaBalance(accountBalanceDto.getHsaBalance());
+	        	existingAccountBalance.setFsaBalance(accountBalanceDto.getFsaBalance());
+	        	existingAccountBalance.setStatus(accountBalanceDto.getStatus());
+	            modelMapper.map(accountBalanceDto, existingAccountBalanceOptional);
+	            AccountBalancesEntity updatedAccountBalance = accountBalanceRepository.save(existingAccountBalance);
+	            logger.info("Updated AccountBalance with ID: {}", updatedAccountBalance.getAccountBalancesId());
+	            return convertToDTO(updatedAccountBalance);
+	        } else {
+	            logger.warn("AccountBalance with ID {} not found for update", accountBalanceId);
+	            return null;
+	        }
+	    }
     
     // Delete
-    public void deleteAccountBalance(Long accountBalanceId) {
-    	accountBalanceRepository.deleteById(accountBalanceId);
-        logger.info("Deleted AccountBalance with ID: {}", accountBalanceId);
-    }
+	 public void deleteAccountBalance(Long accountBalanceId) {
+	    	accountBalanceRepository.deleteById(accountBalanceId);
+	        logger.info("Deleted AccountBalance with ID: {}", accountBalanceId);
+	    }
 
     //count the total AccountBalance
-    public long countAccountBalance()
+	 public long countAccountBalance()
 	 {
 		 return accountBalanceRepository.count();
 	 }
     
 	// Helper method to convert AccountBalanceDTo to AccountBalanceEntity
-    private AccountBalancesEntity convertToEntity(AccountBalanceDto accountBalanceDto )
-    {
-    	return modelMapper.map(accountBalanceDto, AccountBalancesEntity.class);
-    }
+	 private AccountBalancesEntity convertToEntity(AccountBalanceDto accountBalanceDto )
+	    {
+	    	return modelMapper.map(accountBalanceDto, AccountBalancesEntity.class);
+	    }
 
     // Helper method to convert AccountBalanceEntity to AccountBalanceDTo
-    private AccountBalanceDto convertToDTO(AccountBalancesEntity accountBalancesEntity) 
-    {
-        return modelMapper.map(accountBalancesEntity, AccountBalanceDto.class);
-    } 	
+	 private AccountBalanceDto convertToDTO(AccountBalancesEntity accountBalancesEntity) 
+	    {
+	        return modelMapper.map(accountBalancesEntity, AccountBalanceDto.class);
+	    }	
 }

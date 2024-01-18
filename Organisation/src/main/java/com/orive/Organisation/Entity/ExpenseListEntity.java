@@ -4,7 +4,12 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.orive.Organisation.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,20 +33,27 @@ import lombok.ToString;
 public class ExpenseListEntity {	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long expenceListId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expencelist-sequence")
+    @GenericGenerator(name = "expencelist-sequence", strategy = "com.orive.Organisation.Entity.ExpencelistIdGenerator")
+	private String expenceListId;
 	
-	private Long expenceId;
+	@Convert(converter = AesEncryptor.class)
+	@Column(name = "expence_id")
+	private String expenceId;
 	
 	@Column(name = "purchase_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate purchaseDate;
 	
 	@Column(name = "description")
+	@Convert(converter = AesEncryptor.class)
 	private String description;
 	
 	@Column(name = "purchased_by")
+	@Convert(converter = AesEncryptor.class)
 	private String purchasedBy;
 	
 	@Column(name = "amount")
+	@Convert(converter = AesEncryptor.class)
 	private double amount;	
 }

@@ -45,7 +45,7 @@ public class EventService {
     }
     
     //get by EventId
-    public Optional<EventDto> getEventById(Long eventId) {
+    public Optional<EventDto> getEventById(String eventId) {
         Optional<EventEntity> event = eventRepository.findById(eventId);
         if (event.isPresent()) {
             return Optional.of(convertToDTO(event.get()));
@@ -56,12 +56,13 @@ public class EventService {
     }
     
  // Update list by id
-    public EventDto updateEvent(Long eventId, EventDto eventDto) {
+    public EventDto updateEvent(String eventId, EventDto eventDto) {
         Optional<EventEntity> existingEventOptional = eventRepository.findById(eventId);
         if (existingEventOptional.isPresent()) {
         	EventEntity existingEvent = existingEventOptional.get();
         	existingEvent.setTitle(eventDto.getTitle());
-            modelMapper.map(eventDto, existingEventOptional);
+        	existingEvent.setStatus(eventDto.getStatus());
+        	modelMapper.map(eventDto, existingEventOptional);
             EventEntity updatedEvent = eventRepository.save(existingEvent);
             logger.info("Updated Event with ID: {}", updatedEvent.getEventId());
             return convertToDTO(updatedEvent);
@@ -72,7 +73,7 @@ public class EventService {
     }
     
     // Delete
-    public void deleteEvent(Long eventId) {
+    public void deleteEvent(String eventId) {
     	eventRepository.deleteById(eventId);
         logger.info("Deleted Event with ID: {}", eventId);
     }

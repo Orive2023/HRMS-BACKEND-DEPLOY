@@ -47,7 +47,7 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
     }
     
     //get by LeavesId
-    public Optional<LeaveDto> getLeavesById(Long leaveId) {
+    public Optional<LeaveDto> getLeavesById(String leaveId) {
         Optional<LeavesEntity> leaves = leavesRepository.findById(leaveId);
         if (leaves.isPresent()) {
             return Optional.of(convertToDTO(leaves.get()));
@@ -72,7 +72,7 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
     
     
  // Update list by id
-    public LeaveDto updateLeaves(Long leaveId, LeaveDto leaveDto) {
+    public LeaveDto updateLeaves(String leaveId, LeaveDto leaveDto) {
         Optional<LeavesEntity> existingLeavesOptional = leavesRepository.findById(leaveId);
         if (existingLeavesOptional.isPresent()) {
         	LeavesEntity existingLeave = existingLeavesOptional.get();
@@ -92,7 +92,7 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
     
     
     // Update projects by employeeId
-    public List<LeavesEntity> updateLeavesByEmployeeId(long employeeId, List<LeavesEntity> updatedLeaves) {
+    public List<LeavesEntity> updateLeavesByEmployeeId(Long employeeId, List<LeavesEntity> updatedLeaves) {
         List<LeavesEntity> existingLeavesList = leavesRepository.findByEmployeeId(employeeId);
 
         if (!existingLeavesList.isEmpty()) {
@@ -123,7 +123,7 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
        
     
     // Delete
-    public void deleteLeaves(Long leaveId) {
+    public void deleteLeaves(String leaveId) {
     	leavesRepository.deleteById(leaveId);
         logger.info("Deleted Leaves with ID: {}", leaveId);
     }

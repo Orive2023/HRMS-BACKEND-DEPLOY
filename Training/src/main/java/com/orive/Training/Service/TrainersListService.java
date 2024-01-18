@@ -43,7 +43,7 @@ public class TrainersListService {
     }
     
     //get by TrainersListId
-    public Optional<TrainersListDto> getTrainersListById(Long trainersListId) {
+    public Optional<TrainersListDto> getTrainersListById(String trainersListId) {
         Optional<TrainersListEntity> trainersList = trainersListRepository.findById(trainersListId);
         if (trainersList.isPresent()) {
             return Optional.of(convertToDTO(trainersList.get()));
@@ -54,13 +54,14 @@ public class TrainersListService {
     }
     
  // Update list by id
-    public TrainersListDto updateTrainersList(Long trainersListId, TrainersListDto trainersListDto) {
+    public TrainersListDto updateTrainersList(String trainersListId, TrainersListDto trainersListDto) {
         Optional<TrainersListEntity> existingTrainersListOptional = trainersListRepository.findById(trainersListId);
         if (existingTrainersListOptional.isPresent()) {
         	TrainersListEntity existingTrainersList = existingTrainersListOptional.get();
         	existingTrainersList.setTrainersFullName(trainersListDto.getTrainersFullName());
         	existingTrainersList.setEmailAddress(trainersListDto.getEmailAddress());
         	existingTrainersList.setPhoneNo(trainersListDto.getPhoneNo());
+        	existingTrainersList.setStatus(trainersListDto.getStatus());
         	modelMapper.map(trainersListDto, existingTrainersListOptional);
             TrainersListEntity updatedTrainersList = trainersListRepository.save(existingTrainersList);
             logger.info("Updated TrainersList with ID: {}", updatedTrainersList.getTrainersListId());
@@ -72,7 +73,7 @@ public class TrainersListService {
     }
     
     // Delete
-    public void deleteTrainersList(Long trainersListId) {
+    public void deleteTrainersList(String trainersListId) {
     	trainersListRepository.deleteById(trainersListId);
         logger.info("Deleted TrainersList with ID: {}", trainersListId);
     }

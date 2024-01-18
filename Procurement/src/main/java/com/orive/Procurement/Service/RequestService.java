@@ -61,6 +61,7 @@ public class RequestService {
 	            existingRequest.setRequestingPerson(requestDto.getRequestingPerson());
 	        	existingRequest.setExpectedTimeToHaveTheGoodStarts(requestDto.getExpectedTimeToHaveTheGoodStarts());
 	        	existingRequest.setExpectedTimeToHaveTheGoodEnds(requestDto.getExpectedTimeToHaveTheGoodEnds());
+	        	existingRequest.setStatus(requestDto.getStatus());
 	        	modelMapper.map(requestDto, existingRequestOptional);
 	            RequestEntity updatedRequest = requestRepository.save(existingRequest);
 	            logger.info("Updated Request with ID: {}", updatedRequest.getRequestId());

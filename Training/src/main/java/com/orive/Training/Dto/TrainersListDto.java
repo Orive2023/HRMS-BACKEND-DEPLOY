@@ -1,5 +1,7 @@
 package com.orive.Training.Dto;
 
+import com.orive.Training.Enum.Status;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +18,7 @@ import lombok.ToString;
 @Builder
 public class TrainersListDto {
 	
-	private Long trainersListId;
+	private String trainersListId;
 	private String trainersFullName;
 	private String emailAddress;
 	private Long phoneNo;
@@ -31,4 +33,5 @@ public class TrainersListDto {
 	private String previousClients;
 	private String trainingMaterialsProvided;
 	private String additionalNotes;
+	private Status status;
 }

@@ -42,7 +42,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListService.c
 		
 
 	    // Get ExpenseList by expenceId
-	    public List<ExpenseListEntity> getExpenseListByExpenceId(Long expenceId) {
+	    public List<ExpenseListEntity> getExpenseListByExpenceId(String expenceId) {
 	    	logger.info("Fetching expenseList for expenceId: {}", expenceId);
 	        List<ExpenseListEntity> expenseList = expenseListRepository.findByexpenceId(expenceId);
 	        logger.info("Fetched {} expenseList for expenceId: {}", expenseList.size(), expenceId);
@@ -50,7 +50,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListService.c
 	    }
 
 	    // Get ExpenseList by expenceListId
-	    public ExpenseListEntity getExpenseListByxpenceId(Long expenceListId) {
+	    public ExpenseListEntity getExpenseListByxpenceId(String expenceListId) {
 	    	logger.info("Fetching ExpenseList for expenceListId: {}", expenceListId);
 	        ExpenseListEntity expenseList = expenseListRepository.findById(expenceListId)
 	                .orElseThrow(() -> {
@@ -63,7 +63,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListService.c
 	    
 	    
 	 // Update list by id
-	    public ExpenseListEntity updateLocation(Long expenceListId, ExpenseListEntity updatedLocation) {
+	    public ExpenseListEntity updateLocation(String expenceListId, ExpenseListEntity updatedLocation) {
 	    	ExpenseListEntity existingLocation = expenseListRepository.findById(expenceListId)
 	                .orElse(null);
 
@@ -82,11 +82,9 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListService.c
 	        }
 	    }
 	
-	    
-
-	    
+	       
 	    // Delete
-	    public void deleteExpeceList(Long expenceListId) {
+	    public void deleteExpeceList(String expenceListId) {
 	    	expenseListRepository.deleteById(expenceListId);
 	        logger.info("Deleted ExpenceList with ID: {}", expenceListId);
 	    }

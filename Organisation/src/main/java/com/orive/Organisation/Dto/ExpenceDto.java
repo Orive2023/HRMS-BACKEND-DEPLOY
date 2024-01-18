@@ -34,13 +34,11 @@ import lombok.ToString;
 @Builder
 public class ExpenceDto {
 	
-	private Long expenceId;		
+	private String expenceId;		
 	private String expenceType;
 	private LocalDate createdDate;
 	private Long total;
 	private byte[] uploadDocument;
-//	private String status;
-//	private String approvedBy;
 	//private List<ExpenseListDto> expenseListEntities;
 	private List<ExpenseListDto> expenseListDtos=new ArrayList<>();
 	

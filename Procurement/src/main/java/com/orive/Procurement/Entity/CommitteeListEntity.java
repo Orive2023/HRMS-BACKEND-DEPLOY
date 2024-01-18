@@ -3,7 +3,10 @@ package com.orive.Procurement.Entity;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.orive.Procurement.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,9 +35,11 @@ public class CommitteeListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long committeeListId;
 	
+	//@Convert(converter = AesEncryptor.class)
 	private Long bidAnalysisId;
 	
 	@Column(name = "name")
+	@Convert(converter = AesEncryptor.class)
 	private String name;
 	
 	@Lob
@@ -42,6 +47,7 @@ public class CommitteeListEntity {
 	private byte[] signature;
 	
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 
 }

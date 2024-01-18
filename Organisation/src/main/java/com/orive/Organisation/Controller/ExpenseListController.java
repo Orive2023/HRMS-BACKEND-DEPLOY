@@ -50,7 +50,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListControlle
 
     @GetMapping("/{expenceId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public List<ExpenseListEntity> getExpensesByExpenceId(@PathVariable Long expenceId) {
+    public List<ExpenseListEntity> getExpensesByExpenceId(@PathVariable String expenceId) {
     	logger.info("Received request to fetch expenses for expenceId: {}", expenceId);
         List<ExpenseListEntity> expenseList = expenseListService.getExpenseListByExpenceId(expenceId);
         logger.info("Fetched {} expenses for expenceId: {}", expenseList.size(), expenceId);
@@ -59,7 +59,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListControlle
 
     @GetMapping("/detail/{expenceListId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ExpenseListEntity getExpenseListDetails(@PathVariable Long expenceListId) {
+    public ExpenseListEntity getExpenseListDetails(@PathVariable String expenceListId) {
     	logger.info("Received request to fetch expenseList details for expenceListId: {}", expenceListId);
         ExpenseListEntity expenseList = expenseListService.getExpenseListByxpenceId(expenceListId);
         logger.info("Fetched expense details: {}", expenseList);
@@ -70,7 +70,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListControlle
     @PutMapping("/{expenceListId}")
  // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<ExpenseListEntity> updateExpenseList(
-            @PathVariable Long expenceListId,
+            @PathVariable String expenceListId,
             @RequestBody ExpenseListEntity updatedLocation) {
 
         ExpenseListEntity updatedExpenseList = expenseListService.updateLocation(expenceListId, updatedLocation);
@@ -86,7 +86,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListControlle
 
     @DeleteMapping("/delete/{expenceListId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<String> deleteExpenseList(@PathVariable Long expenceListId) {
+    public ResponseEntity<String> deleteExpenseList(@PathVariable String expenceListId) {
     	logger.info("Received request to delete expenseList with ID: {}", expenceListId);
     	expenseListService.deleteExpeceList(expenceListId);
         logger.info("ExpenseList deleted successfully.");

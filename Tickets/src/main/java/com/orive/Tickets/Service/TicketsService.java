@@ -46,7 +46,7 @@ public class TicketsService {
     }
     
     //get by TicketsId
-    public Optional<TicketsDto> getTicketsId(Long TicketsId) {
+    public Optional<TicketsDto> getTicketsId(String TicketsId) {
         Optional<TicketsEntity> tickets = ticketsRepository.findById(TicketsId);
         if (tickets.isPresent()) {
             return Optional.of(convertToDTO(tickets.get()));
@@ -73,12 +73,13 @@ public class TicketsService {
     
     
  // Update list by id
-    public TicketsDto updateTickets(Long TicketsId, TicketsDto ticketsDto) {
+    public TicketsDto updateTickets(String TicketsId, TicketsDto ticketsDto) {
         Optional<TicketsEntity> existingTicketsOptional = ticketsRepository.findById(TicketsId);
         if (existingTicketsOptional.isPresent()) {
         	TicketsEntity existingTickets= existingTicketsOptional.get();
         	existingTickets.setEmployeeName(ticketsDto.getEmployeeName());
-            modelMapper.map(ticketsDto, existingTicketsOptional);
+        	existingTickets.setStatus(ticketsDto.getStatus());
+        	modelMapper.map(ticketsDto, existingTicketsOptional);
             TicketsEntity updatedTickets = ticketsRepository.save(existingTickets);
             logger.info("Updated Tickets with ID: {}", updatedTickets.getTicketsId());
             return convertToDTO(updatedTickets);
@@ -89,7 +90,7 @@ public class TicketsService {
     }
     
     // Delete
-    public void deleteTickets(Long TicketsId) {
+    public void deleteTickets(String TicketsId) {
     	ticketsRepository.deleteById(TicketsId);
         logger.info("Deleted Tickets with ID: {}", TicketsId);
     }

@@ -19,7 +19,7 @@ import lombok.ToString;
 @Builder
 public class HolidaysDto {
 
-    private Long holidaysId;
+    private String holidaysId;
 	private String eventName;
 	private LocalDate startDate;
 	private LocalDate endDate;

@@ -1,6 +1,9 @@
 package com.orive.Procurement.Entity;
 
+import com.orive.Procurement.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,11 +31,14 @@ public class DescriptionOfMaterialListEntity {
 	private Long descriptionOfMaterialId;
 	
 	@Column(name = "description_of_material_or_goods_or_Service")
+	@Convert(converter = AesEncryptor.class)
 	private String descriptionOfMaterialOrGoodsOrService;
 	
 	@Column(name = "unit_name")
+	@Convert(converter = AesEncryptor.class)
 	private String unitName;
 	
 	@Column(name = "quantity")
-	private Double quantity;
+	@Convert(converter = AesEncryptor.class)
+	private double quantity;
 }

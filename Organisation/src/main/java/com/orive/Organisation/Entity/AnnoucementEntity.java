@@ -7,7 +7,12 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import com.orive.Organisation.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,34 +36,44 @@ import lombok.ToString;
 public class AnnoucementEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long announcementsId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "annoucement-sequence")
+    @GenericGenerator(name = "annoucement-sequence", strategy = "com.orive.Organisation.Entity.AnnoucementIdGenerator")
+	private String announcementsId;
 	
 	@Column(name = "title")
+	@Convert(converter = AesEncryptor.class)
 	private String title;
 	
 	@Column(name = "start_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate startDate;
 	
 	@Column(name = "end_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate endDate;
 	
 	@Column(name = "company_name")
+	@Convert(converter = AesEncryptor.class)
 	private String companyName;
 	
 	@Column(name = "location_name")
+	@Convert(converter = AesEncryptor.class)
 	private String locationName;
 	
 	@Column(name = "department_name")
+	@Convert(converter = AesEncryptor.class)
 	private String departmentName;
 	
 	@Column(name = "summary")
+	@Convert(converter = AesEncryptor.class)
 	private String summary;
 		
 	@Column(name = "description",length = 100000)
+	@Convert(converter = AesEncryptor.class)
 	private String description;
 	
 	@Column(name = "created_date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
 	
 //	@Column(name = "status")

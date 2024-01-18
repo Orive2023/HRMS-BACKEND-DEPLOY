@@ -30,22 +30,30 @@ public class Interview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+    
     @ManyToOne(optional = false)
     @JoinColumn(name = "candidate_id", referencedColumnName = "id")
     private Candidate candidate;
+    
     @ManyToOne(optional = false)
     @JoinColumn(name = "scheduler_id", referencedColumnName = "id")
     private User scheduler;
+    
     @ManyToOne(optional = false)
     @JoinColumn(name = "interviewer_id", referencedColumnName = "id")
     private User interviewer;
+    
     private LocalDateTime dateTime;
+    
     @ManyToOne(optional = false)
     @JoinColumn(name = "talent_id", referencedColumnName = "id")
     private Talent talent;
+    
     @Enumerated(EnumType.STRING)
     private InterviewStatus interviewStatus;
+    
+    
     private String meetingLink;
 
 }

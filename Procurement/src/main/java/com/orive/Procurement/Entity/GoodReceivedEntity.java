@@ -5,9 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.Procurement.Config.AesEncryptor;
+import com.orive.Procurement.Enum.Status;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,22 +45,32 @@ public class GoodReceivedEntity {
 	private Long goodReceivedId;
 	
 	@Column(name = "purchase_order")
+	@Convert(converter = AesEncryptor.class)
 	private String purchaseOrder;
 	
 	@Column(name = "payment_source")
+	@Convert(converter = AesEncryptor.class)
 	private String paymentSource;
 	
 	@Column(name = "vendor_name")
+	@Convert(converter = AesEncryptor.class)
 	private String vendorName;
 	
 	@Column(name = "date")
+	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
 	@Column(name = "received_by_name")
+	@Convert(converter = AesEncryptor.class)
 	private String receivedByName;
 	
 	@Column(name = "title")
+	@Convert(converter = AesEncryptor.class)
 	private String title;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 	
 	@Lob
 	@Column(name = "signature_and_stamp", length = 100000)

@@ -38,4 +38,11 @@ public class InterviewController {
         List<InterviewDto> interviews = interviewService.getInterview(schedulerEmail);
         return new ResponseEntity<>(interviews, HttpStatus.OK);
     }
+    
+    @GetMapping("/all")
+ // @PreAuthorize("hasRole('client_admin')")
+    public ResponseEntity<List<InterviewDto>> getAllInterviews() {
+        List<InterviewDto> interviews = interviewService.getAllInterviews();
+        return new ResponseEntity<>(interviews, HttpStatus.OK);
+    }
 }

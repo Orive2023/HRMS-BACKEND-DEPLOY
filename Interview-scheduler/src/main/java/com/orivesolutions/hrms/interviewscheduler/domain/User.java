@@ -1,8 +1,10 @@
 package com.orivesolutions.hrms.interviewscheduler.domain;
 
+import com.orivesolutions.hrms.interviewscheduler.config.AesEncryptor;
 import com.orivesolutions.hrms.interviewscheduler.enums.Role;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,6 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+
 import lombok.Data;
 
 
@@ -24,33 +28,42 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(name = "name")
+   // @Convert(converter = AesEncryptor.class)
     private String name;
 
-    @Column
+    @Column(name = "address")
+    //@Convert(converter = AesEncryptor.class)
     private String address;
 
-    @Column(name = "emailId", unique = true, nullable = false)
+    @Column(name = "email_id", unique = true, nullable = false)
+   // @Convert(converter = AesEncryptor.class)
     private String emailId;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Column
+    @Column(name = "password")
+    //@Convert(converter = AesEncryptor.class)
     private String password;
 
-    @Column
+    @Column(name = "mobile")
+    @Convert(converter = AesEncryptor.class)
     private String mobile;
 
     @Enumerated(EnumType.STRING)
-    @Column
+    @Column(name = "role")
+    //@Convert(converter = AesEncryptor.class)
     private Role role;
 
-    @Column
+    @Column(name = "profile_url")
+    //@Convert(converter = AesEncryptor.class)
     private String profileUrl;
 
-    @Column(name = "forgetToken")
+    @Column(name = "forget_token")
+    //@Convert(converter = AesEncryptor.class)
     private String forgetToken;
 
-    @Column
+    @Column(name = "otp")
+    //@Convert(converter = AesEncryptor.class)
     private Integer otp;
 
 }

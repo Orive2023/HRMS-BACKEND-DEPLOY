@@ -44,7 +44,7 @@ private static final Logger logger=LoggerFactory.getLogger(PaySlipGenerateServic
                 .collect(Collectors.toList());
     }
     //get by AdvanceSaleryId
-    public Optional<PaySlipGenerateDto> getPaySlipGenerateById(Long PaySlipGenerateId) {
+    public Optional<PaySlipGenerateDto> getPaySlipGenerateById(String PaySlipGenerateId) {
         Optional<PaySlipGenerateEntity> advanceSalery = paySlipGenerateRepository.findById(PaySlipGenerateId);
         if (advanceSalery.isPresent()) {
             return Optional.of(convertToDTO(advanceSalery.get()));
@@ -71,7 +71,7 @@ private static final Logger logger=LoggerFactory.getLogger(PaySlipGenerateServic
 //    }
     
     // Delete
-    public void deletePaySlipGenerate(Long PaySlipGenerateId) {
+    public void deletePaySlipGenerate(String PaySlipGenerateId) {
     	paySlipGenerateRepository.deleteById(PaySlipGenerateId);
         logger.info("Deleted PaySlip Generate with ID: {}", PaySlipGenerateId);
     }
