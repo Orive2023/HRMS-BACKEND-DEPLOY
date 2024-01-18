@@ -25,31 +25,31 @@ public class Talent {
     private Long id;
     
     @Column(name = "name")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String name;
     
     @Column(name = "requirements")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String requirements;
     
     @Column(name = "project_name")
-    @Convert(converter = AesEncryptor.class)
+   // @Convert(converter = AesEncryptor.class)
     private String projectName;
     
     @Column(name = "manager_name")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String managerName;
     
     @Column(name = "start_date")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private LocalDate startDate;
     
     @Column(name = "end_date")
-    @Convert(converter = AesEncryptor.class)
+   // @Convert(converter = AesEncryptor.class)
     private LocalDate endDate;
     
     @Column(name = "job_location")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String jobLocation;
 
 }

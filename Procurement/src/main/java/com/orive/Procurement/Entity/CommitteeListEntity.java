@@ -35,7 +35,7 @@ public class CommitteeListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long committeeListId;
 	
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private Long bidAnalysisId;
 	
 	@Column(name = "name")

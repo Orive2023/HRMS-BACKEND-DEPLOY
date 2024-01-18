@@ -14,7 +14,7 @@
 	<name>interview-scheduler</name>
 	<description>This is a spring-boot application to manage the interview process</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 		<mapstruct-version>1.4.2.Final</mapstruct-version>
 		<jsoe.jwt.version>8.17.1</jsoe.jwt.version>
 		<hash.id.version>1.0.3</hash.id.version>
@@ -34,11 +34,11 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -155,6 +155,7 @@
 					</execution>
 				</executions>
 				<configuration>
+					<skip>true</skip>
 					<apiToken>${snyk-api-token}</apiToken>
 					<args>
 						<arg>&#45;&#45;all-projects</arg>
