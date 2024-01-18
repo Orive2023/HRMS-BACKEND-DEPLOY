@@ -33,7 +33,7 @@ public class AccountListService {
         return convertToDTO(savedAccountList);
     }
 
-    // Read
+ // Read
     public List<AccountListDto> getAllAccountList() {
         List<AccountListEntity> accountListEntities = accountListRepository.findAll();
         logger.info("Retrieved {} AccountList from the database", accountListEntities.size());
@@ -42,7 +42,7 @@ public class AccountListService {
                 .collect(Collectors.toList());
     }
     
-    //get by AccountListId
+  //get by AccountListId
     public Optional<AccountListDto> getAccountListById(Long accountListId) {
         Optional<AccountListEntity> accountList = accountListRepository.findById(accountListId);
         if (accountList.isPresent()) {
@@ -63,6 +63,7 @@ public class AccountListService {
         	existingAccountList.setEmailAddress(accountListDto.getEmailAddress());
         	existingAccountList.setUserName(accountListDto.getUserName());
         	existingAccountList.setPassword(accountListDto.getPassword());
+        	existingAccountList.setStatus(accountListDto.getStatus());
             modelMapper.map(accountListDto, existingAccountListOptional);
             AccountListEntity updatedAccountList = accountListRepository.save(existingAccountList);
             logger.info("Updated AccountList with ID: {}", updatedAccountList.getAccountListId());
@@ -73,7 +74,7 @@ public class AccountListService {
         }
     }
     
-    // Delete
+ // Delete
     public void deleteAccountList(Long accountListId) {
     	accountListRepository.deleteById(accountListId);
         logger.info("Deleted AccountList with ID: {}", accountListId);

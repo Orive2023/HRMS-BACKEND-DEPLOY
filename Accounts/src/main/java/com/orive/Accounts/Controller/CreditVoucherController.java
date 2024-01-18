@@ -37,7 +37,6 @@ public class CreditVoucherController {
 		
 		// Create a new CreditVoucher
 	    @PostMapping("/create/creditVoucher")
-	    // @PreAuthorize("hasRole('client_admin')")
 	    public ResponseEntity<CreditVoucherDto> createCreditVoucher(@RequestBody CreditVoucherDto creditVoucherDto) {
 	    	CreditVoucherDto createdCreditVoucher= creditVoucherService.createCreditVoucher(creditVoucherDto);
 	        logger.info("Created CreditVoucher with year: {}", createdCreditVoucher.getCreditVoucherId());
@@ -46,7 +45,6 @@ public class CreditVoucherController {
 
 	    // Get all CreditVoucher   
 	    @GetMapping("/get/creditVoucher")
-	    // @PreAuthorize("hasRole('client_admin')")
 	    public ResponseEntity<List<CreditVoucherDto>> getAllCreditVoucher() {
 	        List<CreditVoucherDto> creditVoucher = creditVoucherService.getAllCreditVoucher();
 	        logger.info("Retrieved {} CreditVoucher from the database", creditVoucher.size());
@@ -55,7 +53,6 @@ public class CreditVoucherController {
 
 	    // Get CreditVoucher by ID
 	    @GetMapping("/get/{creditVoucherId}")
-	    // @PreAuthorize("hasRole('client_admin')")
 	    public ResponseEntity<CreditVoucherDto> getCreditVoucherById(@PathVariable Long creditVoucherId) {
 	        Optional<CreditVoucherDto> creditVoucher = creditVoucherService.getCreditVoucherById(creditVoucherId);
 	        if (creditVoucher.isPresent()) {
@@ -69,7 +66,6 @@ public class CreditVoucherController {
 
 	    // Update CreditVoucher by ID
 	    @PutMapping("/update/{creditVoucherId}")
-	    // @PreAuthorize("hasRole('client_admin')")
 	    public ResponseEntity<CreditVoucherDto> updateCreditVoucher(@PathVariable Long creditVoucherId, @RequestBody CreditVoucherDto updatedCreditVoucherDto) {
 	    	CreditVoucherDto updatedCreditVoucher = creditVoucherService.updateCreditVoucher(creditVoucherId, updatedCreditVoucherDto);
 	        if (updatedCreditVoucher != null) {
@@ -85,7 +81,6 @@ public class CreditVoucherController {
 
 	    // Delete CreditVoucher by ID
 	    @DeleteMapping("/delete/{creditVoucherId}")
-	    // @PreAuthorize("hasRole('client_admin')")
 	    public ResponseEntity<Void> deleteCreditVoucher(@PathVariable Long creditVoucherId) {
 	    	creditVoucherService.deleteCreditVoucher(creditVoucherId);
 	        logger.info("Deleted CreditVoucher with ID: {}", creditVoucherId);
@@ -95,7 +90,6 @@ public class CreditVoucherController {
 	    
 	 // Count the total  CreditVoucher 
 		    @GetMapping("/count/creditVoucher")
-		    // @PreAuthorize("hasRole('client_admin')")
 		    public long countCreditVoucherList()
 		    {
 		    	return creditVoucherService.countCreditVoucher();

@@ -102,7 +102,8 @@ public class ProjectService {
         	existingProject.setStartDate(projectDto.getStartDate());
         	existingProject.setEndDate(projectDto.getEndDate());
         	existingProject.setClientName(projectDto.getClientName());
-            modelMapper.map(projectDto, existingProjectOptional);
+        	existingProject.setStatus(projectDto.getStatus());
+        	modelMapper.map(projectDto, existingProjectOptional);
            ProjectEntity updatedProject = projectRepository.save(existingProject);
             logger.info("Updated project with ID: {}", updatedProject.getProjectsId());
             return convertToDTO( updatedProject);
@@ -141,7 +142,7 @@ public class ProjectService {
                     existingProject.setSummary(updatedProject.getSummary());
                     existingProject.setDescription(updatedProject.getDescription());
                     existingProject.setWorkUpdateSheet(updatedProject.getWorkUpdateSheet());
-
+                    existingProject.setStatus(updatedProject.getStatus());
                     // Update or merge the list of EmployeeProjectManagementEntities
                     existingProject.setEmployeeProjectManagementEntities(updatedProject.getEmployeeProjectManagementEntities());
 

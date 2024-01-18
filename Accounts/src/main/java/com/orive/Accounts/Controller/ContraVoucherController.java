@@ -35,7 +35,6 @@ public class ContraVoucherController {
 	
 	// Create a new ContraVoucher
     @PostMapping("/create/contraVoucher")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<ContraVoucherDto> createContraVoucher(@RequestBody ContraVoucherDto contraVoucherDto) {
     	ContraVoucherDto createdContraVoucher = contraVoucherService.createContraVoucher(contraVoucherDto);
         logger.info("Created ContraVoucher with name: {}", createdContraVoucher.getReversedAccountHead());
@@ -44,7 +43,6 @@ public class ContraVoucherController {
 
     // Get all ContraVoucher   
     @GetMapping("/get/contraVoucher")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<ContraVoucherDto>> getAllContraVoucher() {
         List<ContraVoucherDto> contraVoucher = contraVoucherService.getAllContraVoucher();
         logger.info("Retrieved {} ContraVoucher from the database", contraVoucher.size());
@@ -53,7 +51,6 @@ public class ContraVoucherController {
 
     // Get ContraVoucher by ID
     @GetMapping("/get/{contraVoucherId}")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<ContraVoucherDto> getContraVoucherById(@PathVariable Long contraVoucherId) {
         Optional<ContraVoucherDto> contraVoucher = contraVoucherService.getContraVoucherById(contraVoucherId);
         if (contraVoucher.isPresent()) {
@@ -67,7 +64,6 @@ public class ContraVoucherController {
 
     // Update ContraVoucher by ID
     @PutMapping("/update/{contraVoucherId}")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<ContraVoucherDto> updateContraVoucher(@PathVariable Long contraVoucherId, @RequestBody ContraVoucherDto updatedContraVoucherDto) {
     	ContraVoucherDto updatedContraVoucher = contraVoucherService.updateContraVoucher(contraVoucherId, updatedContraVoucherDto);
         if (updatedContraVoucher != null) {
@@ -83,7 +79,6 @@ public class ContraVoucherController {
 
     // Delete ContraVoucher by ID
     @DeleteMapping("/delete/{contraVoucherId}")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteContraVoucher(@PathVariable Long contraVoucherId) {
     	contraVoucherService.deleteContraVoucher(contraVoucherId);
         logger.info("Deleted ContraVoucher with ID: {}", contraVoucherId);
@@ -92,7 +87,6 @@ public class ContraVoucherController {
 	   
     // count the total ContraVoucher 
 	    @GetMapping("/count/contraVoucher")
-	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countContraVoucher()
 	    {
 	    	return contraVoucherService.countContraVoucher();

@@ -3,6 +3,8 @@ package com.orive.Tickets.Dto;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.orive.Tickets.Enum.Status;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,4 +31,5 @@ public class TicketsDto {
 	private LocalDate date;
 	private String projectTitle;
 	private String description;
+	private Status status;
 }

@@ -1,10 +1,13 @@
 package com.orive.Procurement.Entity;
 
 import com.orive.Procurement.Config.AesEncryptor;
+import com.orive.Procurement.Enum.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -61,4 +64,8 @@ public class VendorEntity {
 	@Column(name = "previous_balance")
 	@Convert(converter = AesEncryptor.class)
 	private double previousBalance;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 }

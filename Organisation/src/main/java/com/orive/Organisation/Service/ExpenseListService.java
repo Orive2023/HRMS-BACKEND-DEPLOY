@@ -82,9 +82,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListService.c
 	        }
 	    }
 	
-	    
-
-	    
+	       
 	    // Delete
 	    public void deleteExpeceList(String expenceListId) {
 	    	expenseListRepository.deleteById(expenceListId);

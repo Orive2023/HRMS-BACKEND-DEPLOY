@@ -35,7 +35,6 @@ private static final Logger logger=LoggerFactory.getLogger(JournalVoucherControl
 	
 	// Create a new JournalVoucher
     @PostMapping("/create/journalVoucher")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<JournalVoucherDto> createJournalVoucher(@RequestBody JournalVoucherDto journalVoucherDto) {
     	JournalVoucherDto createdJournalVoucher = journalVoucherService.createJournalVoucher(journalVoucherDto);
         logger.info("Created JournalVoucher with year: {}", createdJournalVoucher.getJournalVoucherId());
@@ -44,7 +43,6 @@ private static final Logger logger=LoggerFactory.getLogger(JournalVoucherControl
 
     // Get all JournalVoucher   
     @GetMapping("/get/journalVoucher")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<List<JournalVoucherDto>> getAllJournalVoucher() {
         List<JournalVoucherDto> journalVoucher = journalVoucherService.getAllJournalVoucher();
         logger.info("Retrieved {} JournalVoucher from the database", journalVoucher.size());
@@ -53,7 +51,6 @@ private static final Logger logger=LoggerFactory.getLogger(JournalVoucherControl
 
     // Get JournalVoucher by ID
     @GetMapping("/get/{journalVoucherId}")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<JournalVoucherDto> getJournalVoucherById(@PathVariable Long journalVoucherId) {
         Optional<JournalVoucherDto> journalVoucher = journalVoucherService.getJournalVoucherById(journalVoucherId);
         if (journalVoucher.isPresent()) {
@@ -67,7 +64,6 @@ private static final Logger logger=LoggerFactory.getLogger(JournalVoucherControl
 
     // Update JournalVoucher by ID
     @PutMapping("/update/{journalVoucherId}")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<JournalVoucherDto> updateJournalVoucher(@PathVariable Long journalVoucherId, @RequestBody JournalVoucherDto updatedJournalVoucherDto) {
     	JournalVoucherDto updatedJournalVoucher = journalVoucherService.updateJournalVoucher(journalVoucherId, updatedJournalVoucherDto);
         if (updatedJournalVoucher != null) {
@@ -83,7 +79,6 @@ private static final Logger logger=LoggerFactory.getLogger(JournalVoucherControl
 
     // Delete JournalVoucher by ID
     @DeleteMapping("/delete/{journalVoucherId}")
- // @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<Void> deleteJournalVoucher(@PathVariable Long journalVoucherId) {
     	journalVoucherService.deleteJournalVoucher(journalVoucherId);
         logger.info("Deleted JournalVoucher with ID: {}", journalVoucherId);
@@ -92,7 +87,6 @@ private static final Logger logger=LoggerFactory.getLogger(JournalVoucherControl
 	    
    // Count the total JournalVoucher
 	    @GetMapping("/count/journalVoucher")
-	 // @PreAuthorize("hasRole('client_admin')")
 	    public long countJournalVoucher()
 	    {
 	    	return journalVoucherService.countJournalVoucherList();

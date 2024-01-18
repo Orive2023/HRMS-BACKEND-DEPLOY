@@ -1,5 +1,7 @@
 package com.orive.Training.Dto;
 
+import com.orive.Training.Enum.Status;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,4 +33,5 @@ public class TrainersListDto {
 	private String previousClients;
 	private String trainingMaterialsProvided;
 	private String additionalNotes;
+	private Status status;
 }

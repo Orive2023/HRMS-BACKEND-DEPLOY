@@ -56,7 +56,7 @@ public class WorkSheetService {
     
     
     
-    //get by employeeId
+  //get by employeeId
     public List<WorkSheetDto> getEmployeeId(Long employeeId) {
         List<WorkSheetEntity> employees = workSheetRepository.findByEmployeeId(employeeId);
 
@@ -76,6 +76,7 @@ public class WorkSheetService {
         Optional<WorkSheetEntity> existingWorkSheetOptional = workSheetRepository.findById(WorkSheetId);
         if (existingWorkSheetOptional.isPresent()) {
         	WorkSheetEntity existingWorkSheet= existingWorkSheetOptional.get();
+        	existingWorkSheet.setStatus(workSheetDto.getStatus());
         	modelMapper.map(workSheetDto, existingWorkSheetOptional);
             WorkSheetEntity updatedWorkSheet = workSheetRepository.save(existingWorkSheet);
             logger.info("Updated WorkSheet with ID: {}", updatedWorkSheet.getWorkSheetId());

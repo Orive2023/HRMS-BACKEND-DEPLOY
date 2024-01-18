@@ -1,10 +1,13 @@
 package com.orive.Accounts.Entity;
 
 import com.orive.Accounts.Config.AesEncryptor;
+import com.orive.Accounts.Enum.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -97,4 +100,8 @@ public class AccountListEntity {
 	@Column(name = "comments")
 	@Convert(converter = AesEncryptor.class)
 	private String comments;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 }

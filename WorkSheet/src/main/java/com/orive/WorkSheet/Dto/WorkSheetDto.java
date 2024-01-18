@@ -3,6 +3,8 @@ package com.orive.WorkSheet.Dto;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.orive.WorkSheet.Enum.Status;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,4 +35,5 @@ public class WorkSheetDto {
 	private String challangePart;
 	private String workProgress;
 	private LocalDate createdDate;
+	private Status status;
 }

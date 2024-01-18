@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.orive.project.Entity.EmployeeProjectManagementEntity;
+import com.orive.project.Enum.Status;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -39,5 +40,6 @@ public class ProjectDto {
 	private String summary;
 	private String description;
 	private String workUpdateSheet;
+	private Status status;
     private List<EmployeeProjectManagementDto> employeeProjectManagementEntities;
 }

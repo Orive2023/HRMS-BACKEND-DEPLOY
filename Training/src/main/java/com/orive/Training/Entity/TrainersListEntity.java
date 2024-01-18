@@ -4,10 +4,13 @@ package com.orive.Training.Entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.orive.Training.Config.AesEncryptor;
+import com.orive.Training.Enum.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -89,4 +92,8 @@ public class TrainersListEntity {
 	@Column(name = "additional_notes")
 	@Convert(converter = AesEncryptor.class)
 	private String additionalNotes;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 }

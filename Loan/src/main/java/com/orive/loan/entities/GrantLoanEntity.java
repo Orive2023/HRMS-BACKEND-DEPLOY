@@ -6,11 +6,14 @@ import java.util.Date;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.orive.loan.Enum.Status;
 import com.orive.loan.configuration.AesEncryptor;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -77,9 +80,6 @@ public class GrantLoanEntity {
 	@Convert(converter = AesEncryptor.class)
 	private double installment;
 	
-//	@Column(name = "status")
-//	private String status;
-	
 	@Column(name = "installment_cleared")
 	@Convert(converter = AesEncryptor.class)
 	private int installmentCleared;
@@ -87,4 +87,8 @@ public class GrantLoanEntity {
 	@Column(name = "total_payment_cleared")
 	@Convert(converter = AesEncryptor.class)
 	private double totalPaymentCleared;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private Status status;
 }

@@ -125,7 +125,8 @@ private static final Logger logger= LoggerFactory.getLogger(GoodReceivedService.
 	        	GoodReceivedEntity existingGoodReceived = existingGoodReceivedOptional.get();
 	            existingGoodReceived.setVendorName(goodReceivedDto.getVendorName());
 	            existingGoodReceived.setPaymentSource(goodReceivedDto.getPaymentSource());
-	        	modelMapper.map(goodReceivedDto, existingGoodReceived);
+	            existingGoodReceived.setStatus(goodReceivedDto.getStatus());
+	            modelMapper.map(goodReceivedDto, existingGoodReceived);
 	        	GoodReceivedEntity updatedGoodReceived = goodReceivedRepository.save(existingGoodReceived);
 	            logger.info("Updated GoodReceived with ID: {}", updatedGoodReceived.getGoodReceivedId());
 	            return convertToDTO(updatedGoodReceived);
