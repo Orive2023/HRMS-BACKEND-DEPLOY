@@ -47,7 +47,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListControl
 	
 	 
     // Create a new CommitteeList
-    @PostMapping("/create/committeelist")
+    @PostMapping(value = "/create/committeelist", consumes = "multipart/form-data")
 //  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> saveCommitteeListEntity(
     		@RequestParam("bidAnalysisId") Long bidAnalysisId,

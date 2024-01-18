@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Dto.PurchaseOrderDto;
 import com.orive.Procurement.Entity.PurchaseOrderEntity;
+import com.orive.Procurement.Enum.Status;
 import com.orive.Procurement.Service.PurchaseOrderService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -44,7 +45,7 @@ public class PurchaseOrderController {
     
     
     // Create a new PurchaseOrder
-    @PostMapping("/create/purchaseOrder")
+    @PostMapping(value = "/create/purchaseOrder",consumes = "multipart/form-data")
 //  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> savePurchaseOrderEntity(
             @RequestParam("quotation")String quotation,
@@ -55,10 +56,11 @@ public class PurchaseOrderController {
             @RequestParam("authorizedByName") String authorizedByName,
             @RequestParam("title") String title,
             @RequestParam(value = "signatureAndStamp", required = false) MultipartFile fileDocument,
-            @RequestParam("date") LocalDate date){
+            @RequestParam("date") LocalDate date,
+            @RequestParam("status") Status status){
     	
     	String result = purchaseOrderService.savePurchaseOrderEntity( 
-    			quotation, location, vendorName, address, notes, authorizedByName, title, fileDocument, date);
+    			quotation, location, vendorName, address, notes, authorizedByName, title, fileDocument, date, status);
     
     	if(result != null) {
     		 return new ResponseEntity<>(result, HttpStatus.OK);

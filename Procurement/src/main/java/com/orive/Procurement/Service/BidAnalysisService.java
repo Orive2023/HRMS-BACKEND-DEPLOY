@@ -19,6 +19,7 @@ import com.orive.Procurement.Dto.BidAnalysisDto;
 import com.orive.Procurement.Entity.BidAnalysisEntity;
 import com.orive.Procurement.Entity.CommitteeListEntity;
 import com.orive.Procurement.Entity.CompanyListEntity;
+import com.orive.Procurement.Enum.Status;
 import com.orive.Procurement.Exceptions.ResourceNotFoundException;
 import com.orive.Procurement.Repository.BidAnalysisRepository;
 import com.orive.Procurement.Util.PdfUtils;
@@ -44,7 +45,8 @@ public class BidAnalysisService {
 					String location,
 					LocalDate date,
 					String quotation,
-					MultipartFile file) {
+					MultipartFile file,
+					Status status) {
 				
 				try {
 					BidAnalysisEntity pdfData = bidAnalysisRepository.save(BidAnalysisEntity.builder()
@@ -52,6 +54,7 @@ public class BidAnalysisService {
 							.date(date)
 							.quotation(quotation)
 							.attachment(file != null ? PdfUtils.compressPdf(file.getBytes()) : null)
+							.status(status)
 			                .build());
 
 			            if (pdfData != null) {

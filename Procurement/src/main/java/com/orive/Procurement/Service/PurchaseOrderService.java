@@ -19,6 +19,7 @@ import com.orive.Procurement.Entity.PurchaseOrderEntity;
 import com.orive.Procurement.Entity.PurchaseOrderListEntity;
 import com.orive.Procurement.Entity.QuotationEntity;
 import com.orive.Procurement.Entity.QuotationListEntity;
+import com.orive.Procurement.Enum.Status;
 import com.orive.Procurement.Exceptions.ResourceNotFoundException;
 import com.orive.Procurement.Repository.PurchaseOrderRepository;
 import com.orive.Procurement.Util.PdfUtils;
@@ -51,7 +52,8 @@ private static final Logger logger= LoggerFactory.getLogger(PurchaseOrderService
 				String authorizedByName,
 				String title,
 				MultipartFile fileDocument,
-				LocalDate date) {
+				LocalDate date,
+				Status status) {
 				
 				try {
 					PurchaseOrderEntity pdfData = purchaseOrderRepository.save(PurchaseOrderEntity.builder()
@@ -64,6 +66,7 @@ private static final Logger logger= LoggerFactory.getLogger(PurchaseOrderService
 							.title(title)
 							.signatureAndStamp(fileDocument != null ? PdfUtils.compressPdf(fileDocument.getBytes()) : null)
 							.date(date)
+							.status(status)
 			                .build());
 
 			            if (pdfData != null) {

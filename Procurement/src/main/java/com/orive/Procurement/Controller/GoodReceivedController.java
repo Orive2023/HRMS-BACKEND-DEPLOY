@@ -29,6 +29,7 @@ import com.orive.Procurement.Dto.GoodReceivedDto;
 import com.orive.Procurement.Entity.GoodReceivedEntity;
 import com.orive.Procurement.Entity.GoodReceivedListEntity;
 import com.orive.Procurement.Entity.QuotationEntity;
+import com.orive.Procurement.Enum.Status;
 import com.orive.Procurement.Service.GoodReceivedService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -49,7 +50,7 @@ public class GoodReceivedController {
     
     
     //  Create a new GoodReceived
-    @PostMapping("/create/goodreceived")
+    @PostMapping(value = "/create/goodreceived", consumes = "multipart/form-data")
 //  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> saveGoodReceivedEntity(
             @RequestParam("purchaseOrder") String purchaseOrder,
@@ -58,10 +59,11 @@ public class GoodReceivedController {
             @RequestParam("date") LocalDate date,
             @RequestParam("receivedByName") String receivedByName,
             @RequestParam("title")  String title,
-            @RequestParam(value = "signatureAndStamp", required = false) MultipartFile file){
+            @RequestParam(value = "signatureAndStamp", required = false) MultipartFile file,
+            @RequestParam("status") Status status){
     	
     	String result = goodReceivedService.saveGoodReceivedEntity( 
-    			purchaseOrder, paymentSource, vendorName, date, receivedByName, title, file );
+    			purchaseOrder, paymentSource, vendorName, date, receivedByName, title, file, status);
     
     	if(result != null) {
     		 return new ResponseEntity<>(result, HttpStatus.OK);

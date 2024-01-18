@@ -54,7 +54,7 @@ public class EmployeesController {
 
     
  // Create a new Employees  
-    @PostMapping("/create/employee")
+    @PostMapping(value = "/create/employee" , consumes = "multipart/form-data")
   //@PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<?> uploadEmployeeData(
 		  
@@ -108,7 +108,7 @@ public class EmployeesController {
           @RequestParam("workInCity") String workInCity,
           @RequestParam("cityOfResidence")  String cityOfResidence,
           @RequestParam("workPermit") String workPermit,
-          @RequestParam("uploadPhoto")  MultipartFile filePhoto,
+          @RequestParam(value = "uploadPhoto")  MultipartFile filePhoto,
           @RequestParam("businessEmail") String businessEmail,
           @RequestParam("homePhone")  Long homePhone,
           @RequestParam("cellPhone") Long cellPhone,

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.orive.Procurement.Dto.GoodReceivedDto;
 import com.orive.Procurement.Entity.GoodReceivedEntity;
 import com.orive.Procurement.Entity.GoodReceivedListEntity;
+import com.orive.Procurement.Enum.Status;
 import com.orive.Procurement.Exceptions.ResourceNotFoundException;
 import com.orive.Procurement.Repository.GoodReceivedRepository;
 import com.orive.Procurement.Util.PdfUtils;
@@ -47,7 +48,8 @@ private static final Logger logger= LoggerFactory.getLogger(GoodReceivedService.
 					LocalDate date,
 					String receivedByName,
 					String title,
-					MultipartFile file) {
+					MultipartFile file,
+					Status status) {
 				
 				try {
 					GoodReceivedEntity pdfData = goodReceivedRepository.save(GoodReceivedEntity.builder()
@@ -58,6 +60,7 @@ private static final Logger logger= LoggerFactory.getLogger(GoodReceivedService.
 							.receivedByName(receivedByName)
 							.title(title)
 							.signatureAndStamp(file != null ? PdfUtils.compressPdf(file.getBytes()) : null)
+							.status(status)
 			                .build());
 
 			            if (pdfData != null) {
