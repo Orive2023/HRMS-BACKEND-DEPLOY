@@ -30,7 +30,7 @@ public class GoodReceivedListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long goodReceivedListId;
 	
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private Long goodReceivedId;
 	
 	@Column(name = "description")

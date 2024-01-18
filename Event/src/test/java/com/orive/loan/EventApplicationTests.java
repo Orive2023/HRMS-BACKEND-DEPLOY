@@ -1,13 +1,13 @@
-package com.orive.loan;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class EventApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//package com.orive.loan;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class EventApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}

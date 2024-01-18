@@ -22,7 +22,7 @@ public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     
     @OneToOne
     @JoinColumn(name = "candidate_id", referencedColumnName = "id")

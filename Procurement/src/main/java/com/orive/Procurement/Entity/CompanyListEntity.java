@@ -30,7 +30,7 @@ public class CompanyListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long companyListId;
 	
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private Long bidAnalysisId;
 	
 	@Column(name = "company")

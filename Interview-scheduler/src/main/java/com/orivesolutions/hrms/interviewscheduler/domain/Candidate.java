@@ -36,31 +36,31 @@ public class Candidate {
     private Long id;
     
     @Column(name = "name")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String name;
     
     @Column(name = "address")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String address;
     
     @Column(name = "emailId", unique = true, nullable = false)
-    @Convert(converter = AesEncryptor.class)
+   // @Convert(converter = AesEncryptor.class)
     private String email;
     
     @Column(name = "mobile")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String mobile;
     
     @Column(name = "ctc")
-    @Convert(converter = AesEncryptor.class)
+   // @Convert(converter = AesEncryptor.class)
     private Integer ctc;
     
     @Column(name = "ectc")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private Integer ectc;
     
     @Column(name = "location")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String location;
     
     @Column(name = "notice")

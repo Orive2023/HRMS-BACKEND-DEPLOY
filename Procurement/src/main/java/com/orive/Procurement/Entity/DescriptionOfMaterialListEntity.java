@@ -40,5 +40,5 @@ public class DescriptionOfMaterialListEntity {
 	
 	@Column(name = "quantity")
 	@Convert(converter = AesEncryptor.class)
-	private Double quantity;
+	private double quantity;
 }

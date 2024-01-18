@@ -29,20 +29,20 @@ public class User {
     private Long id;
 
     @Column(name = "name")
-    @Convert(converter = AesEncryptor.class)
+   // @Convert(converter = AesEncryptor.class)
     private String name;
 
     @Column(name = "address")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String address;
 
     @Column(name = "email_id", unique = true, nullable = false)
-    @Convert(converter = AesEncryptor.class)
+   // @Convert(converter = AesEncryptor.class)
     private String emailId;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "password")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String password;
 
     @Column(name = "mobile")
@@ -51,19 +51,19 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private Role role;
 
     @Column(name = "profile_url")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String profileUrl;
 
     @Column(name = "forget_token")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private String forgetToken;
 
     @Column(name = "otp")
-    @Convert(converter = AesEncryptor.class)
+    //@Convert(converter = AesEncryptor.class)
     private Integer otp;
 
 }

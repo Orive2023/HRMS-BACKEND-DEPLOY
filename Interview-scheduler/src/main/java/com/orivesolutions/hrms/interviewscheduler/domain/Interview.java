@@ -30,7 +30,7 @@ public class Interview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "candidate_id", referencedColumnName = "id")

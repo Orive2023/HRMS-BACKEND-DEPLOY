@@ -30,7 +30,7 @@ public class PurchaseOrderListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long purchaseOrderListId;
 	
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private Long purchaseOrderId;
 	
 	@Column(name = "description")
