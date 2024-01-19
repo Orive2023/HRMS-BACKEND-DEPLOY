@@ -44,59 +44,11 @@ public class OfficeShiftsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String day;
 	
-	@Column(name = "monday_in_time")
+	@Column(name = "office_clock_in_time")
 	@Convert(converter = AesEncryptor.class)
-	private String mondayInTime;
+	private String officeClockInTime;
 	
-	@Column(name = "monday_out_time")
+	@Column(name = "office_clock_out_time")
 	@Convert(converter = AesEncryptor.class)
-	private String mondayOutTime;
-	
-	@Column(name = "tuesday_in_time")
-	@Convert(converter = AesEncryptor.class)
-	private String tuesdayInTime;
-	
-	@Column(name = "tuesday_out_time")
-	@Convert(converter = AesEncryptor.class)
-	private String tuesdayOutTime;
-	
-	@Column(name = "wednesday_in_time")
-	@Convert(converter = AesEncryptor.class)
-	private String wednesdayInTime;
-	
-	@Column(name = "wednesday_out_time")
-	@Convert(converter = AesEncryptor.class)
-	private String wednesdayOutTime;
-	
-	@Column(name = "thursday_in_time")
-	@Convert(converter = AesEncryptor.class)
-	private String thursdayInTime;
-	
-	@Column(name = "thursday_out_time")
-	@Convert(converter = AesEncryptor.class)
-	private String thursdayOutTime;
-	
-	@Column(name = "friday_in_time")
-	@Convert(converter = AesEncryptor.class)
-	private String fridayInTime;
-	
-	@Column(name = "friday_out_time")
-	@Convert(converter = AesEncryptor.class)
-	private String fridayOutTime;
-	
-	@Column(name = "saturday_in_time")
-	@Convert(converter = AesEncryptor.class)
-	private String saturdayInTime;
-	
-	@Column(name = "saturday_out_time")
-	@Convert(converter = AesEncryptor.class)
-	private String saturdayOutTime;
-	
-	@Column(name = "sunday_in_time")
-	@Convert(converter = AesEncryptor.class)
-	private String sundayInTime;
-	
-	@Column(name = "sunday_out_time")
-	@Convert(converter = AesEncryptor.class)
-	private String sundayOutTime;
+	private String officeClockOutTime;
 }
