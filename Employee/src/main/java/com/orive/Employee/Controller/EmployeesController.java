@@ -354,4 +354,10 @@ public class EmployeesController {
   	    {
   	    	return employeesService.countEmployeesByFemale();
   	    }
+  	    
+  	    //count how many roles 
+  	  @GetMapping("/distinct-roles/count")
+      public long countDistinctEmployeeRoles() {
+          return employeesService.countDistinctEmployeeRoles();
+      }
 }

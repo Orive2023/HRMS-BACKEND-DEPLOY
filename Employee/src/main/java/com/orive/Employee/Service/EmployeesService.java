@@ -379,6 +379,12 @@ public class EmployeesService {
 		 {
 			 return employeesRepository.countEmployeeByFemale();
 		 }
+	    
+	    //count how many roles
+	    public long countDistinctEmployeeRoles() {
+	        List<String> distinctRoles = employeesRepository.findDistinctEmployeeRoles();
+	        return distinctRoles.size();
+	    }
 	    	    
 		// Helper method to convert EmployeesDTo to EmployeesEntity
 	    private EmployeesEntity convertToEntity(EmployeesDto employeesDto)
