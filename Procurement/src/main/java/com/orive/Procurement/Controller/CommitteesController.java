@@ -49,7 +49,7 @@ public class CommitteesController {
 
 	
  	// Create a new Committees
-    @PostMapping("/create/company")
+    @PostMapping(value = "/create/company",consumes = "multipart/form-data")
 //    @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<?> saveCompanyEntity(
   		  @RequestParam("name") String name,
