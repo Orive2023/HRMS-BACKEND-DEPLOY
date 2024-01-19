@@ -33,5 +33,8 @@ public interface EmployeesRepository extends JpaRepository<EmployeesEntity, Long
 	@Query("SELECT e FROM EmployeesEntity e WHERE e.userEmailOrName = :userEmailOrName AND e.password = :password")
 	Optional<EmployeesEntity> findByUserEmailOrNameAndPassword(@Param("userEmailOrName") String userEmailOrName, @Param("password") String password);
  
+	
+	@Query("SELECT DISTINCT e.employeeRole FROM EmployeesEntity e")
+    List<String> findDistinctEmployeeRoles();
 }
 
