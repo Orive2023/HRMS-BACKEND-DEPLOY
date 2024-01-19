@@ -15,10 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Employee.Dto.EmployeesDto;
 import com.orive.Employee.Entity.EmployeesEntity;
+import com.orive.Employee.Enum.Status;
 import com.orive.Employee.Exceptions.ResourceNotFoundException;
 import com.orive.Employee.Repository.EmployeesRepository;
 import com.orive.Employee.util.ImageUploadUtils;
 import com.orive.Employee.util.PdfUploadUtils;
+
 
 
 @Service
@@ -89,7 +91,8 @@ public class EmployeesService {
 				Long cellPhone,
 				String userEmailOrName,
 				String password,
-				MultipartFile fileDocument) {
+				MultipartFile fileDocument,
+				Status status) {
 			
 			try {
 				EmployeesEntity employeeData = employeesRepository.save(EmployeesEntity.builder()
@@ -151,6 +154,7 @@ public class EmployeesService {
 						.userEmailOrName(userEmailOrName)
 						.password(password)
 						.uploadDocument(fileDocument != null ? PdfUploadUtils.compressPdf(fileDocument.getBytes()) : null)
+						.status(status)
 						.build());
 				
 				 if (employeeData != null) {

@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Dto.CommitteesDto;
 import com.orive.Procurement.Entity.GoodReceivedListEntity;
+import com.orive.Procurement.Enum.Status;
 import com.orive.Procurement.Service.CommitteesService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -53,9 +54,10 @@ public class CommitteesController {
 //    @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<?> saveCompanyEntity(
   		  @RequestParam("name") String name,
-          @RequestParam(value = "signature", required = false) MultipartFile file) {
+          @RequestParam(value = "signature", required = false) MultipartFile file,
+          @RequestParam Status status) {
   	  String result = committeesService.saveCommitteesEntity( 
-  			name,file );
+  			name,file,status );
     
     	if(result != null) {
     		 return new ResponseEntity<>(result, HttpStatus.OK);

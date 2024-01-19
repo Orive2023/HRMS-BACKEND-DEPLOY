@@ -28,9 +28,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Employee.Dto.EmployeesDto;
 import com.orive.Employee.Entity.EmployeesEntity;
+import com.orive.Employee.Enum.Status;
 import com.orive.Employee.Exceptions.ResourceNotFoundException;
 import com.orive.Employee.Service.EmployeesService;
 //import org.springframework.security.access.prepost.PreAuthorize;
+
 
 
 @RestController
@@ -114,6 +116,7 @@ public class EmployeesController {
           @RequestParam("cellPhone") Long cellPhone,
           @RequestParam("userEmailOrName")  String userEmailOrName,
           @RequestParam("password") String password,
+          @RequestParam Status status,
           @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument) throws IOException {
                          String uploadEmployee = employeesService.saveEmployeesEntity(employeeId,employeeName,designationName,email,phone,alternativePhone,
                 		                        country,city,zipCode,employeeRole,companyType,attendanceTime,employeeType,createdDate,accountNumber,
@@ -122,7 +125,7 @@ public class EmployeesController {
                 		                        subDepartment,position,dutyType, hireDate,joiningDate,rateType,rateNumber,monthlyWorkHours,
                 		                        payFrequency,medical,family,transportation,others,teamLeaderName,reportingTo,dateOfBirth,
                 		                        gender,maritalStatus,workInCity,cityOfResidence,workPermit,filePhoto,businessEmail,homePhone,
-                				                cellPhone,userEmailOrName,password,fileDocument);
+                				                cellPhone,userEmailOrName,password,fileDocument,status);
                          if(uploadEmployee != null) {
                     		 return new ResponseEntity<>(uploadEmployee, HttpStatus.OK);
                         } else {

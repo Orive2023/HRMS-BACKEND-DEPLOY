@@ -22,6 +22,7 @@ import com.orive.Organisation.Dto.CompanyDto;
 import com.orive.Organisation.Entity.CompanyEntity;
 import com.orive.Organisation.Entity.ExpenceEntity;
 import com.orive.Organisation.Entity.LocationEntity;
+import com.orive.Organisation.Enum.Status;
 import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Repository.CompanyRepository;
 import com.orive.Organisation.Util.ImageUtils;
@@ -68,7 +69,8 @@ public class CompanyService {
                 String state,
                 String uan,
                 String website,
-                int zipCode) {
+                int zipCode,
+                Status status) {
 			
 			try {
 				CompanyEntity uploadImage = companyRepository.save(CompanyEntity.builder()
@@ -89,6 +91,7 @@ public class CompanyService {
 						.uan(uan)
 						.website(website)
 						.zipCode(zipCode)
+						.status(status)
 		                .build());
 
 		            if (uploadImage != null) {
