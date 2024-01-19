@@ -62,9 +62,6 @@ public class ExpenceEntity {
 	
 //	@Column(name = "status")
 //	private String status;
-//	
-//	@Column(name = "approved_by")
-//	private String approvedBy;
 	
 //	@OneToMany(targetEntity =ExpenseListEntity.class,cascade = CascadeType.ALL)
 //	@JoinColumn(name = "expence_list_fk",referencedColumnName = "expenceId")

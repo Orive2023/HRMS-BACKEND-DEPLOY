@@ -17,6 +17,7 @@ import com.orive.Procurement.Dto.CommitteesDto;
 import com.orive.Procurement.Entity.CommitteesEntity;
 import com.orive.Procurement.Entity.GoodReceivedEntity;
 import com.orive.Procurement.Entity.GoodReceivedListEntity;
+import com.orive.Procurement.Enum.Status;
 import com.orive.Procurement.Repository.CommitteesRepository;
 import com.orive.Procurement.Util.PhotoUtils;
 
@@ -44,13 +45,15 @@ public class CommitteesService {
 	//create
 	public String saveCommitteesEntity(
 			String name,		
-			MultipartFile file) {
+			MultipartFile file,
+			Status status) {
 		
 		try {
 			CommitteesEntity uploadImage = committeesRepository.save(CommitteesEntity.builder()
 					.name(name)
 					.signature(file != null ? PhotoUtils.compressImage(file.getBytes()) : null)
-	                .build());
+					.status(status)
+					.build());
 
 	            if (uploadImage != null) {
 	                return "File uploaded successfully: " + (file != null ? file.getOriginalFilename() : "No file attached");

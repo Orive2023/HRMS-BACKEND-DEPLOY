@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,7 @@ import com.orive.Procurement.Dto.QuotationDto;
 import com.orive.Procurement.Entity.BidAnalysisEntity;
 import com.orive.Procurement.Entity.QuotationEntity;
 import com.orive.Procurement.Entity.QuotationListEntity;
+import com.orive.Procurement.Enum.Status;
 import com.orive.Procurement.Exceptions.ResourceNotFoundException;
 import com.orive.Procurement.Repository.QuotationRepository;
 import com.orive.Procurement.Util.PdfUtils;
@@ -46,7 +48,8 @@ public class QuotationService {
 				LocalDate expectedDateOfDelivery,
 				String placeOfDelivery,
 				MultipartFile fileDocument,
-				LocalDate date) {
+				LocalDate date,
+				Status status) {
 			
 			try {
 				QuotationEntity pdfData = quotationRepository.save(QuotationEntity.builder()
@@ -57,6 +60,7 @@ public class QuotationService {
 						.placeOfDelivery(placeOfDelivery)
 						.signatureAndStamp(fileDocument != null ? PdfUtils.compressPdf(fileDocument.getBytes()) : null)
 						.date(date)
+						.status(status)
 		                .build());
 
 		            if (pdfData != null) {

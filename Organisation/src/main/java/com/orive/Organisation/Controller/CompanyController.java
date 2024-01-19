@@ -2,6 +2,7 @@ package com.orive.Organisation.Controller;
 
 import com.orive.Organisation.Dto.CompanyDto;
 import com.orive.Organisation.Entity.CompanyEntity;
+import com.orive.Organisation.Enum.Status;
 import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Service.CompanyService;
 import org.slf4j.Logger;
@@ -27,8 +28,7 @@ public class CompanyController {
 
   
  	// Create a new Company
-      @PostMapping(value = "/create/company" , consumes = "multipart/form-data")
-      
+      @PostMapping(value = "/create/company" , consumes = "multipart/form-data")  
     //  @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<?> saveCompanyEntity(
     		  @RequestParam("address") String address,
@@ -47,12 +47,12 @@ public class CompanyController {
               @RequestParam("state") String state,
               @RequestParam("uan") String uan,
               @RequestParam("website") String website,  
-              @RequestParam("zipCode") int zipCode                                                            
-//              @RequestParam("status")  String status,
-//              @RequestParam("approvedBy") String approvedBy
+              @RequestParam("zipCode") int zipCode,                                                           
+              @RequestParam("status")  Status status
+
               ) {
     	  String result = companyService.saveCompanyEntity( 
-    			  address, cin, city,  companyName, companyType, contactNumber, country, createdDate,  email,  fileDocument,  gst, legalOrTradingName, registrationNumber, state, uan, website, zipCode  );
+    			  address, cin, city,  companyName, companyType, contactNumber, country, createdDate,  email,  fileDocument,  gst, legalOrTradingName, registrationNumber, state, uan, website, zipCode, status  );
       
       	if(result != null) {
       		 return new ResponseEntity<>(result, HttpStatus.OK);

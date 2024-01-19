@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Dto.QuotationDto;
 import com.orive.Procurement.Entity.QuotationEntity;
+import com.orive.Procurement.Enum.Status;
 import com.orive.Procurement.Service.QuotationService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -49,10 +50,11 @@ public class QuotationController {
             @RequestParam("expectedDateOfDelivery") LocalDate expectedDateOfDelivery,
             @RequestParam("placeOfDelivery") String placeOfDelivery,
             @RequestParam(value = "signatureAndStamp", required = false) MultipartFile fileDocument,
-            @RequestParam("date") LocalDate date){
+            @RequestParam("date") LocalDate date,
+            @RequestParam Status status){
     	
     	String result = quotationService.saveQuotationEntity( 
-    			nameOfCompany, address, pinOrEquivalent, expectedDateOfDelivery, placeOfDelivery, fileDocument, date );
+    			nameOfCompany, address, pinOrEquivalent, expectedDateOfDelivery, placeOfDelivery, fileDocument, date, status);
     
     	if(result != null) {
     		 return new ResponseEntity<>(result, HttpStatus.OK);
