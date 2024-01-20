@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.orive.Training.Entity.TrainersListEntity;
 
-public interface TrainersListRepository extends JpaRepository<TrainersListEntity, String> {
+public interface TrainersListRepository extends JpaRepository<TrainersListEntity, Long> {
 
 }

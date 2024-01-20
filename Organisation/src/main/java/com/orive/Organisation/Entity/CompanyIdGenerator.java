@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class CompanyIdGenerator implements IdentifierGenerator {
 
     private static final String PREFIX = "ORCOMP";
-    private static long sequence = 1;
+    private static long sequence = 0;
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {

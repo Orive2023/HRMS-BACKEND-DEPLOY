@@ -21,7 +21,7 @@ import lombok.ToString;
 @Builder
 public class TicketsDto {
 
-    private String ticketsId;	
+    private Long ticketsId;	
 	private String ticketsCode;
 	private String subject;
 	private String employeeName;

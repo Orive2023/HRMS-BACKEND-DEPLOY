@@ -25,7 +25,7 @@ import lombok.ToString;
 public class AttendanceDto {
  	
 	
-	private String attendanceId;
+	private Long attendanceId;
 	private String officeClockIn;
 	private String officeClockOut;
 	private String employeeName;

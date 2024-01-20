@@ -32,9 +32,8 @@ import lombok.ToString;
 public class LeavesEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "leaves-sequence")
-    @GenericGenerator(name = "leaves-sequence", strategy = "com.orive.TimeSheet.Entity.LeavesIdGenerator")
-	private String leaveId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long leaveId;
 	
 	@Column(name = "employee_id")
 	@Convert(converter = AesEncryptor.class)

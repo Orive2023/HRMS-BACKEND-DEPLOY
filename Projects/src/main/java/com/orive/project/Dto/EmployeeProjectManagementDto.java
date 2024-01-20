@@ -26,7 +26,7 @@ import lombok.ToString;
 public class EmployeeProjectManagementDto {
 
 	
-    private String employeeProjectManagementId;
+    private Long employeeProjectManagementId;
 	private Long employeeId;
 	private String projectName;
 	private String employeeName;

@@ -34,8 +34,8 @@ import lombok.ToString;
 public class EventEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event-sequence")
-    @GenericGenerator(name = "event-sequence", strategy = "com.orive.Event.Entity.EventIdGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event-sequence")
+	@GenericGenerator(name = "event-sequence", strategy = "com.orive.Event.Entity.EventIdGenerator")
 	private String eventId;
 	
 	@Column(name = "date")

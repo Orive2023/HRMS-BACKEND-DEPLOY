@@ -32,9 +32,8 @@ import lombok.ToString;
 public class OfficeShiftsEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "officeshifts-sequence")
-    @GenericGenerator(name = "officeshifts-sequence", strategy = "com.orive.TimeSheet.Entity.OfficeShiftIdGenerator")
-	private String officeShiftsId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long officeShiftsId;
 	
 	@Column(name = "created_date")
 	@Convert(converter = AesEncryptor.class)
