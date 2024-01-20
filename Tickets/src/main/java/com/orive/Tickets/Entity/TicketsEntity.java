@@ -36,9 +36,8 @@ import lombok.ToString;
 public class TicketsEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket-sequence")
-    @GenericGenerator(name = "ticket-sequence", strategy = "com.orive.Tickets.Entity.TicketsIdGenerator")
-	private String ticketsId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long ticketsId;
 	
 	@Column(name = "tickets_code")
 	@Convert(converter = AesEncryptor.class)

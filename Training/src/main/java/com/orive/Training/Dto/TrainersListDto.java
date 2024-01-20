@@ -18,7 +18,7 @@ import lombok.ToString;
 @Builder
 public class TrainersListDto {
 	
-	private String trainersListId;
+	private Long trainersListId;
 	private String trainersFullName;
 	private String emailAddress;
 	private Long phoneNo;

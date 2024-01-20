@@ -22,7 +22,7 @@ import lombok.ToString;
 @Builder
 public class OfficeShiftsDto {
 
-	private String officeShiftsId;
+	private Long officeShiftsId;
 	private LocalDate createdDate;
 	private String day;
 	private String officeClockInTime;

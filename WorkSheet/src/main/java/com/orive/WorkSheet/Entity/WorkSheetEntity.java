@@ -35,9 +35,8 @@ import lombok.ToString;
 public class WorkSheetEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "worksheet-sequence")
-    @GenericGenerator(name = "worksheet-sequence", strategy = "com.orive.WorkSheet.Entity.WorkSheetIdGenerator")
-	private String workSheetId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long workSheetId;
 	
 	@Column(name = "work_sheet_title")
 	@Convert(converter = AesEncryptor.class)

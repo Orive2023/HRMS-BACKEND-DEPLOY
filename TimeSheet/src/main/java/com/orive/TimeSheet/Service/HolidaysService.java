@@ -46,7 +46,7 @@ public class HolidaysService {
 	    }
 	    
 	    //get by HolidaysId
-	    public Optional<HolidaysDto> getHolidaysById(String holidaysId) {
+	    public Optional<HolidaysDto> getHolidaysById(Long holidaysId) {
 	        Optional<HolidaysEntity> holidays = holidaysRepository.findById(holidaysId);
 	        if (holidays.isPresent()) {
 	            return Optional.of(convertToDTO(holidays.get()));
@@ -57,7 +57,7 @@ public class HolidaysService {
 	    }
 	    
 	 // Update list by id
-	    public HolidaysDto updateHolidays(String holidaysId, HolidaysDto holidaysDto) {
+	    public HolidaysDto updateHolidays(Long holidaysId, HolidaysDto holidaysDto) {
 	        Optional<HolidaysEntity> existingHolidayOptional = holidaysRepository.findById(holidaysId);
 	        if (existingHolidayOptional.isPresent()) {
 	        	HolidaysEntity existingHoliday = existingHolidayOptional.get();
@@ -75,7 +75,7 @@ public class HolidaysService {
 	    }
 	    
 	    // Delete
-	    public void deleteHolidays(String holidaysId) {
+	    public void deleteHolidays(Long holidaysId) {
 	    	holidaysRepository.deleteById(holidaysId);
 	        logger.info("Deleted Holidays with ID: {}", holidaysId);
 	    }

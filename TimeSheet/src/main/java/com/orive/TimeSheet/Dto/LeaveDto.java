@@ -19,7 +19,7 @@ import lombok.ToString;
 @Builder
 public class LeaveDto {
 
-    private String leaveId;
+    private Long leaveId;
 	private Long employeeId;
 	private String employeeName;
 	private String leaveType;

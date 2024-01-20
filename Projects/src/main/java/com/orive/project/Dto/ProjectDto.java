@@ -27,7 +27,7 @@ import lombok.ToString;
 @Builder
 public class ProjectDto {
 	
-	private String projectsId;
+	private Long projectsId;
 	private String projectTitle;
 	private Long managerEmployeeId;
 	private String clientName;

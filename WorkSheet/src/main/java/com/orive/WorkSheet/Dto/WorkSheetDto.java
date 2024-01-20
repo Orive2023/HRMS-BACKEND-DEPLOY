@@ -21,7 +21,7 @@ import lombok.ToString;
 @Builder
 public class WorkSheetDto {
 
-    private String workSheetId;
+    private Long workSheetId;
 	private String workSheetTitle;
 	private LocalDate startDate;
 	private LocalDate endDate;

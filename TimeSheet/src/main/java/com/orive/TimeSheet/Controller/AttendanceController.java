@@ -130,7 +130,7 @@ public class AttendanceController {
     // Get Attendance by ID
     @GetMapping("/get/{attendanceId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<AttendanceDto> getAttendanceById(@PathVariable String attendanceId) {
+    public ResponseEntity<AttendanceDto> getAttendanceById(@PathVariable Long attendanceId) {
         Optional<AttendanceDto> attendance = attendanceService.getAttendanceById(attendanceId);
         if (attendance.isPresent()) {
             logger.info("Retrieved Attendance with ID: {}", attendanceId);
@@ -144,7 +144,7 @@ public class AttendanceController {
     // Update Attendance by ID
     @PutMapping("/update/{attendanceId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<AttendanceDto> updateAttendance(@PathVariable String attendanceId, @RequestBody AttendanceDto updatedAttendanceDto) {
+    public ResponseEntity<AttendanceDto> updateAttendance(@PathVariable Long attendanceId, @RequestBody AttendanceDto updatedAttendanceDto) {
     	AttendanceDto updatedAttendance = attendanceService.updateAttendances(attendanceId, updatedAttendanceDto);
         if (updatedAttendance != null) {
             logger.info("Updated Attendance with ID: {}", attendanceId);
@@ -189,7 +189,7 @@ public class AttendanceController {
     // Delete Attendance by ID
     @DeleteMapping("/delete/{attendanceId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<Void> deleteAttendance(@PathVariable String attendanceId) {
+    public ResponseEntity<Void> deleteAttendance(@PathVariable Long attendanceId) {
   	  attendanceService.deleteAttendances(attendanceId);
         logger.info("Deleted Attendance with ID: {}", attendanceId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

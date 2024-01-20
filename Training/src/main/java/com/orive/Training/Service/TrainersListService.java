@@ -43,7 +43,7 @@ public class TrainersListService {
     }
     
     //get by TrainersListId
-    public Optional<TrainersListDto> getTrainersListById(String trainersListId) {
+    public Optional<TrainersListDto> getTrainersListById(Long trainersListId) {
         Optional<TrainersListEntity> trainersList = trainersListRepository.findById(trainersListId);
         if (trainersList.isPresent()) {
             return Optional.of(convertToDTO(trainersList.get()));
@@ -54,7 +54,7 @@ public class TrainersListService {
     }
     
  // Update list by id
-    public TrainersListDto updateTrainersList(String trainersListId, TrainersListDto trainersListDto) {
+    public TrainersListDto updateTrainersList(Long trainersListId, TrainersListDto trainersListDto) {
         Optional<TrainersListEntity> existingTrainersListOptional = trainersListRepository.findById(trainersListId);
         if (existingTrainersListOptional.isPresent()) {
         	TrainersListEntity existingTrainersList = existingTrainersListOptional.get();
@@ -73,7 +73,7 @@ public class TrainersListService {
     }
     
     // Delete
-    public void deleteTrainersList(String trainersListId) {
+    public void deleteTrainersList(Long trainersListId) {
     	trainersListRepository.deleteById(trainersListId);
         logger.info("Deleted TrainersList with ID: {}", trainersListId);
     }

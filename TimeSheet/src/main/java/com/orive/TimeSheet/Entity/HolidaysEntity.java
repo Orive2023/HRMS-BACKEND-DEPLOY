@@ -32,9 +32,8 @@ import lombok.ToString;
 public class HolidaysEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "holidays-sequence")
-    @GenericGenerator(name = "holidays-sequence", strategy = "com.orive.TimeSheet.Entity.HolidaysIdGenerator")
-	private String holidaysId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long holidaysId;
 	
 	@Column(name = "event_name")
 	@Convert(converter = AesEncryptor.class)

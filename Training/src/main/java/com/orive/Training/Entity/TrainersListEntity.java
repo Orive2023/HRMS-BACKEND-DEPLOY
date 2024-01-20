@@ -33,9 +33,8 @@ import lombok.ToString;
 public class TrainersListEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trainers-sequence")
-    @GenericGenerator(name = "trainers-sequence", strategy = "com.orive.Training.Entity.TrainingIdGenerator")
-	private String trainersListId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long trainersListId;
 	
 	@Column(name = "trainers_full_name")
 	@Convert(converter = AesEncryptor.class)

@@ -40,7 +40,7 @@ import lombok.ToString;
 public class CompanyEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company-sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "company-sequence")
     @GenericGenerator(name = "company-sequence", strategy = "com.orive.Organisation.Entity.CompanyIdGenerator")
 	private String companyId;
 

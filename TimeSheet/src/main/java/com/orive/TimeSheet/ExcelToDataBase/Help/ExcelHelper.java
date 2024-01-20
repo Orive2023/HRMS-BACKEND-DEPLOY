@@ -91,7 +91,7 @@ public class ExcelHelper {
 						switch (cellId) 
 						{
 	                         case 0:
-	                        	attendanceEntity.setAttendanceId(getStringValue(currentCell));
+	                        	attendanceEntity.setAttendanceId(getNumericValue(currentCell));
 						     break;
                              case 1:
                     	        attendanceEntity.setEmployeeName(getStringValue(currentCell));
