@@ -57,7 +57,7 @@ public class SalaryTemplateController {
       // Get SalaryTemplate by ID
       @GetMapping("/get/{salaryTemplateId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<SalaryTemplateDto> getSalaryTemplateById(@PathVariable String salaryTemplateId) {
+      public ResponseEntity<SalaryTemplateDto> getSalaryTemplateById(@PathVariable Long salaryTemplateId) {
           Optional<SalaryTemplateDto> salaryTemplate = salaryTemplateService.getSalaryTemplateById(salaryTemplateId);
           if (salaryTemplate.isPresent()) {
               logger.info("Retrieved SalaryTemplate with ID: {}", salaryTemplateId);
@@ -71,7 +71,7 @@ public class SalaryTemplateController {
       // Update SalaryTemplate by ID
       @PutMapping("/update/{salaryTemplateId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<SalaryTemplateDto> updateSalaryTemplate(@PathVariable String salaryTemplateId, @RequestBody SalaryTemplateDto updatedSalaryTemplateDto) {
+      public ResponseEntity<SalaryTemplateDto> updateSalaryTemplate(@PathVariable Long salaryTemplateId, @RequestBody SalaryTemplateDto updatedSalaryTemplateDto) {
     	  SalaryTemplateDto updatedSalaryTemplate = salaryTemplateService.updateSalaryTemplate(salaryTemplateId, updatedSalaryTemplateDto);
           if (updatedSalaryTemplate != null) {
               logger.info("Updated SalaryTemplate with ID: {}", salaryTemplateId);
@@ -87,7 +87,7 @@ public class SalaryTemplateController {
       // Delete SalaryTemplate by ID
       @DeleteMapping("/delete/{salaryTemplateId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<Void> deleteSalaryTemplate(@PathVariable String salaryTemplateId) {
+      public ResponseEntity<Void> deleteSalaryTemplate(@PathVariable Long salaryTemplateId) {
     	  salaryTemplateService.deleteSalaryTemplate(salaryTemplateId);
           logger.info("Deleted SalaryTemplate with ID: {}", salaryTemplateId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);

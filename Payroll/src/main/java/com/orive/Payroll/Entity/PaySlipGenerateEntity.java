@@ -35,9 +35,8 @@ import lombok.ToString;
 public class PaySlipGenerateEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payslip-sequence")
-    @GenericGenerator(name = "payslip-sequence", strategy = "com.orive.Payroll.Entity.PaySlipIdGenerator")
-    private String paySlipGenerateId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long paySlipGenerateId;
     
 	@Column(name = "employee_name")
 	@Convert(converter = AesEncryptor.class)

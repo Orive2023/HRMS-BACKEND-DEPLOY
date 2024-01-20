@@ -57,7 +57,7 @@ public class AdvanceSaleryController {
     // Get AdvanceSalery by ID
     @GetMapping("/get/{advanceSaleryId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<AdvanceSaleryDto> getAdvanceSaleryById(@PathVariable String advanceSaleryId) {
+    public ResponseEntity<AdvanceSaleryDto> getAdvanceSaleryById(@PathVariable Long advanceSaleryId) {
         Optional<AdvanceSaleryDto> advanceSalery = advanceSaleryService.getAdvanceSaleryById(advanceSaleryId);
         if (advanceSalery.isPresent()) {
             logger.info("Retrieved AdvanceSalery with ID: {}", advanceSaleryId);
@@ -71,7 +71,7 @@ public class AdvanceSaleryController {
     // Update AdvanceSalery by ID
     @PutMapping("/update/{advanceSaleryId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<AdvanceSaleryDto> updateAdvanceSalery(@PathVariable String advanceSaleryId, @RequestBody AdvanceSaleryDto updatedAdvanceSaleryDto) {
+    public ResponseEntity<AdvanceSaleryDto> updateAdvanceSalery(@PathVariable Long advanceSaleryId, @RequestBody AdvanceSaleryDto updatedAdvanceSaleryDto) {
     	AdvanceSaleryDto updatedAdvanceSalery = advanceSaleryService.updateAdvanceSalery(advanceSaleryId, updatedAdvanceSaleryDto);
         if (updatedAdvanceSalery != null) {
             logger.info("Updated AdvanceSalery with ID: {}", advanceSaleryId);
@@ -87,7 +87,7 @@ public class AdvanceSaleryController {
     // Delete AdvanceSalery by ID
     @DeleteMapping("/delete/{advanceSaleryId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<Void> deleteAdvanceSalery(@PathVariable String advanceSaleryId) {
+    public ResponseEntity<Void> deleteAdvanceSalery(@PathVariable Long advanceSaleryId) {
   	  advanceSaleryService.deleteAdvanceSalery(advanceSaleryId);
         logger.info("Deleted AdvanceSalery with ID: {}", advanceSaleryId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

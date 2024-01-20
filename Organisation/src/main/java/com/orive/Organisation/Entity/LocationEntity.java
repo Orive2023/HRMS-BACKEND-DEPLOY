@@ -33,9 +33,8 @@ import lombok.ToString;
 public class LocationEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "location-sequence")
-    @GenericGenerator(name = "location-sequence", strategy = "com.orive.Organisation.Entity.LocationIdGenerator")
-	private String locationId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long locationId;
 	
 	@Column(name = "company_name")
 	@Convert(converter = AesEncryptor.class)

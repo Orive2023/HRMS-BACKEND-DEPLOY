@@ -46,7 +46,7 @@ private static final Logger logger=LoggerFactory.getLogger(AdvanceSaleryService.
     }
     
     //get by AdvanceSaleryId
-    public Optional<AdvanceSaleryDto> getAdvanceSaleryById(String AdvanceSaleryId) {
+    public Optional<AdvanceSaleryDto> getAdvanceSaleryById(Long AdvanceSaleryId) {
         Optional<AdvanceSaleryEntity> advanceSalery = advanceSaleryRepository.findById(AdvanceSaleryId);
         if (advanceSalery.isPresent()) {
             return Optional.of(convertToDTO(advanceSalery.get()));
@@ -57,7 +57,7 @@ private static final Logger logger=LoggerFactory.getLogger(AdvanceSaleryService.
     }
     
  // Update list by id
-    public AdvanceSaleryDto updateAdvanceSalery(String AdvanceSaleryId, AdvanceSaleryDto advanceSaleryDto) {
+    public AdvanceSaleryDto updateAdvanceSalery(Long AdvanceSaleryId, AdvanceSaleryDto advanceSaleryDto) {
         Optional<AdvanceSaleryEntity> existingAdvanceSaleryOptional = advanceSaleryRepository.findById(AdvanceSaleryId);
         if (existingAdvanceSaleryOptional.isPresent()) {
         	AdvanceSaleryEntity existingAdvanceSalery= existingAdvanceSaleryOptional.get();
@@ -73,7 +73,7 @@ private static final Logger logger=LoggerFactory.getLogger(AdvanceSaleryService.
     }
     
     // Delete
-    public void deleteAdvanceSalery(String AdvanceSaleryId) {
+    public void deleteAdvanceSalery(Long AdvanceSaleryId) {
     	advanceSaleryRepository.deleteById(AdvanceSaleryId);
         logger.info("Deleted AdvanceSalery with ID: {}", AdvanceSaleryId);
     }

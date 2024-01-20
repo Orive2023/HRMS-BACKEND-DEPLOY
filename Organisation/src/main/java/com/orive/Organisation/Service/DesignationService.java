@@ -42,7 +42,7 @@ public class DesignationService {
     }
     
     //get by DesignationId
-    public Optional<DesignationDto> getDesignationById(String designationId) {
+    public Optional<DesignationDto> getDesignationById(Long designationId) {
         Optional<DesignationEntity> designation = designationRepository.findById(designationId);
         if (designation.isPresent()) {
             return Optional.of(convertToDTO(designation.get()));
@@ -53,7 +53,7 @@ public class DesignationService {
     }
     
  // Update list by id
-    public DesignationDto updateDesignation(String designationId, DesignationDto designationDto) {
+    public DesignationDto updateDesignation(Long designationId, DesignationDto designationDto) {
         Optional<DesignationEntity> existingDesignationOptional = designationRepository.findById(designationId);
         if (existingDesignationOptional.isPresent()) {
         	DesignationEntity existingDesignation = existingDesignationOptional.get();
@@ -69,7 +69,7 @@ public class DesignationService {
     }
     
     // Delete
-    public void deleteDesignation(String designationId) {
+    public void deleteDesignation(Long designationId) {
     	designationRepository.deleteById(designationId);
         logger.info("Deleted Designation with ID: {}", designationId);
     }

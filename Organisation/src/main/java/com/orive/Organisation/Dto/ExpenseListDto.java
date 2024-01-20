@@ -21,7 +21,7 @@ import lombok.ToString;
 public class ExpenseListDto {
 
 	
-    private String expenceListId;
+    private Long expenceListId;
 	private String expenceId;
 	private LocalDate purchaseDate;
 	private String description;

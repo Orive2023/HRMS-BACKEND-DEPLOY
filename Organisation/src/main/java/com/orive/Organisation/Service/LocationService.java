@@ -45,7 +45,7 @@ public class LocationService {
     }
     
     //get by LocationId
-    public Optional<LocationDto> getLocationById(String locationId) {
+    public Optional<LocationDto> getLocationById(Long locationId) {
         Optional<LocationEntity> location = locationRepository.findById(locationId);
         if (location.isPresent()) {
             return Optional.of(convertToDTO(location.get()));
@@ -56,7 +56,7 @@ public class LocationService {
     }
     
  // Update list by id
-    public LocationDto updateLocation(String locationId, LocationDto locationDto) {
+    public LocationDto updateLocation(Long locationId, LocationDto locationDto) {
         Optional<LocationEntity> existingLocationOptional = locationRepository.findById(locationId);
         if (existingLocationOptional.isPresent()) {
         	LocationEntity existingLocation = existingLocationOptional.get();
@@ -74,7 +74,7 @@ public class LocationService {
     }
     
     // Delete
-    public void deleteLocation(String locationId) {
+    public void deleteLocation(Long locationId) {
     	locationRepository.deleteById(locationId);
         logger.info("Deleted Location with ID: {}", locationId);
     }

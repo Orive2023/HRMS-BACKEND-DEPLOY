@@ -63,7 +63,7 @@ public class PoliciesService {
 	}
 		
 	//Download pdf
-	public byte[] downloadPdf(String policiesId) {
+	public byte[] downloadPdf(Long policiesId) {
 		 Optional<PoliciesEntity> dbPdfData = policiesRepository.findById(policiesId);
 	    
 	    if (dbPdfData.isPresent()) {
@@ -85,7 +85,7 @@ public class PoliciesService {
     }
     
     //get by PoliciesId
-    public Optional<PoliciesDto> getPoliciesById(String policiesId) {
+    public Optional<PoliciesDto> getPoliciesById(Long policiesId) {
         Optional<PoliciesEntity> policies = policiesRepository.findById(policiesId);
         if (policies.isPresent()) {
             return Optional.of(convertToDTO(policies.get()));
@@ -96,7 +96,7 @@ public class PoliciesService {
     }
     
  // Update list by id
-    public PoliciesDto updatePolicies(String policiesId, PoliciesDto policiesDto) {
+    public PoliciesDto updatePolicies(Long policiesId, PoliciesDto policiesDto) {
         Optional<PoliciesEntity> existingPoliciesOptional = policiesRepository.findById(policiesId);
         if (existingPoliciesOptional.isPresent()) {
         	PoliciesEntity existingPolicies = existingPoliciesOptional.get();
@@ -112,7 +112,7 @@ public class PoliciesService {
     }
     
     // Delete
-    public void deletePolicies(String policiesId) {
+    public void deletePolicies(Long policiesId) {
     	policiesRepository.deleteById(policiesId);
         logger.info("Deleted Policies with ID: {}", policiesId);
     }

@@ -55,7 +55,7 @@ public class SelfAssessmentController {
    // Get SelfAssessment by ID
    @GetMapping("/get/{selfAssessmentId}")
    // @PreAuthorize("hasRole('client_admin')")
-   public ResponseEntity<SelfAssessmentDto> getSelfAssessmentId(@PathVariable String selfAssessmentId) {
+   public ResponseEntity<SelfAssessmentDto> getSelfAssessmentId(@PathVariable Long selfAssessmentId) {
        Optional<SelfAssessmentDto> selfAssessment = selfAssessmentService.getSelfAssessmentById(selfAssessmentId);
        if (selfAssessment.isPresent()) {
            logger.info("Retrieved SelfAssessment with ID: {}", selfAssessmentId);
@@ -69,7 +69,7 @@ public class SelfAssessmentController {
    // Update SelfAssessment by ID
    @PutMapping("/update/{selfAssessmentId}")
    // @PreAuthorize("hasRole('client_admin')")
-   public ResponseEntity<SelfAssessmentDto> updateSelfAssessment(@PathVariable String selfAssessmentId, @RequestBody SelfAssessmentDto updatedSelfAssessmentDto) {
+   public ResponseEntity<SelfAssessmentDto> updateSelfAssessment(@PathVariable Long selfAssessmentId, @RequestBody SelfAssessmentDto updatedSelfAssessmentDto) {
 	   SelfAssessmentDto updatedTravels = selfAssessmentService.updateSelfAssessment(selfAssessmentId, updatedSelfAssessmentDto);
        if (updatedTravels != null) {
            logger.info("Updated SelfAssessment with ID: {}", selfAssessmentId);
@@ -83,7 +83,7 @@ public class SelfAssessmentController {
    // Delete SelfAssessment by ID
    @DeleteMapping("/delete/{selfAssessmentId}")
    // @PreAuthorize("hasRole('client_admin')")
-   public ResponseEntity<Void> deleteSelfAssessment(@PathVariable String selfAssessmentId) {
+   public ResponseEntity<Void> deleteSelfAssessment(@PathVariable Long selfAssessmentId) {
 	   selfAssessmentService.deleteSelfAssessment(selfAssessmentId);
        logger.info("Deleted SelfAssessment with ID: {}", selfAssessmentId);
        return new ResponseEntity<>(HttpStatus.NO_CONTENT);

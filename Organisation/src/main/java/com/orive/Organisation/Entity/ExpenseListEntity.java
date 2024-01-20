@@ -33,9 +33,8 @@ import lombok.ToString;
 public class ExpenseListEntity {	
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expencelist-sequence")
-    @GenericGenerator(name = "expencelist-sequence", strategy = "com.orive.Organisation.Entity.ExpencelistIdGenerator")
-	private String expenceListId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long expenceListId;
 	
 	@Convert(converter = AesEncryptor.class)
 	@Column(name = "expence_id")

@@ -48,7 +48,7 @@ private static final Logger logger=LoggerFactory.getLogger(SalaryTemplateService
     }
     
     //get by SalaryTemplateId
-    public Optional<SalaryTemplateDto> getSalaryTemplateById(String salaryTemplateId) {
+    public Optional<SalaryTemplateDto> getSalaryTemplateById(Long salaryTemplateId) {
         Optional<SalaryTemplateEntity> salaryTemplate = salaryTemplateRepository.findById(salaryTemplateId);
         if (salaryTemplate.isPresent()) {
             return Optional.of(convertToDTO(salaryTemplate.get()));
@@ -59,7 +59,7 @@ private static final Logger logger=LoggerFactory.getLogger(SalaryTemplateService
     }
     
  // Update list by id
-    public SalaryTemplateDto updateSalaryTemplate(String salaryTemplateId, SalaryTemplateDto salaryTemplateDto) {
+    public SalaryTemplateDto updateSalaryTemplate(Long salaryTemplateId, SalaryTemplateDto salaryTemplateDto) {
         Optional<SalaryTemplateEntity> existingSalaryTemplateOptional = salaryTemplateRepository.findById(salaryTemplateId);
         if (existingSalaryTemplateOptional.isPresent()) {
         	SalaryTemplateEntity existingSalaryTemplate= existingSalaryTemplateOptional.get();
@@ -75,7 +75,7 @@ private static final Logger logger=LoggerFactory.getLogger(SalaryTemplateService
     }
     
     // Delete
-    public void deleteSalaryTemplate(String salaryTemplateId) {
+    public void deleteSalaryTemplate(Long salaryTemplateId) {
     	salaryTemplateRepository.deleteById(salaryTemplateId);
         logger.info("Deleted SalaryTemplate with ID: {}", salaryTemplateId);
     }

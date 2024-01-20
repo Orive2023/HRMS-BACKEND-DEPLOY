@@ -32,9 +32,8 @@ import lombok.ToString;
 public class SelfAssessmentEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "selfassessment-sequence")
-    @GenericGenerator(name = "selfassessment-sequence", strategy = "com.orive.Performance.Entity.SelfAssessmentIdGenerator")
-	private String selfAssessmentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long selfAssessmentId;
 	
 	@Column(name = "performance_goal_rating")
 	@Convert(converter = AesEncryptor.class)

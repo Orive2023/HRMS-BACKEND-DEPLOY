@@ -31,9 +31,8 @@ import lombok.ToString;
 public class PerformanceAppraisalEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "performanceappraisal-sequence")
-    @GenericGenerator(name = "performanceappraisal-sequence", strategy = "com.orive.Performance.Entity.PerformanceIdGenerator")
-	private String performanceAppraisalId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long performanceAppraisalId;
 	
 	@Column(name = "employee_name")
 	@Convert(converter = AesEncryptor.class)

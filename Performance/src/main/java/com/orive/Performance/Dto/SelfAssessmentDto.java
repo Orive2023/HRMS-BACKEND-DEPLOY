@@ -16,7 +16,7 @@ import lombok.ToString;
 @Builder
 public class SelfAssessmentDto {
 
-    private String selfAssessmentId;
+    private Long selfAssessmentId;
 	private int performanceGoalRating;
 	private String performanceGoalComments;
 	private int newSkillsRating;

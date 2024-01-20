@@ -21,7 +21,7 @@ import lombok.ToString;
 @Builder
 public class PerformanceAppraisalDto {
 	
-    private String performanceAppraisalId;
+    private Long performanceAppraisalId;
 	private String employeeName;
 	private Long employeeId;
 	private String departmentName;

@@ -66,7 +66,7 @@ public class PoliciesController {
  // Get Policies pdf by id  
     @GetMapping("/download/{policiesId}")
     // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<byte[]> downloadsPdf(@PathVariable String policiesId) {
+    public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long policiesId) {
         byte[] pdf = policiesService.downloadPdf(policiesId);
 
         if (pdf != null) {
@@ -92,7 +92,7 @@ public class PoliciesController {
       // Get Policies by ID
       @GetMapping("/get/{policiesId}")
       // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<PoliciesDto> getPoliciesById(@PathVariable String policiesId) {
+      public ResponseEntity<PoliciesDto> getPoliciesById(@PathVariable Long policiesId) {
           Optional<PoliciesDto> policies = policiesService.getPoliciesById(policiesId);
           if (policies.isPresent()) {
               logger.info("Retrieved Policies with ID: {}", policiesId);
@@ -106,7 +106,7 @@ public class PoliciesController {
       // Update Policies by ID
       @PutMapping("/update/{policiesId}")
       // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<PoliciesDto> updatePolicies(@PathVariable String policiesId, @RequestBody PoliciesDto updatedPoliciesDto) {
+      public ResponseEntity<PoliciesDto> updatePolicies(@PathVariable Long policiesId, @RequestBody PoliciesDto updatedPoliciesDto) {
     	  PoliciesDto updatedPolicies = policiesService.updatePolicies(policiesId, updatedPoliciesDto);
           if (updatedPolicies != null) {
               logger.info("Updated Policies with ID: {}", policiesId);
@@ -122,7 +122,7 @@ public class PoliciesController {
       // Delete Policies by ID
       @DeleteMapping("/delete/{policiesId}")
       // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<Void> deletePolicies(@PathVariable String policiesId) {
+      public ResponseEntity<Void> deletePolicies(@PathVariable Long policiesId) {
     	  policiesService.deletePolicies(policiesId);
           logger.info("Deleted Policies with ID: {}", policiesId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);

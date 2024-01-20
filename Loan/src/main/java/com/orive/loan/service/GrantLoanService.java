@@ -61,7 +61,7 @@ public class GrantLoanService {
     }
     
     //get by GrantLoanId
-    public Optional<GrantLoanDto> getGrantLoanById(String grantLoanId) {
+    public Optional<GrantLoanDto> getGrantLoanById(Long grantLoanId) {
         Optional<GrantLoanEntity> grantLoan = grantLoanRepository.findById(grantLoanId);
         if (grantLoan.isPresent()) {
             return Optional.of(convertToDTO(grantLoan.get()));
@@ -72,7 +72,7 @@ public class GrantLoanService {
     }
     
  // Update list by id
-    public GrantLoanDto updateGrantLoan(String grantLoanId, GrantLoanDto grantLoanDto) {
+    public GrantLoanDto updateGrantLoan(Long grantLoanId, GrantLoanDto grantLoanDto) {
         Optional<GrantLoanEntity> existingGrantLoanOptional = grantLoanRepository.findById(grantLoanId);
         if (existingGrantLoanOptional.isPresent()) {
         	GrantLoanEntity existingGrantLoan = existingGrantLoanOptional.get();
@@ -91,7 +91,7 @@ public class GrantLoanService {
     }
     
     // Delete
-    public void deleteGrantLoan(String grantLoanId) {
+    public void deleteGrantLoan(Long grantLoanId) {
     	grantLoanRepository.deleteById(grantLoanId);
         logger.info("Deleted GrantLoan with ID: {}", grantLoanId);
     }

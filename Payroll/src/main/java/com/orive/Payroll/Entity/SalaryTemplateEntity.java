@@ -31,9 +31,8 @@ import lombok.ToString;
 public class SalaryTemplateEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "salarytemplate-sequence")
-    @GenericGenerator(name = "salarytemplate-sequence", strategy = "com.orive.Payroll.Entity.SalaryTemplateIdGenerator")
-	private String salaryTemplateId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long salaryTemplateId;
 		
 	@Column(name = "basic_salery")
 	@Convert(converter = AesEncryptor.class)

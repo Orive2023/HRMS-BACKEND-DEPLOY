@@ -35,9 +35,8 @@ import lombok.ToString;
 public class DepartmentEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "department-sequence")
-    @GenericGenerator(name = "department-sequence", strategy = "com.orive.Organisation.Entity.DepartmentIdGenerator")
-	private String departmentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long departmentId;
 	
 //	@NotEmpty(message = "This field shouldn't be empty")
 	@Column(name = "department_name")

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.orive.Organisation.Entity.ExpenceEntity;
 import com.orive.Organisation.Entity.ExpenseListEntity;
 
-public interface ExpenceRepository extends JpaRepository<ExpenceEntity, String>{
+public interface ExpenceRepository extends JpaRepository<ExpenceEntity, Long>{
 
 	
 }

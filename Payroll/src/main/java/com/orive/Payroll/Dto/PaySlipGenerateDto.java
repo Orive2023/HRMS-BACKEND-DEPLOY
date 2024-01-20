@@ -19,7 +19,7 @@ import lombok.ToString;
 public class PaySlipGenerateDto {
 	
 	
-	private String paySlipGenerateId;
+	private Long paySlipGenerateId;
     private String employeeName;
     private Long employeeId;
     private String designation;

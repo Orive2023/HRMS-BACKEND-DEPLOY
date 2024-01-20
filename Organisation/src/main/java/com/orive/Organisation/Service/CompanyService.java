@@ -124,7 +124,7 @@ public class CompanyService {
     }
     
     //get by CompanyId
-    public CompanyEntity getCompanyById(String companyId) {
+    public CompanyEntity getCompanyById(Long companyId) {
         CompanyEntity company = companyRepository.findById(companyId)
                 .orElseThrow(() -> {
                     logger.warn("Company with ID {} not found", companyId);
@@ -138,7 +138,7 @@ public class CompanyService {
     }
     
  // Update list by id
-    public void partialUpdateCompany(String companyId, CompanyEntity companyEntity) {
+    public void partialUpdateCompany(Long companyId, CompanyEntity companyEntity) {
         Optional<CompanyEntity> existingCompanyOptional = companyRepository.findById(companyId);
         if (existingCompanyOptional.isPresent()) {
             CompanyEntity existingCompany = existingCompanyOptional.get();
@@ -179,7 +179,7 @@ public class CompanyService {
     }
     
     // Delete
-    public void deleteCompany(String companyId) {
+    public void deleteCompany(Long companyId) {
     	companyRepository.deleteById(companyId);
         logger.info("Deleted company with ID: {}", companyId);
     }

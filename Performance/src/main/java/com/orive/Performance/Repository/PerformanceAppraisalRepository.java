@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.orive.Performance.Entity.PerformanceAppraisalEntity;
 
-public interface PerformanceAppraisalRepository extends JpaRepository<PerformanceAppraisalEntity, String> {
+public interface PerformanceAppraisalRepository extends JpaRepository<PerformanceAppraisalEntity, Long> {
 	
 	//Query for find by employeeId
 	 List<PerformanceAppraisalEntity> findPerformanceAppraisalByEmployeeId(Long employeeId);

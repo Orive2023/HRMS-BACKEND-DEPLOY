@@ -29,7 +29,7 @@ import lombok.ToString;
 public class CompanyDto {
 
 	
-	private String companyId;
+	private Long companyId;
 	private String companyName;
 	private String companyType;
 	private String legalOrTradingName;

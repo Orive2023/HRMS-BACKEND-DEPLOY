@@ -20,7 +20,7 @@ import lombok.ToString;
 @Builder
 public class LocationDto {
 
-	private String locationId;
+	private Long locationId;
 	private String companyName;
 	private String locationHead;
 	private String locationName;

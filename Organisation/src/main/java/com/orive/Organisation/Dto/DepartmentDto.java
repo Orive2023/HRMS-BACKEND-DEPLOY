@@ -21,7 +21,7 @@ import lombok.ToString;
 @Builder
 public class DepartmentDto {
 
-	private String departmentId;
+	private Long departmentId;
 	private String departmentName;
 	private String companyName;
 	private String locationName;

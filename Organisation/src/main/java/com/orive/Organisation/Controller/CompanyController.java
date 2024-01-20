@@ -85,7 +85,7 @@ public class CompanyController {
 
       // Get company by ID
       @GetMapping("/get/{companyId}")
-      public ResponseEntity<CompanyEntity> getCompanyById(@PathVariable String companyId) {
+      public ResponseEntity<CompanyEntity> getCompanyById(@PathVariable Long companyId) {
           try {
               CompanyEntity company = companyService.getCompanyById(companyId);
               return ResponseEntity.ok(company);
@@ -100,7 +100,7 @@ public class CompanyController {
    // Update company by ID
       @PutMapping("/update/{companyId}")
       public ResponseEntity<Void> partialUpdateCompany(
-              @PathVariable String companyId,
+              @PathVariable Long companyId,
               @RequestBody CompanyEntity companyEntity) {
 
           companyService.partialUpdateCompany(companyId, companyEntity);
@@ -110,7 +110,7 @@ public class CompanyController {
 
       // Delete Company by ID
       @DeleteMapping("/delete/{companyId}")
-      public ResponseEntity<Void> deleteCompany(@PathVariable String companyId) {
+      public ResponseEntity<Void> deleteCompany(@PathVariable Long companyId) {
     	  companyService.deleteCompany(companyId);
           logger.info("Deleted company with ID: {}", companyId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
