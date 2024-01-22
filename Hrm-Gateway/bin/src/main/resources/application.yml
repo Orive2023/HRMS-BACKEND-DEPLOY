@@ -29,7 +29,7 @@ spring:
       - id: PAYROLL-SERVICE
         uri: lb://PAYROLL-SERVICE
         predicates:
-          - Path=/advancesalery/**,/salaryTemplate/**
+          - Path=/advancesalery/**,/salaryTemplate/**,/payslipgenerate/**
       - id: PROJECTS-SERVICE
         uri: lb://PROJECTS-SERVICE
         predicates:
@@ -42,6 +42,30 @@ spring:
         uri: lb://WORKSHEET-SERVICE
         predicates:
           - Path=/worksheet/**
+      - id: ACCOUNTS-SERVICE
+        uri: lb://ACCOUNTS-SERVICE
+        predicates:
+          - Path=/accountbalance/**,/accountlist/**,/contravoucher/**,/creditvoucher/**,/debitvoucher/**,/financialyear/**,/journalvoucher/**,/openingbalance/**,/subtype/** 
+      - id: PROCUREMENT-SERVICE
+        uri: lb://PROCUREMENT-SERVICE
+        predicates:
+          - Path=/bidAnalysis/**,/committeelist/**,/committees/**,/companylist/**,/goodreceived/**,/goodreceivedlist/**,/purchaseOrder/**,/purchaseorderlist/**,/quotation/**,/quotationlist/**,/request/**,/units/**,/vendor/** 
+      - id: TIMESHEET-SERVICE
+        uri: lb://TIMESHEET-SERVICE
+        predicates:
+          - Path=/attendance/**,/holidays/**,/leaves/**,/officeshifts/**
+      - id: TRAINING-SERVICE
+        uri: lb://TRAINING-SERVICE
+        predicates:
+          - Path=/trainerslist/**
+      - id: EVENT-SERVICE
+        uri: lb://EVENT-SERVICE
+        predicates:
+          - Path=/event/**
+      - id: INTERVIEW-SCHEDULER
+        uri: lb://INTERVIEW-SCHEDULER
+        predicates:
+          - Path=/candidates/**,/interviews/**,/talents/**,/users/**                     
 eureka:
   instance:
     prefer-ip-address: true
