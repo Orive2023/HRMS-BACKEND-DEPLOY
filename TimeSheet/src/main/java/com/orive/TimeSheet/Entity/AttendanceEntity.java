@@ -187,9 +187,16 @@ public class AttendanceEntity {
 	    
 	    private String calculateLate() {
 	        if (clockIn != null && officeClockIn != null) {
-	            // Calculate late as the difference between clock-in time and office clock-in time
+	            // Parse the clock-in times
 	            LocalTime startTime = LocalTime.parse(clockIn);
 	            LocalTime officeStartTime = LocalTime.parse(officeClockIn);
+
+	            // Add a condition to check if clockIn is earlier than officeClockIn
+	            if (startTime.isBefore(officeStartTime)) {
+	                return "00:00:00";
+	            }
+
+	            // Calculate late as the difference between clock-in time and office clock-in time
 	            Duration lateDuration = Duration.between(officeStartTime, startTime);
 
 	            // Convert late duration to hours and minutes
@@ -200,8 +207,10 @@ public class AttendanceEntity {
 	            // Return the formatted result
 	            return String.format("%dh %02dmin", lateHours, lateMinutesRemainder);
 	        }
+	        
 	        return null; // Return null if clockIn or officeClockIn is not available
 	    }
+
 	    
 	    private String calculateEarlyLeaving() {
 	        // Default values for clockOut and officeClockOut
@@ -212,6 +221,12 @@ public class AttendanceEntity {
 	        if (clockOut != null && !clockOut.isEmpty() && !clockOut.equals("00:00:00")) {
 	            endTime = LocalTime.parse(clockOut);
 	        }
+
+	        // Add a condition to return "00:00:00" if clockOut is "00:00:00"
+	        if (endTime.equals(LocalTime.parse("00:00:00"))) {
+	            return "00:00:00";
+	        }
+
 	        if (officeClockOut != null && !officeClockOut.isEmpty() && !officeClockOut.equals("00:00:00")) {
 	            officeEndTime = LocalTime.parse(officeClockOut);
 	        }
