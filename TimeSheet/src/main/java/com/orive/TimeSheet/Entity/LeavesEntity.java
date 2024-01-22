@@ -32,7 +32,8 @@ import lombok.ToString;
 public class LeavesEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.TimeSheet.Entity.LeavesCustomIdGenerator")
 	private Long leaveId;
 	
 	@Column(name = "employee_id")

@@ -28,11 +28,12 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "office_shift")
+@Table(name = "officeshift")
 public class OfficeShiftsEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.TimeSheet.Entity.OfficeShiftsCustomIdGenerator")
 	private Long officeShiftsId;
 	
 	@Column(name = "created_date")

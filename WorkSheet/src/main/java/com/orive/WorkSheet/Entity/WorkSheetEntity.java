@@ -31,11 +31,12 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "work_sheet")
+@Table(name = "worksheet")
 public class WorkSheetEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.WorkSheet.Entity.CustomIdGenerator")
 	private Long workSheetId;
 	
 	@Column(name = "work_sheet_title")

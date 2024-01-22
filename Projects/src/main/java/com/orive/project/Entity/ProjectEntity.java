@@ -41,7 +41,8 @@ import lombok.ToString;
 public class ProjectEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.project.Entity.ProjectCustomIdGenerator")
 	private Long projectsId;
 	
 	@Column(name = "project_title")

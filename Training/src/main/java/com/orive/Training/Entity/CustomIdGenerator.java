@@ -1,4 +1,4 @@
-package com.orive.bank.entities;
+package com.orive.Training.Entity;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -11,10 +11,10 @@ import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
 public class CustomIdGenerator implements IdentifierGenerator {
-
+	
 	private static final long serialVersionUID = 1L;
 
-	private final String prefix = "ORIBA-";
+	private final String prefix = "ORITRS-";
 	private long sequence;
 
 	@Override
@@ -27,7 +27,7 @@ public class CustomIdGenerator implements IdentifierGenerator {
 			jdbcConnectionAccess = session.getJdbcConnectionAccess();
 			connection = jdbcConnectionAccess.obtainConnection();
 
-			String query = "SELECT MAX(add_bank_id), COUNT(add_bank_id) FROM addbankentity";
+			String query = "SELECT MAX(trainers_list_id), COUNT(trainers_list_id) FROM trainerslist";
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
@@ -59,4 +59,5 @@ public class CustomIdGenerator implements IdentifierGenerator {
 		}
 		return null;
 	}
+
 }

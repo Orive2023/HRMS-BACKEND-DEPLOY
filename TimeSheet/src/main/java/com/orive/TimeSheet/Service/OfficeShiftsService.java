@@ -61,7 +61,8 @@ public class OfficeShiftsService {
 	        Optional<OfficeShiftsEntity> existingofficeShiftsOptional = officeShiftsRepository.findById(OfficeShiftsId);
 	        if (existingofficeShiftsOptional.isPresent()) {
 	        	OfficeShiftsEntity existingOfficeShifts = existingofficeShiftsOptional.get();
-	             
+	        	existingOfficeShifts.setOfficeClockInTime(officeShiftsDto.getOfficeClockInTime());
+	        	existingOfficeShifts.setOfficeClockOutTime(officeShiftsDto.getOfficeClockOutTime());
 	        	modelMapper.map(officeShiftsDto, existingofficeShiftsOptional);
 	            OfficeShiftsEntity updatedOfficeShifts = officeShiftsRepository.save(existingOfficeShifts);
 	            logger.info("Updated OfficeShifts with ID: {}", updatedOfficeShifts.getOfficeShiftsId());

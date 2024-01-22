@@ -1,4 +1,4 @@
-package com.orive.bank.entities;
+package com.orive.TimeSheet.Entity;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -10,11 +10,11 @@ import org.hibernate.engine.jdbc.connections.spi.JdbcConnectionAccess;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
-public class CustomIdGenerator implements IdentifierGenerator {
+public class LeavesCustomIdGenerator implements IdentifierGenerator {
 
 	private static final long serialVersionUID = 1L;
 
-	private final String prefix = "ORIBA-";
+	private final String prefix = "ORITMSLAES-";
 	private long sequence;
 
 	@Override
@@ -27,7 +27,7 @@ public class CustomIdGenerator implements IdentifierGenerator {
 			jdbcConnectionAccess = session.getJdbcConnectionAccess();
 			connection = jdbcConnectionAccess.obtainConnection();
 
-			String query = "SELECT MAX(add_bank_id), COUNT(add_bank_id) FROM addbankentity";
+			String query = "SELECT MAX(leave_id), COUNT(leave_id) FROM leaves";
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {

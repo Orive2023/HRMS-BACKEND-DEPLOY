@@ -36,7 +36,8 @@ import lombok.ToString;
 public class TicketsEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Tickets.Entity.CustomIdGenerator")
 	private Long ticketsId;
 	
 	@Column(name = "tickets_code")

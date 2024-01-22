@@ -32,7 +32,8 @@ import lombok.ToString;
 public class EmployeeProjectManagementEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.project.Entity.EmployeeProjectManagementCustomIdGenerator")
 	private Long employeeProjectManagementId;
 	
 	@Column(name = "employee_id")

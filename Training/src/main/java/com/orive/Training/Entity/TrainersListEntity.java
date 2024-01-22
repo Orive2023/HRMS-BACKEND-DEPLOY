@@ -29,11 +29,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "trainers_list")
+@Table(name = "trainerslist")
 public class TrainersListEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Training.Entity.CustomIdGenerator")
 	private Long trainersListId;
 	
 	@Column(name = "trainers_full_name")
