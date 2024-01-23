@@ -18,7 +18,7 @@ import lombok.ToString;
 @Builder
 public class CommitteesDto {
 
-    private Long committeesId;
+    private String committeesId;
 	private String name;
 	private Status status;
 	private byte[] signature;

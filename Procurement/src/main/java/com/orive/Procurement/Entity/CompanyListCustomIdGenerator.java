@@ -1,4 +1,4 @@
-package com.orive.WorkSheet.Entity;
+package com.orive.Procurement.Entity;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -10,11 +10,11 @@ import org.hibernate.engine.jdbc.connections.spi.JdbcConnectionAccess;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
-public class CustomIdGenerator implements IdentifierGenerator {
+public class CompanyListCustomIdGenerator implements IdentifierGenerator {
 	
 	private static final long serialVersionUID = 1L;
 
-	private final String prefix = "ORIWS-";
+	private final String prefix = "ORIBDANLSCMPL-";
 	private long sequence;
 
 	@Override
@@ -27,7 +27,7 @@ public class CustomIdGenerator implements IdentifierGenerator {
 			jdbcConnectionAccess = session.getJdbcConnectionAccess();
 			connection = jdbcConnectionAccess.obtainConnection();
 
-			String query = "SELECT MAX(work_sheet_id), COUNT(work_sheet_id) FROM worksheet";
+			String query = "SELECT MAX(company_list_id), COUNT(company_list_id) FROM companylist";
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
@@ -59,4 +59,5 @@ public class CustomIdGenerator implements IdentifierGenerator {
 		}
 		return null;
 	}
+
 }

@@ -3,6 +3,8 @@ package com.orive.Procurement.Entity;
 import java.time.LocalDate;
 import java.util.Date;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Procurement.Config.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -28,12 +30,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "committee_list")
+@Table(name = "committeelist")
 public class CommitteeListEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long committeeListId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Procurement.Entity.CommitteeListCustomIdGenerator")
+	private String committeeListId;
 	
 	//@Convert(converter = AesEncryptor.class)
 	private Long bidAnalysisId;

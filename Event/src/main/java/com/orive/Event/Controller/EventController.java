@@ -53,7 +53,7 @@ public class EventController {
     // Get Event by ID
     @GetMapping("/get/{eventId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<EventDto> getEventById(@PathVariable Long eventId) {
+    public ResponseEntity<EventDto> getEventById(@PathVariable String eventId) {
         Optional<EventDto> event = eventService.getEventById(eventId);
         if (event.isPresent()) {
             logger.info("Retrieved Event with ID: {}", eventId);
@@ -67,7 +67,7 @@ public class EventController {
     // Update Event by ID
     @PutMapping("/update/{eventId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<EventDto> updateEvent(@PathVariable Long eventId, @RequestBody EventDto updatedEventDto) {
+    public ResponseEntity<EventDto> updateEvent(@PathVariable String eventId, @RequestBody EventDto updatedEventDto) {
     	EventDto updatedEvent = eventService.updateEvent(eventId, updatedEventDto);
         if (updatedEvent != null) {
             logger.info("Updated Event with ID: {}", eventId);
@@ -83,7 +83,7 @@ public class EventController {
     // Delete Event by ID
     @DeleteMapping("/delete/{eventId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<Void> deleteEvent(@PathVariable Long eventId) {
+    public ResponseEntity<Void> deleteEvent(@PathVariable String eventId) {
     	eventService.deleteEvent(eventId);
         logger.info("Deleted Event with ID: {}", eventId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -93,7 +93,7 @@ public class CommitteesController {
     // Get CommitteesbyId
     @GetMapping("/get/{committeesId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<CommitteesDto> getCommitteesbyId(@PathVariable Long committeesId) {
+    public ResponseEntity<CommitteesDto> getCommitteesbyId(@PathVariable String committeesId) {
         Optional<CommitteesDto> committees = committeesService.getCommitteesById(committeesId);
         if (committees.isPresent()) {
             logger.info("Retrieved Committees with ID: {}", committeesId);
@@ -107,7 +107,7 @@ public class CommitteesController {
     // Update Committees by ID
     @PutMapping("/update/{committeesId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<CommitteesDto> updateCommittees(@PathVariable Long committeesId, @RequestBody CommitteesDto updatedCommitteesDto) {
+    public ResponseEntity<CommitteesDto> updateCommittees(@PathVariable String committeesId, @RequestBody CommitteesDto updatedCommitteesDto) {
     	CommitteesDto updatedCommittees = committeesService.updateCommittees(committeesId, updatedCommitteesDto);
         if (updatedCommittees != null) {
             logger.info("Updated Committees with ID: {}", committeesId);
@@ -123,7 +123,7 @@ public class CommitteesController {
     // Delete Committees by ID
     @DeleteMapping("/delete/{committeesId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<Void> deleteCommittees(@PathVariable Long committeesId) {
+    public ResponseEntity<Void> deleteCommittees(@PathVariable String committeesId) {
   	  committeesService.deleteCommittees(committeesId);
         logger.info("Deleted Committees with ID: {}", committeesId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -85,7 +85,7 @@ public class CommitteesService {
 		    }
 		    
 		    //get by CommitteesId
-		    public Optional<CommitteesDto> getCommitteesById(Long committeesId) {
+		    public Optional<CommitteesDto> getCommitteesById(String committeesId) {
 		        Optional<CommitteesEntity> committees = committeesRepository.findById(committeesId);
 		        if (committees.isPresent()) {
 		            return Optional.of(convertToDTO(committees.get()));
@@ -96,7 +96,7 @@ public class CommitteesService {
 		    }
 		    
 		 // Update list by id
-		    public CommitteesDto updateCommittees(Long committeesId, CommitteesDto committeesDto) {
+		    public CommitteesDto updateCommittees(String committeesId, CommitteesDto committeesDto) {
 		        Optional<CommitteesEntity> existingCommitteesOptional = committeesRepository.findById(committeesId);
 		        if (existingCommitteesOptional.isPresent()) {
 		        	CommitteesEntity existingCommittees = existingCommitteesOptional.get();
@@ -113,7 +113,7 @@ public class CommitteesService {
 		    }
 		    
 		    // Delete
-		    public void deleteCommittees(Long committeesId) {
+		    public void deleteCommittees(String committeesId) {
 		    committeesRepository.deleteById(committeesId);
 		        logger.info("Deleted Committees with ID: {}", committeesId);
 		    }

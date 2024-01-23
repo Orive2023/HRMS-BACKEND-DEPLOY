@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.orive.Procurement.Entity.CompanyListEntity;
 
 
-public interface CompanyListRepository extends JpaRepository<CompanyListEntity, Long> {
+public interface CompanyListRepository extends JpaRepository<CompanyListEntity, String> {
    
 	List<CompanyListEntity> findByBidAnalysisId(Long bidAnalysisId);
 

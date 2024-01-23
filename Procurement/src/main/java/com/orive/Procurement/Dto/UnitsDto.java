@@ -18,7 +18,7 @@ import lombok.ToString;
 @Builder
 public class UnitsDto {
 	
-    private Long unitsId;
+    private String unitsId;
     private String unitName;
     private Status status;
 

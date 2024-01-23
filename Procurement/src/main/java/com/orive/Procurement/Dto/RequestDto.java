@@ -28,7 +28,7 @@ import lombok.ToString;
 @Builder
 public class RequestDto {
 
-	private Long requestId;
+	private String requestId;
 	
 	private String requestingPerson;
 	

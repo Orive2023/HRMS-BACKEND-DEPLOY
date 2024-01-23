@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Procurement.Config.AesEncryptor;
 import com.orive.Procurement.Enum.Status;
 
@@ -37,8 +39,9 @@ import lombok.ToString;
 public class RequestEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long requestId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Procurement.Entity.RequestCustomIdGenerator")
+	private String requestId;
 	
 	@Column(name = "requesting_person")
 	@Convert(converter = AesEncryptor.class)

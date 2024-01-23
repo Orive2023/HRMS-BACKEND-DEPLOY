@@ -1,5 +1,7 @@
 package com.orive.Procurement.Entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Procurement.Config.AesEncryptor;
 import com.orive.Procurement.Enum.Status;
 
@@ -31,8 +33,9 @@ import lombok.ToString;
 public class CommitteesEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long committeesId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Procurement.Entity.CommitteesCustomIdGenerator")
+	private String committeesId;
 	
 	@Column(name = "name")
 	@Convert(converter = AesEncryptor.class)

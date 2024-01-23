@@ -36,8 +36,9 @@ import lombok.ToString;
 public class GrantLoanEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long grantLoanId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.loan.entities.GrantLoanCustomIdGenerator")
+	private String grantLoanId;
 	
 	@Column(name = "employee_name")
 	@Convert(converter = AesEncryptor.class)
