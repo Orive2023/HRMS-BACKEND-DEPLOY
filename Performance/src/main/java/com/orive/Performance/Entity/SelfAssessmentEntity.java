@@ -28,12 +28,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "self_assessment")
+@Table(name = "selfassessment")
 public class SelfAssessmentEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long selfAssessmentId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Performance.Entity.SelfAssessmentCustomIdGenerator")
+	private String selfAssessmentId;
 	
 	@Column(name = "performance_goal_rating")
 	@Convert(converter = AesEncryptor.class)

@@ -42,7 +42,7 @@ public class GoodReceivedEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long goodReceivedId;
+	private String goodReceivedId;
 	
 	@Column(name = "purchase_order")
 	@Convert(converter = AesEncryptor.class)

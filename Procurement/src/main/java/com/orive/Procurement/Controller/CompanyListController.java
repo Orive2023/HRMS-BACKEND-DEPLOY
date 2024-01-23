@@ -60,7 +60,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListControlle
 
     @GetMapping("/detail/{companyListId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public CompanyListEntity getCompanyListDetails(@PathVariable Long companyListId) {
+    public CompanyListEntity getCompanyListDetails(@PathVariable String companyListId) {
     	logger.info("Received request to fetch CompanyList details for companyListId: {}", companyListId);
     	CompanyListEntity companyList = companyListService.getCompanyListByCompanyListId(companyListId);
         logger.info("Fetched company details: {}", companyListId);
@@ -86,7 +86,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListControlle
 
     @DeleteMapping("/delete/{companyListId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<String> deleteCompanyList(@PathVariable Long companyListId) {
+    public ResponseEntity<String> deleteCompanyList(@PathVariable String companyListId) {
     	logger.info("Received request to delete CompanyList with ID: {}", companyListId);
     	companyListService.deleteCompanyList(companyListId);
         logger.info("CompanyList deleted successfully.");

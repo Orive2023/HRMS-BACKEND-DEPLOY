@@ -43,7 +43,7 @@ public class RequestService {
 	    }
 	    
 	    //get by RequestId
-	    public Optional<RequestDto> getRequestById(Long requestId) {
+	    public Optional<RequestDto> getRequestById(String requestId) {
 	        Optional<RequestEntity> request = requestRepository.findById(requestId);
 	        if (request.isPresent()) {
 	            return Optional.of(convertToDTO(request.get()));
@@ -54,7 +54,7 @@ public class RequestService {
 	    }
 	    
 	 // Update list by id
-	    public RequestDto updateRequest(Long requestId, RequestDto requestDto) {
+	    public RequestDto updateRequest(String requestId, RequestDto requestDto) {
 	        Optional<RequestEntity> existingRequestOptional = requestRepository.findById(requestId);
 	        if (existingRequestOptional.isPresent()) {
 	        	RequestEntity existingRequest = existingRequestOptional.get();
@@ -73,7 +73,7 @@ public class RequestService {
 	    }
 	    
 	    // Delete
-	    public void deleteRequest(Long requestId) {
+	    public void deleteRequest(String requestId) {
 	    requestRepository.deleteById(requestId);
 	        logger.info("Deleted Request with ID: {}", requestId);
 	    }

@@ -25,7 +25,7 @@ import lombok.ToString;
 @Builder
 public class GoodReceivedDto {
 
-    private Long goodReceivedId;
+    private String goodReceivedId;
 	private String purchaseOrder;
 	private String paymentSource;
 	private String vendorName;

@@ -57,7 +57,7 @@ public class PerformanceAppraisalController {
     // Get PerformanceAppraisalbyId
     @GetMapping("/get/{performanceAppraisalId}")
     // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<PerformanceAppraisalDto> getPerformanceAppraisalbyId(@PathVariable Long performanceAppraisalId) {
+    public ResponseEntity<PerformanceAppraisalDto> getPerformanceAppraisalbyId(@PathVariable String performanceAppraisalId) {
         Optional<PerformanceAppraisalDto> performanceAppraisal = performanceAppraisalService.getPerformanceAppraisalById(performanceAppraisalId);
         if (performanceAppraisal.isPresent()) {
             logger.info("Retrieved PerformanceAppraisal with ID: {}", performanceAppraisalId);
@@ -88,7 +88,7 @@ public class PerformanceAppraisalController {
     // Update PerformanceAppraisal by PerformanceAppraisalbyId
     @PutMapping("/update/{performanceAppraisalId}")
     // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<PerformanceAppraisalDto> updatePerformanceAppraisal(@PathVariable Long performanceAppraisalId, @RequestBody PerformanceAppraisalDto updatedPerformanceAppraisalDto) {
+    public ResponseEntity<PerformanceAppraisalDto> updatePerformanceAppraisal(@PathVariable String performanceAppraisalId, @RequestBody PerformanceAppraisalDto updatedPerformanceAppraisalDto) {
     	PerformanceAppraisalDto updatedPerformanceAppraisal = performanceAppraisalService.updatePerformanceAppraisal(performanceAppraisalId, updatedPerformanceAppraisalDto);
         if (updatedPerformanceAppraisal != null) {
             logger.info("Updated PerformanceAppraisal with ID: {}", performanceAppraisalId);
@@ -104,7 +104,7 @@ public class PerformanceAppraisalController {
     // Delete PerformanceAppraisal by ID
     @DeleteMapping("/delete/{performanceAppraisalId}")
     // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<Void> deletePerformanceAppraisal(@PathVariable Long performanceAppraisalId) {
+    public ResponseEntity<Void> deletePerformanceAppraisal(@PathVariable String performanceAppraisalId) {
   	  performanceAppraisalService.deletePerformanceAppraisal(performanceAppraisalId);
         logger.info("Deleted PerformanceAppraisal with ID: {}", performanceAppraisalId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -22,7 +22,7 @@ import lombok.ToString;
 @Builder
 public class CommitteeListDto {
 	
-	private Long committeeListId;	
+	private String committeeListId;	
 	private Long bidAnalysisId;	
 	private String name;	
 	private byte[] signature;	

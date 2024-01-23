@@ -34,8 +34,9 @@ import lombok.ToString;
 public class EventEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long eventId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Event.Entity.EventCustomIdGenerator")
+	private String eventId;
 	
 	@Column(name = "date")
 	@Convert(converter = AesEncryptor.class)

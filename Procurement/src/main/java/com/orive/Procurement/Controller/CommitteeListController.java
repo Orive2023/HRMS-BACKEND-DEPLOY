@@ -70,7 +70,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListControl
  // Get CommitteeList Photo by bidAnalysisId  
     @GetMapping("/download/{bidAnalysisId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<byte[]> downloadsPhoto(@PathVariable Long bidAnalysisId) {
+    public ResponseEntity<byte[]> downloadsPhoto(@PathVariable String bidAnalysisId) {
         byte[] photo = committeeListService.downloadImage(bidAnalysisId);
 
         if (photo != null) {
@@ -105,7 +105,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListControl
 
     @GetMapping("/detail/{committeeListId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public CommitteeListEntity getCommitteeListDetails(@PathVariable Long committeeListId) {
+    public CommitteeListEntity getCommitteeListDetails(@PathVariable String committeeListId) {
     	logger.info("Received request to fetch committeeList details for committeeListId: {}", committeeListId);
     	CommitteeListEntity committeeList = committeeListService.getCommitteeListByCommitteeListId(committeeListId);
         logger.info("Fetched committee details: {}", committeeListId);
@@ -131,7 +131,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListControl
 
     @DeleteMapping("/delete/{committeeListId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<String> deleteCommitteeList(@PathVariable Long committeeListId) {
+    public ResponseEntity<String> deleteCommitteeList(@PathVariable String committeeListId) {
     	logger.info("Received request to delete CommitteeList with ID: {}", committeeListId);
     	committeeListService.deleteCommitteeList(committeeListId);
         logger.info("CommitteeList deleted successfully.");

@@ -24,7 +24,7 @@ import lombok.ToString;
 @Builder
 public class PurchaseOrderDto {
 	
-    private Long purchaseOrderId;
+    private String purchaseOrderId;
 	private String quotation;
 	private String location;
 	private String vendorName;

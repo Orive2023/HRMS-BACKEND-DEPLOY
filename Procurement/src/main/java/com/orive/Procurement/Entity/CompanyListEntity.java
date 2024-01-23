@@ -1,5 +1,7 @@
 package com.orive.Procurement.Entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Procurement.Config.AesEncryptor;
 
 import jakarta.persistence.Column;
@@ -23,12 +25,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "company_list")
+@Table(name = "companylist")
 public class CompanyListEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long companyListId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Procurement.Entity.CompanyListCustomIdGenerator")
+	private String companyListId;
 	
 	//@Convert(converter = AesEncryptor.class)
 	private Long bidAnalysisId;

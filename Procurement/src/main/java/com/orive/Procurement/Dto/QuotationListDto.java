@@ -18,7 +18,7 @@ import lombok.ToString;
 @Builder
 public class QuotationListDto {
 
-    private Long quotationListId;
+    private String quotationListId;
     private Long quotationId;
 	private String descriptionOfMaterials;
 	private String unitName;

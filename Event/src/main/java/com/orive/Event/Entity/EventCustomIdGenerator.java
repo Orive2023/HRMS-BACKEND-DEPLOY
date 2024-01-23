@@ -1,4 +1,4 @@
-package com.orive.WorkSheet.Entity;
+package com.orive.Event.Entity;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -10,11 +10,11 @@ import org.hibernate.engine.jdbc.connections.spi.JdbcConnectionAccess;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
-public class CustomIdGenerator implements IdentifierGenerator {
-	
+public class EventCustomIdGenerator implements IdentifierGenerator {
+
 	private static final long serialVersionUID = 1L;
 
-	private final String prefix = "ORIWS-";
+	private final String prefix = "ORIEVNT-";
 	private long sequence;
 
 	@Override
@@ -27,7 +27,7 @@ public class CustomIdGenerator implements IdentifierGenerator {
 			jdbcConnectionAccess = session.getJdbcConnectionAccess();
 			connection = jdbcConnectionAccess.obtainConnection();
 
-			String query = "SELECT MAX(work_sheet_id), COUNT(work_sheet_id) FROM worksheet";
+			String query = "SELECT MAX(event_id), COUNT(event_id) FROM events";
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {

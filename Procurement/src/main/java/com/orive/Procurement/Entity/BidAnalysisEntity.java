@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.orive.Procurement.Config.AesEncryptor;
 import com.orive.Procurement.Enum.Status;
 
@@ -36,12 +38,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "bid_analysis")
+@Table(name = "bidanalysis")
 public class BidAnalysisEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long bidAnalysisId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Procurement.Entity.BidAnalysisCustomIdGenerator")
+	private String bidAnalysisId;
 	
 	@Column(name = "location")
 	@Convert(converter = AesEncryptor.class)

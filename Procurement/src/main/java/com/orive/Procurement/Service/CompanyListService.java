@@ -53,7 +53,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListService.c
 	    }
 
 	    // Get CompanyList by companyListId
-	    public CompanyListEntity getCompanyListByCompanyListId(Long companyListId) {
+	    public CompanyListEntity getCompanyListByCompanyListId(String companyListId) {
 	    	logger.info("Fetching CompanyList for companyListId: {}", companyListId);
 	    	CompanyListEntity companyList = companyListRepository.findById(companyListId)
 	                .orElseThrow(() -> {
@@ -84,7 +84,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListService.c
 
 	    
 	    // Delete
-	    public void deleteCompanyList(Long companyListId) {
+	    public void deleteCompanyList(String companyListId) {
 	    	companyListRepository.deleteById(companyListId);
 	        logger.info("Deleted CompanyList with ID: {}", companyListId);
 	    }
