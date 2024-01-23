@@ -44,7 +44,7 @@ public class WorkSheetService {
     }
     
     //get by WorkSheetId
-    public Optional<WorkSheetDto> getWorkSheetId(Long WorkSheetId) {
+    public Optional<WorkSheetDto> getWorkSheetId(String WorkSheetId) {
         Optional<WorkSheetEntity> workSheet = workSheetRepository.findById(WorkSheetId);
         if (workSheet.isPresent()) {
             return Optional.of(convertToDTO(workSheet.get()));
@@ -72,7 +72,7 @@ public class WorkSheetService {
     
     
  // Update list by id
-    public WorkSheetDto updateWorkSheet(Long WorkSheetId, WorkSheetDto workSheetDto) {
+    public WorkSheetDto updateWorkSheet(String WorkSheetId, WorkSheetDto workSheetDto) {
         Optional<WorkSheetEntity> existingWorkSheetOptional = workSheetRepository.findById(WorkSheetId);
         if (existingWorkSheetOptional.isPresent()) {
         	WorkSheetEntity existingWorkSheet= existingWorkSheetOptional.get();
@@ -88,7 +88,7 @@ public class WorkSheetService {
     }
     
     // Delete
-    public void deleteWorkSheet(Long WorkSheetId) {
+    public void deleteWorkSheet(String WorkSheetId) {
     	workSheetRepository.deleteById(WorkSheetId);
         logger.info("Deleted WorkSheet with ID: {}", WorkSheetId);
     }

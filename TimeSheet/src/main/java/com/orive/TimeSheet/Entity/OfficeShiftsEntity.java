@@ -34,7 +34,7 @@ public class OfficeShiftsEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
     @GenericGenerator(name = "custom-sequence", strategy = "com.orive.TimeSheet.Entity.OfficeShiftsCustomIdGenerator")
-	private Long officeShiftsId;
+	private String officeShiftsId;
 	
 	@Column(name = "created_date")
 	@Convert(converter = AesEncryptor.class)

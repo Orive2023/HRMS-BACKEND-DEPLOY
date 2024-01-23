@@ -55,7 +55,7 @@ public class WorkSheetController {
 		  // Get WorkSheet by ID
 		  @GetMapping("/get/{workSheetId}")
 		  // @PreAuthorize("hasRole('client_admin')")
-		  public ResponseEntity<WorkSheetDto> getWorkSheetDtoId(@PathVariable Long workSheetId) {
+		  public ResponseEntity<WorkSheetDto> getWorkSheetDtoId(@PathVariable String workSheetId) {
 		      Optional<WorkSheetDto> workSheet = workSheetService.getWorkSheetId(workSheetId);
 		      if (workSheet.isPresent()) {
 		          logger.info("Retrieved WorkSheet with ID: {}", workSheetId);
@@ -85,7 +85,7 @@ public class WorkSheetController {
 		  // Update WorkSheet by ID
 		  @PutMapping("/update/{workSheetId}")
 		  // @PreAuthorize("hasRole('client_admin')")
-		  public ResponseEntity<WorkSheetDto> updateWorkSheet(@PathVariable Long workSheetId, @RequestBody WorkSheetDto updatedWorkSheetDto) {
+		  public ResponseEntity<WorkSheetDto> updateWorkSheet(@PathVariable String workSheetId, @RequestBody WorkSheetDto updatedWorkSheetDto) {
 			  WorkSheetDto updatedWorkSheet = workSheetService.updateWorkSheet(workSheetId, updatedWorkSheetDto);
 		      if (updatedWorkSheet != null) {
 		          logger.info("Updated WorkSheet with ID: {}", workSheetId);
@@ -99,7 +99,7 @@ public class WorkSheetController {
 		  // Delete WorkSheet by ID
 		  @DeleteMapping("/delete/{workSheetId}")
 		  // @PreAuthorize("hasRole('client_admin')")
-		  public ResponseEntity<Void> deleteWorkSheet(@PathVariable Long workSheetId) {
+		  public ResponseEntity<Void> deleteWorkSheet(@PathVariable String workSheetId) {
 			   workSheetService.deleteWorkSheet(workSheetId);
 		      logger.info("Deleted WorkSheet with ID: {}", workSheetId);
 		      return new ResponseEntity<>(HttpStatus.NO_CONTENT);

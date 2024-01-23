@@ -37,7 +37,7 @@ public class WorkSheetEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
     @GenericGenerator(name = "custom-sequence", strategy = "com.orive.WorkSheet.Entity.CustomIdGenerator")
-	private Long workSheetId;
+	private String workSheetId;
 	
 	@Column(name = "work_sheet_title")
 	@Convert(converter = AesEncryptor.class)

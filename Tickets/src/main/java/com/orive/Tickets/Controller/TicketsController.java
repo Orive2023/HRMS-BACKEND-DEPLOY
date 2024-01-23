@@ -56,7 +56,7 @@ public class TicketsController {
 	  // Get Tickets by ID
 	  @GetMapping("/get/{ticketsId}")
 	  // @PreAuthorize("hasRole('client_admin')")
-	  public ResponseEntity<TicketsDto> getTicketsId(@PathVariable Long ticketsId) {
+	  public ResponseEntity<TicketsDto> getTicketsId(@PathVariable String ticketsId) {
 	      Optional<TicketsDto> tickets = ticketsService.getTicketsId(ticketsId);
 	      if (tickets.isPresent()) {
 	          logger.info("Retrieved Tickets with ID: {}", ticketsId);
@@ -85,7 +85,7 @@ public class TicketsController {
 	  // Update Tickets by ID
 	  @PutMapping("/update/{ticketsId}")
 	  // @PreAuthorize("hasRole('client_admin')")
-	  public ResponseEntity<TicketsDto> updateTickets(@PathVariable Long ticketsId, @RequestBody TicketsDto updatedTicketsDto) {
+	  public ResponseEntity<TicketsDto> updateTickets(@PathVariable String ticketsId, @RequestBody TicketsDto updatedTicketsDto) {
 		  TicketsDto updatedTickets = ticketsService.updateTickets(ticketsId, updatedTicketsDto);
 	      if (updatedTickets != null) {
 	          logger.info("Updated Tickets with ID: {}", ticketsId);
@@ -99,7 +99,7 @@ public class TicketsController {
 	  // Delete Tickets by ID
 	  @DeleteMapping("/delete/{ticketsId}")
 	  // @PreAuthorize("hasRole('client_admin')")
-	  public ResponseEntity<Void> deleteTickets(@PathVariable Long ticketsId) {
+	  public ResponseEntity<Void> deleteTickets(@PathVariable String ticketsId) {
 		   ticketsService.deleteTickets(ticketsId);
 	      logger.info("Deleted Tickets with ID: {}", ticketsId);
 	      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
