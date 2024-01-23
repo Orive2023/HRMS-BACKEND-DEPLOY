@@ -35,7 +35,7 @@ public class TrainersListEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
     @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Training.Entity.CustomIdGenerator")
-	private Long trainersListId;
+	private String trainersListId;
 	
 	@Column(name = "trainers_full_name")
 	@Convert(converter = AesEncryptor.class)

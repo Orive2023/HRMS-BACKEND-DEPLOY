@@ -46,7 +46,7 @@ public class OfficeShiftsService {
 	    }
 	    
 	    //get by OfficeShiftId
-	    public Optional<OfficeShiftsDto> getOfficeShiftsById(Long OfficeShiftsId) {
+	    public Optional<OfficeShiftsDto> getOfficeShiftsById(String OfficeShiftsId) {
 	        Optional<OfficeShiftsEntity> OfficeShifts = officeShiftsRepository.findById(OfficeShiftsId);
 	        if (OfficeShifts.isPresent()) {
 	            return Optional.of(convertToDTO(OfficeShifts.get()));
@@ -57,7 +57,7 @@ public class OfficeShiftsService {
 	    }
 	    
 	 // Update list by id
-	    public OfficeShiftsDto updateOfficeShifts(Long OfficeShiftsId, OfficeShiftsDto officeShiftsDto) {
+	    public OfficeShiftsDto updateOfficeShifts(String OfficeShiftsId, OfficeShiftsDto officeShiftsDto) {
 	        Optional<OfficeShiftsEntity> existingofficeShiftsOptional = officeShiftsRepository.findById(OfficeShiftsId);
 	        if (existingofficeShiftsOptional.isPresent()) {
 	        	OfficeShiftsEntity existingOfficeShifts = existingofficeShiftsOptional.get();
@@ -74,7 +74,7 @@ public class OfficeShiftsService {
 	    }
 	    
 	    // Delete
-	    public void deleteOfficeShifts(Long OfficeShiftsId) {
+	    public void deleteOfficeShifts(String OfficeShiftsId) {
 	    	officeShiftsRepository.deleteById(OfficeShiftsId);
 	        logger.info("Deleted OfficeShifts with ID: {}", OfficeShiftsId);
 	    }

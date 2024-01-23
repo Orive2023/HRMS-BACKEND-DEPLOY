@@ -38,7 +38,7 @@ public class TicketsEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
     @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Tickets.Entity.CustomIdGenerator")
-	private Long ticketsId;
+	private String ticketsId;
 	
 	@Column(name = "tickets_code")
 	@Convert(converter = AesEncryptor.class)

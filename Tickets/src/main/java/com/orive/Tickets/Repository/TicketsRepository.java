@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import com.orive.Tickets.Entity.TicketsEntity;
 
 
-public interface TicketsRepository extends JpaRepository<TicketsEntity, Long> {
+public interface TicketsRepository extends JpaRepository<TicketsEntity, String> {
 	
 //	@Query("SELECT t FROM TicketsEntity t WHERE t.employeeId = :employeeId")
 //	Optional<TicketsEntity> findByEmployeeId(@Param("employeeId") Long employeeId);

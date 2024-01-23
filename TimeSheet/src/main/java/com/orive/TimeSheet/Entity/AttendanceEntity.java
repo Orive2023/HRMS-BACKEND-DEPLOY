@@ -40,7 +40,7 @@ public class AttendanceEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
     @GenericGenerator(name = "custom-sequence", strategy = "com.orive.TimeSheet.Entity.AttendanceCustomIdGenerator")
-	private Long attendanceId;
+	private String attendanceId;
 	
 	@Column(name = "office_clock_in")
 	@Convert(converter = AesEncryptor.class)

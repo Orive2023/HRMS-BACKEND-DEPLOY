@@ -34,7 +34,7 @@ public class HolidaysEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
     @GenericGenerator(name = "custom-sequence", strategy = "com.orive.TimeSheet.Entity.HolidaysCustomIdGenerator")
-	private Long holidaysId;
+	private String holidaysId;
 	
 	@Column(name = "event_name")
 	@Convert(converter = AesEncryptor.class)

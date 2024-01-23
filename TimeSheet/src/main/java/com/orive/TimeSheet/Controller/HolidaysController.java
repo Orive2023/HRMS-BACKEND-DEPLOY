@@ -55,7 +55,7 @@ public class HolidaysController {
       // Get Holidays by ID
       @GetMapping("/get/{holidaysId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<HolidaysDto> getHolidaysById(@PathVariable Long holidaysId) {
+      public ResponseEntity<HolidaysDto> getHolidaysById(@PathVariable String holidaysId) {
           Optional<HolidaysDto> holidays = holidaysService.getHolidaysById(holidaysId);
           if (holidays.isPresent()) {
               logger.info("Retrieved Holidays with ID: {}", holidaysId);
@@ -69,7 +69,7 @@ public class HolidaysController {
       // Update Holidays by ID
       @PutMapping("/update/{holidaysId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<HolidaysDto> updateHolidays(@PathVariable Long holidaysId, @RequestBody HolidaysDto updatedHolidaysDto) {
+      public ResponseEntity<HolidaysDto> updateHolidays(@PathVariable String holidaysId, @RequestBody HolidaysDto updatedHolidaysDto) {
     	  HolidaysDto updatedHolidays = holidaysService.updateHolidays(holidaysId, updatedHolidaysDto);
           if (updatedHolidays != null) {
               logger.info("Updated Holidays with ID: {}", holidaysId);
@@ -85,7 +85,7 @@ public class HolidaysController {
       // Delete Holidays by ID
       @DeleteMapping("/delete/{holidaysId}")
    // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<Void> deleteHolidays(@PathVariable Long holidaysId) {
+      public ResponseEntity<Void> deleteHolidays(@PathVariable String holidaysId) {
     	  holidaysService.deleteHolidays(holidaysId);
           logger.info("Deleted Holidays with ID: {}", holidaysId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
