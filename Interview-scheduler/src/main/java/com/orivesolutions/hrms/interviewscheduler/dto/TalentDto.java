@@ -9,13 +9,21 @@ import java.time.LocalDate;
 public class TalentDto {
 
     private long id;
-    private String name;
-    private String requirements;
-    private String projectName;
-    private String managerName;
+    private String country;
+    private String city;
+    private String role;
+    private String subRole;
+    private String projectRole;
+    private String businessArea;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
-    private String jobLocation;
+    private String jobNo;
+    private String designation;
+    private String projectRoleDesc;
+    private String mustHaveSkills;
+    private String goodHaveSkills;
+    private String qualification;
+    private String description;
 }

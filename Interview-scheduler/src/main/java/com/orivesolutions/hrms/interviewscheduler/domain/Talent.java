@@ -24,32 +24,63 @@ public class Talent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "name")
+    @Column(name = "country")
     //@Convert(converter = AesEncryptor.class)
-    private String name;
+    private String country;
     
-    @Column(name = "requirements")
+    @Column(name = "city")
     //@Convert(converter = AesEncryptor.class)
-    private String requirements;
+    private String city;
     
-    @Column(name = "project_name")
+    @Column(name = "role")
    // @Convert(converter = AesEncryptor.class)
-    private String projectName;
+    private String role;
     
-    @Column(name = "manager_name")
+    @Column(name = "sub_role")   
     //@Convert(converter = AesEncryptor.class)
-    private String managerName;
+    private String subRole;
+    
+    @Column(name = "project_role")
+    //@Convert(converter = AesEncryptor.class)
+    private String projectRole;
+    
+    @Column(name = "business_area")
+   // @Convert(converter = AesEncryptor.class)
+    private String businessArea;
     
     @Column(name = "start_date")
     //@Convert(converter = AesEncryptor.class)
     private LocalDate startDate;
     
     @Column(name = "end_date")
-   // @Convert(converter = AesEncryptor.class)
-    private LocalDate endDate;
+    // @Convert(converter = AesEncryptor.class)
+     private LocalDate endDate;
     
-    @Column(name = "job_location")
+    @Column(name = "jobNo")
     //@Convert(converter = AesEncryptor.class)
-    private String jobLocation;
+    private String jobNo;
+    
+    @Column(name = "designation")
+    //@Convert(converter = AesEncryptor.class)
+    private String designation;
+    
+    @Column(name = "project_role_desc")
+    //@Convert(converter = AesEncryptor.class)
+    private String projectRoleDesc;
 
+    @Column(name = "must_have_skills")
+    //@Convert(converter = AesEncryptor.class)
+    private String mustHaveSkills;
+    
+    @Column(name = "good_have_skills")
+    //@Convert(converter = AesEncryptor.class)
+    private String goodHaveSkills;
+    
+    @Column(name = "qualification")
+    //@Convert(converter = AesEncryptor.class)
+    private String qualification;
+    
+    @Column(name = "description")
+    //@Convert(converter = AesEncryptor.class)
+    private String description;
 }
