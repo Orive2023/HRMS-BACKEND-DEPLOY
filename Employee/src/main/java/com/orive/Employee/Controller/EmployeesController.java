@@ -60,7 +60,7 @@ public class EmployeesController {
   //@PreAuthorize("hasRole('client_admin')")
   public ResponseEntity<?> uploadEmployeeData(
 		  
-		  @RequestParam("employeeId")Long employeeId,
+		 
           @RequestParam("employeeName") String employeeName,
           @RequestParam("designationName") String designationName,
           @RequestParam("email") String email,
@@ -118,7 +118,7 @@ public class EmployeesController {
           @RequestParam("password") String password,
           @RequestParam Status status,
           @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument) throws IOException {
-                         String uploadEmployee = employeesService.saveEmployeesEntity(employeeId,employeeName,designationName,email,phone,alternativePhone,
+                         String uploadEmployee = employeesService.saveEmployeesEntity(employeeName,designationName,email,phone,alternativePhone,
                 		                        country,city,zipCode,employeeRole,companyType,attendanceTime,employeeType,createdDate,accountNumber,
                 		                        bankName,ifscNumber,branchName,basicSalary,transportAllowance,grossSalary,tinNumber,
                 		                        hraAllowances,otherAllowances,pfAllowances,daAllowances,medicalAllowances,otherInsurance,tax,

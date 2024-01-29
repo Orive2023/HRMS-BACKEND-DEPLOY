@@ -35,7 +35,7 @@ public class EmployeesService {
 		private ModelMapper modelMapper;
 		
 		public String saveEmployeesEntity(
-			    Long employeeId,
+			    
 				String employeeName,
 				String designationName,
 				String email,
@@ -97,7 +97,7 @@ public class EmployeesService {
 			try {
 				EmployeesEntity employeeData = employeesRepository.save(EmployeesEntity.builder()
 						
-						.employeeId(employeeId)
+						
 						.employeeName(employeeName)
 						.designationName(designationName)
 						.email(email)

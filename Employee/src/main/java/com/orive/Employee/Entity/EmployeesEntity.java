@@ -36,8 +36,8 @@ public class EmployeesEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-	@Column(name = "employee_id", unique = true)
-	@Convert(converter = AesEncryptor.class)
+	//@Column(name = "employee_id", unique = true)
+	//@Convert(converter = AesEncryptor.class)
 	private Long employeeId;
 	
 	@Column(name = "employee_name")
