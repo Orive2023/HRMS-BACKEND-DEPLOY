@@ -44,12 +44,12 @@ public class WorkSheetService {
     }
     
     //get by WorkSheetId
-    public Optional<WorkSheetDto> getWorkSheetId(String WorkSheetId) {
-        Optional<WorkSheetEntity> workSheet = workSheetRepository.findById(WorkSheetId);
+    public Optional<WorkSheetDto> getWorkSheetId(String workSheetId) {
+        Optional<WorkSheetEntity> workSheet = workSheetRepository.findById(workSheetId);
         if (workSheet.isPresent()) {
             return Optional.of(convertToDTO(workSheet.get()));
         } else {
-            logger.warn("WorkSheet with ID {} not found", WorkSheetId);
+            logger.warn("WorkSheet with ID {} not found", workSheetId);
             return Optional.empty();
         }
     }
@@ -72,8 +72,8 @@ public class WorkSheetService {
     
     
  // Update list by id
-    public WorkSheetDto updateWorkSheet(String WorkSheetId, WorkSheetDto workSheetDto) {
-        Optional<WorkSheetEntity> existingWorkSheetOptional = workSheetRepository.findById(WorkSheetId);
+    public WorkSheetDto updateWorkSheet(String workSheetId, WorkSheetDto workSheetDto) {
+        Optional<WorkSheetEntity> existingWorkSheetOptional = workSheetRepository.findById(workSheetId);
         if (existingWorkSheetOptional.isPresent()) {
         	WorkSheetEntity existingWorkSheet= existingWorkSheetOptional.get();
         	existingWorkSheet.setStatus(workSheetDto.getStatus());
@@ -82,15 +82,15 @@ public class WorkSheetService {
             logger.info("Updated WorkSheet with ID: {}", updatedWorkSheet.getWorkSheetId());
             return convertToDTO(updatedWorkSheet);
         } else {
-            logger.warn("WorkSheet with ID {} not found for update", WorkSheetId);
+            logger.warn("WorkSheet with ID {} not found for update", workSheetId);
             return null;
         }
     }
     
     // Delete
-    public void deleteWorkSheet(String WorkSheetId) {
-    	workSheetRepository.deleteById(WorkSheetId);
-        logger.info("Deleted WorkSheet with ID: {}", WorkSheetId);
+    public void deleteWorkSheet(String workSheetId) {
+    	workSheetRepository.deleteById(workSheetId);
+        logger.info("Deleted WorkSheet with ID: {}", workSheetId);
     }
 
     //count the total WorkSheet
