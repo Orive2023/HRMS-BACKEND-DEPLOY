@@ -44,12 +44,12 @@ public class WorkSheetService {
     }
     
     //get by WorkSheetId
-    public Optional<WorkSheetDto> getWorkSheetId(String WorkSheetId) {
-        Optional<WorkSheetEntity> workSheet = workSheetRepository.findById(WorkSheetId);
+    public Optional<WorkSheetDto> getWorkSheetId(String workSheetId) {
+        Optional<WorkSheetEntity> workSheet = workSheetRepository.findById(workSheetId);
         if (workSheet.isPresent()) {
             return Optional.of(convertToDTO(workSheet.get()));
         } else {
-            logger.warn("WorkSheet with ID {} not found", WorkSheetId);
+            logger.warn("WorkSheet with ID {} not found", workSheetId);
             return Optional.empty();
         }
     }
