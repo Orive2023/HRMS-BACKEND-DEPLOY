@@ -30,7 +30,7 @@ public class QuotationListEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String quotationListId;
+	private long quotationListId;
 	
 	//@Convert(converter = AesEncryptor.class)
 	private Long quotationId;

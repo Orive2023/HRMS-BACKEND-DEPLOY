@@ -80,7 +80,7 @@ public class BidAnalysisController {
  // Get BidAnalysis pdf by id  
     @GetMapping("/download/{bidAnalysisId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<byte[]> downloadsPdf(@PathVariable String bidAnalysisId) {
+    public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long bidAnalysisId) {
         byte[] pdf = bidAnalysisService.downloadPdf(bidAnalysisId);
 
         if (pdf != null) {
@@ -117,7 +117,7 @@ public class BidAnalysisController {
 
     @GetMapping("/combined-data/{bidAnalysisId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<BidAnalysisEntity> getCombinedData(@PathVariable String bidAnalysisId) {
+    public ResponseEntity<BidAnalysisEntity> getCombinedData(@PathVariable Long bidAnalysisId) {
         try {
             BidAnalysisEntity combinedData = bidAnalysisService.getCombinedDataByBidAnalysisId(bidAnalysisId);
             return new ResponseEntity<>(combinedData, HttpStatus.OK);
@@ -132,7 +132,7 @@ public class BidAnalysisController {
     // Update BidAnalysis by ID
     @PutMapping("/update/{bidAnalysisId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<BidAnalysisDto> updateBidAnalysis(@PathVariable String bidAnalysisId, @RequestBody BidAnalysisDto updatedBidAnalysisDto) {
+    public ResponseEntity<BidAnalysisDto> updateBidAnalysis(@PathVariable Long bidAnalysisId, @RequestBody BidAnalysisDto updatedBidAnalysisDto) {
     	BidAnalysisDto updatedBidAnalysis= bidAnalysisService.updateBidAnalysis(bidAnalysisId, updatedBidAnalysisDto);
         if (updatedBidAnalysis != null) {
             logger.info("Updated BidAnalysis with ID: {}", bidAnalysisId);
@@ -148,7 +148,7 @@ public class BidAnalysisController {
     // Delete BidAnalysis by ID
     @DeleteMapping("/delete/{bidAnalysisId}")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<Void> deleteBidAnalysis(@PathVariable String bidAnalysisId) {
+    public ResponseEntity<Void> deleteBidAnalysis(@PathVariable Long bidAnalysisId) {
   	  bidAnalysisService.deleteBidAnalysis(bidAnalysisId);
         logger.info("Deleted BidAnalysis with ID: {}", bidAnalysisId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

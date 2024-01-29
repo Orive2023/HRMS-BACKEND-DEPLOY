@@ -58,7 +58,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListService
 			
 			
 			//Download signature
-			public byte[] downloadImage(String bidAnalysisId) {
+			public byte[] downloadImage(Long bidAnalysisId) {
 				 Optional<CommitteeListEntity> dbImageData = committeeListRepository.findById(bidAnalysisId);
 			    
 			    if (dbImageData.isPresent()) {
@@ -88,7 +88,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListService
 	    }
 
 	    // Get CommitteeList by committeeListId
-	    public CommitteeListEntity getCommitteeListByCommitteeListId(String committeeListId) {
+	    public CommitteeListEntity getCommitteeListByCommitteeListId(Long committeeListId) {
 	    	logger.info("Fetching CommitteeList for committeeListId: {}", committeeListId);
 	    	CommitteeListEntity committeeList = committeeListRepository.findById(committeeListId)
 	                .orElseThrow(() -> {
@@ -119,7 +119,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListService
 
 	    
 	    // Delete
-	    public void deleteCommitteeList(String committeeListId) {
+	    public void deleteCommitteeList(Long committeeListId) {
 	    	committeeListRepository.deleteById(committeeListId);
 	        logger.info("Deleted CommitteeList with ID: {}", committeeListId);
 	    }

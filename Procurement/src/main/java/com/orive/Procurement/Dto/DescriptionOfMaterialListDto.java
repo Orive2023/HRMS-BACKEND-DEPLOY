@@ -21,7 +21,7 @@ import lombok.ToString;
 @Builder
 public class DescriptionOfMaterialListDto {
 	
-	private String descriptionOfMaterialId;
+	private Long descriptionOfMaterialId;
 	
 	private String descriptionOfMaterialOrGoodsOrService;
 	

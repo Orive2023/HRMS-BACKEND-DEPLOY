@@ -39,9 +39,8 @@ import lombok.ToString;
 public class RequestEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
-    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Procurement.Entity.RequestCustomIdGenerator")
-	private String requestId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long requestId;
 	
 	@Column(name = "requesting_person")
 	@Convert(converter = AesEncryptor.class)

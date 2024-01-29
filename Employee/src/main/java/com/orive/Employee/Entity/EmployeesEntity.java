@@ -35,9 +35,7 @@ import lombok.ToString;
 public class EmployeesEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long employeeSerialNo;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	@Column(name = "employee_id", unique = true)
 	@Convert(converter = AesEncryptor.class)
 	private Long employeeId;

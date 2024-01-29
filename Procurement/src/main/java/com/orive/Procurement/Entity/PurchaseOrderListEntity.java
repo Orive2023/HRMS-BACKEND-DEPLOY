@@ -28,7 +28,7 @@ public class PurchaseOrderListEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String purchaseOrderListId;
+	private Long purchaseOrderListId;
 	
 	//@Convert(converter = AesEncryptor.class)
 	private Long purchaseOrderId;

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.orive.Procurement.Entity.CommitteeListEntity;
 
-public interface CommitteeListRepository extends JpaRepository<CommitteeListEntity, String> {
+public interface CommitteeListRepository extends JpaRepository<CommitteeListEntity, Long> {
 	
 	List<CommitteeListEntity> findByBidAnalysisId(Long bidAnalysisId);
 }

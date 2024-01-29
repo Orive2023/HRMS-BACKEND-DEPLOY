@@ -31,7 +31,7 @@ public class UnitsEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String unitsId;
+	private Long unitsId;
 	
 	@Column(name = "unit_name")
 	@Convert(converter = AesEncryptor.class)

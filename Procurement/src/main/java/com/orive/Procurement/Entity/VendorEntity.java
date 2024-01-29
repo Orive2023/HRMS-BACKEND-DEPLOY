@@ -31,9 +31,9 @@ public class VendorEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String vendorId;
+	private Long vendorId;
 	
-	@Column(name = "vendo_name")
+	@Column(name = "vendor_name")
 	@Convert(converter = AesEncryptor.class)
 	private String vendorName;
 	

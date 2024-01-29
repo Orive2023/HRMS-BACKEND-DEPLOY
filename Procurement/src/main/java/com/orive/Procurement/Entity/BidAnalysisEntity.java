@@ -42,9 +42,8 @@ import lombok.ToString;
 public class BidAnalysisEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
-    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Procurement.Entity.BidAnalysisCustomIdGenerator")
-	private String bidAnalysisId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long bidAnalysisId;
 	
 	@Column(name = "location")
 	@Convert(converter = AesEncryptor.class)

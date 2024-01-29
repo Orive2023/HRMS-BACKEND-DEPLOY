@@ -22,7 +22,7 @@ public class ExpenseListDto {
 
 	
     private Long expenceListId;
-	private String expenceId;
+	private Long expenceId;
 	private LocalDate purchaseDate;
 	private String description;
 	private String purchasedBy;

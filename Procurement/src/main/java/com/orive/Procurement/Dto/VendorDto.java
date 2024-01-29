@@ -18,7 +18,7 @@ import lombok.ToString;
 @Builder
 public class VendorDto {
  
-	private String vendorId;
+	private Long vendorId;
 	private String vendorName;
 	private Long mobileNo;
 	private String emailAddress;

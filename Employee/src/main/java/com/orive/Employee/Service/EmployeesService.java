@@ -301,7 +301,7 @@ public class EmployeesService {
 	        	existingEmployees.setStatus(employeesDto.getStatus());
 	        	modelMapper.map(employeesDto, existingEmployeesOptional);
 	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
-	            logger.info("Updated Employees with EmployeeSerialNo: {}", updatedEmployees.getEmployeeSerialNo());
+	            logger.info("Updated Employees with EmployeeSerialNo: {}", updatedEmployees.getEmployeeId());
 	            return convertToDTO(updatedEmployees);
 	        } else {
 	            logger.warn("Employees with EmployeeSerialNo {} not found for update", employeeSerialNo);

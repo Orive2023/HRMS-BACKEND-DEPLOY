@@ -41,7 +41,7 @@ public class PurchaseOrderEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String purchaseOrderId;
+	private Long purchaseOrderId;
 	
 	@Column(name = "quotation")
 	@Convert(converter = AesEncryptor.class)

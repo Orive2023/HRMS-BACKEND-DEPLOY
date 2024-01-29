@@ -18,7 +18,7 @@ import lombok.ToString;
 @Builder
 public class GoodReceivedListDto {
 	
-    private String goodReceivedListId;
+    private Long goodReceivedListId;
     private Long goodReceivedId;
 	private String description;
 	private String unitName;

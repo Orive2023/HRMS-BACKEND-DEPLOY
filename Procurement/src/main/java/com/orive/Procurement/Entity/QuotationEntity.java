@@ -37,7 +37,7 @@ public class QuotationEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String quotationId;
+	private Long quotationId;
 	
 	@Column(name = "name_of_company")
 	@Convert(converter = AesEncryptor.class)

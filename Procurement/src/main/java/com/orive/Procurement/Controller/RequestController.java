@@ -57,7 +57,7 @@ public class RequestController {
     // Get RequestbyId
     @GetMapping("/get/{requestId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<RequestDto> getRequestbyId(@PathVariable String requestId) {
+    public ResponseEntity<RequestDto> getRequestbyId(@PathVariable Long requestId) {
         Optional<RequestDto> request = requestService.getRequestById(requestId);
         if (request.isPresent()) {
             logger.info("Retrieved Request with ID: {}", requestId);
@@ -71,7 +71,7 @@ public class RequestController {
     // Update Request by ID
     @PutMapping("/update/{requestId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<RequestDto> updateRequest(@PathVariable String requestId, @RequestBody RequestDto updatedRequestDto) {
+    public ResponseEntity<RequestDto> updateRequest(@PathVariable Long requestId, @RequestBody RequestDto updatedRequestDto) {
     	RequestDto updatedRequest = requestService.updateRequest(requestId, updatedRequestDto);
         if (updatedRequest != null) {
             logger.info("Updated Request with ID: {}", requestId);
@@ -87,7 +87,7 @@ public class RequestController {
     // Delete Request by ID
     @DeleteMapping("/delete/{requestId}")
  // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<Void> deleteRequest(@PathVariable String requestId) {
+    public ResponseEntity<Void> deleteRequest(@PathVariable Long requestId) {
   	  requestService.deleteRequest(requestId);
         logger.info("Deleted Request with ID: {}", requestId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

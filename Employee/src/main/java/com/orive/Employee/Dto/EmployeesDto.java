@@ -24,8 +24,7 @@ import lombok.ToString;
 @ToString
 @Builder
 public class EmployeesDto {
-
-	private Long employeeSerialNo;
+	
     private Long employeeId;
 	private String employeeName;
 	private String designationName;

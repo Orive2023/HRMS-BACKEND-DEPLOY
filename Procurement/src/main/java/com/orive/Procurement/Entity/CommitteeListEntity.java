@@ -34,9 +34,8 @@ import lombok.ToString;
 public class CommitteeListEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
-    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Procurement.Entity.CommitteeListCustomIdGenerator")
-	private String committeeListId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long committeeListId;
 	
 	//@Convert(converter = AesEncryptor.class)
 	private Long bidAnalysisId;

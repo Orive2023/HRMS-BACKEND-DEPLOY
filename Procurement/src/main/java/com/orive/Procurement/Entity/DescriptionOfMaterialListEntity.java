@@ -29,9 +29,8 @@ import lombok.ToString;
 public class DescriptionOfMaterialListEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
-    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Procurement.Entity.DescriptionOfMaterialListCustomIdGenerator")
-	private String descriptionOfMaterialId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long descriptionOfMaterialId;
 	
 	@Column(name = "description_of_material_or_goods_or_Service")
 	@Convert(converter = AesEncryptor.class)

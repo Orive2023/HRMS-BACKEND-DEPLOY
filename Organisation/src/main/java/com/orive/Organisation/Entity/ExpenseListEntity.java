@@ -36,9 +36,9 @@ public class ExpenseListEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long expenceListId;
 	
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	@Column(name = "expence_id")
-	private String expenceId;
+	private Long expenceId;
 	
 	@Column(name = "purchase_date")
 	@Convert(converter = AesEncryptor.class)

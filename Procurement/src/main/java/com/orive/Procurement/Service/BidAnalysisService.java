@@ -71,7 +71,7 @@ public class BidAnalysisService {
 				
 		
 	//Download pdf
-	public byte[] downloadPdf(String bidAnalysisId) {
+	public byte[] downloadPdf(Long bidAnalysisId) {
 		 Optional<BidAnalysisEntity> dbPdfData = bidAnalysisRepository.findById(bidAnalysisId);
 	    
 	    if (dbPdfData.isPresent()) {
@@ -127,7 +127,7 @@ public class BidAnalysisService {
 //	    }
 	    
 	    
-	    public BidAnalysisEntity getCombinedDataByBidAnalysisId(String bidAnalysisId) {
+	    public BidAnalysisEntity getCombinedDataByBidAnalysisId(Long bidAnalysisId) {
 	        BidAnalysisEntity bidAnalysis = bidAnalysisRepository.findById(bidAnalysisId)
 	                .orElseThrow(() -> new ResourceNotFoundException("BidAnalysis with given id is not found on server !! : " + bidAnalysisId));
 
@@ -148,7 +148,7 @@ public class BidAnalysisService {
 	    
 	    
 	 // Update list by id
-	    public BidAnalysisDto updateBidAnalysis(String bidAnalysisId, BidAnalysisDto bidAnalysisDto) {
+	    public BidAnalysisDto updateBidAnalysis(Long bidAnalysisId, BidAnalysisDto bidAnalysisDto) {
 	        Optional<BidAnalysisEntity> existingBidAnalysisOptional = bidAnalysisRepository.findById(bidAnalysisId);
 	        if (existingBidAnalysisOptional.isPresent()) {
 	        	BidAnalysisEntity existingBidAnalysis = existingBidAnalysisOptional.get();
@@ -166,7 +166,7 @@ public class BidAnalysisService {
 	    }
 	    
 	    // Delete
-	    public void deleteBidAnalysis(String bidAnalysisId) {
+	    public void deleteBidAnalysis(Long bidAnalysisId) {
 	    bidAnalysisRepository.deleteById(bidAnalysisId);
 	        logger.info("Deleted BidAnalysis with ID: {}", bidAnalysisId);
 	    }

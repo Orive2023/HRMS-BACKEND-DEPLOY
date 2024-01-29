@@ -33,7 +33,7 @@ import lombok.ToString;
 public class BidAnalysisDto {
 
 
-	private String bidAnalysisId;
+	private Long bidAnalysisId;
 	private String location;
 	private LocalDate date;
 	private String quotation;

@@ -28,7 +28,7 @@ public class GoodReceivedListEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String goodReceivedListId;
+	private Long goodReceivedListId;
 	
 	//@Convert(converter = AesEncryptor.class)
 	private Long goodReceivedId;

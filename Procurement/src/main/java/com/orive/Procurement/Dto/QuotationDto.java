@@ -22,7 +22,7 @@ import lombok.ToString;
 @Builder
 public class QuotationDto {
 
-    private String quotationId;
+    private Long quotationId;
 	private String nameOfCompany;
 	private String address;
 	private Long pinOrEquivalent;
