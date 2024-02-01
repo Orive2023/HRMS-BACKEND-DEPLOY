@@ -11,6 +11,10 @@ import com.orive.TimeSheet.Entity.AttendanceEntity;
 
 public interface AttendanceRepository extends JpaRepository<AttendanceEntity, String> {
 
+	//Get method by using employeeId
+	@Query("SELECT a FROM AttendanceEntity a WHERE a.employeeId = :employeeId")
+	List<AttendanceEntity> findByEmployeeId(@Param("employeeId") Long employeeId);
+
 	//Count the employees present today
 		@Query("SELECT COUNT(a) FROM AttendanceEntity a WHERE a.date = CURRENT_DATE()")
 		long countPresentEmployeesToday();
@@ -30,4 +34,4 @@ public interface AttendanceRepository extends JpaRepository<AttendanceEntity, St
 		 @Query("SELECT DISTINCT a.date FROM AttendanceEntity a WHERE MONTH(a.date) = :month AND YEAR(a.date) = :year AND a.employeeId = :employeeId")
 		 List<LocalDate> getDistinctLoginDatesForMonth(@Param("month") int month, @Param("year") int year, @Param("employeeId") Long employeeId);
 }
-    
+ 

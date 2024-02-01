@@ -33,6 +33,7 @@ import com.orive.TimeSheet.ExcelToDataBase.Help.ExcelHelper;
 import com.orive.TimeSheet.Service.AttendanceService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
+
 @RestController
 @RequestMapping(value = "attendance")
 @CrossOrigin(origins = "*")
@@ -108,7 +109,8 @@ public class AttendanceController {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("please upload excel file ");
 	}
 	
-	
+
+    //get all product
 	@GetMapping("/get/product")
 	// @PreAuthorize("hasRole('client_admin')")
 	public List<AttendanceEntity> getAllAttendanceEntities()
@@ -129,7 +131,7 @@ public class AttendanceController {
 
     // Get Attendance by ID
     @GetMapping("/get/{attendanceId}")
- // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
     public ResponseEntity<AttendanceDto> getAttendanceById(@PathVariable String attendanceId) {
         Optional<AttendanceDto> attendance = attendanceService.getAttendanceById(attendanceId);
         if (attendance.isPresent()) {
@@ -140,6 +142,20 @@ public class AttendanceController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
+    
+ // Get Employee by ID
+	  @GetMapping("/{employeeId}")
+	  // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
+	    public ResponseEntity<List<AttendanceDto>> getAttendanceByEmployeeId(@PathVariable Long employeeId) {
+	        List<AttendanceDto> attendance = attendanceService.getEmployeeId(employeeId);
+	        if (attendance.isEmpty()) {
+	            return ResponseEntity.notFound().build();
+	        } else {
+	            return ResponseEntity.ok(attendance);
+	        }
+	    }
+    
 
     // Update Attendance by ID
     @PutMapping("/update/{attendanceId}")

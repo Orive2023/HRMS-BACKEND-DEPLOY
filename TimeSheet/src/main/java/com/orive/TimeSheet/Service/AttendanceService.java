@@ -3,6 +3,7 @@ package com.orive.TimeSheet.Service;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -134,6 +135,22 @@ public class AttendanceService {
             return Optional.empty();
         }
     }
+    
+    //get by employeeId
+    public List<AttendanceDto> getEmployeeId(Long employeeId) {
+        List<AttendanceEntity> employees = attendanceRepository.findByEmployeeId(employeeId);
+
+        if (employees.isEmpty()) {
+            logger.warn("Attendance with ID {} not found", employeeId);
+            return Collections.emptyList();
+        }
+
+        return employees.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    } 
+    
+    
     
  // Update list by id
     public AttendanceDto updateAttendances(String attendanceId, AttendanceDto attendanceDto) {
