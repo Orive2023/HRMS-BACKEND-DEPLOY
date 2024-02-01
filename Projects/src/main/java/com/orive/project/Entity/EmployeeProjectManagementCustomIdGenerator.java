@@ -27,7 +27,7 @@ public class EmployeeProjectManagementCustomIdGenerator implements IdentifierGen
 			jdbcConnectionAccess = session.getJdbcConnectionAccess();
 			connection = jdbcConnectionAccess.obtainConnection();
 
-			String query = "SELECT MAX(employee_project_management_id), COUNT(employee_project_management_id) FROM employeeProjectManagement";
+			String query = "SELECT MAX(employee_project_management_id), COUNT(employee_project_management_id) FROM employeeprojectmanagement";
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
