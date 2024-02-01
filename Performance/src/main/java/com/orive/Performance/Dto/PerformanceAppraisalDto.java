@@ -2,7 +2,10 @@ package com.orive.Performance.Dto;
 
 import java.time.LocalDate;
 
+import com.orive.Performance.Config.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,36 +24,36 @@ import lombok.ToString;
 @Builder
 public class PerformanceAppraisalDto {
 	
-    private String performanceAppraisalId;
+	private String performanceAppraisalId;
 	private String employeeName;
 	private Long employeeId;
 	private String departmentName;
 	private String position;
 	private LocalDate appraisalPeriod;
-	private int qualityOfWorkRating;
+	private double qualityOfWorkRating;
 	private String qualityOfWorkComments;
-	private Long qualityOfWorkScore;
-	private int jobKnowledgeRating;
+	private double qualityOfWorkScore;
+	private double jobKnowledgeRating;
 	private String jobKnowledgeComments;
-	private Long jobKnowledgeScore;
-	private int communicationSkillsRating;
+	private double jobKnowledgeScore;
+	private double communicationSkillsRating;
 	private String communicationSkillsComments;
-	private Long communicationSkillsScore;
-	private int teamworkAndCollaborationRating;
+	private double communicationSkillsScore;
+	private double teamworkAndCollaborationRating;
 	private String teamworkAndCollaborationComments;
-	private Long teamworkAndCollaborationScore;
-	private int initiativeAndCreativityRating;
+	private double teamworkAndCollaborationScore;
+	private double initiativeAndCreativityRating;
 	private String initiativeAndCreativityComments;
-	private Long initiativeAndCreativityScore;
-	private int punctualityAndAttendanceRating;
+	private double initiativeAndCreativityScore;
+	private double punctualityAndAttendanceRating;
 	private String punctualityAndAttendanceComments;
-	private Long punctualityAndAttendanceScore;
-	private int adaptabilityRating;
+	private double punctualityAndAttendanceScore;
+	private double adaptabilityRating;
 	private String adaptabilityComments;
-	private Long adaptabilityScore;
-	private int overallRating;
+	private double adaptabilityScore;
+	private double overallRating;
 	private String overallComments;
-	private Long overallScore;
+	private double overallScore;
 	private String areasForImprovement;
 	private String employeesSelfAssessment;
 	private String goalsAchieved;
