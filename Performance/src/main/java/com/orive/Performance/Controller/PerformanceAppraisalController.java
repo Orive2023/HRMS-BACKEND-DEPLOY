@@ -56,7 +56,7 @@ public class PerformanceAppraisalController {
 
     // Get PerformanceAppraisalbyId
     @GetMapping("/get/{performanceAppraisalId}")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
     public ResponseEntity<PerformanceAppraisalDto> getPerformanceAppraisalbyId(@PathVariable String performanceAppraisalId) {
         Optional<PerformanceAppraisalDto> performanceAppraisal = performanceAppraisalService.getPerformanceAppraisalById(performanceAppraisalId);
         if (performanceAppraisal.isPresent()) {
@@ -72,7 +72,7 @@ public class PerformanceAppraisalController {
     
  // Get PerformanceAppraisal by EmployeeId
     @GetMapping("/byId/{employeeId}")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
     public ResponseEntity<List<PerformanceAppraisalEntity>> getPerformanceAppraisalByEmployeeId(@PathVariable Long employeeId) {
         try {
             List<PerformanceAppraisalEntity> performanceAppraisal = performanceAppraisalService.getPerformanceAppraisalByEmployeeId(employeeId);
