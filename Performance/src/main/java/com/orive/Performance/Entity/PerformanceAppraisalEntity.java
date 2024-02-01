@@ -57,7 +57,7 @@ public class PerformanceAppraisalEntity {
 	
 	@Column(name = "quality_of_work_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int qualityOfWorkRating;
+	private double qualityOfWorkRating;
 	
 	@Column(name = "quality_of_work_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -65,11 +65,11 @@ public class PerformanceAppraisalEntity {
 	
 	@Column(name = "quality_of_work_score")
 	@Convert(converter = AesEncryptor.class)
-	private Long qualityOfWorkScore;
+	private double qualityOfWorkScore;
 	
 	@Column(name = "job_knowledge_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int jobKnowledgeRating;
+	private double jobKnowledgeRating;
 	
 	@Column(name = "job_knowledge_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -77,11 +77,11 @@ public class PerformanceAppraisalEntity {
 	
 	@Column(name = "job_knowledge_score")
 	@Convert(converter = AesEncryptor.class)
-	private Long jobKnowledgeScore;
+	private double jobKnowledgeScore;
 	
 	@Column(name = "communication_skills_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int communicationSkillsRating;
+	private double communicationSkillsRating;
 
 	@Column(name = "communication_skills_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -89,11 +89,11 @@ public class PerformanceAppraisalEntity {
 	
 	@Column(name = "communication_skills_score")
 	@Convert(converter = AesEncryptor.class)
-	private Long communicationSkillsScore;
+	private double communicationSkillsScore;
 	
 	@Column(name = "teamwork_and_collaboration_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int teamworkAndCollaborationRating;
+	private double teamworkAndCollaborationRating;
 	
 	@Column(name = "teamwork_and_collaboration_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -101,11 +101,11 @@ public class PerformanceAppraisalEntity {
 	
 	@Column(name = "teamwork_and_collaboration_score")
 	@Convert(converter = AesEncryptor.class)
-	private Long teamworkAndCollaborationScore;
+	private double teamworkAndCollaborationScore;
 	
 	@Column(name = "initiative_and_creativity_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int initiativeAndCreativityRating;
+	private double initiativeAndCreativityRating;
 	
 	@Column(name = "initiative_and_creativity_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -113,11 +113,11 @@ public class PerformanceAppraisalEntity {
 	
 	@Column(name = "initiative_and_creativity_score")
 	@Convert(converter = AesEncryptor.class)
-	private Long initiativeAndCreativityScore;
+	private double initiativeAndCreativityScore;
 	
 	@Column(name = "punctuality_and_attendance_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int punctualityAndAttendanceRating;
+	private double punctualityAndAttendanceRating;
 	
 	@Column(name = "punctuality_and_attendance_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -125,11 +125,11 @@ public class PerformanceAppraisalEntity {
 	
 	@Column(name = "punctuality_and_attendance_score")
 	@Convert(converter = AesEncryptor.class)
-	private Long punctualityAndAttendanceScore;
+	private double punctualityAndAttendanceScore;
 	
 	@Column(name = "adaptability_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int adaptabilityRating;
+	private double adaptabilityRating;
 	
 	@Column(name = "adaptability_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -137,11 +137,11 @@ public class PerformanceAppraisalEntity {
 	
 	@Column(name = "adaptability_score")
 	@Convert(converter = AesEncryptor.class)
-	private Long adaptabilityScore;
+	private double adaptabilityScore;
 	
 	@Column(name = "overall_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int overallRating;
+	private double overallRating;
 	
 	@Column(name = "overall_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -149,7 +149,7 @@ public class PerformanceAppraisalEntity {
 	
 	@Column(name = "overall_score")
 	@Convert(converter = AesEncryptor.class)
-	private Long overallScore;
+	private double overallScore;
 	
 	@Column(name = "areas_for_improvement")
 	@Convert(converter = AesEncryptor.class)

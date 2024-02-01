@@ -38,7 +38,7 @@ public class SelfAssessmentEntity {
 	
 	@Column(name = "performance_goal_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int performanceGoalRating;
+	private double performanceGoalRating;
 	
 	@Column(name = "performance_goal_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -46,7 +46,7 @@ public class SelfAssessmentEntity {
 	
 	@Column(name = "new_skills_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int newSkillsRating;
+	private double newSkillsRating;
 	
 	@Column(name = "new_skills_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -54,7 +54,7 @@ public class SelfAssessmentEntity {
 	
 	@Column(name = "collaboration_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int collaborationRating;
+	private double collaborationRating;
 	
 	@Column(name = "collaboration_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -62,7 +62,7 @@ public class SelfAssessmentEntity {
 	
 	@Column(name = "managed_your_time_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int managedYourTimeRating;
+	private double managedYourTimeRating;
 	
 	@Column(name = "managed_your_time_comments")
 	@Convert(converter = AesEncryptor.class)
@@ -70,7 +70,7 @@ public class SelfAssessmentEntity {
 	
 	@Column(name = "improved_communication_skill_rating")
 	@Convert(converter = AesEncryptor.class)
-	private int improvedCommunicationSkillRating;
+	private double improvedCommunicationSkillRating;
 	
 	@Column(name = "improved_communication_skill_comments")
 	@Convert(converter = AesEncryptor.class)

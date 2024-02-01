@@ -93,20 +93,6 @@ public class PerformanceAppraisalService {
 	 }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 	// Helper method to convert PerformanceAppraisalDTo to PerformanceAppraisalEntity
     private PerformanceAppraisalEntity convertToEntity(PerformanceAppraisalDto performanceAppraisalDto)
     {

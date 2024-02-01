@@ -17,14 +17,14 @@ import lombok.ToString;
 public class SelfAssessmentDto {
 
     private String selfAssessmentId;
-	private int performanceGoalRating;
+	private double performanceGoalRating;
 	private String performanceGoalComments;
-	private int newSkillsRating;
+	private double newSkillsRating;
 	private String newSkillsComments;
-	private int collaborationRating;
+	private double collaborationRating;
 	private String collaborationComments;
-	private int managedYourTimeRating;
+	private double managedYourTimeRating;
 	private String managedYourTimeComments;
-	private int improvedCommunicationSkillRating;
+	private double improvedCommunicationSkillRating;
 	private String improvedCommunicationSkillComments;
 }
