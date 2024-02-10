@@ -41,7 +41,7 @@ public class SalaryTemplateController {
    // @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<SalaryTemplateDto> createSalaryTemplate(@RequestBody SalaryTemplateDto salaryTemplateDto) {
     	  SalaryTemplateDto createdSalaryTemplate = salaryTemplateService.createSalaryTemplate(salaryTemplateDto);
-          logger.info("Created SalaryTemplate with name: {}", createdSalaryTemplate.getBasicSalery());
+          logger.info("Created SalaryTemplate with name: {}", createdSalaryTemplate.getBasicSalary());
           return new ResponseEntity<>(createdSalaryTemplate, HttpStatus.CREATED);
       }
 

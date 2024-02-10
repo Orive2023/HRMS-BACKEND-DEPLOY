@@ -30,7 +30,7 @@ public class ResignationsController {
 	private static final Logger logger = LoggerFactory.getLogger(ResignationsController.class);
 	
 	 @Autowired
-	    private ResignationsService resignationsService;
+	 private ResignationsService resignationsService;
 	 
 	// Create a new Resignation
      @PostMapping("/create/resignations")
