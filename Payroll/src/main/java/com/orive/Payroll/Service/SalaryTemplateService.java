@@ -63,7 +63,7 @@ private static final Logger logger=LoggerFactory.getLogger(SalaryTemplateService
         Optional<SalaryTemplateEntity> existingSalaryTemplateOptional = salaryTemplateRepository.findById(salaryTemplateId);
         if (existingSalaryTemplateOptional.isPresent()) {
         	SalaryTemplateEntity existingSalaryTemplate= existingSalaryTemplateOptional.get();
-        	existingSalaryTemplate.setBasicSalery(salaryTemplateDto.getBasicSalery());
+        	existingSalaryTemplate.setBasicSalary(salaryTemplateDto.getBasicSalary());
             modelMapper.map(salaryTemplateDto, existingSalaryTemplateOptional);
             SalaryTemplateEntity updatedSalaryTemplate = salaryTemplateRepository.save(existingSalaryTemplate);
             logger.info("Updated SalaryTemplate with ID: {}", updatedSalaryTemplate.getSalaryTemplateId());

@@ -30,9 +30,9 @@ private static final Logger logger=LoggerFactory.getLogger(EmployeesExitService.
 	// Create
     public EmployeesExitDto createEmployeesExit(EmployeesExitDto employeesExitDto) {
     	EmployeesExitEntity employeesExitEntity = convertToEntity(employeesExitDto);
-    	EmployeesExitEntity savedemployeesExitDto = employeesExitRepository.save(employeesExitEntity);
-        logger.info("Created  EmployeeExit with ID: {}", savedemployeesExitDto.getEmployeeExitId());
-        return convertToDTO(savedemployeesExitDto);
+    	EmployeesExitEntity savedEmployeeExit = employeesExitRepository.save(employeesExitEntity);
+        logger.info("Created  EmployeeExit with ID: {}", savedEmployeeExit.getEmployeeExitId());
+        return convertToDTO(savedEmployeeExit);
     }
 
     // Read
