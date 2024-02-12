@@ -79,9 +79,12 @@ public class PurchaseOrderEntity {
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 	
 	@Transient
 	private List<PurchaseOrderListEntity> purchaseOrderListEntities = new ArrayList<>();

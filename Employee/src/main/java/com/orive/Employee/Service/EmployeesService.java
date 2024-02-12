@@ -92,7 +92,7 @@ public class EmployeesService {
 				String userEmailOrName,
 				String password,
 				MultipartFile fileDocument,
-				Status status) {
+				String status) {
 			
 			try {
 				EmployeesEntity employeeData = employeesRepository.save(EmployeesEntity.builder()

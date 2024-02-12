@@ -67,9 +67,12 @@ public class QuotationEntity {
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 	
 	@Transient
 	private List<QuotationListEntity> quotationListEntities=new ArrayList<>();

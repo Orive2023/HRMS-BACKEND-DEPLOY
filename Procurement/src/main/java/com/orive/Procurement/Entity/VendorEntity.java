@@ -65,7 +65,10 @@ public class VendorEntity {
 	@Convert(converter = AesEncryptor.class)
 	private double previousBalance;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 }

@@ -46,7 +46,7 @@ public class CommitteesService {
 	public String saveCommitteesEntity(
 			String name,		
 			MultipartFile file,
-			Status status) {
+			String status) {
 		
 		try {
 			CommitteesEntity uploadImage = committeesRepository.save(CommitteesEntity.builder()

@@ -20,6 +20,6 @@ public class UnitsDto {
 	
     private Long unitsId;
     private String unitName;
-    private Status status;
+    private String status;
 
 }

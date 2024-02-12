@@ -61,9 +61,12 @@ public class BidAnalysisEntity {
 	@Column(name = "attachment", length = 100000)
 	private byte[] attachment;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 	
 	@Transient
 	private List<CommitteeListEntity> committeeListEntities = new ArrayList<>();

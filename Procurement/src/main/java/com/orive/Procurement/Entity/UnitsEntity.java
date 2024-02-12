@@ -36,8 +36,11 @@ public class UnitsEntity {
 	@Column(name = "unit_name")
 	@Convert(converter = AesEncryptor.class)
 	private String unitName;
-	
-	@Enumerated(EnumType.STRING)
+		
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 }

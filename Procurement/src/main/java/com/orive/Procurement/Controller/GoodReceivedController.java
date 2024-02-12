@@ -60,7 +60,7 @@ public class GoodReceivedController {
             @RequestParam("receivedByName") String receivedByName,
             @RequestParam("title")  String title,
             @RequestParam(value = "signatureAndStamp", required = false) MultipartFile file,
-            @RequestParam("status") Status status){
+            @RequestParam("status") String status){
     	
     	String result = goodReceivedService.saveGoodReceivedEntity( 
     			purchaseOrder, paymentSource, vendorName, date, receivedByName, title, file, status);

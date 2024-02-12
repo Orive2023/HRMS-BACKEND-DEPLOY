@@ -38,7 +38,7 @@ public class BidAnalysisDto {
 	private LocalDate date;
 	private String quotation;
 	private byte[] attachment;
-	private Status status;
+	private String status;
 	private List<CommitteeListDto> committeeListDtos = new ArrayList<>();
 	private List<CompanyListDto> companyListDtos= new ArrayList<>();
 }

@@ -33,5 +33,5 @@ public class TrainersListDto {
 	private String previousClients;
 	private String trainingMaterialsProvided;
 	private String additionalNotes;
-	private Status status;
+	private String status;
 }

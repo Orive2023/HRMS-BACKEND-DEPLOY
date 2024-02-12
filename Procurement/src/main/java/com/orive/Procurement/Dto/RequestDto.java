@@ -42,7 +42,7 @@ public class RequestDto {
 	
 	private LocalDate createdDate;
 	
-	private Status status;
+	private String status;
 	
 	private List<DescriptionOfMaterialListDto> descriptionOfMaterialEntities;
 }

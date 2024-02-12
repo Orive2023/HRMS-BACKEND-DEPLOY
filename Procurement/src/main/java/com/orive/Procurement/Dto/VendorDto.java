@@ -27,5 +27,5 @@ public class VendorDto {
 	private String city;
 	private int zipCode;
 	private double previousBalance;
-	private Status status;
+	private String status;
 }

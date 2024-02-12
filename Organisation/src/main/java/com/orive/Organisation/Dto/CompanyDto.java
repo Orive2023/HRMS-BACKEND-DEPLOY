@@ -47,6 +47,6 @@ public class CompanyDto {
 	private String uan;
 	private LocalDate createdDate;
 	private byte[] file;
-	private Status status;
+	private String status;
 //	private List<LocationEntity> locationEntities=new ArrayList<>();
 }

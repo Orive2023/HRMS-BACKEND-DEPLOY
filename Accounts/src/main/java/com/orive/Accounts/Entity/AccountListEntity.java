@@ -101,7 +101,10 @@ public class AccountListEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String comments;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 }

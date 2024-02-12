@@ -40,6 +40,6 @@ public class ProjectDto {
 	private String summary;
 	private String description;
 	private String workUpdateSheet;
-	private Status status;
+	private String status;
     private List<EmployeeProjectManagementDto> employeeProjectManagementEntities;
 }

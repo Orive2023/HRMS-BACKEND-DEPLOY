@@ -20,7 +20,7 @@ public class CommitteesDto {
 
     private Long committeesId;
 	private String name;
-	private Status status;
+	private String status;
 	private byte[] signature;
 
 }

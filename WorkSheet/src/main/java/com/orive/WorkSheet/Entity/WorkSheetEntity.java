@@ -90,8 +90,11 @@ public class WorkSheetEntity {
 	@Column(name = "created_date")
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
-	
-	@Enumerated(EnumType.STRING)
+
 	@Column(name="status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name="status")
+//	private Status status;
 }

@@ -34,6 +34,6 @@ public class PurchaseOrderDto {
 	private String title;
 	private byte[] signatureAndStamp;
 	private LocalDate date;
-	private Status status;
+	private String status;
 	private List<PurchaseOrderListDto> purchaseOrderListDtos=new ArrayList<>();
 }

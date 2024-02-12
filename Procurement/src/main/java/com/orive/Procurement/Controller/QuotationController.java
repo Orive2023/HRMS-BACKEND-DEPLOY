@@ -51,7 +51,7 @@ public class QuotationController {
             @RequestParam("placeOfDelivery") String placeOfDelivery,
             @RequestParam(value = "signatureAndStamp", required = false) MultipartFile fileDocument,
             @RequestParam("date") LocalDate date,
-            @RequestParam Status status){
+            @RequestParam ("status")String status){
     	
     	String result = quotationService.saveQuotationEntity( 
     			nameOfCompany, address, pinOrEquivalent, expectedDateOfDelivery, placeOfDelivery, fileDocument, date, status);

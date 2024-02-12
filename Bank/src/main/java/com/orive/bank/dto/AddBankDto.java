@@ -26,5 +26,5 @@ public class AddBankDto {
 	private Long accountNumber;
 	private String branchName;
 	private String accountType;
-	private Status status;
+	private String status;
 }

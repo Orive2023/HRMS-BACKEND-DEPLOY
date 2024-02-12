@@ -30,6 +30,6 @@ public class QuotationDto {
 	private String placeOfDelivery;
 	private byte[] signatureAndStamp;
 	private LocalDate date;
-	private Status status;
+	private String status;
 	private List<QuotationListDto> quotationListDtos=new ArrayList<>();
 }
