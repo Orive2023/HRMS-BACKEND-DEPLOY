@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.3</version>
+		<version>3.1.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.orivesolutions.hrms.interviewschedular</groupId>
@@ -14,13 +14,14 @@
 	<name>interview-scheduler</name>
 	<description>This is a spring-boot application to manage the interview process</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 		<mapstruct-version>1.4.2.Final</mapstruct-version>
 		<jsoe.jwt.version>8.17.1</jsoe.jwt.version>
 		<hash.id.version>1.0.3</hash.id.version>
 		<log.path>/target/log4j/</log.path>
 		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
 		<snyk-api-token>de1b851b-444-43ee-8278-36fef124860b</snyk-api-token>
+		<spring-cloud.version>2022.0.4</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -33,18 +34,18 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -64,12 +65,24 @@
 			<version>${mapstruct-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.200</version> <!-- Use the latest version available -->
-			<scope>test</scope> <!-- You typically use H2 for testing, so add it to the test scope -->
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        
+		<!-- 	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>-->
 
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -89,7 +102,10 @@
 			<version>7.0.0</version> <!-- Use the same version as cucumber-java -->
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
 </dependencies>
 
 	<build>
@@ -139,13 +155,34 @@
 					</execution>
 				</executions>
 				<configuration>
+					<skip>true</skip>
 					<apiToken>${snyk-api-token}</apiToken>
 					<args>
 						<arg>&#45;&#45;all-projects</arg>
 					</args>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
+					</image>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
