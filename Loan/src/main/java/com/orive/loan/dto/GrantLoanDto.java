@@ -35,5 +35,5 @@ public class GrantLoanDto {
 	private double installment;
 	private int installmentCleared;
 	private double totalPaymentCleared;
-	private Status status;
+	private String status;
 }

@@ -46,7 +46,7 @@ public class BidAnalysisService {
 					LocalDate date,
 					String quotation,
 					MultipartFile file,
-					Status status) {
+					String status) {
 				
 				try {
 					BidAnalysisEntity pdfData = bidAnalysisRepository.save(BidAnalysisEntity.builder()

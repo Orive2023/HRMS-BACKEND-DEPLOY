@@ -53,7 +53,7 @@ private static final Logger logger= LoggerFactory.getLogger(PurchaseOrderService
 				String title,
 				MultipartFile fileDocument,
 				LocalDate date,
-				Status status) {
+				String status) {
 				
 				try {
 					PurchaseOrderEntity pdfData = purchaseOrderRepository.save(PurchaseOrderEntity.builder()

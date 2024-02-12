@@ -35,5 +35,5 @@ public class WorkSheetDto {
 	private String challangePart;
 	private String workProgress;
 	private LocalDate createdDate;
-	private Status status;
+	private String status;
 }

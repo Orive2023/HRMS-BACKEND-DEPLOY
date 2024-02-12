@@ -116,7 +116,7 @@ public class EmployeesController {
           @RequestParam("cellPhone") Long cellPhone,
           @RequestParam("userEmailOrName")  String userEmailOrName,
           @RequestParam("password") String password,
-          @RequestParam Status status,
+          @RequestParam ("status") String status,
           @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument) throws IOException {
                          String uploadEmployee = employeesService.saveEmployeesEntity(employeeName,designationName,email,phone,alternativePhone,
                 		                        country,city,zipCode,employeeRole,companyType,attendanceTime,employeeType,createdDate,accountNumber,

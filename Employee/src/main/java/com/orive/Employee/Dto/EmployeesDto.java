@@ -82,5 +82,5 @@ public class EmployeesDto {
 	private String userEmailOrName;
 	private String password;
 	private byte[] uploadDocument;
-	private Status status;
+	private String status;
 }

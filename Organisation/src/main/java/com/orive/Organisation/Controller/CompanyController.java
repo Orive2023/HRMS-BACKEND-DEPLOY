@@ -48,7 +48,7 @@ public class CompanyController {
               @RequestParam("uan") String uan,
               @RequestParam("website") String website,  
               @RequestParam("zipCode") int zipCode,                                                           
-              @RequestParam("status")  Status status
+              @RequestParam("status")  String status
 
               ) {
     	  String result = companyService.saveCompanyEntity( 

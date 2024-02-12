@@ -68,9 +68,12 @@ public class GoodReceivedEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String title;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 	
 	@Lob
 	@Column(name = "signature_and_stamp", length = 100000)

@@ -37,5 +37,5 @@ public class AccountBalanceDto {
 	private double accountBalance;
 	private String purpose;
 	private String comments;
-	private Status status;
+	private String status;
 }

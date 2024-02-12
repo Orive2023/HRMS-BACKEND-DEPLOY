@@ -56,8 +56,11 @@ public class AddBankEntity {
 	//@Convert(converter = AesEncryptor.class)
 	private String accountType;
 		
-	@Enumerated(EnumType.STRING)
 	@Column(name="status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name="status")
+//	private Status status;
 	
 }

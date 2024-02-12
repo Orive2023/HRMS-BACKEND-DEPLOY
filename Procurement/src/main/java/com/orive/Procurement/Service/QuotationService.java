@@ -49,7 +49,7 @@ public class QuotationService {
 				String placeOfDelivery,
 				MultipartFile fileDocument,
 				LocalDate date,
-				Status status) {
+				String status) {
 			
 			try {
 				QuotationEntity pdfData = quotationRepository.save(QuotationEntity.builder()

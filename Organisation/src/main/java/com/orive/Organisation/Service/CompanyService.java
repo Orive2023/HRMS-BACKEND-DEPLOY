@@ -70,7 +70,7 @@ public class CompanyService {
                 String uan,
                 String website,
                 int zipCode,
-                Status status) {
+                String status) {
 			
 			try {
 				CompanyEntity uploadImage = companyRepository.save(CompanyEntity.builder()

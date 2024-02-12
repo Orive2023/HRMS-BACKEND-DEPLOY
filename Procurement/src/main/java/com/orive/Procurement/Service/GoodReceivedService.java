@@ -49,7 +49,7 @@ private static final Logger logger= LoggerFactory.getLogger(GoodReceivedService.
 					String receivedByName,
 					String title,
 					MultipartFile file,
-					Status status) {
+					String status) {
 				
 				try {
 					GoodReceivedEntity pdfData = goodReceivedRepository.save(GoodReceivedEntity.builder()

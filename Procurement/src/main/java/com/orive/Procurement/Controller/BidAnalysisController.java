@@ -63,7 +63,7 @@ public class BidAnalysisController {
    		    @RequestParam LocalDate date,
    		    @RequestParam String quotation,
             @RequestParam(value = "attachment", required = false) MultipartFile file,
-            @RequestParam Status status){
+            @RequestParam String status){
     	
     	String result = bidAnalysisService.saveBidAnalysisEntity( 
     			location, date, quotation, file, status);

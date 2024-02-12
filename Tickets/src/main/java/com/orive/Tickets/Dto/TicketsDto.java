@@ -31,5 +31,5 @@ public class TicketsDto {
 	private LocalDate date;
 	private String projectTitle;
 	private String description;
-	private Status status;
+	private String status;
 }

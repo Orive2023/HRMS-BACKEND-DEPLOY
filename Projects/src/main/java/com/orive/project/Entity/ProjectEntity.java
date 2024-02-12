@@ -93,9 +93,12 @@ public class ProjectEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String workUpdateSheet;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 	
 	@OneToMany(targetEntity = EmployeeProjectManagementEntity.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "projects_employeeProjectManagement_fk",referencedColumnName = "projectsId")

@@ -112,9 +112,12 @@ public class CompanyEntity {
 	@Column(name = "file",length = 100000)
 	private byte[] file;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 	
 //	@Transient
 //	private List<LocationEntity> locationEntities=new ArrayList<>();

@@ -264,7 +264,10 @@ public class EmployeesEntity {
 	@Column(name = "upload_document", length = 100000)
 	private byte[] uploadDocument;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 }

@@ -57,7 +57,7 @@ public class PurchaseOrderController {
             @RequestParam("title") String title,
             @RequestParam(value = "signatureAndStamp", required = false) MultipartFile fileDocument,
             @RequestParam("date") LocalDate date,
-            @RequestParam("status") Status status){
+            @RequestParam("status") String status){
     	
     	String result = purchaseOrderService.savePurchaseOrderEntity( 
     			quotation, location, vendorName, address, notes, authorizedByName, title, fileDocument, date, status);

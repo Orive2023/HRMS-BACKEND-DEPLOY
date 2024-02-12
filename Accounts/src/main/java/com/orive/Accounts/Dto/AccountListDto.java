@@ -36,5 +36,5 @@ public class AccountListDto {
 	private String additionalAccountType;
 	private String additionalAccountInformation;
 	private String comments;
-	private Status status;
+	private String status;
 }

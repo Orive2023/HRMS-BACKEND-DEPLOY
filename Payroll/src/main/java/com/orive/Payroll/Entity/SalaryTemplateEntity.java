@@ -331,6 +331,7 @@ public class SalaryTemplateEntity {
     @Column(name = "old_tds")
     private Double oldTds;
     
+    @Column(name = "new_tds")
     private Double newTds;  
 
     @Column(name = "created_date")

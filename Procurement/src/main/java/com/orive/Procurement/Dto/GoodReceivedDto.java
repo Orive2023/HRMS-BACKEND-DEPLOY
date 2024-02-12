@@ -32,7 +32,7 @@ public class GoodReceivedDto {
 	private LocalDate date;
 	private String receivedByName;
 	private String title;
-	private Status status;
+	private String status;
 	private byte[] signatureAndStamp;
 	private List<GoodReceivedListDto> goodReceivedListDtos=new ArrayList<>();
 }

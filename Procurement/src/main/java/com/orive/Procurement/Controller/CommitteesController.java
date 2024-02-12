@@ -55,7 +55,7 @@ public class CommitteesController {
     public ResponseEntity<?> saveCompanyEntity(
   		  @RequestParam("name") String name,
           @RequestParam(value = "signature", required = false) MultipartFile file,
-          @RequestParam Status status) {
+          @RequestParam String status) {
   	  String result = committeesService.saveCommitteesEntity( 
   			name,file,status );
     

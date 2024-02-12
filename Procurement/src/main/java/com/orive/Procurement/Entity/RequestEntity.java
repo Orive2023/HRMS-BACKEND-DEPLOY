@@ -66,9 +66,12 @@ public class RequestEntity {
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate createdDate;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private Status status;
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 	
 	@OneToMany(targetEntity = DescriptionOfMaterialListEntity.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "request_description_fk",referencedColumnName = "requestId")
