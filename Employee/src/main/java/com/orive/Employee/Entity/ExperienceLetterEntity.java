@@ -48,6 +48,9 @@ public class ExperienceLetterEntity {
 	@Column(name = "designation")
 	private String designation;
 	
+	@Column(name = "work_based_on")
+	private String workBasedOn;
+	
 	@Column(name = "joining_date")
 	private LocalDate joiningDate;
 	

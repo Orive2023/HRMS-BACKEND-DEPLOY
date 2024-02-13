@@ -47,6 +47,9 @@ public class InternJoiningLetterEntity {
 	@Column(name = "joining_date")
 	private LocalDate joiningDate;
 	
+	@Column(name = "submission_date")
+	private LocalDate submissionDate;
+	
 	@Column(name = "subject")
 	private String subject;
 	

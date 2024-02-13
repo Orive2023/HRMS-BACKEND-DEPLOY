@@ -25,6 +25,7 @@ public class ExperienceLetterDto {
 	private String employeeName;
 	private String employeeId;
 	private String designation;
+	private String workBasedOn;
 	private LocalDate joiningDate;
 	private LocalDate leavesDate;
 	private String  servingPeriod;

@@ -25,6 +25,7 @@ public class InternJoiningLetterDto {
 	private String candidateName;
 	private String collegeName;
 	private LocalDate joiningDate;
+	private LocalDate submissionDate;
 	private String subject;
 	private String employeeDesignation;
 	private String department;
