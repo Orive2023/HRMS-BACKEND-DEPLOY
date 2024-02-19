@@ -65,7 +65,11 @@ spring:
       - id: INTERVIEW-SCHEDULER
         uri: lb://INTERVIEW-SCHEDULER
         predicates:
-          - Path=/candidates/**,/interviews/**,/talents/**,/users/**                     
+          - Path=/candidates/**,/interviews/**,/talents/**,/users/**
+      - id: SALE-SERVICE
+        uri: lb://SALE-SERVICE
+        predicates:
+          - Path=/client/**,/revenue/**,/sale/**                     
 eureka:
   instance:
     prefer-ip-address: true
