@@ -1,6 +1,8 @@
 package com.orive.Payroll.Controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -96,5 +98,10 @@ public class PaySlipGenerateController {
 	    public long countPaySlipGenerate()
 	    {
 	    	return paySlipGenerateService.countPaySlipGenerate();
+	    }
+	    
+	    @GetMapping("/total-net-salary/{year}/{month}")
+	    public Map<String, Double> getTotalNetSalaryForDepartmentsInMonth(@PathVariable int year, @PathVariable int month) {
+	        return paySlipGenerateService.getTotalNetSalaryForDepartmentsInMonth(year, month);
 	    }
 }

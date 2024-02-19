@@ -28,6 +28,7 @@ public class PaySlipGenerateDto {
     private Long employeeId;
     private String employeeName;
     private String designation;
+    private String department;
     private Double workingDays;
     private Double presentDays;
     private Double presentBasicSalary;
