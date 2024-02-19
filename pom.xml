@@ -35,6 +35,7 @@
         <module>WorkSheet</module>
         <module>Training</module>
         <module>Event</module>
+        <module>Sale</module>
         <module>Hrm-Gateway</module>
         <module>Hrm-Service-Registry</module>
 
