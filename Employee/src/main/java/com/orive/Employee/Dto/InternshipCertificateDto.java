@@ -22,6 +22,7 @@ public class InternshipCertificateDto {
 	private String employeeName;
 	private String registrationNo;
 	private LocalDate date;
+	private LocalDate issuesDate;
 	private String internsName;
 	private LocalDate startDate;
 	private LocalDate endDate;

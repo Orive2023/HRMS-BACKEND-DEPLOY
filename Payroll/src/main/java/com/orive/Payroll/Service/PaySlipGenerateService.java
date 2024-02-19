@@ -1,7 +1,11 @@
 package com.orive.Payroll.Service;
 
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -81,6 +85,17 @@ private static final Logger logger=LoggerFactory.getLogger(PaySlipGenerateServic
 	 {
 		 return paySlipGenerateRepository.count();
 	 }
+    
+    public Map<String, Double> getTotalNetSalaryForDepartmentsInMonth(int year, int month) {
+        Map<String, Double> netSalaryByDepartment = new HashMap<>();
+        List<Object[]> results = paySlipGenerateRepository.getTotalNetSalaryForDepartmentsInMonth(year, month);
+        for (Object[] result : results) {
+            String department = (String) result[0];
+            Double netSalary = (Double) result[1];
+            netSalaryByDepartment.put(department, netSalary);
+        }
+        return netSalaryByDepartment;
+    }
     
 	// Helper method to convert AdvanceSaleryDTo to AdvanceSaleryEntity
     private PaySlipGenerateEntity convertToEntity(PaySlipGenerateDto advanceSaleryDto)

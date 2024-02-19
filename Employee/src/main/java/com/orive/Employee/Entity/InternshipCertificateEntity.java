@@ -41,6 +41,9 @@ public class InternshipCertificateEntity {
 	@Column(name = "date")
 	private LocalDate date;
 	
+	@Column(name = "issues_date")
+	private LocalDate issuesDate;
+	
 	@Column(name = "interns_name")
 	private String internsName;
 	

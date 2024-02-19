@@ -48,6 +48,9 @@ public class PaySlipGenerateEntity {
 	    @Column(name = "designation")
 	    private String designation;
 	    
+	    @Column(name = "department")
+	    private String department;
+	    
 	    @Column(name = "working_days")
 	    private Double workingDays;
 	    
