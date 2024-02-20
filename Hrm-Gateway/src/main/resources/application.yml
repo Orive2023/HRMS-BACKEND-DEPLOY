@@ -17,7 +17,7 @@ spring:
       - id: EMPLOYEE-SERVICE
         uri: lb://EMPLOYEE-SERVICE
         predicates:
-          - Path=/awards/**,/companystationary/**,/complaints/**,/employee/**,/employee_exit/**,/promotions/**,/resignation/**,/termination/**,/transfers/**,/travels/**,/warnings/**,/experiencejoiningletter/**,/experienceletter/**,/internjoiningletter/**,/internshipcertificate/**,
+          - Path=/awards/**,/companystationary/**,/complaints/**,/employee/**,/employee_exit/**,/promotions/**,/resignation/**,/termination/**,/transfers/**,/travels/**,/warnings/**,/experiencejoiningletter/**,/experienceletter/**,/internjoiningletter/**,/internshipcertificate/**
       - id: LOAN-SERVICE
         uri: lb://LOAN-SERVICE
         predicates:
