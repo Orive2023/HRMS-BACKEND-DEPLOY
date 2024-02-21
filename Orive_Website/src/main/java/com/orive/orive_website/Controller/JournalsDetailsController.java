@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.orive_website.DTO.JournalsDetailsDto;
 import com.orive.orive_website.Service.JournalsDetailsService;
-
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController

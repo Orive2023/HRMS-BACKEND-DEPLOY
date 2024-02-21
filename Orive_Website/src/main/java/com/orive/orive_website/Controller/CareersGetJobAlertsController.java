@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.orive_website.DTO.CareersGetJobAlertsDto;
 import com.orive.orive_website.Service.CareersGetJobAlertsService;
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping(value = "careersgetjobAlerts")

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.orive_website.DTO.LandingPagePopUpDto;
 import com.orive.orive_website.Service.LandingPagePopUpService;
-
+//import org.springframework.security.access.prepost.PreAuthorize;
 
 
 @RestController

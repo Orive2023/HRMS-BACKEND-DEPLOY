@@ -69,7 +69,11 @@ spring:
       - id: SALE-SERVICE
         uri: lb://SALE-SERVICE
         predicates:
-          - Path=/client/**,/revenue/**,/sale/**                     
+          - Path=/client/**,/revenue/**,/sale/**
+      - id: ORIVEWEBSITE-SERVICE
+        uri: lb://ORIVEWEBSITE-SERVICE
+        predicates:
+          - Path=/careersgetjobAlerts/**,/journalsdetails/**,/landingpagepopup/**,/reachus/**                     
 eureka:
   instance:
     prefer-ip-address: true
