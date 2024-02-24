@@ -38,15 +38,45 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
   
-  	// Create a new Department
-      @PostMapping("/create/department")
-   // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<DepartmentDto> createDepartment(@Valid @RequestBody DepartmentDto departmentDto) {
-    	  DepartmentDto createdDepartment = departmentService.createDepartment(departmentDto);
-          logger.info("Created Department with name: {}", createdDepartment.getCompanyName());
-          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
-      }
+// 	// Create a new Department
+//      @PostMapping("/create/department")
+//   // @PreAuthorize("hasRole('client_admin')")
+//      public ResponseEntity<DepartmentDto> createDepartment(@Valid @RequestBody DepartmentDto departmentDto) {
+//    	  DepartmentDto createdDepartment = departmentService.createDepartment(departmentDto);
+//          logger.info("Created Department with name: {}", createdDepartment.getCompanyName());
+//          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
+//          
+//      }
+    
+    
+ // Create a new Department
+    @PostMapping("/create/department")
+  //@PreAuthorize("hasRole('client_admin')")
+  public ResponseEntity<?> createDepartment(@Valid @RequestBody DepartmentDto departmentDto) {
+      try {
+          // Check if the department name already exists
+          Optional<DepartmentDto> existingDepartment = departmentService.getDepartmentByName(departmentDto.getDepartmentName());
+          if (existingDepartment.isPresent()) {
+              // Department name already exists, return a bad request response with the error message
+              return ResponseEntity.badRequest().body("Department with name '" + departmentDto.getDepartmentName() + "' already exists");
+          }
 
+          // Department name is unique, proceed with creating the department
+          DepartmentDto createdDepartment = departmentService.createDepartment(departmentDto);
+          logger.info("Created Department with name: {}", createdDepartment.getCompanyName());
+          
+          // Return the created department with a success status code
+          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
+      } catch (Exception e) {
+          // Handle any unexpected errors
+          logger.error("Error creating department: {}", e.getMessage());
+          
+          // Return an internal server error response with a generic error message
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Department");
+      }
+  }
+    
+    
       // Get all Department     
       @GetMapping("/get/department")
    // @PreAuthorize("hasRole('client_admin')")
@@ -66,6 +96,21 @@ public class DepartmentController {
               return new ResponseEntity<>(department.get(), HttpStatus.OK);
           } else {
               logger.warn("Department with ID {} not found", departmentId);
+              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+          }
+      }
+      
+      
+      // Get Department by Name
+      @GetMapping("/get/name/{departmentName}")
+   // @PreAuthorize("hasRole('client_admin')")
+      public ResponseEntity<DepartmentDto> getDepartmentByName(@PathVariable String departmentName) {
+          Optional<DepartmentDto> department = departmentService.getDepartmentByName(departmentName);
+          if (department.isPresent()) {
+              logger.info("Retrieved Department with Name: {}", departmentName);
+              return new ResponseEntity<>(department.get(), HttpStatus.OK);
+          } else {
+              logger.warn("Department with Name {} not found", departmentName);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }

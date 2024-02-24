@@ -41,6 +41,7 @@ public class EmployeesDto {
 	private LocalDate createdDate;
 	private Long accountNumber;
 	private String bankName;
+	private String departmentName;
 	private String ifscNumber;
 	private String branchName;
 	private double basicSalary;

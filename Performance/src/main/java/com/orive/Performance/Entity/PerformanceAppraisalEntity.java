@@ -83,9 +83,9 @@ public class PerformanceAppraisalEntity {
 	@Convert(converter = AesEncryptor.class)
 	private double communicationSkillsRating;
 
-	@Column(name = "communication_skills_comments")
-	@Convert(converter = AesEncryptor.class)
-	private String communicationSkillsComments;
+//	@Column(name = "communication_skills_comments")
+//	@Convert(converter = AesEncryptor.class)
+//	private String communicationSkillsComments;
 	
 	@Column(name = "communication_skills_score")
 	@Convert(converter = AesEncryptor.class)

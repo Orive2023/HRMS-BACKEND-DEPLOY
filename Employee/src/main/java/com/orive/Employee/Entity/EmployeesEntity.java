@@ -120,6 +120,10 @@ public class EmployeesEntity {
 	@Convert(converter = AesEncryptor.class)
 	private double grossSalary;
 	
+	@Column(name = "department_name")
+	@Convert(converter = AesEncryptor.class)
+	private String departmentName;
+	
 	@Column(name = "tin_number")
 	@Convert(converter = AesEncryptor.class)
 	private Long tinNumber;

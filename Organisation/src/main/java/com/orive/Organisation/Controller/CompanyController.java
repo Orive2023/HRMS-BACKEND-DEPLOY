@@ -52,15 +52,17 @@ public class CompanyController {
 
               ) {
     	  String result = companyService.saveCompanyEntity( 
-    			  address, cin, city,  companyName, companyType, contactNumber, country, createdDate,  email,  fileDocument,  gst, legalOrTradingName, registrationNumber, state, uan, website, zipCode, status  );
+    			  address, cin, city,  companyName, companyType, contactNumber, country, createdDate,  email,  fileDocument,  gst, legalOrTradingName, registrationNumber, state, uan, website, zipCode, status);
       
-      	if(result != null) {
-      		 return new ResponseEntity<>(result, HttpStatus.OK);
+    	  if (result != null && result.startsWith("Error")) {
+              return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+          } else if (result != null) {
+              return new ResponseEntity<>(result, HttpStatus.OK);
           } else {
               return new ResponseEntity<>("Failed to save Company entity", HttpStatus.INTERNAL_SERVER_ERROR);
-         
-      	}
-          }      
+          }
+      }
+    
     
     
  // Get companies logo by name

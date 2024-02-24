@@ -72,8 +72,15 @@ public class CompanyService {
                 int zipCode,
                 String status) {
 			
-			try {
-				CompanyEntity uploadImage = companyRepository.save(CompanyEntity.builder()
+			 // Check if the company with the given name already exists
+		    Optional<CompanyEntity> existingCompany = companyRepository.findByCompanyName(companyName);
+		    if (existingCompany.isPresent()) {
+		        return "Error: A company with the name '" + companyName + "' already exists";
+		    }
+			
+		    try {
+		        // Create a new CompanyEntity object and save it
+		        CompanyEntity newCompany = CompanyEntity.builder()
 						.address(address)
 						.cin(cin)
 						.city(city)
@@ -92,18 +99,20 @@ public class CompanyService {
 						.website(website)
 						.zipCode(zipCode)
 						.status(status)
-		                .build());
+		                .build();
 
-		            if (uploadImage != null) {
-		                return "File uploaded successfully: " + (fileDocument != null ? fileDocument.getOriginalFilename() : "No file attached");
-		            }
+		        CompanyEntity savedCompany = companyRepository.save(newCompany);
+
+		        if (savedCompany != null) {
+		            return "Company saved successfully with ID: " + savedCompany.getCompanyId();
+		        } else {
+		            return "Error: Failed to save company";
+		        }
 				
-			}catch (Exception e) {
-				// Handle the IOException appropriately (e.g., log it, return an error message)
+		    } catch (IOException e) {
+		        // Handle the IOException appropriately (e.g., log it, return an error message)
 		        return "Error uploading file: " + e.getMessage();
-			}
-			
-			return null;
+		    }
 		}
 		
 		 //Download Logo

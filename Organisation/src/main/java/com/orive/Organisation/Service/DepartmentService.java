@@ -28,14 +28,31 @@ public class DepartmentService {
 	private ModelMapper modelMapper;
 	
 	
-	// Create
-    public DepartmentDto createDepartment(DepartmentDto departmentDto) {
-    	DepartmentEntity departmentEntity = convertToEntity(departmentDto);
-    	DepartmentEntity savedDepartment = departmentRepository.save(departmentEntity);
-        logger.info("Created Department with ID: {}", savedDepartment.getDepartmentId());
-        return convertToDTO(savedDepartment);
-    }
+//	// Create
+//    public DepartmentDto createDepartment(DepartmentDto departmentDto) {
+//    	DepartmentEntity departmentEntity = convertToEntity(departmentDto);
+//    	DepartmentEntity savedDepartment = departmentRepository.save(departmentEntity);
+//        logger.info("Created Department with ID: {}", savedDepartment.getDepartmentId());
+//        return convertToDTO(savedDepartment);
+//    }
 
+	// Create
+	public DepartmentDto createDepartment(DepartmentDto departmentDto) {
+	    // Check if the department name already exists
+	    Optional<DepartmentEntity> existingDepartment = departmentRepository.findByDepartmentName(departmentDto.getDepartmentName());
+	    if (existingDepartment.isPresent()) {
+	        // Department name already exists, handle the error as needed
+	        throw new RuntimeException("Department with name '" + departmentDto.getDepartmentName() + "' already exists");
+	    }
+
+	    // Department name is unique, proceed with saving
+	    DepartmentEntity departmentEntity = convertToEntity(departmentDto);
+	    DepartmentEntity savedDepartment = departmentRepository.save(departmentEntity);
+	    logger.info("Created Department with ID: {}", savedDepartment.getDepartmentId());
+	    return convertToDTO(savedDepartment);
+	}
+	
+	
     // Read
     public List<DepartmentDto> getAllDepartment() {
         List<DepartmentEntity> departmentEntities = departmentRepository.findAll();
@@ -52,6 +69,17 @@ public class DepartmentService {
             return Optional.of(convertToDTO(department.get()));
         } else {
             logger.warn("Department with ID {} not found", departmentId);
+            return Optional.empty();
+        }
+    }
+    
+  //get by DepartmentByName
+    public Optional<DepartmentDto> getDepartmentByName(String departmentName) {
+        Optional<DepartmentEntity> department = departmentRepository.findByDepartmentName(departmentName);
+        if (department.isPresent()) {
+            return Optional.of(convertToDTO(department.get()));
+        } else {
+            logger.warn("Department with Name {} not found", departmentName);
             return Optional.empty();
         }
     }
