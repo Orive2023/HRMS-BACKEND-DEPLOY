@@ -33,6 +33,7 @@ public class GrantLoanDto {
 	private double installmentPeriod;
 	private double repaymentTotal;
 	private double installment;
+	private String accountType;
 	private int installmentCleared;
 	private double totalPaymentCleared;
 	private String status;
