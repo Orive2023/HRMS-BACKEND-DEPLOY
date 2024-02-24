@@ -80,6 +80,10 @@ public class GrantLoanEntity {
 	@Convert(converter = AesEncryptor.class)
 	private double installment;
 	
+	@Column(name = "account_type")
+	@Convert(converter = AesEncryptor.class)
+	private String accountType;
+	
 	@Column(name = "installment_cleared")
 	@Convert(converter = AesEncryptor.class)
 	private int installmentCleared;
