@@ -37,7 +37,7 @@ public class PerformanceAppraisalDto {
 	private String jobKnowledgeComments;
 	private double jobKnowledgeScore;
 	private double communicationSkillsRating;
-	private String communicationSkillsComments;
+//	private String communicationSkillsComments;
 	private double communicationSkillsScore;
 	private double teamworkAndCollaborationRating;
 	private String teamworkAndCollaborationComments;

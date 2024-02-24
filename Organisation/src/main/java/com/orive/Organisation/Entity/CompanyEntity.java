@@ -47,7 +47,6 @@ public class CompanyEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String companyName;
 	
-	
 	@Column(name = "company_type")
 	@Convert(converter = AesEncryptor.class)
 	private String companyType;

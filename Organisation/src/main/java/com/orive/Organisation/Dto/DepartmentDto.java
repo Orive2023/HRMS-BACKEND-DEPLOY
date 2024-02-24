@@ -29,4 +29,8 @@ public class DepartmentDto {
 	private LocalDate createdDate;
 //	private String status;
 //	private String approvedBy;
+	
+
 }
+
+
