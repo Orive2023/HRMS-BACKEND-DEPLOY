@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.orive.bank.dto.AddBankDto;
 import com.orive.bank.service.AddBankService;
 //import org.springframework.security.access.prepost.PreAuthorize;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "addbank")
@@ -32,14 +35,41 @@ public class AddBankController {
 	@Autowired
 	private AddBankService addBankService;
 	
-	// Create a new AddBank
-    @PostMapping("/create/addbank")
- // @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<AddBankDto> createAddBank(@RequestBody AddBankDto addBankDto) {
-    	AddBankDto createdAddBank = addBankService.createAddBank(addBankDto);
-        logger.info("Created AddBank with name: {}", createdAddBank.getAccountName());
-        return new ResponseEntity<>(createdAddBank, HttpStatus.CREATED);
-    }
+//	// Create a new AddBank
+//    @PostMapping("/create/addbank")
+// // @PreAuthorize("hasRole('client_admin')")
+//    public ResponseEntity<AddBankDto> createAddBank(@RequestBody AddBankDto addBankDto) {
+//    	AddBankDto createdAddBank = addBankService.createAddBank(addBankDto);
+//        logger.info("Created AddBank with name: {}", createdAddBank.getAccountName());
+//        return new ResponseEntity<>(createdAddBank, HttpStatus.CREATED);
+//    }
+	
+	// Create a new Bank
+    @PostMapping("/create/bank")
+  //@PreAuthorize("hasRole('client_admin')")
+  public ResponseEntity<?> createBank(@Valid @RequestBody AddBankDto addBankDto) {
+      try {
+          // Check if the Bank name already exists
+          Optional<AddBankDto> existingDepartment = addBankService.getBankByAccountNumber(addBankDto.getAccountNumber());
+          if (existingDepartment.isPresent()) {
+              // Bank name already exists, return a bad request response with the error message
+              return ResponseEntity.badRequest().body("Bank with name '" + addBankDto.getAccountNumber() + "' already exists");
+          }
+
+          // Bank name is unique, proceed with creating the Bank
+          AddBankDto createdDepartment = addBankService.createBank(addBankDto);
+          logger.info("Bank Department with name: {}", createdDepartment.getBankName());
+          
+          // Return the created Bank with a success status code
+          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
+      } catch (Exception e) {
+          // Handle any unexpected errors
+          logger.error("Error creating Bank: {}", e.getMessage());
+          
+          // Return an internal server error response with a generic error message
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Department");
+      }
+  }
 
     // Get all AddBank   
     @GetMapping("/get/addbank")

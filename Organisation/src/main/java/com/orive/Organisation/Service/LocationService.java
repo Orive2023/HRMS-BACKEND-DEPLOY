@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.orive.Organisation.Dto.DesignationDto;
 import com.orive.Organisation.Dto.LocationDto;
+import com.orive.Organisation.Entity.DesignationEntity;
 import com.orive.Organisation.Entity.LocationEntity;
 import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Repository.LocationRepository;
@@ -27,13 +29,28 @@ public class LocationService {
 	private ModelMapper modelMapper;
 	
 	
+//	// Create
+//    public LocationDto createLocation(LocationDto locationDto) {
+//    	LocationEntity locationEntity = convertToEntity(locationDto);
+//    	LocationEntity savedLocation = locationRepository.save(locationEntity);
+//        logger.info("Created Location with ID: {}", savedLocation.getLocationId());
+//        return convertToDTO(savedLocation);
+//    }
+	
 	// Create
-    public LocationDto createLocation(LocationDto locationDto) {
-    	LocationEntity locationEntity = convertToEntity(locationDto);
-    	LocationEntity savedLocation = locationRepository.save(locationEntity);
-        logger.info("Created Location with ID: {}", savedLocation.getLocationId());
-        return convertToDTO(savedLocation);
-    }
+			public LocationDto createLocation(LocationDto locationDto) {
+			    // Check if the department name already exists
+			    Optional<LocationEntity> existingDepartment = locationRepository.findByLocationName(locationDto.getLocationName());
+			    if (existingDepartment.isPresent()) {
+			        // Department name already exists, handle the error as needed
+			        throw new RuntimeException("Location with name '" + locationDto.getLocationName() + "' already exists");
+			    }
+			    // Department name is unique, proceed with saving
+			    LocationEntity departmentEntity = convertToEntity(locationDto);
+			    LocationEntity savedDepartment = locationRepository.save(departmentEntity);
+			    logger.info("Created Location with ID: {}", savedDepartment.getLocationName());
+			    return convertToDTO(savedDepartment);
+			}
 
     // Read
     public List<LocationDto> getAllLocation() {
@@ -51,6 +68,17 @@ public class LocationService {
             return Optional.of(convertToDTO(location.get()));
         } else {
             logger.warn("Location with ID {} not found", locationId);
+            return Optional.empty();
+        }
+    }
+    
+    //get by LocationByName
+    public Optional<LocationDto> getLocationByName(String locationName) {
+        Optional<LocationEntity> department = locationRepository.findByLocationName(locationName);
+        if (department.isPresent()) {
+            return Optional.of(convertToDTO(department.get()));
+        } else {
+            logger.warn("Location with Name {} not found", locationName);
             return Optional.empty();
         }
     }

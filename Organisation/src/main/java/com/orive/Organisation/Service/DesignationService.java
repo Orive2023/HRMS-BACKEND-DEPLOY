@@ -9,7 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.orive.Organisation.Dto.DepartmentDto;
 import com.orive.Organisation.Dto.DesignationDto;
+import com.orive.Organisation.Entity.DepartmentEntity;
 import com.orive.Organisation.Entity.DesignationEntity;
 import com.orive.Organisation.Repository.DesignationRepository;
 
@@ -24,13 +27,28 @@ public class DesignationService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
+//	// Create
+//    public DesignationDto createDesignation(DesignationDto designationDto) {
+//    	DesignationEntity designationEntity = convertToEntity(designationDto);
+//    	DesignationEntity savedDesignation = designationRepository.save(designationEntity);
+//        logger.info("Created Designation with ID: {}", savedDesignation.getDesignationId());
+//        return convertToDTO(savedDesignation);
+//    }
+	
 	// Create
-    public DesignationDto createDesignation(DesignationDto designationDto) {
-    	DesignationEntity designationEntity = convertToEntity(designationDto);
-    	DesignationEntity savedDesignation = designationRepository.save(designationEntity);
-        logger.info("Created Designation with ID: {}", savedDesignation.getDesignationId());
-        return convertToDTO(savedDesignation);
-    }
+		public DesignationDto createDesignation(DesignationDto designationDto) {
+		    // Check if the department name already exists
+		    Optional<DesignationEntity> existingDepartment = designationRepository.findByDesignationName(designationDto.getDesignationName());
+		    if (existingDepartment.isPresent()) {
+		        // Department name already exists, handle the error as needed
+		        throw new RuntimeException("Designation with name '" + designationDto.getDesignationName() + "' already exists");
+		    }
+		    // Department name is unique, proceed with saving
+		    DesignationEntity departmentEntity = convertToEntity(designationDto);
+		    DesignationEntity savedDepartment = designationRepository.save(departmentEntity);
+		    logger.info("Created Designation with ID: {}", savedDepartment.getDesignationId());
+		    return convertToDTO(savedDepartment);
+		}
 
     // Read
     public List<DesignationDto> getAllDesignation() {
@@ -48,6 +66,17 @@ public class DesignationService {
             return Optional.of(convertToDTO(designation.get()));
         } else {
             logger.warn("Designation with ID {} not found", designationId);
+            return Optional.empty();
+        }
+    }
+    
+  //get by DepartmentByName
+    public Optional<DesignationDto> getDesignationByName(String designationName) {
+        Optional<DesignationEntity> department = designationRepository.findByDesignationName(designationName);
+        if (department.isPresent()) {
+            return Optional.of(convertToDTO(department.get()));
+        } else {
+            logger.warn("Designation with Name {} not found", designationName);
             return Optional.empty();
         }
     }

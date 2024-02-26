@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.orive.Organisation.Dto.DesignationDto;
 import com.orive.Organisation.Dto.LocationDto;
 import com.orive.Organisation.Entity.LocationEntity;
 import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Service.LocationService;
 //import org.springframework.security.access.prepost.PreAuthorize;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "location")
@@ -35,14 +38,41 @@ public class LocationController {
     private LocationService locationService;
 
   
-  	// Create a new Location
-      @PostMapping("/create/location")
-   // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<LocationDto> createLocation(@RequestBody LocationDto locationDto) {
-    	  LocationDto createdLocation = locationService.createLocation(locationDto);
-          logger.info("Created Location with name: {}", createdLocation.getCompanyName());
-          return new ResponseEntity<>(createdLocation, HttpStatus.CREATED);
+//  	// Create a new Location
+//      @PostMapping("/create/location")
+//   // @PreAuthorize("hasRole('client_admin')")
+//      public ResponseEntity<LocationDto> createLocation(@RequestBody LocationDto locationDto) {
+//    	  LocationDto createdLocation = locationService.createLocation(locationDto);
+//          logger.info("Created Location with name: {}", createdLocation.getCompanyName());
+//          return new ResponseEntity<>(createdLocation, HttpStatus.CREATED);
+//      }
+    
+ // Create a new Department
+    @PostMapping("/create/location")
+  //@PreAuthorize("hasRole('client_admin')")
+  public ResponseEntity<?> createLocation(@Valid @RequestBody LocationDto locationDto) {
+      try {
+          // Check if the location name already exists
+          Optional<LocationDto> existingDepartment = locationService.getLocationByName(locationDto.getLocationName());
+          if (existingDepartment.isPresent()) {
+              // location name already exists, return a bad request response with the error message
+              return ResponseEntity.badRequest().body("Location with name '" + locationDto.getLocationName() + "' already exists");
+          }
+
+          // location name is unique, proceed with creating the location
+          LocationDto createdDepartment = locationService.createLocation(locationDto);
+          logger.info("Created Location with name: {}", createdDepartment.getLocationName());
+          
+          // Return the created location with a success status code
+          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
+      } catch (Exception e) {
+          // Handle any unexpected errors
+          logger.error("Error creating Location: {}", e.getMessage());
+          
+          // Return an internal server error response with a generic error message
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Location");
       }
+  }
 
       // Get all Location  
       @GetMapping("/get/location")

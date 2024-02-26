@@ -22,6 +22,9 @@ import com.orive.Employee.Dto.ResignationsDto;
 import com.orive.Employee.Service.ResignationsService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
+
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "resignations")
 @CrossOrigin(origins = "*")
@@ -32,14 +35,41 @@ public class ResignationsController {
 	 @Autowired
 	 private ResignationsService resignationsService;
 	 
-	// Create a new Resignation
-     @PostMapping("/create/resignations")
-     // @PreAuthorize("hasRole('client_admin')")
-     public ResponseEntity<ResignationsDto> createResignations(@RequestBody ResignationsDto resignationsDto) {
-    	 ResignationsDto createdResignation = resignationsService.createResignations(resignationsDto);
-         logger.info("Created resignations with id: {}", createdResignation.getEmployeeName());
-         return new ResponseEntity<>(createdResignation, HttpStatus.CREATED);
-     }
+//	// Create a new Resignation
+//     @PostMapping("/create/resignations")
+//     // @PreAuthorize("hasRole('client_admin')")
+//     public ResponseEntity<ResignationsDto> createResignations(@RequestBody ResignationsDto resignationsDto) {
+//    	 ResignationsDto createdResignation = resignationsService.createResignations(resignationsDto);
+//         logger.info("Created resignations with id: {}", createdResignation.getEmployeeName());
+//         return new ResponseEntity<>(createdResignation, HttpStatus.CREATED);
+//     }
+	 
+	 // Create a new Department
+	    @PostMapping("/create/resignation")
+	  //@PreAuthorize("hasRole('client_admin')")
+	  public ResponseEntity<?> createResignation(@Valid @RequestBody ResignationsDto resignationsDto) {
+	      try {
+	          // Check if the department name already exists
+	          Optional<ResignationsDto> existingDepartment = resignationsService.getResignationsByName(resignationsDto.getEmployeeName());
+	          if (existingDepartment.isPresent()) {
+	              // Department name already exists, return a bad request response with the error message
+	              return ResponseEntity.badRequest().body("Resignation with name '" + resignationsDto.getEmployeeName() + "' already exists");
+	          }
+
+	          // Department name is unique, proceed with creating the department
+	          ResignationsDto createdDepartment = resignationsService.createResignation(resignationsDto);
+	          logger.info("Created Resignation with name: {}", createdDepartment.getEmployeeName());
+	          
+	          // Return the created department with a success status code
+	          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
+	      } catch (Exception e) {
+	          // Handle any unexpected errors
+	          logger.error("Error creating department: {}", e.getMessage());
+	          
+	          // Return an internal server error response with a generic error message
+	          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Designation");
+	      }
+	  }
 
      // Get all Resignations
      

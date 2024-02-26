@@ -16,6 +16,8 @@ import com.orive.Employee.Entity.AwardsEntity;
 import com.orive.Employee.Entity.ResignationsEntity;
 import com.orive.Employee.Repository.ResignationsRepository;
 
+
+
 @Service
 public class ResignationsService {
 	
@@ -28,13 +30,28 @@ public class ResignationsService {
 	private ModelMapper modelMapper;
 	
 	
+//	// Create
+//    public ResignationsDto createResignations(ResignationsDto resignationsDto) {
+//    	ResignationsEntity resignationsEntity = convertToEntity(resignationsDto);
+//    	ResignationsEntity savedResignations = resignationsRepository.save(resignationsEntity);
+//        logger.info("Created Resignation with ID: {}", savedResignations.getResignationId());
+//        return convertToDTO(savedResignations);
+//    }
+	
 	// Create
-    public ResignationsDto createResignations(ResignationsDto resignationsDto) {
-    	ResignationsEntity resignationsEntity = convertToEntity(resignationsDto);
-    	ResignationsEntity savedResignations = resignationsRepository.save(resignationsEntity);
-        logger.info("Created Resignation with ID: {}", savedResignations.getResignationId());
-        return convertToDTO(savedResignations);
-    }
+			public ResignationsDto createResignation(ResignationsDto resignationsDto) {
+			    // Check if the department name already exists
+			    Optional<ResignationsEntity> existingDepartment = resignationsRepository.findByEmployeeName(resignationsDto.getEmployeeName());
+			    if (existingDepartment.isPresent()) {
+			        // Department name already exists, handle the error as needed
+			        throw new RuntimeException("Resignation with name '" + resignationsDto.getEmployeeName() + "' already exists");
+			    }
+			    // Department name is unique, proceed with saving
+			    ResignationsEntity departmentEntity = convertToEntity(resignationsDto);
+			    ResignationsEntity savedDepartment = resignationsRepository.save(departmentEntity);
+			    logger.info("Created Resignation with ID: {}", savedDepartment.getResignationId());
+			    return convertToDTO(savedDepartment);
+			}
 
     // Read
     public List<ResignationsDto> getAllResignations() {
@@ -52,6 +69,17 @@ public class ResignationsService {
             return Optional.of(convertToDTO(resignation.get()));
         } else {
             logger.warn("Resignation with ID {} not found", resignationId);
+            return Optional.empty();
+        }
+    }
+    
+  //get by ResignationsByName
+    public Optional<ResignationsDto> getResignationsByName(String employeeName) {
+        Optional<ResignationsEntity> department = resignationsRepository.findByEmployeeName(employeeName);
+        if (department.isPresent()) {
+            return Optional.of(convertToDTO(department.get()));
+        } else {
+            logger.warn("Employee with Name {} not found", employeeName);
             return Optional.empty();
         }
     }

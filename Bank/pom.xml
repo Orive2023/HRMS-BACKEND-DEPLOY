@@ -7,7 +7,6 @@
 		<artifactId>orive-hmr-backend</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
 	<artifactId>Bank</artifactId>
 	<version>${project.parent.version}</version>
 	<name>Bank</name>

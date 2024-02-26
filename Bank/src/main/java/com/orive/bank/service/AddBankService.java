@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.orive.bank.dto.AddBankDto;
 import com.orive.bank.entities.AddBankEntity;
 import com.orive.bank.repository.AddBankRepository;
@@ -26,13 +27,28 @@ public class AddBankService {
 	private ModelMapper modelMapper;
 	
 	
+//	// Create
+//    public AddBankDto createAddBank(AddBankDto addBankDto) {
+//    	AddBankEntity addBankEntity = convertToEntity(addBankDto);
+//    	AddBankEntity savedAddBank = addBankRepository.save(addBankEntity);
+//        logger.info("Created AddBank with ID: {}", savedAddBank.getAccountName());
+//        return convertToDTO(savedAddBank);
+//    }
+	
 	// Create
-    public AddBankDto createAddBank(AddBankDto addBankDto) {
-    	AddBankEntity addBankEntity = convertToEntity(addBankDto);
-    	AddBankEntity savedAddBank = addBankRepository.save(addBankEntity);
-        logger.info("Created AddBank with ID: {}", savedAddBank.getAccountName());
-        return convertToDTO(savedAddBank);
-    }
+			public AddBankDto createBank(AddBankDto addBankDto) {
+			    // Check if the Bank name already exists
+			    Optional<AddBankEntity> existingDepartment = addBankRepository.findByAccountNumber(addBankDto.getAccountNumber());
+			    if (existingDepartment.isPresent()) {
+			        // Bank name already exists, handle the error as needed
+			        throw new RuntimeException("Designation with name '" + addBankDto.getAccountNumber() + "' already exists");
+			    }
+			    // Bank name is unique, proceed with saving
+			    AddBankEntity departmentEntity = convertToEntity(addBankDto);
+			    AddBankEntity savedDepartment = addBankRepository.save(departmentEntity);
+			    logger.info("Created Designation with ID: {}", savedDepartment.getAddBankId());
+			    return convertToDTO(savedDepartment);
+			}
 
     // Read
     public List<AddBankDto> getAllAddBank() {
@@ -50,6 +66,17 @@ public class AddBankService {
             return Optional.of(convertToDTO(addBank.get()));
         } else {
             logger.warn("AddBank with ID {} not found", addBankId);
+            return Optional.empty();
+        }
+    }
+    
+  //get by AccountByNumber
+    public Optional<AddBankDto> getBankByAccountNumber(Long accountNumber) {
+        Optional<AddBankEntity> department = addBankRepository.findByAccountNumber(accountNumber);
+        if (department.isPresent()) {
+            return Optional.of(convertToDTO(department.get()));
+        } else {
+            logger.warn("Designation with AccountNumber {} not found", accountNumber);
             return Optional.empty();
         }
     }

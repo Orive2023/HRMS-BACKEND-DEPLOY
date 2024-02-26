@@ -44,7 +44,6 @@ public class DepartmentService {
 	        // Department name already exists, handle the error as needed
 	        throw new RuntimeException("Department with name '" + departmentDto.getDepartmentName() + "' already exists");
 	    }
-
 	    // Department name is unique, proceed with saving
 	    DepartmentEntity departmentEntity = convertToEntity(departmentDto);
 	    DepartmentEntity savedDepartment = departmentRepository.save(departmentEntity);

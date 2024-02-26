@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Organisation.Dto.PoliciesDto;
+import com.orive.Organisation.Entity.CompanyEntity;
 import com.orive.Organisation.Entity.PoliciesEntity;
 import com.orive.Organisation.Repository.PoliciesRepository;
 import com.orive.Organisation.Util.UploadPdfUtils;
@@ -40,6 +41,12 @@ public class PoliciesService {
 			String description,
 			LocalDate createdDate,
 			MultipartFile file) {
+		
+		 // Check if the Policies with the given name already exists
+	    Optional<PoliciesEntity> existingCompany = policiesRepository.findByPoliciesTittle(title);
+	    if (existingCompany.isPresent()) {
+	        return "Error: A Policies with the name '" + title + "' already exists";
+	    }
 		
 		try {
 			PoliciesEntity pdfData = policiesRepository.save(PoliciesEntity.builder()

@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.orive.Employee.Dto.TerminationsDto;
 import com.orive.Employee.Service.TerminationsService;
 //import org.springframework.security.access.prepost.PreAuthorize;
+
+import jakarta.validation.Valid;
 
 
 
@@ -34,14 +37,42 @@ public class TerminationsController {
 	 @Autowired
 	    private TerminationsService terminationsService;
 	 
-		// Create a new Terminations
-     @PostMapping("/create/terminations")
-  // @PreAuthorize("hasRole('client_admin')")
-     public ResponseEntity<TerminationsDto> createTerminations(@RequestBody TerminationsDto terminationsDto) {
-    	 TerminationsDto createdTerminations = terminationsService.createTerminations(terminationsDto);
-         logger.info("Created Terminations with name: {}", createdTerminations.getEmployeeName());
-         return new ResponseEntity<>(createdTerminations, HttpStatus.CREATED);
-     }
+//		// Create a new Terminations
+//     @PostMapping("/create/terminations")
+//  // @PreAuthorize("hasRole('client_admin')")
+//     public ResponseEntity<TerminationsDto> createTerminations(@RequestBody TerminationsDto terminationsDto) {
+//    	 TerminationsDto createdTerminations = terminationsService.createTerminations(terminationsDto);
+//         logger.info("Created Terminations with name: {}", createdTerminations.getEmployeeName());
+//         return new ResponseEntity<>(createdTerminations, HttpStatus.CREATED);
+//     }
+	 
+	 
+	 // Create a new Department
+	    @PostMapping("/create/terminations")
+	  //@PreAuthorize("hasRole('client_admin')")
+	  public ResponseEntity<?> createTerminations(@Valid @RequestBody TerminationsDto terminationsDto) {
+	      try {
+	          // Check if the Terminations name already exists
+	          Optional<TerminationsDto> existingDepartment = terminationsService.getTerminationsByName(terminationsDto.getEmployeeName());
+	          if (existingDepartment.isPresent()) {
+	              // Terminations name already exists, return a bad request response with the error message
+	              return ResponseEntity.badRequest().body("Resignation with name '" + terminationsDto.getEmployeeName() + "' already exists");
+	          }
+
+	          // Terminations name is unique, proceed with creating the Terminations
+	          TerminationsDto createdDepartment = terminationsService.createTermination(terminationsDto);
+	          logger.info("Created Resignation with name: {}", createdDepartment.getEmployeeName());
+	          
+	          // Return the created Terminations with a success status code
+	          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
+	      } catch (Exception e) {
+	          // Handle any unexpected errors
+	          logger.error("Error creating Terminations: {}", e.getMessage());
+	          
+	          // Return an internal server error response with a generic error message
+	          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Terminations");
+	      }
+	  }
 
      // Get all Terminations  
      @GetMapping("/get/terminationsId")

@@ -55,13 +55,14 @@ public class PoliciesController {
     	String result = policiesService.savePoliciesEntity( 
     			companyName, title, description, createdDate, file );
     
-    	if(result != null) {
-    		 return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Failed to save policies entity", HttpStatus.INTERNAL_SERVER_ERROR);
-       
-    	}
-    }
+    	 if (result != null && result.startsWith("Error")) {
+             return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
+         } else if (result != null) {
+             return new ResponseEntity<>(result, HttpStatus.OK);
+         } else {
+             return new ResponseEntity<>("Failed to save Policies entity", HttpStatus.INTERNAL_SERVER_ERROR);
+         }
+     }
     
  // Get Policies pdf by id  
     @GetMapping("/download/{policiesId}")

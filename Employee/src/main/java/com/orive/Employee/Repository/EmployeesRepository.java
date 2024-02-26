@@ -15,6 +15,10 @@ public interface EmployeesRepository extends JpaRepository<EmployeesEntity, Long
 //Query for find by EmployeeName
  List<EmployeesEntity> findEmployeeByEmployeeName(String employeeName);
  
+ 
+//Query for find by EmployeeName
+List<EmployeesEntity> findEmployeeByUsername(String username);
+ 
 //Query for find by employeeId
  List<EmployeesEntity> findEmployeeByEmployeeId(Long employeeId);
 //  @Query("SELECT l FROM EmployeesEntity l WHERE l.employeeId = :employeeId")

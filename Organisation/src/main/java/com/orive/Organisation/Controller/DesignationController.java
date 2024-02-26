@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.orive.Organisation.Dto.DepartmentDto;
 import com.orive.Organisation.Dto.DesignationDto;
 import com.orive.Organisation.Service.DesignationService;
 //import org.springframework.security.access.prepost.PreAuthorize;
+
+import jakarta.validation.Valid;
 
 
 
@@ -35,14 +38,41 @@ public class DesignationController {
     private DesignationService designationService;
 
   
-  	// Create a new Designation
-      @PostMapping("/create/designation")
-   // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<DesignationDto> createDesignation(@RequestBody DesignationDto designationDto) {
-    	  DesignationDto createdDesignation = designationService.createDesignation(designationDto);
-          logger.info("Created Designation with name: {}", createdDesignation.getDesignationName());
-          return new ResponseEntity<>(createdDesignation, HttpStatus.CREATED);
+//  	// Create a new Designation
+//      @PostMapping("/create/designation")
+//   // @PreAuthorize("hasRole('client_admin')")
+//      public ResponseEntity<DesignationDto> createDesignation(@RequestBody DesignationDto designationDto) {
+//    	  DesignationDto createdDesignation = designationService.createDesignation(designationDto);
+//          logger.info("Created Designation with name: {}", createdDesignation.getDesignationName());
+//          return new ResponseEntity<>(createdDesignation, HttpStatus.CREATED);
+//      }
+    
+ // Create a new Department
+    @PostMapping("/create/designation")
+  //@PreAuthorize("hasRole('client_admin')")
+  public ResponseEntity<?> createDesignation(@Valid @RequestBody DesignationDto designationDto) {
+      try {
+          // Check if the department name already exists
+          Optional<DesignationDto> existingDepartment = designationService.getDesignationByName(designationDto.getDesignationName());
+          if (existingDepartment.isPresent()) {
+              // Department name already exists, return a bad request response with the error message
+              return ResponseEntity.badRequest().body("Designation with name '" + designationDto.getDesignationName() + "' already exists");
+          }
+
+          // Department name is unique, proceed with creating the department
+          DesignationDto createdDepartment = designationService.createDesignation(designationDto);
+          logger.info("Created Designation with name: {}", createdDepartment.getDesignationName());
+          
+          // Return the created department with a success status code
+          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
+      } catch (Exception e) {
+          // Handle any unexpected errors
+          logger.error("Error creating department: {}", e.getMessage());
+          
+          // Return an internal server error response with a generic error message
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Designation");
       }
+  }
 
       // Get all Designation
       @GetMapping("/get/designation")

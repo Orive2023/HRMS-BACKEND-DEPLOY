@@ -10,9 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.orive.Employee.Dto.AwardsDto;
+
 import com.orive.Employee.Dto.TerminationsDto;
-import com.orive.Employee.Entity.AwardsEntity;
+
+
 import com.orive.Employee.Entity.TerminationsEntity;
 import com.orive.Employee.Repository.TerminationsRepository;
 
@@ -27,13 +28,28 @@ public class TerminationsService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
+//	// Create
+//    public TerminationsDto createTerminations(TerminationsDto terminationsDto) {
+//    	TerminationsEntity terminationsEntity = convertToEntity(terminationsDto);
+//    	TerminationsEntity savedTermination = terminationsRepository.save(terminationsEntity);
+//        logger.info("Created Terminations with ID: {}", savedTermination.getTerminationId());
+//        return convertToDTO(savedTermination);
+//    }
+	
 	// Create
-    public TerminationsDto createTerminations(TerminationsDto terminationsDto) {
-    	TerminationsEntity terminationsEntity = convertToEntity(terminationsDto);
-    	TerminationsEntity savedTermination = terminationsRepository.save(terminationsEntity);
-        logger.info("Created Terminations with ID: {}", savedTermination.getTerminationId());
-        return convertToDTO(savedTermination);
-    }
+				public TerminationsDto createTermination(TerminationsDto terminationsDto) {
+				    // Check if the department name already exists
+				    Optional<TerminationsEntity> existingDepartment = terminationsRepository.findByEmployeeName(terminationsDto.getEmployeeName());
+				    if (existingDepartment.isPresent()) {
+				        // Department name already exists, handle the error as needed
+				        throw new RuntimeException("Terminations with name '" + terminationsDto.getEmployeeName() + "' already exists");
+				    }
+				    // Department name is unique, proceed with saving
+				    TerminationsEntity departmentEntity = convertToEntity(terminationsDto);
+				    TerminationsEntity savedDepartment = terminationsRepository.save(departmentEntity);
+				    logger.info("Created Terminations with ID: {}", savedDepartment.getTerminationId());
+				    return convertToDTO(savedDepartment);
+				}	
 
     // Read
     public List<TerminationsDto> getAllTerminations() {
@@ -51,6 +67,16 @@ public class TerminationsService {
             return Optional.of(convertToDTO(termination.get()));
         } else {
             logger.warn("Terminations with ID {} not found", terminationsId);
+            return Optional.empty();
+        }
+    }
+    //get by TerminationsByName
+    public Optional<TerminationsDto> getTerminationsByName(String employeeName) {
+        Optional<TerminationsEntity> department = terminationsRepository.findByEmployeeName(employeeName);
+        if (department.isPresent()) {
+            return Optional.of(convertToDTO(department.get()));
+        } else {
+            logger.warn("Employee with Name {} not found", employeeName);
             return Optional.empty();
         }
     }

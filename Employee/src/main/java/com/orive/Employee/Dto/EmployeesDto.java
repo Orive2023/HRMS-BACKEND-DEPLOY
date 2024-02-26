@@ -27,6 +27,7 @@ public class EmployeesDto {
 	
     private Long employeeId;
 	private String employeeName;
+	private String username;
 	private String designationName;
 	private String email;
 	private Long phone;

@@ -23,6 +23,7 @@ import com.orive.Employee.util.PdfUploadUtils;
 
 
 
+
 @Service
 public class EmployeesService {
 
@@ -37,6 +38,7 @@ public class EmployeesService {
 		public String saveEmployeesEntity(
 			    
 				String employeeName,
+				String username,
 				String designationName,
 				String email,
 				Long phone,
@@ -93,12 +95,20 @@ public class EmployeesService {
 				String password,
 				MultipartFile fileDocument,
 				String status) {
+			// Retrieve a list of employees with the given username
+	        List<EmployeesEntity> existingEmployees = employeesRepository.findEmployeeByUsername(username);
+
+	        // Check if the list is not empty
+	        if (!existingEmployees.isEmpty()) {
+	            return "Error: An employee with the username '" + username + "' already exists";
+	        }
 			
 			try {
 				EmployeesEntity employeeData = employeesRepository.save(EmployeesEntity.builder()
 						
 						
 						.employeeName(employeeName)
+						.username(username)
 						.designationName(designationName)
 						.email(email)
 						.phone(phone)
@@ -161,25 +171,19 @@ public class EmployeesService {
 			            return "File uploaded successfully: " + (fileDocument != null ? fileDocument.getOriginalFilename() : "No file attached");
 			        }
 				
-			}catch (Exception e) {
-				// Handle the IOException appropriately (e.g., log it, return an error message)
-		        return "Error uploading file: " + e.getMessage();
-			}
-			
-			return null;
-		}
-			
+			 } catch (Exception e) {
+		            // Handle the IOException appropriately (e.g., log it, return an error message)
+		            return "Error saving employee data: " + e.getMessage();
+		        }
+
+		        return "Unknown error occurred while saving employee data";
+		    }
 		
-	 //Download Logo			
-//		 public byte[] downloadImage(Long employeeId){
-//		        Optional<EmployeesEntity> dbImageData = employeesRepository.findById(employeeId);
-//		        byte[] images=ImageUploadUtils.decompressImage(dbImageData.get().getUploadPhoto());
-//		        return images;
-//		    }
+			
 		
 		//Download Logo
-		public byte[] downloadImage(Long employeeId) {
-		    List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByEmployeeId(employeeId);
+		public byte[] downloadImage(String username) {
+		    List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByUsername(username);
 
 		    if (!employeeList.isEmpty()) {
 		        EmployeesEntity dbImageData = employeeList.get(0);
@@ -193,22 +197,12 @@ public class EmployeesService {
 
 		
 		
-        //Download pdf		
-//			public byte[] downloadPdf(Long employeeId) {
-//				 Optional<EmployeesEntity> dbPdfData = employeesRepository.findById(employeeId);
-//			    
-//			    if (dbPdfData.isPresent()) {
-//			        return PdfUploadUtils.decompressPdf(dbPdfData.get().getUploadDocument());
-//			    } else {
-//			        // Handle the case where the candidate profile is not found
-//			        return null;
-//			    }
-//			}
+
 		
 		
 		//Download pdf	
-		public byte[] downloadPdf(Long employeeId) {
-		    List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByEmployeeId(employeeId);
+		public byte[] downloadPdf(String username) {
+		    List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByUsername(username);
 
 		    if (!employeeList.isEmpty()) {
 		        EmployeesEntity dbPdfData = employeeList.get(0);
@@ -231,16 +225,16 @@ public class EmployeesService {
 	                .collect(Collectors.toList());
 	    }
 	    
-	    //get by employeeSerialNo
-	    public Optional<EmployeesDto> getEmployeeSerialNo(Long employeeSerialNo) {
-	        Optional<EmployeesEntity> employee = employeesRepository.findById(employeeSerialNo);
-	        if (employee.isPresent()) {
-	            return Optional.of(convertToDTO(employee.get()));
-	        } else {
-	            logger.warn("Employees with ID {} not found", employeeSerialNo);
-	            return Optional.empty();
-	        }
-	    }
+//	    //get by employeeSerialNo
+//	    public Optional<EmployeesDto> getEmployeeSerialNo(Long employeeSerialNo) {
+//	        Optional<EmployeesEntity> employee = employeesRepository.findById(employeeSerialNo);
+//	        if (employee.isPresent()) {
+//	            return Optional.of(convertToDTO(employee.get()));
+//	        } else {
+//	            logger.warn("Employees with ID {} not found", employeeSerialNo);
+//	            return Optional.empty();
+//	        }
+//	    }
 	    
 	    //get by EmployeesName
 	    public List<EmployeesEntity> getEmployeesByName(String employeeName) {
@@ -255,11 +249,11 @@ public class EmployeesService {
 	    
 	    
 	  //get by EmployeesId
-	    public List<EmployeesEntity> getEmployeesByEmployeeId(Long employeeId) {
-	        List<EmployeesEntity> employees = employeesRepository.findEmployeeByEmployeeId(employeeId);
+	    public List<EmployeesEntity> getEmployeesByEmployeeId(String username) {
+	        List<EmployeesEntity> employees = employeesRepository.findEmployeeByUsername(username);
 	        if (employees.isEmpty()) {
-	            logger.warn("No employees found with EmployeeID: {}", employeeId);
-	            throw new ResourceNotFoundException("No employees found with EmployeeId: " + employeeId);
+	            logger.warn("No employees found with username: {}", username);
+	            throw new ResourceNotFoundException("No employees found with username: " + username);
 	        }
 	        return employees;
 	    }
@@ -281,38 +275,38 @@ public class EmployeesService {
 	 
 	    
 	    
-	 // Update list by EmployeeSerialNo
-	    public EmployeesDto updateEmployeeSerialNo(Long employeeSerialNo, EmployeesDto employeesDto) {
-	        Optional<EmployeesEntity> existingEmployeesOptional = employeesRepository.findById(employeeSerialNo);
-	        if (existingEmployeesOptional.isPresent()) {
-	        	EmployeesEntity existingEmployees = existingEmployeesOptional.get();
-	        	existingEmployees.setEmployeeName(employeesDto.getEmployeeName());
-	        	existingEmployees.setPhone(employeesDto.getPhone());
-	        	existingEmployees.setAccountNumber(employeesDto.getAccountNumber());
-	        	existingEmployees.setBasicSalary(employeesDto.getBasicSalary());
-	        	existingEmployees.setTransportAllowance(employeesDto.getTransportAllowance());
-	        	existingEmployees.setHraAllowances(employeesDto.getHraAllowances());
-	        	existingEmployees.setOtherAllowances(employeesDto.getOtherAllowances());
-	        	existingEmployees.setPfAllowances(employeesDto.getPfAllowances());
-	        	existingEmployees.setDaAllowances(employeesDto.getDaAllowances());
-	        	existingEmployees.setMedicalAllowances(employeesDto.getMedicalAllowances());
-	        	existingEmployees.setOtherInsurance(employeesDto.getOtherInsurance());
-	        	existingEmployees.setTax(employeesDto.getTax());
-	        	existingEmployees.setStatus(employeesDto.getStatus());
-	        	modelMapper.map(employeesDto, existingEmployeesOptional);
-	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
-	            logger.info("Updated Employees with EmployeeSerialNo: {}", updatedEmployees.getEmployeeId());
-	            return convertToDTO(updatedEmployees);
-	        } else {
-	            logger.warn("Employees with EmployeeSerialNo {} not found for update", employeeSerialNo);
-	            return null;
-	        }
-	    }
+//	 // Update list by EmployeeSerialNo
+//	    public EmployeesDto updateEmployeeSerialNo(Long employeeSerialNo, EmployeesDto employeesDto) {
+//	        Optional<EmployeesEntity> existingEmployeesOptional = employeesRepository.findById(employeeSerialNo);
+//	        if (existingEmployeesOptional.isPresent()) {
+//	        	EmployeesEntity existingEmployees = existingEmployeesOptional.get();
+//	        	existingEmployees.setEmployeeName(employeesDto.getEmployeeName());
+//	        	existingEmployees.setPhone(employeesDto.getPhone());
+//	        	existingEmployees.setAccountNumber(employeesDto.getAccountNumber());
+//	        	existingEmployees.setBasicSalary(employeesDto.getBasicSalary());
+//	        	existingEmployees.setTransportAllowance(employeesDto.getTransportAllowance());
+//	        	existingEmployees.setHraAllowances(employeesDto.getHraAllowances());
+//	        	existingEmployees.setOtherAllowances(employeesDto.getOtherAllowances());
+//	        	existingEmployees.setPfAllowances(employeesDto.getPfAllowances());
+//	        	existingEmployees.setDaAllowances(employeesDto.getDaAllowances());
+//	        	existingEmployees.setMedicalAllowances(employeesDto.getMedicalAllowances());
+//	        	existingEmployees.setOtherInsurance(employeesDto.getOtherInsurance());
+//	        	existingEmployees.setTax(employeesDto.getTax());
+//	        	existingEmployees.setStatus(employeesDto.getStatus());
+//	        	modelMapper.map(employeesDto, existingEmployeesOptional);
+//	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
+//	            logger.info("Updated Employees with EmployeeSerialNo: {}", updatedEmployees.getEmployeeId());
+//	            return convertToDTO(updatedEmployees);
+//	        } else {
+//	            logger.warn("Employees with EmployeeSerialNo {} not found for update", employeeSerialNo);
+//	            return null;
+//	        }
+//	    }
 	    
 	    
  //Update list by EmployeeId
-	    public EmployeesDto updateEmployees(Long employeeId, EmployeesDto employeesDto) {
-	        List<EmployeesEntity> existingEmployeesList = employeesRepository.findEmployeeByEmployeeId(employeeId);
+	    public EmployeesDto updateEmployees(String username, EmployeesDto employeesDto) {
+	        List<EmployeesEntity> existingEmployeesList = employeesRepository.findEmployeeByUsername(username);
 
 	        if (!existingEmployeesList.isEmpty()) {
 	            EmployeesEntity existingEmployees = existingEmployeesList.get(0);
@@ -331,31 +325,31 @@ public class EmployeesService {
 	            existingEmployees.setTax(employeesDto.getTax());
 
 	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
-	            logger.info("Updated Employees with ID: {}", updatedEmployees.getEmployeeId());
+	            logger.info("Updated Employees with username: {}", updatedEmployees.getUsername());
 	            return convertToDTO(updatedEmployees);
 	        } else {
-	            logger.warn("Employees with ID {} not found for update", employeeId);
+	            logger.warn("Employees with username {} not found for update", username);
 	            return null;
 	        }
 	    }
 
 	    
-       // Delete Employee By Using EmployeeSerialNo
-	    public void deleteEmployeesBySerialNo(Long employeeSerialNo) {
-	    	employeesRepository.deleteById(employeeSerialNo);
-	        logger.info("Deleted Employees with ID: {}", employeeSerialNo);
-	    }
+//       // Delete Employee By Using EmployeeSerialNo
+//	    public void deleteEmployeesBySerialNo(Long employeeSerialNo) {
+//	    	employeesRepository.deleteById(employeeSerialNo);
+//	        logger.info("Deleted Employees with ID: {}", employeeSerialNo);
+//	    }
 	    
 	    
        // Delete Employee By Using EmployeeId
-	    public void deleteEmployeeByEmployeeId(Long employeeId) {
-	        List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByEmployeeId(employeeId);
+	    public void deleteEmployeeByEmployeeId(String username) {
+	        List<EmployeesEntity> employeeList = employeesRepository.findEmployeeByUsername(username);
 	        if (!employeeList.isEmpty()) {
 	            EmployeesEntity employeeToDelete = employeeList.get(0);
 	            employeesRepository.delete(employeeToDelete);
-	            logger.info("Deleted Employee with EmployeeID: {}", employeeId);
+	            logger.info("Deleted Employee with username: {}", username);
 	        } else {
-	            logger.warn("Employee with EmployeeID {} not found for delete", employeeId);
+	            logger.warn("Employee with username {} not found for delete", username);
 	            // You may choose to throw an exception or handle it according to your application logic
 	        }
 	    }
