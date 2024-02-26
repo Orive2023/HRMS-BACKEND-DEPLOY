@@ -23,6 +23,8 @@ import com.orive.WorkSheet.Dto.WorkSheetDto;
 import com.orive.WorkSheet.Service.WorkSheetService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "worksheet")
 @CrossOrigin(origins = "*")
@@ -33,17 +35,46 @@ public class WorkSheetController {
 	@Autowired
 	private WorkSheetService workSheetService;
 	
-	// Create a new WorkSheet
-		  @PostMapping("/create/worksheet")
-		  // @PreAuthorize("hasRole('client_admin')")
-		  public ResponseEntity<WorkSheetDto> createWorkSheet(@RequestBody WorkSheetDto workSheetDto) {
-			  WorkSheetDto createdWorkSheet = workSheetService.createWorkSheet(workSheetDto);
-		      logger.info("Created WorkSheet with id: {}", createdWorkSheet.getWorkSheetTitle());
-		      return new ResponseEntity<>(createdWorkSheet, HttpStatus.CREATED);
-		  }
+//	// Create a new WorkSheet
+//		  @PostMapping("/create/worksheet")
+//		  // @PreAuthorize("hasRole('client_admin')")
+//		  public ResponseEntity<WorkSheetDto> createWorkSheet(@RequestBody WorkSheetDto workSheetDto) {
+//			  WorkSheetDto createdWorkSheet = workSheetService.createWorkSheet(workSheetDto);
+//		      logger.info("Created WorkSheet with id: {}", createdWorkSheet.getWorkSheetTitle());
+//		      return new ResponseEntity<>(createdWorkSheet, HttpStatus.CREATED);
+//		  }
 
+	
+	// Create a new  WorkSheet
+    @PostMapping("/create/worksheet")
+  //@PreAuthorize("hasRole('client_admin')")
+  public ResponseEntity<?> createDepartment(@Valid @RequestBody WorkSheetDto workSheetDto) {
+      try {
+          // Check if the WorkSheetTitle And Project already exists
+          Optional<WorkSheetDto> existingWorkSheetTitleAndProject = workSheetService.getWorkSheetByWorkSheetTitleAndProject(workSheetDto.getWorkSheetTitle(), workSheetDto.getProject());
+          if (existingWorkSheetTitleAndProject.isPresent()) {
+              // WorkSheetTitle And Project already exists, return a bad request response with the error message
+              return ResponseEntity.badRequest().body(" WorkSheet with WorkSheetTitle '" + workSheetDto.getWorkSheetTitle() + " And Project Name " + workSheetDto.getProject() + "' already exists");
+          }
+
+          // WorkSheetTitle And Project name is unique, proceed with creating the WorkSheet
+          WorkSheetDto createdWorkSheet = workSheetService.createWorkSheet(workSheetDto);
+          logger.info("Created WorkSheet with WorkSheetTitle And Project name: {}",  createdWorkSheet.getWorkSheetTitle() , createdWorkSheet.getProject());
+          
+          // Return the created WorkSheet with a success status code
+          return new ResponseEntity<>(createdWorkSheet, HttpStatus.CREATED);
+      } catch (Exception e) {
+          // Handle any unexpected errors
+          logger.error("Error creating WorkSheet: {}", e.getMessage());
+          
+          // Return an internal server error response with a generic error message
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create WorkSheet");
+        }
+      }
+	
+    
 		  
-		  // Get all WorkSheet  
+	// Get all WorkSheet  
 		  @GetMapping("/get/worksheet")
 		  // @PreAuthorize("hasRole('client_admin')")
 		  public ResponseEntity<List<WorkSheetDto>> getAllWorkSheets() {
@@ -51,8 +82,10 @@ public class WorkSheetController {
 		      logger.info("Retrieved {} WorkSheet from the database", workSheet.size());
 		      return new ResponseEntity<>(workSheet, HttpStatus.OK);
 		  }
+		  
+		  
 
-		  // Get WorkSheet by ID
+	// Get WorkSheet by ID
 		  @GetMapping("/get/{workSheetId}")
 		    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
 		  public ResponseEntity<WorkSheetDto> getWorkSheetDtoId(@PathVariable String workSheetId) {
@@ -67,7 +100,24 @@ public class WorkSheetController {
 		  }
 		  
 		  
-		// Get Employee by ID
+		  
+	// Get WorkSheet by WorkSheetTitle And Project
+	      @GetMapping("/get/name/{workSheetTitle}/{project}")
+	   // @PreAuthorize("hasRole('client_admin')")
+	      public ResponseEntity<WorkSheetDto> getWorkSheetByWorkSheetTitleAndProject(@PathVariable String workSheetTitle, @PathVariable String project) {
+	          Optional<WorkSheetDto> workSheet = workSheetService.getWorkSheetByWorkSheetTitleAndProject(workSheetTitle,project);
+	          if (workSheet.isPresent()) {
+	              logger.info("Retrieved WorkSheet with WorkSheetTitle And Project: {}", workSheetTitle,project);
+	              return new ResponseEntity<>(workSheet.get(), HttpStatus.OK);
+	          } else {
+	              logger.warn("WorkSheet with WorkSheetTitle And Project {} not found", workSheetTitle,project);
+	              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	          }
+	      }
+		  
+		  
+		  
+	// Get Employee by ID
 		  @GetMapping("/{employeeId}")
 		    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
 		    public ResponseEntity<List<WorkSheetDto>> getWorkSheetsByEmployeeId(@PathVariable Long employeeId) {
@@ -82,7 +132,7 @@ public class WorkSheetController {
 		  
 		  
 		  
-		  // Update WorkSheet by ID
+	 // Update WorkSheet by ID
 		  @PutMapping("/update/{workSheetId}")
 		  // @PreAuthorize("hasRole('client_admin')")
 		  public ResponseEntity<WorkSheetDto> updateWorkSheet(@PathVariable String workSheetId, @RequestBody WorkSheetDto updatedWorkSheetDto) {
@@ -96,7 +146,9 @@ public class WorkSheetController {
 		      }
 		  }
 		  
-		  // Delete WorkSheet by ID
+		  
+		  
+	 // Delete WorkSheet by ID
 		  @DeleteMapping("/delete/{workSheetId}")
 		  // @PreAuthorize("hasRole('client_admin')")
 		  public ResponseEntity<Void> deleteWorkSheet(@PathVariable String workSheetId) {
@@ -104,7 +156,9 @@ public class WorkSheetController {
 		      logger.info("Deleted WorkSheet with ID: {}", workSheetId);
 		      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		  }
-			    
+		  
+			  
+     // Count WorkSheet
 			    @GetMapping("/count/worksheet")
 			    // @PreAuthorize("hasRole('client_admin')")
 			    public long countWorkSheet()

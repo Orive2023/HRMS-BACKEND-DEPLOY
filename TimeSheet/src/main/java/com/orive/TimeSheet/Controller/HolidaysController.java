@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.orive.TimeSheet.Dto.HolidaysDto;
 import com.orive.TimeSheet.Service.HolidaysService;
 //import org.springframework.security.access.prepost.PreAuthorize;
+
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -34,14 +37,44 @@ public class HolidaysController {
     private HolidaysService holidaysService;
 
   
-  	// Create a new Holidays
-      @PostMapping("/create/holidays")
-   // @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<HolidaysDto> createHolidays(@RequestBody HolidaysDto holidaysDto) {
-    	  HolidaysDto createdHoliday = holidaysService.createHolidays(holidaysDto);
-          logger.info("Created Holidays with name: {}", createdHoliday.getEventName());
+//  	// Create a new Holidays
+//      @PostMapping("/create/holidays")
+//   // @PreAuthorize("hasRole('client_admin')")
+//      public ResponseEntity<HolidaysDto> createHolidays(@RequestBody HolidaysDto holidaysDto) {
+//    	  HolidaysDto createdHoliday = holidaysService.createHolidays(holidaysDto);
+//          logger.info("Created Holidays with name: {}", createdHoliday.getEventName());
+//          return new ResponseEntity<>(createdHoliday, HttpStatus.CREATED);
+//      }
+    
+    
+ // Create a new Holidays
+    @PostMapping("/create/holidays")
+  //@PreAuthorize("hasRole('client_admin')")
+  public ResponseEntity<?> createDesignation(@Valid @RequestBody HolidaysDto holidaysDto) {
+      try {
+          // Check if the EventName name already exists
+          Optional<HolidaysDto> existingEventName = holidaysService.getHolidaysByEventName(holidaysDto.getEventName());
+          if (existingEventName.isPresent()) {
+              // EventName name already exists, return a bad request response with the error message
+              return ResponseEntity.badRequest().body("Holidays with EventName '" + holidaysDto.getEventName() + "' already exists");
+          }
+
+          // EventName name is unique, proceed with creating the Holidays
+          HolidaysDto createdHoliday = holidaysService.createHolidays(holidaysDto);
+          logger.info("Created Holidays with EventName: {}", createdHoliday.getEventName());
+          
+          // Return the created Holidays with a success status code
           return new ResponseEntity<>(createdHoliday, HttpStatus.CREATED);
+      } catch (Exception e) {
+          // Handle any unexpected errors
+          logger.error("Error creating Holidays: {}", e.getMessage());
+          
+          // Return an internal server error response with a generic error message
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Holidays");
       }
+  }
+    
+    
 
       // Get all Holidays   
       @GetMapping("/get/holidays")
@@ -66,6 +99,22 @@ public class HolidaysController {
           }
       }
 
+      
+      // Get Holidays by EventName
+      @GetMapping("/get/name/{eventName}")
+   // @PreAuthorize("hasRole('client_admin')")
+      public ResponseEntity<HolidaysDto> getHolidaysByEventName(@PathVariable String eventName) {
+          Optional<HolidaysDto> holidays = holidaysService.getHolidaysByEventName(eventName);
+          if (holidays.isPresent()) {
+              logger.info("Retrieved Holidays with EventName: {}", eventName);
+              return new ResponseEntity<>(holidays.get(), HttpStatus.OK);
+          } else {
+              logger.warn("Holidays with EventName {} not found", eventName);
+              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+          }
+      }
+      
+      
       // Update Holidays by ID
       @PutMapping("/update/{holidaysId}")
    // @PreAuthorize("hasRole('client_admin')")

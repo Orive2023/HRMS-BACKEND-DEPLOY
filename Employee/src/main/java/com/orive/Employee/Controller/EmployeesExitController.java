@@ -44,9 +44,9 @@ public class EmployeesExitController {
 	      logger.info("Created EmployeeExit with id: {}", createdEmployeesExit.getEmployeeToExit());
 	      return new ResponseEntity<>(createdEmployeesExit, HttpStatus.CREATED);
 	  }
-
-	  // Get all EmployeeExit
 	  
+
+	  // Get all EmployeeExit	  
 	  @GetMapping("/get/employee_exit")
 	// @PreAuthorize("hasRole('client_admin')")
 	  public ResponseEntity<List<EmployeesExitDto>> getAllEmployeeExit() {
@@ -55,6 +55,7 @@ public class EmployeesExitController {
 	      return new ResponseEntity<>(employeesExit, HttpStatus.OK);
 	  }
 
+	  
 	  // Get EmployeeExit by ID
 	  @GetMapping("/get/{employeesExitId}")
 	// @PreAuthorize("hasRole('client_admin')")

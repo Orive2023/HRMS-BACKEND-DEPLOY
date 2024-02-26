@@ -16,6 +16,8 @@ import com.orive.Tickets.Dto.TicketsDto;
 import com.orive.Tickets.Entity.TicketsEntity;
 import com.orive.Tickets.Repository.TicketsRepository;
 
+
+
 @Service
 public class TicketsService {
 	
@@ -28,14 +30,31 @@ public class TicketsService {
 	private ModelMapper modelMapper;
 	
 	
-	// Create
-    public TicketsDto createTickets(TicketsDto ticketsDto) {
-    	TicketsEntity  ticketsEntity = convertToEntity(ticketsDto);
-    	TicketsEntity savedTickets = ticketsRepository.save(ticketsEntity);
-        logger.info("Created Tickets with ID: {}", savedTickets.getTicketsId());
-        return convertToDTO(savedTickets);
-    }
+//	// Create
+//    public TicketsDto createTickets(TicketsDto ticketsDto) {
+//    	TicketsEntity  ticketsEntity = convertToEntity(ticketsDto);
+//    	TicketsEntity savedTickets = ticketsRepository.save(ticketsEntity);
+//        logger.info("Created Tickets with ID: {}", savedTickets.getTicketsId());
+//        return convertToDTO(savedTickets);
+//    }
 
+	
+	// Create
+			public TicketsDto createTickets(TicketsDto ticketsDto) {
+			    // Check if the TicketsCode And ProjectTitle already exists
+			    Optional<TicketsEntity> existingTicketsCodeAndProjectTitle = ticketsRepository.findByTicketsCodeAndProjectTitle(ticketsDto.getTicketsCode(), ticketsDto.getProjectTitle());
+			    if (existingTicketsCodeAndProjectTitle.isPresent()) {
+			        // TicketsCode And ProjectTitle already exists, handle the error as needed
+			        throw new RuntimeException("TicketsCode And ProjectTitle with name '" + ticketsDto.getTicketsCode() + ticketsDto.getProjectTitle() + "' already exists");
+			    }
+			    // TicketsCode And ProjectTitle  name is unique, proceed with saving
+			    TicketsEntity ticketsEntity = convertToEntity(ticketsDto);
+			    TicketsEntity savedTickets = ticketsRepository.save(ticketsEntity);
+			    logger.info("Created Tickets with ID: {}", savedTickets.getTicketsId());
+			    return convertToDTO(savedTickets);
+			}
+	
+	
     // Read
     public List<TicketsDto> getAllTickets() {
         List<TicketsEntity>ticketsEntities = ticketsRepository.findAll();
@@ -52,6 +71,18 @@ public class TicketsService {
             return Optional.of(convertToDTO(tickets.get()));
         } else {
             logger.warn("Tickets with ID {} not found", TicketsId);
+            return Optional.empty();
+        }
+    }
+    
+    
+  //get Tickets by  TicketsCode And ProjectTitle
+    public Optional<TicketsDto> getTicketsByTicketsCodeAndProjectTitle(String ticketsCode, String projectTitle) {
+        Optional<TicketsEntity> tickets = ticketsRepository.findByTicketsCodeAndProjectTitle(ticketsCode,projectTitle);
+        if (tickets.isPresent()) {
+            return Optional.of(convertToDTO(tickets.get()));
+        } else {
+            logger.warn("Tickets with TicketsCode And ProjectTitle {} not found", ticketsCode,projectTitle);
             return Optional.empty();
         }
     }

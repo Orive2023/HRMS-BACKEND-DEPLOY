@@ -22,6 +22,7 @@ import com.orive.Tickets.Dto.TicketsDto;
 import com.orive.Tickets.Entity.TicketsEntity;
 import com.orive.Tickets.Service.TicketsService;
 //import org.springframework.security.access.prepost.PreAuthorize;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "tickets")
@@ -34,14 +35,44 @@ public class TicketsController {
 	private TicketsService ticketsService;
 	
 	
-	// Create a new Tickets
-	  @PostMapping("/create/tickets")
-	  // @PreAuthorize("hasRole('client_admin')")
-	  public ResponseEntity<TicketsDto> createTickets(@RequestBody TicketsDto ticketsDto) {
-		  TicketsDto createdTickets = ticketsService.createTickets(ticketsDto);
-	      logger.info("Created Tickets with id: {}", createdTickets.getTicketsCode());
-	      return new ResponseEntity<>(createdTickets, HttpStatus.CREATED);
-	  }
+//	// Create a new Tickets
+//	  @PostMapping("/create/tickets")
+//	  // @PreAuthorize("hasRole('client_admin')")
+//	  public ResponseEntity<TicketsDto> createTickets(@RequestBody TicketsDto ticketsDto) {
+//		  TicketsDto createdTickets = ticketsService.createTickets(ticketsDto);
+//	      logger.info("Created Tickets with id: {}", createdTickets.getTicketsCode());
+//	      return new ResponseEntity<>(createdTickets, HttpStatus.CREATED);
+//	  }
+	
+	
+	
+	// Create a new  Tickets
+    @PostMapping("/create/tickets")
+  //@PreAuthorize("hasRole('client_admin')")
+  public ResponseEntity<?> createTickets(@Valid @RequestBody TicketsDto ticketsDto) {
+      try {
+          // Check if the TicketsCode And ProjectTitle already exists
+          Optional<TicketsDto> existingTicketsCodeAndProjectTitle = ticketsService.getTicketsByTicketsCodeAndProjectTitle(ticketsDto.getTicketsCode(), ticketsDto.getProjectTitle());
+          if (existingTicketsCodeAndProjectTitle.isPresent()) {
+              // TicketsCode And ProjectTitle already exists, return a bad request response with the error message
+              return ResponseEntity.badRequest().body(" Tickets with TicketsCode '" + ticketsDto.getTicketsCode() + " And Project Tittle " + ticketsDto.getProjectTitle() + "' already exists");
+          }
+
+          // TicketsCode And ProjectTitle name is unique, proceed with creating the WorkSheet
+          TicketsDto createdTickets = ticketsService.createTickets(ticketsDto);
+          logger.info("Created Tickets with TicketsCode And ProjectTitle: {}",  createdTickets.getTicketsCode() , createdTickets.getProjectTitle());
+          
+          // Return the created Tickets with a success status code
+          return new ResponseEntity<>(createdTickets, HttpStatus.CREATED);
+      } catch (Exception e) {
+          // Handle any unexpected errors
+          logger.error("Error creating Tickets: {}", e.getMessage());
+          
+          // Return an internal server error response with a generic error message
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Tickets");
+        }
+      }
+	
 
 	  
 	  // Get all Tickets  
@@ -66,6 +97,23 @@ public class TicketsController {
 	          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	      }
 	  }
+	  
+	  
+	  
+	// Get Tickets by TicketsCode And ProjectTitle
+      @GetMapping("/get/name/{ticketsCode}/{projectTitle}")
+   // @PreAuthorize("hasRole('client_admin')")
+      public ResponseEntity<TicketsDto> getTicketsByTicketsCodeAndProjectTitle(@PathVariable String ticketsCode, @PathVariable String projectTitle) {
+          Optional<TicketsDto> tickets = ticketsService.getTicketsByTicketsCodeAndProjectTitle(ticketsCode,projectTitle);
+          if (tickets.isPresent()) {
+              logger.info("Retrieved Tickets with TicketsCode And ProjectTitle: {}", ticketsCode,projectTitle);
+              return new ResponseEntity<>(tickets.get(), HttpStatus.OK);
+          } else {
+              logger.warn("Tickets with TicketsCode And ProjectTitle {} not found", ticketsCode,projectTitle);
+              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+          }
+      }
+	  
 
 	  
 	// Get Employee by ID

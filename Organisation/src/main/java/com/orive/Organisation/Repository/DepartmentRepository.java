@@ -14,6 +14,5 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Lo
 	@Query("SELECT d FROM DepartmentEntity d WHERE d.departmentName = :departmentName")
 	Optional<DepartmentEntity> findByDepartmentName(String departmentName);
 	
-//	@Query("SELECT d FROM CompanyEntity d WHERE d.departmentName = :departmentName")
-//    List<DepartmentEntity> findByDepartmentName(String departmentName);
+
 }
