@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.orive.TimeSheet.Dto.HolidaysDto;
 import com.orive.TimeSheet.Entity.HolidaysEntity;
 import com.orive.TimeSheet.Repository.HolidaysRepository;
@@ -28,14 +29,31 @@ public class HolidaysService {
 		private ModelMapper modelMapper;
 		
 		
+//		// Create
+//	    public HolidaysDto createHolidays(HolidaysDto holidaysDto) {
+//	    	HolidaysEntity holidaysEntity = convertToEntity(holidaysDto);
+//	    	HolidaysEntity savedHolidays = holidaysRepository.save(holidaysEntity);
+//	        logger.info("Created Holidays with ID: {}", savedHolidays.getHolidaysId());
+//	        return convertToDTO(savedHolidays);
+//	    }
+		
+		
 		// Create
-	    public HolidaysDto createHolidays(HolidaysDto holidaysDto) {
-	    	HolidaysEntity holidaysEntity = convertToEntity(holidaysDto);
-	    	HolidaysEntity savedHolidays = holidaysRepository.save(holidaysEntity);
-	        logger.info("Created Holidays with ID: {}", savedHolidays.getHolidaysId());
-	        return convertToDTO(savedHolidays);
-	    }
-
+		public HolidaysDto createHolidays(HolidaysDto holidaysDto) {
+		    // Check if the EventName name already exists
+		    Optional<HolidaysEntity> existingEventName = holidaysRepository.findByEventName(holidaysDto.getEventName());
+		    if (existingEventName.isPresent()) {
+		        // EventName already exists, handle the error as needed
+		        throw new RuntimeException("Holidays with EventName '" + holidaysDto.getEventName() + "' already exists");
+		    }
+		    // EventName name is unique, proceed with saving
+		    HolidaysEntity holidaysEntity = convertToEntity(holidaysDto);
+		    HolidaysEntity savedHolidays = holidaysRepository.save(holidaysEntity);
+		    logger.info("Created Holidays with ID: {}", savedHolidays.getHolidaysId());
+		    return convertToDTO(savedHolidays);
+		}
+		
+		
 	    // Read
 	    public List<HolidaysDto> getAllHolidays() {
 	        List<HolidaysEntity> holidaysEntities = holidaysRepository.findAll();
@@ -56,6 +74,19 @@ public class HolidaysService {
 	        }
 	    }
 	    
+	    
+	  //get by Holidays By EventName
+	    public Optional<HolidaysDto> getHolidaysByEventName(String eventName) {
+	        Optional<HolidaysEntity> holidays = holidaysRepository.findByEventName(eventName);
+	        if (holidays.isPresent()) {
+	            return Optional.of(convertToDTO(holidays.get()));
+	        } else {
+	            logger.warn("Holidays with EventName {} not found", eventName);
+	            return Optional.empty();
+	        }
+	    }
+	    
+	    	    
 	 // Update list by id
 	    public HolidaysDto updateHolidays(String holidaysId, HolidaysDto holidaysDto) {
 	        Optional<HolidaysEntity> existingHolidayOptional = holidaysRepository.findById(holidaysId);

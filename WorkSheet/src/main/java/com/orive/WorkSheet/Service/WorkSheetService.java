@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.orive.WorkSheet.Dto.WorkSheetDto;
 import com.orive.WorkSheet.Entity.WorkSheetEntity;
 import com.orive.WorkSheet.Repository.WorkSheetRepository;
@@ -26,13 +27,30 @@ public class WorkSheetService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
+//	// Create
+//    public WorkSheetDto createWorkSheet(WorkSheetDto workSheetDto) {
+//    	WorkSheetEntity  workSheetEntity = convertToEntity(workSheetDto);
+//    	WorkSheetEntity savedWorkSheet = workSheetRepository.save(workSheetEntity);
+//        logger.info("Created WorkSheet with ID: {}", savedWorkSheet.getWorkSheetId());
+//        return convertToDTO(savedWorkSheet);
+//    }
+	
 	// Create
-    public WorkSheetDto createWorkSheet(WorkSheetDto workSheetDto) {
-    	WorkSheetEntity  workSheetEntity = convertToEntity(workSheetDto);
-    	WorkSheetEntity savedWorkSheet = workSheetRepository.save(workSheetEntity);
-        logger.info("Created WorkSheet with ID: {}", savedWorkSheet.getWorkSheetId());
-        return convertToDTO(savedWorkSheet);
-    }
+		public WorkSheetDto createWorkSheet(WorkSheetDto workSheetDto) {
+		    // Check if the workSheetTitle And project already exists
+		    Optional<WorkSheetEntity> existingWorkSheetTitleAndProject = workSheetRepository.findByWorkSheetTitleAndProject(workSheetDto.getWorkSheetTitle(), workSheetDto.getProject());
+		    if (existingWorkSheetTitleAndProject.isPresent()) {
+		        // workSheetTitle And project name already exists, handle the error as needed
+		        throw new RuntimeException("WorkSheetTitle And Project with name '" + workSheetDto.getWorkSheetTitle() + workSheetDto.getProject() + "' already exists");
+		    }
+		    // WorkSheetTitle And Project  name is unique, proceed with saving
+		    WorkSheetEntity workSheetEntity = convertToEntity(workSheetDto);
+		    WorkSheetEntity savedWorkSheet = workSheetRepository.save(workSheetEntity);
+		    logger.info("Created WorkSheet with ID: {}", savedWorkSheet.getWorkSheetId());
+		    return convertToDTO(savedWorkSheet);
+		}
+		
+		
 
     // Read
     public List<WorkSheetDto> getAllWorkSheets() {
@@ -50,6 +68,19 @@ public class WorkSheetService {
             return Optional.of(convertToDTO(workSheet.get()));
         } else {
             logger.warn("WorkSheet with ID {} not found", workSheetId);
+            return Optional.empty();
+        }
+    }
+    
+    
+    
+    //get by WorkSheetByWorkSheetTitleAndProject
+    public Optional<WorkSheetDto> getWorkSheetByWorkSheetTitleAndProject(String workSheetTitle, String project) {
+        Optional<WorkSheetEntity> workSheet = workSheetRepository.findByWorkSheetTitleAndProject(workSheetTitle,project);
+        if (workSheet.isPresent()) {
+            return Optional.of(convertToDTO(workSheet.get()));
+        } else {
+            logger.warn("WorkSheet with Name {} not found", workSheetTitle,project);
             return Optional.empty();
         }
     }
