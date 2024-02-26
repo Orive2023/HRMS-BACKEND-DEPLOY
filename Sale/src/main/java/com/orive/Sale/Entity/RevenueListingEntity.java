@@ -22,12 +22,12 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "salelisting")
-public class SaleListingEntity {
+@Table(name = "revenuelisting")
+public class RevenueListingEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String saleListingId;
+	private String revenueListingId;
 	
 	@Column(name = "item_name")
 	private String itemName;
