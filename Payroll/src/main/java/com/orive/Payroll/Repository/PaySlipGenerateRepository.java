@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.orive.Payroll.Entity.PaySlipGenerateEntity;
 
-public interface PaySlipGenerateRepository extends JpaRepository<PaySlipGenerateEntity, Long> {
+public interface PaySlipGenerateRepository extends JpaRepository<PaySlipGenerateEntity, String> {
 
 	@Query("SELECT p.department, SUM(p.netSalary) FROM PaySlipGenerateEntity p " +
             "WHERE YEAR(p.createdDate) = :year " +

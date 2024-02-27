@@ -31,8 +31,9 @@ import lombok.ToString;
 public class AdvanceSaleryEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long advanceSaleryId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Payroll.Entity.AdvanceSaleryCustomIdGenerator")
+	private String advanceSaleryId;
 	
 	@Column(name = "created_date")
 	@Convert(converter = AesEncryptor.class)
