@@ -2,6 +2,8 @@ package com.orive.Payroll.Entity;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,9 +29,10 @@ import lombok.ToString;
 @Table(name = "salary_template")
 public class SalaryTemplateEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long salaryTemplateId;
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Payroll.Entity.SalaryTemplateCustomIdGenerator")
+    private String salaryTemplateId;
     
     @Column(name = "employee_id")
     private Long employeeId;

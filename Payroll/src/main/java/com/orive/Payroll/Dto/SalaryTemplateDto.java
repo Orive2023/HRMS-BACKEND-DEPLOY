@@ -21,7 +21,7 @@ import lombok.ToString;
 @Builder
 public class SalaryTemplateDto {
 
-    private Long salaryTemplateId;
+    private String salaryTemplateId;
     private Long employeeId;
     private String employeeName;
     private String designation;

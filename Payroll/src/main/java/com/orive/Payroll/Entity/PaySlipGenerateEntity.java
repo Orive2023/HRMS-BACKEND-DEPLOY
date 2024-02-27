@@ -36,8 +36,9 @@ import lombok.ToString;
 public class PaySlipGenerateEntity {
 	
 	    @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long paySlipGenerateId;
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+        @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Payroll.Entity.PaySlipGenerateCustomIdGenerator")
+	    private String paySlipGenerateId;
     
 	    @Column(name = "employee_id")
 	    private Long employeeId;
