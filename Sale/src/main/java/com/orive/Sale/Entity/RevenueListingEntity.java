@@ -27,7 +27,7 @@ public class RevenueListingEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String revenueListingId;
+	private Long revenueListingId;
 	
 	@Column(name = "item_name")
 	private String itemName;

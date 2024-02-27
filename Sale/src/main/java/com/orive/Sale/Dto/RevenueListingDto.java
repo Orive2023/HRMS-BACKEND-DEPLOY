@@ -18,7 +18,7 @@ import lombok.ToString;
 public class RevenueListingDto {
 
 	
-    private String revenueListingId;
+    private Long revenueListingId;
 	private String itemName;
 	private Long hsn;
 	private Long quantity;
