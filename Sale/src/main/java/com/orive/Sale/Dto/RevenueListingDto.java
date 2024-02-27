@@ -15,10 +15,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SaleListingDto {
+public class RevenueListingDto {
 
 	
-    private String saleListingId;
+    private Long revenueListingId;
 	private String itemName;
 	private Long hsn;
 	private Long quantity;
