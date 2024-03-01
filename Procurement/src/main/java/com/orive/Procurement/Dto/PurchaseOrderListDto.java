@@ -24,7 +24,6 @@ public class PurchaseOrderListDto {
 	private String unitName;
 	private int quantity;
 	private double price;
-	private double total;
-	private double grandTotal;
+	
 
 }

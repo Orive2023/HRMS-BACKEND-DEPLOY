@@ -89,6 +89,14 @@ public class PurchaseOrderEntity {
 	@Transient
 	private List<PurchaseOrderListEntity> purchaseOrderListEntities = new ArrayList<>();
 	
+	@Column(name = "total")
+	@Convert(converter = AesEncryptor.class)
+	private double total;
+	
+	@Column(name = "grand_total")
+	@Convert(converter = AesEncryptor.class)
+	private double grandTotal;
+	
 //	@OneToMany(targetEntity = PurchaseOrderListEntity.class,cascade = CascadeType.ALL)
 //	@JoinColumn(name = "purchaseOrder_list_fk",referencedColumnName = "purchaseOrderId")
 //	private List<PurchaseOrderListEntity> purchaseOrderListEntities;

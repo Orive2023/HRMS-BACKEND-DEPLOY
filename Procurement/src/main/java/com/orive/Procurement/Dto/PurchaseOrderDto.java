@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.Procurement.Config.AesEncryptor;
 import com.orive.Procurement.Enum.Status;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,4 +38,6 @@ public class PurchaseOrderDto {
 	private LocalDate date;
 	private String status;
 	private List<PurchaseOrderListDto> purchaseOrderListDtos=new ArrayList<>();
+	private double total;
+	private double grandTotal;
 }

@@ -13,8 +13,8 @@ import com.orive.WorkSheet.Entity.WorkSheetEntity;
 public interface WorkSheetRepository extends JpaRepository<WorkSheetEntity, String>{
 	
 	//Query for find by employeeId
-	@Query("SELECT w FROM WorkSheetEntity w WHERE w.employeeId = :employeeId")
-	List<WorkSheetEntity> findByEmployeeId(@Param("employeeId") Long employeeId);
+	@Query("SELECT w FROM WorkSheetEntity w WHERE w.username = :username")
+	List<WorkSheetEntity> findByUsername(@Param("username") String username);
 	
 	
 	//Query for find duplicate using workSheetTitle And project

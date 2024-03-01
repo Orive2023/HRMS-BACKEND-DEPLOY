@@ -118,10 +118,10 @@ public class WorkSheetController {
 		  
 		  
 	// Get Employee by ID
-		  @GetMapping("/{employeeId}")
+		  @GetMapping("/getusername/{username}")
 		    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
-		    public ResponseEntity<List<WorkSheetDto>> getWorkSheetsByEmployeeId(@PathVariable Long employeeId) {
-		        List<WorkSheetDto> workSheet = workSheetService.getEmployeeId(employeeId);
+		    public ResponseEntity<List<WorkSheetDto>> getWorkSheetsByEmployeeId(@PathVariable String username) {
+		        List<WorkSheetDto> workSheet = workSheetService.getEmployeeId(username);
 
 		        if (workSheet.isEmpty()) {
 		            return ResponseEntity.notFound().build();

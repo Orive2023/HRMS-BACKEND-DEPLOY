@@ -49,11 +49,5 @@ public class PurchaseOrderListEntity {
 	@Convert(converter = AesEncryptor.class)
 	private double price;
 	
-	@Column(name = "total")
-	@Convert(converter = AesEncryptor.class)
-	private double total;
 	
-	@Column(name = "grand_total")
-	@Convert(converter = AesEncryptor.class)
-	private double grandTotal;
 }
