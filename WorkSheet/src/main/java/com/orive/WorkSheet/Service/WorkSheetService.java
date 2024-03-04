@@ -89,7 +89,7 @@ public class WorkSheetService {
     
   //get by employeeId
     public List<WorkSheetDto> getEmployeeId(String username) {
-        List<WorkSheetEntity> employees = workSheetRepository.findByUsername(username);
+        List<WorkSheetEntity> employees = workSheetRepository.findByEmployeeId(username);
 
         if (employees.isEmpty()) {
             logger.warn("WorkSheet with ID {} not found", username);
