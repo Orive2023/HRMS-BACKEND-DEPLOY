@@ -37,7 +37,7 @@ public class WorkSheetController {
 	
 //	// Create a new WorkSheet
 //		  @PostMapping("/create/worksheet")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		 // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<WorkSheetDto> createWorkSheet(@RequestBody WorkSheetDto workSheetDto) {
 //			  WorkSheetDto createdWorkSheet = workSheetService.createWorkSheet(workSheetDto);
 //		      logger.info("Created WorkSheet with id: {}", createdWorkSheet.getWorkSheetTitle());
@@ -47,7 +47,7 @@ public class WorkSheetController {
 	
 	// Create a new  WorkSheet
     @PostMapping("/create/worksheet")
-  //@PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
   public ResponseEntity<?> createDepartment(@Valid @RequestBody WorkSheetDto workSheetDto) {
       try {
           // Check if the WorkSheetTitle And Project already exists
@@ -76,7 +76,7 @@ public class WorkSheetController {
 		  
 	// Get all WorkSheet  
 		  @GetMapping("/get/worksheet")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<List<WorkSheetDto>> getAllWorkSheets() {
 		      List<WorkSheetDto> workSheet = workSheetService.getAllWorkSheets();
 		      logger.info("Retrieved {} WorkSheet from the database", workSheet.size());
@@ -87,6 +87,7 @@ public class WorkSheetController {
 
 	// Get WorkSheet by ID
 		  @GetMapping("/get/{workSheetId}")
+		// @PreAuthorize("hasRole('client_HR')")
 		    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
 		  public ResponseEntity<WorkSheetDto> getWorkSheetDtoId(@PathVariable String workSheetId) {
 		      Optional<WorkSheetDto> workSheet = workSheetService.getWorkSheetId(workSheetId);
@@ -103,7 +104,7 @@ public class WorkSheetController {
 		  
 	// Get WorkSheet by WorkSheetTitle And Project
 	      @GetMapping("/get/name/{workSheetTitle}/{project}")
-	   // @PreAuthorize("hasRole('client_admin')")
+	   // @PreAuthorize("hasRole('client_HR')")
 	      public ResponseEntity<WorkSheetDto> getWorkSheetByWorkSheetTitleAndProject(@PathVariable String workSheetTitle, @PathVariable String project) {
 	          Optional<WorkSheetDto> workSheet = workSheetService.getWorkSheetByWorkSheetTitleAndProject(workSheetTitle,project);
 	          if (workSheet.isPresent()) {
@@ -118,7 +119,8 @@ public class WorkSheetController {
 		  
 		  
 	// Get Employee by ID
-		  @GetMapping("/getusername/{username}")
+		  @GetMapping("/{employeeId}")
+		// @PreAuthorize("hasRole('client_HR')")
 		    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
 		    public ResponseEntity<List<WorkSheetDto>> getWorkSheetsByEmployeeId(@PathVariable String username) {
 		        List<WorkSheetDto> workSheet = workSheetService.getEmployeeId(username);
@@ -134,7 +136,7 @@ public class WorkSheetController {
 		  
 	 // Update WorkSheet by ID
 		  @PutMapping("/update/{workSheetId}")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<WorkSheetDto> updateWorkSheet(@PathVariable String workSheetId, @RequestBody WorkSheetDto updatedWorkSheetDto) {
 			  WorkSheetDto updatedWorkSheet = workSheetService.updateWorkSheet(workSheetId, updatedWorkSheetDto);
 		      if (updatedWorkSheet != null) {
@@ -150,7 +152,7 @@ public class WorkSheetController {
 		  
 	 // Delete WorkSheet by ID
 		  @DeleteMapping("/delete/{workSheetId}")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<Void> deleteWorkSheet(@PathVariable String workSheetId) {
 			   workSheetService.deleteWorkSheet(workSheetId);
 		      logger.info("Deleted WorkSheet with ID: {}", workSheetId);
@@ -160,7 +162,7 @@ public class WorkSheetController {
 			  
      // Count WorkSheet
 			    @GetMapping("/count/worksheet")
-			    // @PreAuthorize("hasRole('client_admin')")
+			 // @PreAuthorize("hasRole('client_HR')")
 			    public long countWorkSheet()
 			    {
 			    	return workSheetService.countWorkSheet();
