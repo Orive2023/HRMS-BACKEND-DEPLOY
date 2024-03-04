@@ -23,7 +23,7 @@ import lombok.ToString;
 public class AwardsDto {
 
 	private Long awardId;
-	private Long employeeId;
+	private String username;
 	private String awardName;
 	private String awardDescription;
 	private String giftItem;

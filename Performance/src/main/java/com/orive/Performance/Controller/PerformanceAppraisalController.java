@@ -74,13 +74,13 @@ public class PerformanceAppraisalController {
     @GetMapping("/byId/{employeeId}")
  // @PreAuthorize("hasRole('client_HR')")
     // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
-    public ResponseEntity<List<PerformanceAppraisalEntity>> getPerformanceAppraisalByEmployeeId(@PathVariable Long employeeId) {
+    public ResponseEntity<List<PerformanceAppraisalEntity>> getPerformanceAppraisalByEmployeeId(@PathVariable String username) {
         try {
-            List<PerformanceAppraisalEntity> performanceAppraisal = performanceAppraisalService.getPerformanceAppraisalByEmployeeId(employeeId);
-            logger.info("Retrieved PerformanceAppraisal with EmployeeId: {}", employeeId);
+            List<PerformanceAppraisalEntity> performanceAppraisal = performanceAppraisalService.getPerformanceAppraisalByEmployeeId(username);
+            logger.info("Retrieved PerformanceAppraisal with EmployeeId: {}", username);
             return new ResponseEntity<>(performanceAppraisal, HttpStatus.OK);
         } catch (ResourceNotFoundException e) {
-      	  logger.warn("PerformanceAppraisal with EmployeeID {} not found", employeeId);
+      	  logger.warn("PerformanceAppraisal with EmployeeID {} not found", username);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

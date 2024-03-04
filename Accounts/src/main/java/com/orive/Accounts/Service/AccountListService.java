@@ -61,7 +61,7 @@ public class AccountListService {
         	existingAccountList.setEmployeeName(accountListDto.getEmployeeName());
         	existingAccountList.setBankName(accountListDto.getBankName());
         	existingAccountList.setEmailAddress(accountListDto.getEmailAddress());
-        	existingAccountList.setUserName(accountListDto.getUserName());
+        	existingAccountList.setUsername(accountListDto.getUsername());
         	existingAccountList.setPassword(accountListDto.getPassword());
         	existingAccountList.setStatus(accountListDto.getStatus());
             modelMapper.map(accountListDto, existingAccountListOptional);

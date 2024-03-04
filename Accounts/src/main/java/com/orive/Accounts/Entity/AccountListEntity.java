@@ -37,9 +37,9 @@ public class AccountListEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
-	@Column(name = "employee_id")
+	@Column(name = "username")
 	@Convert(converter = AesEncryptor.class)
-	private Long employeeId;
+	private String username;
 	
 	@Column(name = "department_name")
 	@Convert(converter = AesEncryptor.class)

@@ -22,7 +22,7 @@ import lombok.ToString;
 public class SalaryTemplateDto {
 
     private String salaryTemplateId;
-    private Long employeeId;
+    private String username;
     private String employeeName;
     private String designation;
     private Double workingDays;

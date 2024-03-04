@@ -23,7 +23,7 @@ public class ExperienceLetterDto {
 	private Long referrenceNumber;
 	private LocalDate date;
 	private String employeeName;
-	private String employeeId;
+	private String username;
 	private String designation;
 	private String workBasedOn;
 	private LocalDate joiningDate;

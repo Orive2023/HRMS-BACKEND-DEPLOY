@@ -24,7 +24,7 @@ public class ExperienceJoiningLetterDto {
 	private String referrenceNo;
 	private LocalDate formReleaseDate;
 	private String employeeName;
-	private String employeeId;
+	private String username;
 	private String employeeAddress;
 	private String subject;
 	private String employeeDesignation;

@@ -40,8 +40,8 @@ public class PaySlipGenerateEntity {
         @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Payroll.Entity.PaySlipGenerateCustomIdGenerator")
 	    private String paySlipGenerateId;
     
-	    @Column(name = "employee_id")
-	    private Long employeeId;
+	    @Column(name = "username")
+	    private String username;
 	    
 	    @Column(name = "employee_name")
 	    private String employeeName;

@@ -42,8 +42,8 @@ public class ExperienceJoiningLetterEntity {
 	@Column(name = "employee_name")
 	private String employeeName;
 	
-	@Column(name = "employee_id")
-	private String employeeId;
+	@Column(name = "username")
+	private String username;
 	
 	@Column(name = "employee_address")
 	private String employeeAddress;

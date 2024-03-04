@@ -20,7 +20,7 @@ public class AccountBalanceDto {
 	
 	private Long accountBalancesId;
 	private String employeeName;
-	private Long employeeId;
+	private String username;
 	private String departmentName;
 	private String position;
 	private double hsaBalance;

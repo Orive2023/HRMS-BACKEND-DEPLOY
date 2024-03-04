@@ -12,7 +12,7 @@ import com.orive.Employee.Entity.AwardsEntity;
 public interface AwardsRepository extends JpaRepository<AwardsEntity, Long>{
 	
 	//Query for find Awards By employeeId;
-			@Query("SELECT a FROM AwardsEntity a WHERE a.employeeId = :employeeId")
-			List<AwardsEntity> findAwardsByEmployeeId(@Param("employeeId") Long employeeId);
+			@Query("SELECT a FROM AwardsEntity a WHERE a.username = :username")
+			List<AwardsEntity> findAwardsByEmployeeId(@Param("username") String username);
 	
 }

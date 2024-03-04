@@ -34,8 +34,8 @@ public class SalaryTemplateEntity {
     @GenericGenerator(name = "custom-sequence", strategy = "com.orive.Payroll.Entity.SalaryTemplateCustomIdGenerator")
     private String salaryTemplateId;
     
-    @Column(name = "employee_id")
-    private Long employeeId;
+    @Column(name = "username")
+    private String username;
     
     @Column(name = "employee_name")
     private String employeeName;

@@ -34,9 +34,9 @@ public class AwardsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long awardId;
 	
-	@Column(name = "employee_id")
+	@Column(name = "username")
 	@Convert(converter = AesEncryptor.class)
-	private Long employeeId;
+	private String username;
 	
 	@Column(name = "award_name")
 	@Convert(converter = AesEncryptor.class)

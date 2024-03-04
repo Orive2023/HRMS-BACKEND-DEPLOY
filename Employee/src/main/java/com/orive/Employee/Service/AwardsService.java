@@ -60,11 +60,11 @@ private static final Logger logger=LoggerFactory.getLogger(AwardsService.class);
     
     
     //get by Awards By  employeeId
-    public List<AwardsDto> getAwardsByEmployeeId(Long employeeId) {
-        List<AwardsEntity> award = awardsRepository.findAwardsByEmployeeId(employeeId);
+    public List<AwardsDto> getAwardsByEmployeeId(String username) {
+        List<AwardsEntity> award = awardsRepository.findAwardsByEmployeeId(username);
 
         if (award.isEmpty()) {
-            logger.warn("Awards with employeeId {} not found", employeeId);
+            logger.warn("Awards with employeeId {} not found", username);
             return Collections.emptyList();
         }
         return award.stream()

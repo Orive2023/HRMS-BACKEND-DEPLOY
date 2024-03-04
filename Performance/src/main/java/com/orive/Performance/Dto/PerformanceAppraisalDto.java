@@ -26,7 +26,7 @@ public class PerformanceAppraisalDto {
 	
 	private String performanceAppraisalId;
 	private String employeeName;
-	private Long employeeId;
+	 private String username;
 	private String departmentName;
 	private String position;
 	private LocalDate appraisalPeriod;

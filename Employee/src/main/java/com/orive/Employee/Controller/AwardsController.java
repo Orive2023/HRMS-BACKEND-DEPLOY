@@ -70,10 +70,10 @@ public class AwardsController {
       
       
   	// Get Award By EmployeeID
-	  @GetMapping("/employee/get/{employeeId}")
+	  @GetMapping("/employee/get/{username}")
 	  // @PreAuthorize("hasRole('client_HR')")
-	    public ResponseEntity<List<AwardsDto>> getAwardsByEmployeeId(@PathVariable Long employeeId) {
-	        List<AwardsDto> award = awardsService.getAwardsByEmployeeId(employeeId);
+	    public ResponseEntity<List<AwardsDto>> getAwardsByEmployeeId(@PathVariable String username) {
+	        List<AwardsDto> award = awardsService.getAwardsByEmployeeId(username);
 
 	        if (award.isEmpty()) {
 	            return ResponseEntity.notFound().build();

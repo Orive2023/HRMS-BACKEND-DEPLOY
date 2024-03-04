@@ -55,11 +55,11 @@ public class PerformanceAppraisalService {
     
     
    //get by EmployeeId
-    public List<PerformanceAppraisalEntity> getPerformanceAppraisalByEmployeeId(Long employeeId) {
-        List<PerformanceAppraisalEntity> performanceAppraisal = performanceAppraisalRepository.findPerformanceAppraisalByEmployeeId(employeeId);
+    public List<PerformanceAppraisalEntity> getPerformanceAppraisalByEmployeeId(String username) {
+        List<PerformanceAppraisalEntity> performanceAppraisal = performanceAppraisalRepository.findPerformanceAppraisalByEmployeeId(username);
         if (performanceAppraisal.isEmpty()) {
-            logger.warn("No PerformanceAppraisal found with EmployeeID: {}", employeeId);
-            throw new ResourceNotFoundException("No PerformanceAppraisal found with EmployeeId: " + employeeId);
+            logger.warn("No PerformanceAppraisal found with EmployeeID: {}", username);
+            throw new ResourceNotFoundException("No PerformanceAppraisal found with EmployeeId: " + username);
         }
         return performanceAppraisal;
     }

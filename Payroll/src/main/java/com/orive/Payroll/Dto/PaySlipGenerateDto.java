@@ -25,7 +25,7 @@ import lombok.ToString;
 public class PaySlipGenerateDto {
 	
     private String paySlipGenerateId;
-    private Long employeeId;
+    private String username;
     private String employeeName;
     private String designation;
     private String department;
