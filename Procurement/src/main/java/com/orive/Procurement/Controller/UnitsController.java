@@ -35,7 +35,7 @@ public class UnitsController {
 
 	// Create a new Units
     @PostMapping("/create/units")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<UnitsDto> createUnits(@RequestBody UnitsDto unitsDto) {
     	UnitsDto createdUnits = unitsService.createUnits(unitsDto);
         logger.info("Created Units with name: {}", createdUnits.getUnitName());
@@ -44,7 +44,7 @@ public class UnitsController {
 
     // Get all Units   
     @GetMapping("/get/units")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<UnitsDto>> getAllUnits() {
         List<UnitsDto> units = unitsService.getAllUnits();
         logger.info("Retrieved {} Units from the database", units.size());
@@ -53,7 +53,7 @@ public class UnitsController {
 
     // Get UnitsbyId
     @GetMapping("/get/{unitsId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<UnitsDto> getUnitsbyId(@PathVariable Long unitsId) {
         Optional<UnitsDto> units = unitsService.getUnitsById(unitsId);
         if (units.isPresent()) {
@@ -67,7 +67,7 @@ public class UnitsController {
 
     // Update Units by ID
     @PutMapping("/update/{unitsId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<UnitsDto> updateUnits(@PathVariable Long unitsId, @RequestBody UnitsDto updatedUnitsDto) {
     	UnitsDto updatedUnits = unitsService.updateUnits(unitsId, updatedUnitsDto);
         if (updatedUnits != null) {
@@ -83,7 +83,7 @@ public class UnitsController {
 
     // Delete Units by ID
     @DeleteMapping("/delete/{unitsId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteUnits(@PathVariable Long unitsId) {
   	  unitsService.deleteUnits(unitsId);
         logger.info("Deleted Units with ID: {}", unitsId);
@@ -91,7 +91,7 @@ public class UnitsController {
     }
 	    
 	    @GetMapping("/count/units")
-	 // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countUnits()
 	    {
 	    	return unitsService.countUnits();

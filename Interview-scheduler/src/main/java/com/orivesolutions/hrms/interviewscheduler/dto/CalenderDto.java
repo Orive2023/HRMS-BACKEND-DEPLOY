@@ -5,6 +5,7 @@ import biweekly.property.Organizer;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 @Data
@@ -15,7 +16,7 @@ public class CalenderDto {
     private String summary;
     private Organizer organizer;
     private String meetingLink;
-    private LocalDateTime eventDateTime;
+    private LocalDate eventDateTime;
     private List<Attendee> attendees;
 
 }

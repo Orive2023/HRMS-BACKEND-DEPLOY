@@ -37,17 +37,16 @@ public class WarningsController {
 	 
 	// Create a new Warnings
 	  @PostMapping("/create/warnings")
-	// @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
 	  public ResponseEntity<WarningsDto> createWarnings(@RequestBody WarningsDto warningsDto) {
 		  WarningsDto createdWarnings = warningsService.createWarnings(warningsDto);
 	      logger.info("Created Warnings with id: {}", createdWarnings.getWarningToEmployee());
 	      return new ResponseEntity<>(createdWarnings, HttpStatus.CREATED);
 	  }
 
-	  // Get all Complaints
-	  
+	  // Get all Complaints  
 	  @GetMapping("/get/warnings")
-	// @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
 	  public ResponseEntity<List<WarningsDto>> getAllWarnings() {
 	      List<WarningsDto> warnings = warningsService.getAllWarnings();
 	      logger.info("Retrieved {} Warnings from the database", warnings.size());
@@ -56,7 +55,7 @@ public class WarningsController {
 
 	  // Get Complaints by ID
 	  @GetMapping("/get/{warningsId}")
-	// @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
 	  public ResponseEntity<WarningsDto> getWarningsDtoId(@PathVariable Long warningsId) {
 	      Optional<WarningsDto> warnings = warningsService.getWarningsById(warningsId);
 	      if (warnings.isPresent()) {
@@ -70,7 +69,7 @@ public class WarningsController {
 
 	  // Update Complaints by ID
 	  @PutMapping("/update/{warningsId}")
-	// @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
 	  public ResponseEntity<WarningsDto> updateWarnings(@PathVariable Long warningsId, @RequestBody WarningsDto updatedWarningsDto) {
 		  WarningsDto updatedWarnings = warningsService.updateWarnings(warningsId, updatedWarningsDto);
 	      if (updatedWarnings != null) {
@@ -84,7 +83,7 @@ public class WarningsController {
 	  
 	  // Delete Complaints by ID
 	  @DeleteMapping("/delete/{warningsId}")
-	// @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
 	  public ResponseEntity<Void> deleteWarnings(@PathVariable Long warningsId) {
 		   warningsService.deleteWarnings(warningsId);
 	      logger.info("Deleted Warnings with ID: {}", warningsId);
@@ -93,7 +92,7 @@ public class WarningsController {
 		   
 	  // Count the total Complaints
 		    @GetMapping("/count/warnings")
-		 // @PreAuthorize("hasRole('client_admin')")
+		 // @PreAuthorize("hasRole('client_HR')")
 		    public long countWarnings()
 		    {
 		    	return warningsService.countWarnings();

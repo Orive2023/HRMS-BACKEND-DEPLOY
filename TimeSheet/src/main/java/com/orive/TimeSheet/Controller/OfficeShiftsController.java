@@ -36,7 +36,7 @@ public class OfficeShiftsController {
   
   	// Create a new OfficeShifts
       @PostMapping("/create/officeShifts")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<OfficeShiftsDto> createOfficeShifts(@RequestBody OfficeShiftsDto officeShiftsDto) {
     	  OfficeShiftsDto createdOfficeShifts = officeShiftsService.createOfficeShifts(officeShiftsDto);
           logger.info("Created OfficeShifts with name: {}", createdOfficeShifts.getOfficeShiftsId());
@@ -45,7 +45,7 @@ public class OfficeShiftsController {
 
       // Get all OfficeShifts   
       @GetMapping("/get/officeShifts")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<OfficeShiftsDto>> getAllOfficeShifts() {
           List<OfficeShiftsDto> officeShifts = officeShiftsService.getAllOfficeShifts();
           logger.info("Retrieved {} OfficeShifts from the database", officeShifts.size());
@@ -54,7 +54,7 @@ public class OfficeShiftsController {
 
       // Get OfficeShifts by ID
       @GetMapping("/get/{OfficeShiftsId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<OfficeShiftsDto> getOfficeShiftsById(@PathVariable String OfficeShiftsId) {
           Optional<OfficeShiftsDto> officeShifts = officeShiftsService.getOfficeShiftsById(OfficeShiftsId);
           if (officeShifts.isPresent()) {
@@ -68,7 +68,7 @@ public class OfficeShiftsController {
 
       // Update OfficeShifts by ID
       @PutMapping("/update/{OfficeShiftsId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<OfficeShiftsDto> updateOfficeShifts(@PathVariable String OfficeShiftsId, @RequestBody OfficeShiftsDto updatedOfficeShiftsDTO) {
     	  OfficeShiftsDto updatedOfficeShifts = officeShiftsService.updateOfficeShifts(OfficeShiftsId, updatedOfficeShiftsDTO);
           if (updatedOfficeShifts != null) {
@@ -84,7 +84,7 @@ public class OfficeShiftsController {
 
       // Delete OfficeShifts by ID
       @DeleteMapping("/delete/{OfficeShiftsId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<Void> deleteOfficeShifts(@PathVariable String OfficeShiftsId) {
     	  officeShiftsService.deleteOfficeShifts(OfficeShiftsId);
           logger.info("Deleted company with ID: {}", OfficeShiftsId);
@@ -92,7 +92,7 @@ public class OfficeShiftsController {
       }
   	    
   	    @GetMapping("/count/officeShifts")
-  	// @PreAuthorize("hasRole('client_admin')")
+  	// @PreAuthorize("hasRole('client_HR')")
   	    public long countOfficeShifts()
   	    {
   	    	return officeShiftsService.countOfficeShifts();

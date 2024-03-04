@@ -35,6 +35,7 @@ public class SubTypeController {
 		
 		// Create a new SubType
 	    @PostMapping("/create/subType")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public ResponseEntity<SubTypeDto> createSubTypeList(@RequestBody SubTypeDto subTypeDto) {
 	    	SubTypeDto createdSubType = subTypeSevice.createSubTypeList(subTypeDto);
 	        logger.info("Created SubType with year: {}", createdSubType.getSubType());
@@ -43,6 +44,7 @@ public class SubTypeController {
 
 	    // Get all SubType   
 	    @GetMapping("/get/subType")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public ResponseEntity<List<SubTypeDto>> getAllSubTypeList() {
 	        List<SubTypeDto> subType = subTypeSevice.getAllSubTypeList();
 	        logger.info("Retrieved {} SubType from the database", subType.size());
@@ -51,6 +53,7 @@ public class SubTypeController {
 
 	    // Get SubType by ID
 	    @GetMapping("/get/{subTypeId}")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public ResponseEntity<SubTypeDto> getSubTypeById(@PathVariable Long subTypeId) {
 	        Optional<SubTypeDto> subType = subTypeSevice.getSubTypeById(subTypeId);
 	        if (subType.isPresent()) {
@@ -64,6 +67,7 @@ public class SubTypeController {
 
 	    // Update SubType by ID
 	    @PutMapping("/update/{subTypeId}")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public ResponseEntity<SubTypeDto> updateSubTypeList(@PathVariable Long subTypeId, @RequestBody SubTypeDto updatedSubTypeDto) {
 	    	SubTypeDto updatedSubType = subTypeSevice.updateSubTypeList(subTypeId, updatedSubTypeDto);
 	        if (updatedSubType != null) {
@@ -79,6 +83,7 @@ public class SubTypeController {
 
 	    // Delete SubType by ID
 	    @DeleteMapping("/delete/{subTypeId}")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public ResponseEntity<Void> deleteSubTypeList(@PathVariable Long subTypeId) {
 	    	subTypeSevice.deleteSubTypeList(subTypeId);
 	        logger.info("Deleted SubType with ID: {}", subTypeId);
@@ -87,6 +92,7 @@ public class SubTypeController {
 		   
 	    // Count the total SubType
 		    @GetMapping("/count/subType")
+		 // @PreAuthorize("hasRole('client_HR')")
 		    public long countSubTypeList()
 		    {
 		    	return subTypeSevice.countSubTypeList();

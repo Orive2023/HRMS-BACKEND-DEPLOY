@@ -46,7 +46,7 @@ public class AttendanceController {
 	
 	 //Create a new Attendance
     @PostMapping("/create/attendance")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
     	AttendanceDto createdAttendance = attendanceService.createsAttendances(attendanceDto);
         logger.info("Created Attendance with name: {}", createdAttendance.getEmployeeName());
@@ -55,7 +55,7 @@ public class AttendanceController {
 	
 	
 //	 @PostMapping("/upload/attendance")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
 //	    public ResponseEntity<String> uploadExcel(
 //	            @RequestParam String employeeName,
 //	            @RequestParam LocalTime clockIn,
@@ -77,7 +77,7 @@ public class AttendanceController {
 //	    }
 //
 //	    @GetMapping("/download/excel/{attendanceId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
 //	    public ResponseEntity<byte[]> downloadExcel(@RequestParam Long attendanceId) {
 //	        byte[] excelData = attendanceService.downloadExcel(attendanceId);
 //
@@ -97,7 +97,7 @@ public class AttendanceController {
     
 //Get excelsheet   
     @PostMapping("/product/upload")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file)
 	{
 		if(ExcelHelper.chechExcelFormat(file))
@@ -112,7 +112,7 @@ public class AttendanceController {
 
     //get all product
 	@GetMapping("/get/product")
-	// @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
 	public List<AttendanceEntity> getAllAttendanceEntities()
 	{
 		return this.attendanceService.getAllAttendancesEntities();
@@ -122,7 +122,7 @@ public class AttendanceController {
 
     // Get all Attendance   
     @GetMapping("/get/attendance")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<AttendanceDto>> getAllAttendance() {
         List<AttendanceDto> attendance = attendanceService.getAllAttendances();
         logger.info("Retrieved {} Attendance from the database", attendance.size());
@@ -131,6 +131,7 @@ public class AttendanceController {
 
     // Get Attendance by ID
     @GetMapping("/get/{attendanceId}")
+ // @PreAuthorize("hasRole('client_HR')")
     // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
     public ResponseEntity<AttendanceDto> getAttendanceById(@PathVariable String attendanceId) {
         Optional<AttendanceDto> attendance = attendanceService.getAttendanceById(attendanceId);
@@ -146,6 +147,7 @@ public class AttendanceController {
     
  // Get Employee by ID
 	  @GetMapping("/{employeeId}")
+	// @PreAuthorize("hasRole('client_HR')")
 	  // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
 	    public ResponseEntity<List<AttendanceDto>> getAttendanceByEmployeeId(@PathVariable Long employeeId) {
 	        List<AttendanceDto> attendance = attendanceService.getEmployeeId(employeeId);
@@ -159,7 +161,7 @@ public class AttendanceController {
 
     // Update Attendance by ID
     @PutMapping("/update/{attendanceId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<AttendanceDto> updateAttendance(@PathVariable String attendanceId, @RequestBody AttendanceDto updatedAttendanceDto) {
     	AttendanceDto updatedAttendance = attendanceService.updateAttendances(attendanceId, updatedAttendanceDto);
         if (updatedAttendance != null) {
@@ -174,7 +176,7 @@ public class AttendanceController {
 
     // Update Attendance by Name And Date
     @PutMapping("/update/{employeeName}/{date}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<AttendanceDto> updateAttendanceByEmployeeNameAndDate(@PathVariable String employeeName, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) {
     	AttendanceDto updatedAttendance = attendanceService.updateAttendancesByEmployeeNameAndDate(employeeName, date, updatedAttendanceDto);
         if (updatedAttendance != null) {
@@ -189,7 +191,7 @@ public class AttendanceController {
     
  // Update Attendance by Id And Date
     @PutMapping("/update/Id/{employeeId}/{date}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<AttendanceDto> updateAttendanceByEmployeeIdAndDate(@PathVariable Long employeeId, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) {
     	AttendanceDto updatedAttendance = attendanceService.updateAttendancesByEmployeeIdAndDate(employeeId, date, updatedAttendanceDto);
         if (updatedAttendance != null) {
@@ -204,7 +206,7 @@ public class AttendanceController {
     
     // Delete Attendance by ID
     @DeleteMapping("/delete/{attendanceId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteAttendance(@PathVariable String attendanceId) {
   	  attendanceService.deleteAttendances(attendanceId);
         logger.info("Deleted Attendance with ID: {}", attendanceId);
@@ -213,7 +215,7 @@ public class AttendanceController {
 	    
     //count the total Attendance
 	    @GetMapping("/count/attendance")
-	 // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countAttendance()
 	    {
 	    	return attendanceService.countAttendances();
@@ -221,7 +223,7 @@ public class AttendanceController {
 
 	    //count the total Attendance of employees present today    
 	    @GetMapping("/count/present/attendance")
-	 // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countPresentEmployeesToday()
 	    {
 	    	return attendanceService.countPresentEmployeesToday();
@@ -229,7 +231,7 @@ public class AttendanceController {
 	    
 	    //count the totalOvertime on a particular month and year
 	    @GetMapping("/total-overtime/{employeeId}/{year}/{month}")
-	 // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public ResponseEntity<String> getTotalOvertimeInMonth(
 	            @PathVariable Long employeeId,
 	            @PathVariable int year,
@@ -242,7 +244,7 @@ public class AttendanceController {
 	    
 	    //count the total times login in a month
 	    @GetMapping("/login-days/{employeeId}/{month}/{year}")
-	 // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public int getNumberOfLoginDaysForMonth(
 	            @PathVariable Long employeeId,
 	            @PathVariable int month,

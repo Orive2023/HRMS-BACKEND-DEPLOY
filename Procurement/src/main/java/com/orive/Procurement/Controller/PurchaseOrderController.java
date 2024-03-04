@@ -46,7 +46,7 @@ public class PurchaseOrderController {
     
     // Create a new PurchaseOrder
     @PostMapping(value = "/create/purchaseOrder",consumes = "multipart/form-data")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> savePurchaseOrderEntity(
             @RequestParam("quotation")String quotation,
             @RequestParam("location") String location,
@@ -73,7 +73,7 @@ public class PurchaseOrderController {
     
  // Get Quotation pdf by id  
     @GetMapping("/download/{purchaseOrderId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long purchaseOrderId) {
         byte[] pdf = purchaseOrderService.downloadPdf(purchaseOrderId);
 
@@ -90,7 +90,7 @@ public class PurchaseOrderController {
 
     // Get all PurchaseOrder    
     @GetMapping("/get/purchaseOrder")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<PurchaseOrderDto>> getAllPurchaseOrder() {
         List<PurchaseOrderDto> purchaseOrder = purchaseOrderService.getAllPurchaseOrder();
         logger.info("Retrieved {} PurchaseOrder from the database", purchaseOrder.size());
@@ -99,6 +99,7 @@ public class PurchaseOrderController {
 
 //    // Get PurchaseOrderbyId
 //    @GetMapping("/get/{bidAnalysisId}")
+ // @PreAuthorize("hasRole('client_HR')")
 //    public ResponseEntity<PurchaseOrderDto> getPurchaseOrderbyId(@PathVariable Long purchaseOrderId) {
 //        Optional<PurchaseOrderDto> purchaseOrder = purchaseOrderService.getPurchaseOrderById(purchaseOrderId);
 //        if (purchaseOrder.isPresent()) {
@@ -113,7 +114,7 @@ public class PurchaseOrderController {
     
     // Get PurchaseOrderId
     @GetMapping("/get/{purchaseOrderId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<PurchaseOrderEntity> getPurchaseOrderByPurchaseOrderId(@PathVariable Long purchaseOrderId) {
   	  logger.info("Received PurchaseOrder to get PurchaseOrder by ID: {}", purchaseOrderId);
   	PurchaseOrderEntity purchaseOrder = purchaseOrderService.getByPurchaseOrderId(purchaseOrderId);
@@ -124,7 +125,7 @@ public class PurchaseOrderController {
     
     // Update PurchaseOrder by ID
     @PutMapping("/update/{purchaseOrderId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<PurchaseOrderDto> updatePurchaseOrder(@PathVariable Long purchaseOrderId, @RequestBody PurchaseOrderDto updatedPurchaseOrderDto) {
     	PurchaseOrderDto updatedPurchaseOrder= purchaseOrderService.updatePurchaseOrder(purchaseOrderId, updatedPurchaseOrderDto);
         if (updatedPurchaseOrder != null) {
@@ -140,7 +141,7 @@ public class PurchaseOrderController {
 
     // Delete PurchaseOrder by ID
     @DeleteMapping("/delete/{purchaseOrderId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deletePurchaseOrder(@PathVariable Long purchaseOrderId) {
   	  purchaseOrderService.deletePurchaseOrder(purchaseOrderId);
         logger.info("Deleted PurchaseOrder with ID: {}", purchaseOrderId);
@@ -149,7 +150,7 @@ public class PurchaseOrderController {
 	    
     //count the total PurchaseOrder
 	    @GetMapping("/count/purchaseOrder")
-	//  @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countPurchaseOrder()
 	    {
 	    	return purchaseOrderService.countPurchaseOrder();

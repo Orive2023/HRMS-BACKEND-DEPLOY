@@ -32,7 +32,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListControlle
 	private CompanyListService companyListService;
 	
 	@PostMapping("/add")
-	// @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> addCompanyList(@RequestBody CompanyListEntity companyList) {
 		logger.info("Received request to add CompanyList: {}", companyList);
 		companyListService.saveCompanyList(companyList);
@@ -41,7 +41,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListControlle
     }
 
     @GetMapping("/all")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public List<CompanyListEntity> getAllCompanyList() {
     	logger.info("Received request to fetch all CompanyList.");
         List<CompanyListEntity> companyList = companyListService.getCompanyListAllDetails();
@@ -50,7 +50,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListControlle
     }
 
     @GetMapping("/{bidAnalysisId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public List<CompanyListEntity> getCompanyByBidAnalysisId(@PathVariable Long bidAnalysisId) {
     	logger.info("Received request to fetch company for bidAnalysisId: {}", bidAnalysisId);
         List<CompanyListEntity> companyList = companyListService.getCompanyListByBidAnalysisId(bidAnalysisId);
@@ -59,7 +59,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListControlle
     }
 
     @GetMapping("/detail/{companyListId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public CompanyListEntity getCompanyListDetails(@PathVariable Long companyListId) {
     	logger.info("Received request to fetch CompanyList details for companyListId: {}", companyListId);
     	CompanyListEntity companyList = companyListService.getCompanyListByCompanyListId(companyListId);
@@ -69,6 +69,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListControlle
     
     
 //    @PutMapping("/{quotationListId}")
+ // @PreAuthorize("hasRole('client_HR')")
 //    public ResponseEntity<ExpenseListEntity> updateExpenseList(
 //            @PathVariable Long expenceListId,
 //            @RequestBody ExpenseListEntity updatedLocation) {
@@ -85,7 +86,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListControlle
 //    }
 
     @DeleteMapping("/delete/{companyListId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> deleteCompanyList(@PathVariable Long companyListId) {
     	logger.info("Received request to delete CompanyList with ID: {}", companyListId);
     	companyListService.deleteCompanyList(companyListId);

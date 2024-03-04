@@ -35,7 +35,7 @@ private static final Logger logger = LoggerFactory.getLogger(JournalsDetailsCont
 	
 //	// Create a new JournalsDetails
 //		  @PostMapping("/create/journalsdetails")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		  // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<JournalsDetailsDto> createJournalsDetails(@RequestBody JournalsDetailsDto journalsDetailsDto) {
 //			  JournalsDetailsDto createdJournalsDetails = journalsDetailsService.createJournalsDetails(journalsDetailsDto);
 //		      logger.info("Created JournalsDetails with id: {}", createdJournalsDetails.getJournalsDetailsId());
@@ -46,7 +46,7 @@ private static final Logger logger = LoggerFactory.getLogger(JournalsDetailsCont
 	
 		  // Get all JournalsDetails  
 		  @GetMapping("/get/journalsdetails")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<List<JournalsDetailsDto>> getAllJournalsDetails() {
 		      List<JournalsDetailsDto> journalsDetails = journalsDetailsService.getAllJournalsDetails();
 		      logger.info("Retrieved {} JournalsDetails from the database", journalsDetails.size());
@@ -57,7 +57,7 @@ private static final Logger logger = LoggerFactory.getLogger(JournalsDetailsCont
 		  
 //		  // Get JournalsDetails by ID
 //		  @GetMapping("/get/{journalsDetailsId}")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		  // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<JournalsDetailsDto> getJournalsDetailsId(@PathVariable Long journalsDetailsId) {
 //		      Optional<JournalsDetailsDto> journalsDetails = journalsDetailsService.getJournalsDetailsId(journalsDetailsId);
 //		      if (journalsDetails.isPresent()) {
@@ -75,7 +75,7 @@ private static final Logger logger = LoggerFactory.getLogger(JournalsDetailsCont
 		  
 //		  // Update JournalsDetails by ID
 //		  @PutMapping("/update/{journalsDetailsId}")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		  // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<JournalsDetailsDto> updateJournalsDetails(@PathVariable Long journalsDetailsId, @RequestBody JournalsDetailsDto updatedJournalsDetailsDto) {
 //			  JournalsDetailsDto updatedJournalsDetails = journalsDetailsService.updateJournalsDetails(journalsDetailsId, updatedJournalsDetailsDto);
 //		      if (updatedJournalsDetails != null) {
@@ -91,7 +91,7 @@ private static final Logger logger = LoggerFactory.getLogger(JournalsDetailsCont
 		  
 		  // Delete JournalsDetails by ID
 		  @DeleteMapping("/delete/{journalsDetailsId}")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<Void> deleteJournalsDetails(@PathVariable Long journalsDetailsId) {
 			  journalsDetailsService.deleteJournalsDetails(journalsDetailsId);
 		      logger.info("Deleted JournalsDetails with ID: {}", journalsDetailsId);
@@ -102,7 +102,7 @@ private static final Logger logger = LoggerFactory.getLogger(JournalsDetailsCont
 		  
 //		  // Count total JournalsDetails 
 //			    @GetMapping("/count/journalsdetails")
-//			    // @PreAuthorize("hasRole('client_admin')")
+//			   // @PreAuthorize("hasRole('client_HR')")
 //			    public long countJournalsDetails()
 //			    {
 //			    	return journalsDetailsService.countJournalsDetails();

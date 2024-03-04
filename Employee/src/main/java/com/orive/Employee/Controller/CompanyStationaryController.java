@@ -36,7 +36,7 @@ public class CompanyStationaryController {
   
   	// Create a new CompanyStationary
       @PostMapping("/create/companystationary")
-   // @PreAuthorize("hasRole('client_admin')")
+      // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<CompanyStationaryDto> createCompanyStationary(@RequestBody CompanyStationaryDto companyStationaryDto) {
     	  CompanyStationaryDto createdCompanyStationary = companyStationaryService.createCompanyStationary(companyStationaryDto);
           logger.info("Created CompanyStationary with name: {}", createdCompanyStationary.getEmployeeName());
@@ -45,7 +45,7 @@ public class CompanyStationaryController {
 
       // Get all CompanyStationary      
       @GetMapping("/get/companystationary")
-   // @PreAuthorize("hasRole('client_admin')")
+      // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<CompanyStationaryDto>> getAllCompanyStationary() {
           List<CompanyStationaryDto> companyStationary = companyStationaryService.getAllCompanyStationary();
           logger.info("Retrieved {} CompanyStationary from the database", companyStationary.size());
@@ -54,7 +54,7 @@ public class CompanyStationaryController {
 
       // Get CompanyStationary by ID
       @GetMapping("/get/{companyStationaryId}")
-   // @PreAuthorize("hasRole('client_admin')")
+      // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<CompanyStationaryDto> getCompanyStationaryById(@PathVariable Long companyStationaryId) {
           Optional<CompanyStationaryDto> companyStationary = companyStationaryService.getCompanyStationaryById(companyStationaryId);
           if (companyStationary.isPresent()) {
@@ -68,7 +68,7 @@ public class CompanyStationaryController {
 
       // Update CompanyStationary by ID
       @PutMapping("/update/{companyStationaryId}")
-   // @PreAuthorize("hasRole('client_admin')")
+      // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<CompanyStationaryDto> updateCompanyStationary(@PathVariable Long companyStationaryId, @RequestBody CompanyStationaryDto updatedCompanyStationaryDto) {
     	  CompanyStationaryDto updatedCompanyStationary = companyStationaryService.updateCompanyStationary(companyStationaryId, updatedCompanyStationaryDto);
           if (updatedCompanyStationary != null) {
@@ -84,7 +84,7 @@ public class CompanyStationaryController {
 
       // Delete CompanyStationary by ID
       @DeleteMapping("/delete/{companyStationaryId}")
-   // @PreAuthorize("hasRole('client_admin')")
+      // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<Void> deleteCompanyStationary(@PathVariable Long companyStationaryId) {
     	  companyStationaryService.deleteCompanyStationary(companyStationaryId);
           logger.info("Deleted CompanyStationary with ID: {}", companyStationaryId);
@@ -93,7 +93,7 @@ public class CompanyStationaryController {
   	    
       //Count CompanyStationary
   	    @GetMapping("/count/companystationary")
-  	// @PreAuthorize("hasRole('client_admin')")
+  	  // @PreAuthorize("hasRole('client_HR')")
   	    public long countCompanyStationary()
   	    {
   	    	return companyStationaryService.countCompanyStationary();

@@ -21,6 +21,7 @@ private  static final Logger logger=LoggerFactory.getLogger(GoodReceivedListServ
 	@Autowired
 	private GoodReceivedListRepository goodReceivedListRepository;
 	
+	//create method
 	 public void saveGoodReceivedList(GoodReceivedListEntity goodReceivedList) {
 	        try {
 	        	goodReceivedListRepository.save(goodReceivedList);

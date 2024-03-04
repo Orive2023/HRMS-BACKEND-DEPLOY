@@ -33,7 +33,7 @@ public class ExperienceLetterController {
 	
 	// Create a new ExperienceLetter
 	   @PostMapping("/create/experienceletter")
-	   // @PreAuthorize("hasRole('client_admin')")
+	   // @PreAuthorize("hasRole('client_HR')")
 	   public ResponseEntity<ExperienceLetterDto> createExperienceLetter(@RequestBody ExperienceLetterDto experienceLetterDto) {
 		   ExperienceLetterDto createdExperienceLetter = experienceLetterService.createExperienceLetter(experienceLetterDto);
 	       logger.info("Created ExperienceLetter with id: {}", createdExperienceLetter.getEmployeeName());
@@ -42,7 +42,7 @@ public class ExperienceLetterController {
 
 	   // Get all ExperienceLetter	   
 	   @GetMapping("/get/experienceletter")
-	   // @PreAuthorize("hasRole('client_admin')")
+	   // @PreAuthorize("hasRole('client_HR')")
 	   public ResponseEntity<List<ExperienceLetterDto>> getAllExperienceLetter() {
 	       List<ExperienceLetterDto> experienceLetter = experienceLetterService.getAllExperienceLetter();
 	       logger.info("Retrieved {} ExperienceLetter from the database", experienceLetter.size());
@@ -51,7 +51,7 @@ public class ExperienceLetterController {
 
 	   // Get ExperienceLetter by ID
 	   @GetMapping("/get/{experienceLetterId}")
-	   // @PreAuthorize("hasRole('client_admin')")
+	   // @PreAuthorize("hasRole('client_HR')")
 	   public ResponseEntity<ExperienceLetterDto> getExperienceLetterId(@PathVariable Long experienceLetterId) {
 	       Optional<ExperienceLetterDto> experienceLetter = experienceLetterService.getExperienceLetterById(experienceLetterId);
 	       if (experienceLetter.isPresent()) {
@@ -66,7 +66,7 @@ public class ExperienceLetterController {
 	   
 	   // Update ExperienceLetter by ID
 	   @PutMapping("/update/{experienceLetterId}")
-	   // @PreAuthorize("hasRole('client_admin')")
+	   // @PreAuthorize("hasRole('client_HR')")
 	   public ResponseEntity<ExperienceLetterDto> updateExperienceLetter(@PathVariable Long experienceLetterId, @RequestBody ExperienceLetterDto updatedExperienceLetterDto) {
 		   ExperienceLetterDto updatedExperienceLetter = experienceLetterService.updateExperienceLetter(experienceLetterId, updatedExperienceLetterDto);
 	       if (updatedExperienceLetter != null) {
@@ -81,7 +81,7 @@ public class ExperienceLetterController {
 	   
 	   // Delete ExperienceLetter by ID
 	   @DeleteMapping("/delete/{experienceLetterId}")
-	   // @PreAuthorize("hasRole('client_admin')")
+	   // @PreAuthorize("hasRole('client_HR')")
 	   public ResponseEntity<Void> deleteExperienceLetter(@PathVariable Long experienceLetterId) {
 		   experienceLetterService.deleteExperienceLetter(experienceLetterId);
 	       logger.info("Deleted ExperienceLetter with ID: {}", experienceLetterId);
@@ -91,7 +91,7 @@ public class ExperienceLetterController {
 		    
 	   // Count the total ExperienceLetter 
 		    @GetMapping("/count/experienceletter")
-		    // @PreAuthorize("hasRole('client_admin')")
+		    // @PreAuthorize("hasRole('client_HR')")
 		    public long countExperienceLetter()
 		    {
 		    	return experienceLetterService.countExperienceLetter();

@@ -34,7 +34,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReachUsController.c
 	
 //	// Create a new ReachUs
 //		  @PostMapping("/create/reachus")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		 // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<ReachUsDto> createReachUs(@RequestBody ReachUsDto reachUsDto) {
 //			  ReachUsDto createdReachUs = reachUsService.createReachUs(reachUsDto);
 //		      logger.info("Created ReachUs with id: {}", createdReachUs.getReachUsId());
@@ -44,7 +44,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReachUsController.c
 		  
 		  // Get all ReachUs  
 		  @GetMapping("/get/reachus")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<List<ReachUsDto>> getAllReachUs() {
 		      List<ReachUsDto> reachUs = reachUsService.getAllReachUs();
 		      logger.info("Retrieved {} ReachUs from the database", reachUs.size());
@@ -55,7 +55,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReachUsController.c
 
 //		  // Get ReachUs by ID
 //		  @GetMapping("/get/{reachUsId}")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		  // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<ReachUsDto> getReachUsId(@PathVariable Long reachUsId) {
 //		      Optional<ReachUsDto> reachUs = reachUsService.getReachUsId(reachUsId);
 //		      if (reachUs.isPresent()) {
@@ -71,7 +71,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReachUsController.c
 		  
 //		  // Update ReachUs by ID
 //		  @PutMapping("/update/{reachUsId}")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		  // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<ReachUsDto> updateReachUs(@PathVariable Long reachUsId, @RequestBody ReachUsDto updatedReachUsDto) {
 //			  ReachUsDto updatedReachUs = reachUsService.updateReachUs(reachUsId, updatedReachUsDto);
 //		      if (updatedReachUs != null) {
@@ -87,7 +87,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReachUsController.c
 		  
 		  // Delete ReachUs by ID
 		  @DeleteMapping("/delete/{reachUsId}")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<Void> deleteReachUs(@PathVariable Long reachUsId) {
 			  reachUsService.deleteReachUs(reachUsId);
 		      logger.info("Deleted ReachUs with ID: {}", reachUsId);
@@ -97,7 +97,7 @@ private static final Logger logger = LoggerFactory.getLogger(ReachUsController.c
 		  
 //			//count all  ReachUs   
 //			    @GetMapping("/count/reachus")
-//			    // @PreAuthorize("hasRole('client_admin')")
+//			   // @PreAuthorize("hasRole('client_HR')")
 //			    public long countReachUs()
 //			    {
 //			    	return reachUsService.countReachUs();

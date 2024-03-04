@@ -29,7 +29,7 @@ public class ExpenceController {
  
     // Create a new Expence
     @PostMapping(value = "/create/expence" , consumes = "multipart/form-data")
-  //  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> saveExpenceEntity(
             @RequestParam("expenceType") String expenceType,
             @RequestParam("createdDate") LocalDate createdDate,
@@ -51,7 +51,7 @@ public class ExpenceController {
     
  // Get Expence pdf by id  
     @GetMapping("/download/{expenceId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long expenceId) {
         byte[] pdf = expenceService.downloadPdf(expenceId);
 
@@ -67,7 +67,7 @@ public class ExpenceController {
     		
       // Get all Expence
       @GetMapping("/get/expence")
-  //  @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<ExpenceDto>> getAllExpence() {
           List<ExpenceDto> expence = expenceService.getAllExpence();
           logger.info("Retrieved {} Expence from the database", expence.size());
@@ -75,7 +75,7 @@ public class ExpenceController {
       }
 
       @GetMapping("/get/{expenceId}")
-  //  @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<ExpenceEntity> getExpenceByExpenceId(@PathVariable Long expenceId) {
     	  logger.info("Received request to get expense by ID: {}", expenceId);
           ExpenceEntity expence = expenceService.getByCareerSiteId(expenceId);
@@ -88,7 +88,7 @@ public class ExpenceController {
 
       // Delete Expence by ID
       @DeleteMapping("/delete/{expenceId}")
-  //  @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<Void> deleteExpence(@PathVariable Long expenceId) {
     	  expenceService.deleteExpence(expenceId);
           logger.info("Deleted Expence with ID: {}", expenceId);
@@ -97,7 +97,7 @@ public class ExpenceController {
   	    
       //Count the total Expence
   	    @GetMapping("/count/expence")
-  	//  @PreAuthorize("hasRole('client_admin')")
+  	// @PreAuthorize("hasRole('client_HR')")
   	    public long countExpence()
   	    {
   	    	return expenceService.countExpence();

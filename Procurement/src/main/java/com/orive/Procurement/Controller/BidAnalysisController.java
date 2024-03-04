@@ -48,6 +48,7 @@ public class BidAnalysisController {
     
  // Create a new BidAnalysis
 //    @PostMapping("/create/bidAnalysis")
+ // @PreAuthorize("hasRole('client_HR')")
 //    public ResponseEntity<BidAnalysisDto> createBidAnalysis(@RequestBody BidAnalysisDto bidAnalysisDto) {
 //    	BidAnalysisDto createdBidAnalysis= bidAnalysisService.createBidAnalysis(bidAnalysisDto);
 //        logger.info("Created BidAnalysis with name: {}", createdBidAnalysis.getLocation());
@@ -57,7 +58,7 @@ public class BidAnalysisController {
     
  // Create a new BidAnalysis
     @PostMapping(value = "/create/bidAnalysis", consumes = "multipart/form-data")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> saveBidAnalysisEntity(
     		@RequestParam String location,
    		    @RequestParam LocalDate date,
@@ -79,7 +80,7 @@ public class BidAnalysisController {
     
  // Get BidAnalysis pdf by id  
     @GetMapping("/download/{bidAnalysisId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long bidAnalysisId) {
         byte[] pdf = bidAnalysisService.downloadPdf(bidAnalysisId);
 
@@ -95,7 +96,7 @@ public class BidAnalysisController {
     		
     // Get all BidAnalysis    
     @GetMapping("/get/bidAnalysis")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<BidAnalysisDto>> getAllBidAnalysis() {
         List<BidAnalysisDto> bidAnalysis = bidAnalysisService.getAllBidAnalysis();
         logger.info("Retrieved {} BidAnalysis from the database", bidAnalysis.size());
@@ -104,6 +105,7 @@ public class BidAnalysisController {
 
 //    // Get BidAnalysisbyId
 //    @GetMapping("/get/{bidAnalysisId}")
+ // @PreAuthorize("hasRole('client_HR')")
 //    public ResponseEntity<BidAnalysisDto> getBidAnalysisbyId(@PathVariable Long bidAnalysisId) {
 //        Optional<BidAnalysisDto> bidAnalysis = bidAnalysisService.getBidAnalysisById(bidAnalysisId);
 //        if (bidAnalysis.isPresent()) {
@@ -116,7 +118,7 @@ public class BidAnalysisController {
 //    }
 
     @GetMapping("/combined-data/{bidAnalysisId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<BidAnalysisEntity> getCombinedData(@PathVariable Long bidAnalysisId) {
         try {
             BidAnalysisEntity combinedData = bidAnalysisService.getCombinedDataByBidAnalysisId(bidAnalysisId);
@@ -131,7 +133,7 @@ public class BidAnalysisController {
     
     // Update BidAnalysis by ID
     @PutMapping("/update/{bidAnalysisId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<BidAnalysisDto> updateBidAnalysis(@PathVariable Long bidAnalysisId, @RequestBody BidAnalysisDto updatedBidAnalysisDto) {
     	BidAnalysisDto updatedBidAnalysis= bidAnalysisService.updateBidAnalysis(bidAnalysisId, updatedBidAnalysisDto);
         if (updatedBidAnalysis != null) {
@@ -147,7 +149,7 @@ public class BidAnalysisController {
 
     // Delete BidAnalysis by ID
     @DeleteMapping("/delete/{bidAnalysisId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteBidAnalysis(@PathVariable Long bidAnalysisId) {
   	  bidAnalysisService.deleteBidAnalysis(bidAnalysisId);
         logger.info("Deleted BidAnalysis with ID: {}", bidAnalysisId);
@@ -156,7 +158,7 @@ public class BidAnalysisController {
 	    
     //Count the total BidAnalysis
 	    @GetMapping("/count/bidAnalysis")
-	//  @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countBidAnalysis()
 	    {
 	    	return bidAnalysisService.countBidAnalysis();

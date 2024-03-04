@@ -31,7 +31,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListControlle
 	private ExpenseListService expenseListService;
 	
 	@PostMapping("/add")
-	// @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> addExpenseList(@RequestBody ExpenseListEntity expenseList) {
 		logger.info("Received request to add expenseList: {}", expenseList);
 		expenseListService.saveExpenseList(expenseList);
@@ -40,7 +40,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListControlle
     }
 
     @GetMapping("/all")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public List<ExpenseListEntity> getAllExpensesList() {
     	logger.info("Received request to fetch all expenseList.");
         List<ExpenseListEntity> expenseList = expenseListService.getExpenceListAllDetails();
@@ -49,7 +49,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListControlle
     }
 
     @GetMapping("/{expenceId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public List<ExpenseListEntity> getExpensesByExpenceId(@PathVariable Long expenceId) {
     	logger.info("Received request to fetch expenses for expenceId: {}", expenceId);
         List<ExpenseListEntity> expenseList = expenseListService.getExpenseListByExpenceId(expenceId);
@@ -58,7 +58,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListControlle
     }
 
     @GetMapping("/detail/{expenceListId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ExpenseListEntity getExpenseListDetails(@PathVariable Long expenceListId) {
     	logger.info("Received request to fetch expenseList details for expenceListId: {}", expenceListId);
         ExpenseListEntity expenseList = expenseListService.getExpenseListByxpenceId(expenceListId);
@@ -68,7 +68,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListControlle
     
     
     @PutMapping("/{expenceListId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<ExpenseListEntity> updateExpenseList(
             @PathVariable Long expenceListId,
             @RequestBody ExpenseListEntity updatedLocation) {
@@ -85,7 +85,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListControlle
     }
 
     @DeleteMapping("/delete/{expenceListId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> deleteExpenseList(@PathVariable Long expenceListId) {
     	logger.info("Received request to delete expenseList with ID: {}", expenceListId);
     	expenseListService.deleteExpeceList(expenceListId);

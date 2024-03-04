@@ -49,7 +49,7 @@ public class DesignationController {
     
  // Create a new Department
     @PostMapping("/create/designation")
-  //@PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
   public ResponseEntity<?> createDesignation(@Valid @RequestBody DesignationDto designationDto) {
       try {
           // Check if the department name already exists
@@ -76,7 +76,7 @@ public class DesignationController {
 
       // Get all Designation
       @GetMapping("/get/designation")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<DesignationDto>> getAllDesignation() {
           List<DesignationDto> designation = designationService.getAllDesignation();
           logger.info("Retrieved {} Designation from the database", designation.size());
@@ -85,7 +85,7 @@ public class DesignationController {
 
       // Get Designation by ID
       @GetMapping("/get/{designationId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<DesignationDto> getDesignationById(@PathVariable Long designationId) {
           Optional<DesignationDto> designation = designationService.getDesignationById(designationId);
           if (designation.isPresent()) {
@@ -99,7 +99,7 @@ public class DesignationController {
 
       // Update Designation by ID
       @PutMapping("/update/{designationId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<DesignationDto> updateDesignation(@PathVariable Long designationId, @RequestBody DesignationDto updatedDesignationDto) {
     	  DesignationDto updatedDesignation = designationService.updateDesignation(designationId, updatedDesignationDto);
           if (updatedDesignation != null) {
@@ -114,7 +114,7 @@ public class DesignationController {
 
       // Delete Designation by ID
       @DeleteMapping("/delete/{designationId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<Void> deleteDesignation(@PathVariable Long designationId) {
     	  designationService.deleteDesignation(designationId);
           logger.info("Deleted Designation with ID: {}", designationId);
@@ -124,7 +124,7 @@ public class DesignationController {
       
   	  //Count the total Designation
   	    @GetMapping("/count/designation")
-  	// @PreAuthorize("hasRole('client_admin')")
+  	// @PreAuthorize("hasRole('client_HR')")
   	    public long countDesignation()
   	    {
   	    	return designationService.countDesignation();

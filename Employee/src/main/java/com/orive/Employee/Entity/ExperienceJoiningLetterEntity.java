@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +32,8 @@ public class ExperienceJoiningLetterEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long experienceJoiningLetterId;
 	
-	@Column(name = "referrence_no")
+//	@Column(name = "referrence_no")
+	@Column(name = "referrence_no", length = 5)
 	private String referrenceNo;
 	
 	@Column(name = "form_release_date")
@@ -79,7 +82,8 @@ public class ExperienceJoiningLetterEntity {
 	private String pancardNo;
 	
 	@Column(name = "marksheets")
-	private byte[] marksheets;
+	private String marksheets;
+//	private byte[] marksheets;
 	
 	@Column(name = "reporting_manager")
 	private String reportingManager;
@@ -95,4 +99,45 @@ public class ExperienceJoiningLetterEntity {
 	
 	@Column(name = "department")
 	private String department;
-}
+	
+//	@PrePersist
+//    @PreUpdate
+//    private void generateReferenceNumber() {
+//        if (referrenceNo == null) {
+//            // Generate the specific number based on your requirements
+//            String datePart = LocalDate.now().toString().replace("-", "");
+//            String randomPart = String.format("%05d", (int) (Math.random() * 10000)); // 5-digit random number
+//            referrenceNo = "REF-" + datePart + "-" + randomPart;
+//        }
+//      }
+	 
+//	@PrePersist
+//	@PreUpdate
+//	private void generateReferenceNumber() {
+//	    if (referrenceNo == null) {
+//	        // Generate the specific number based on your requirements
+//	        
+//	        // Generate a random part (e.g., 8 characters)
+//	        String randomPart = generateRandomString(8);
+//	        
+//	        // Combine randomPart with a prefix to form the reference number
+//	        referrenceNo = "REF-" + randomPart;
+//
+//	        // Truncate the reference number if it exceeds the allowed length
+//	        if (referrenceNo.length() > 15) {
+//	            referrenceNo = referrenceNo.substring(0, 15);
+//	        }
+//	    }
+//	}
+//
+//	private String generateRandomString(int length) {
+//	    StringBuilder randomStringBuilder = new StringBuilder();
+//	    for (int i = 0; i < length; i++) {
+//	        char randomChar = (char) ('a' + Math.random() * ('z' - 'a' + 1));
+//	        randomStringBuilder.append(randomChar);
+//	    }
+//	    return randomStringBuilder.toString().toUpperCase(); // Convert to uppercase if needed
+//	}
+	
+	}
+

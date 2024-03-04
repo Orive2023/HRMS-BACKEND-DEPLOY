@@ -28,14 +28,14 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/createUser")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public HttpEntity<ResponseDto> createUser(@RequestBody UserDto userDto) {
         userDto = userService.createUser(userDto);
         return new ResponseEntity<>(ResponseUtil.getSuccessResponse(userDto), HttpStatus.CREATED);
     }
 
     @GetMapping("/getUser/{id}")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public HttpEntity<ResponseDto> getUser(@PathVariable Long id) {
         UserDto userDto = userService.getUser(id);
         return new ResponseEntity<>(ResponseUtil.getSuccessResponse(userDto), HttpStatus.OK);
@@ -44,7 +44,7 @@ public class UserController {
    
     
     @GetMapping("/getAll")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<UserDto>> getAll() {
         List<UserDto> userDtos = userService.getUsers();
         return new ResponseEntity<>(userDtos, HttpStatus.OK);

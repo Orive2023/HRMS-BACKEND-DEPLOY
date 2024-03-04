@@ -30,6 +30,7 @@ import jakarta.mail.util.ByteArrayDataSource;
 import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -126,8 +127,8 @@ public class GmailServiceImpl implements EmailService {
         }
     }
 
-    private Date getStartDate(LocalDateTime eventDateTime) {
-        Instant instant = eventDateTime.atZone(ZoneId.systemDefault()).toInstant();
+    private Date getStartDate(LocalDate localDate) {
+        Instant instant = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
         return Date.from(instant);
     }
 }

@@ -35,7 +35,7 @@ public class SaleController {
 	
 	// Create a new WorkSheet
 		  @PostMapping("/create/Sale")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<SaleDto> createSale(@RequestBody SaleDto saleDto) {
 			  SaleDto createdWorkSheet = saleService.createSale(saleDto);
 		      logger.info("Created Sale with id: {}", createdWorkSheet.getSaleId());
@@ -45,7 +45,7 @@ public class SaleController {
 		  
 		  // Get all WorkSheet  
 		  @GetMapping("/get/Sale")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<List<SaleDto>> getAllSale() {
 		      List<SaleDto> workSheet = saleService.getAllSale();
 		      logger.info("Retrieved {} Sale from the database", workSheet.size());
@@ -54,6 +54,7 @@ public class SaleController {
 
 		  // Get WorkSheet by ID
 		  @GetMapping("/get/{saleId}")
+		// @PreAuthorize("hasRole('client_HR')")
 		    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
 		  public ResponseEntity<SaleDto> getSaleId(@PathVariable String saleId) {
 		      Optional<SaleDto> workSheet = saleService.getSaleId(saleId);
@@ -71,7 +72,7 @@ public class SaleController {
 		  
 		  // Update WorkSheet by ID
 		  @PutMapping("/update/{saleId}")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<SaleDto> updateSale(@PathVariable String saleId, @RequestBody SaleDto saleDto) {
 			  SaleDto updatedWorkSheet = saleService.updateSale(saleId, saleDto);
 		      if (updatedWorkSheet != null) {
@@ -85,7 +86,7 @@ public class SaleController {
 		  
 		  // Delete WorkSheet by ID
 		  @DeleteMapping("/delete/{saleId}")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<Void> deleteSale(@PathVariable String saleId) {
 			  saleService.deleteSale(saleId);
 		      logger.info("Deleted Sale with ID: {}", saleId);
@@ -93,7 +94,7 @@ public class SaleController {
 		  }
 			    
 			    @GetMapping("/count/Sale")
-			    // @PreAuthorize("hasRole('client_admin')")
+			 // @PreAuthorize("hasRole('client_HR')")
 			    public long countSale()
 			    {
 			    	return saleService.countSale();

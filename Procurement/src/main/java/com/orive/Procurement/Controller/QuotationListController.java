@@ -33,7 +33,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
 	private QuotationListService quotationListService;
 	
 	@PostMapping("/add")
-	 // @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> addQuotationList(@RequestBody QuotationListEntity quotationList) {
 		logger.info("Received request to add QuotationList: {}", quotationList);
 		quotationListService.saveQuotationList(quotationList);
@@ -42,7 +42,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
     }
 
     @GetMapping("/all")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public List<QuotationListEntity> getAllQuotationList() {
     	logger.info("Received request to fetch all QuotationList.");
         List<QuotationListEntity> quotationList = quotationListService.getQuotationListAllDetails();
@@ -51,7 +51,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
     }
 
     @GetMapping("/{quotationId}")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public List<QuotationListEntity> getQuotationByQuotationId(@PathVariable Long quotationId) {
     	logger.info("Received request to fetch quotation for quotationId: {}", quotationId);
         List<QuotationListEntity> quotationList = quotationListService.getQuotationListByQuotationId(quotationId);
@@ -60,7 +60,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
     }
 
     @GetMapping("/detail/{quotationListId}")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public QuotationListEntity getQuotationListDetails(@PathVariable Long quotationListId) {
     	logger.info("Received request to fetch QuotationList details for quotationListId: {}", quotationListId);
     	QuotationListEntity quotationList = quotationListService.getQuotationListByquotationListId(quotationListId);
@@ -70,6 +70,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
     
     
 //    @PutMapping("/{quotationListId}")
+ // @PreAuthorize("hasRole('client_HR')")
 //    public ResponseEntity<ExpenseListEntity> updateExpenseList(
 //            @PathVariable Long expenceListId,
 //            @RequestBody ExpenseListEntity updatedLocation) {
@@ -86,7 +87,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
 //    }
 
     @DeleteMapping("/delete/{quotationListId}")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> deleteQuotationList(@PathVariable Long quotationListId) {
     	logger.info("Received request to delete QuotationList with ID: {}", quotationListId);
     	quotationListService.deleteQuotationList(quotationListId);
