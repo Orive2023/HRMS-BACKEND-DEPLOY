@@ -29,7 +29,7 @@ public class CompanyController {
   
  	// Create a new Company
       @PostMapping(value = "/create/company" , consumes = "multipart/form-data")  
-    //  @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<?> saveCompanyEntity(
     		  @RequestParam("address") String address,
     		  @RequestParam("cin") String cin,
@@ -67,7 +67,7 @@ public class CompanyController {
     
  // Get companies logo by name
     @GetMapping("/{companyName}")
-  //  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
 	public ResponseEntity<?> downloadImage(@PathVariable String companyName){
 		byte[] imageData=companyService.downloadImage(companyName);
 		return ResponseEntity.status(HttpStatus.OK)
@@ -78,7 +78,7 @@ public class CompanyController {
     
  // Get all companies  
       @GetMapping("/get/company")
-   //   @PreAuthorize("hasRole('client_user')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<CompanyDto>> getAllCompany() {
           List<CompanyDto> companies = companyService.getAllCompany();
           logger.info("Retrieved {} companies from the database", companies.size());
@@ -87,6 +87,7 @@ public class CompanyController {
 
       // Get company by ID
       @GetMapping("/get/{companyId}")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<CompanyEntity> getCompanyById(@PathVariable Long companyId) {
           try {
               CompanyEntity company = companyService.getCompanyById(companyId);
@@ -101,6 +102,7 @@ public class CompanyController {
 
    // Update company by ID
       @PutMapping("/update/{companyId}")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<Void> partialUpdateCompany(
               @PathVariable Long companyId,
               @RequestBody CompanyEntity companyEntity) {
@@ -112,6 +114,7 @@ public class CompanyController {
 
       // Delete Company by ID
       @DeleteMapping("/delete/{companyId}")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<Void> deleteCompany(@PathVariable Long companyId) {
     	  companyService.deleteCompany(companyId);
           logger.info("Deleted company with ID: {}", companyId);
@@ -120,7 +123,7 @@ public class CompanyController {
   	    
       //Count the total Company
   	    @GetMapping("/count/company")
-  	//  @PreAuthorize("hasRole('client_admin')")
+  	// @PreAuthorize("hasRole('client_HR')")
   	    public long countCompany()
   	    {
   	    	return companyService.countCompany();

@@ -1,5 +1,6 @@
 package com.orivesolutions.hrms.interviewscheduler.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.orivesolutions.hrms.interviewscheduler.enums.InterviewStatus;
@@ -44,7 +45,7 @@ public class Interview {
     @JoinColumn(name = "interviewer_id", referencedColumnName = "id")
     private User interviewer;
     
-    private LocalDateTime dateTime;
+    private LocalDate dateTime;
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "talent_id", referencedColumnName = "id")

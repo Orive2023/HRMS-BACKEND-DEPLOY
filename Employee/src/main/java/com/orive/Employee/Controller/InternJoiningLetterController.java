@@ -33,7 +33,7 @@ public class InternJoiningLetterController {
 	
 	// Create a new InternJoiningLetter
     @PostMapping("/create/internjoiningletter")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<InternJoiningLetterDto> createInternJoiningLetter(@RequestBody InternJoiningLetterDto internJoiningLetterDto) {
     	InternJoiningLetterDto createdInternJoiningLetter = internJoiningLetterService.createInternJoiningLetter(internJoiningLetterDto);
         logger.info("Created InternJoiningLetter with id: {}", createdInternJoiningLetter.getInternJoiningLetterId());
@@ -42,7 +42,7 @@ public class InternJoiningLetterController {
 
     // Get all InternJoiningLetter   
     @GetMapping("/get/internjoiningletter")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<InternJoiningLetterDto>> getAllInternJoiningLetter() {
         List<InternJoiningLetterDto> internJoiningLetter = internJoiningLetterService.getAllInternJoiningLetter();
         logger.info("Retrieved {} InternJoiningLetter from the database", internJoiningLetter.size());
@@ -51,7 +51,7 @@ public class InternJoiningLetterController {
 
     // Get InternJoiningLetter by ID
     @GetMapping("/get/{internJoiningLetterId}")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<InternJoiningLetterDto> getInternJoiningLetterId(@PathVariable Long internJoiningLetterId) {
         Optional<InternJoiningLetterDto> internJoiningLetter = internJoiningLetterService.getInternJoiningLetterId(internJoiningLetterId);
         if (internJoiningLetter.isPresent()) {
@@ -66,7 +66,7 @@ public class InternJoiningLetterController {
     
     // Update InternJoiningLetter by ID
     @PutMapping("/update/{internJoiningLetterId}")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<InternJoiningLetterDto> updateInternJoiningLetter(@PathVariable Long internJoiningLetterId, @RequestBody InternJoiningLetterDto updatedInternJoiningLetterDto) {
     	InternJoiningLetterDto updatedInternJoiningLetter = internJoiningLetterService.updateInternJoiningLetter(internJoiningLetterId, updatedInternJoiningLetterDto);
         if (updatedInternJoiningLetter != null) {
@@ -82,7 +82,7 @@ public class InternJoiningLetterController {
 
     // Delete InternJoiningLetter by ID
     @DeleteMapping("/delete/{internJoiningLetterId}")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteInternJoiningLetter(@PathVariable Long internJoiningLetterId) {
    	 internJoiningLetterService.deleteInternJoiningLetter(internJoiningLetterId);
         logger.info("Deleted InternJoiningLetter with ID: {}", internJoiningLetterId);
@@ -91,7 +91,7 @@ public class InternJoiningLetterController {
 	    
  // Count the total  InternJoiningLetter
 	    @GetMapping("/count/internjoiningletter")
-	   // @PreAuthorize("hasRole('client_admin')")
+	    // @PreAuthorize("hasRole('client_HR')")
 	    public long countInternJoiningLetter()
 	    {
 	    	return internJoiningLetterService.countInternJoiningLetter();

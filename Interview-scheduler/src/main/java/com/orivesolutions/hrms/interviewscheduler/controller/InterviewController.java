@@ -26,21 +26,21 @@ public class InterviewController {
     private InterviewService interviewService;
 
     @PostMapping("/scheduleInterview")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public HttpEntity<InterviewDto> scheduleInterview(@RequestBody InterviewDto interviewDto) {
         interviewDto = interviewService.scheduleInterview(interviewDto);
         return new ResponseEntity<>(interviewDto, HttpStatus.CREATED);
     }
 
     @GetMapping("/getInterview")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public HttpEntity<List<InterviewDto>> getInterview(@PathVariable String schedulerEmail) {
         List<InterviewDto> interviews = interviewService.getInterview(schedulerEmail);
         return new ResponseEntity<>(interviews, HttpStatus.OK);
     }
     
     @GetMapping("/all")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<InterviewDto>> getAllInterviews() {
         List<InterviewDto> interviews = interviewService.getAllInterviews();
         return new ResponseEntity<>(interviews, HttpStatus.OK);

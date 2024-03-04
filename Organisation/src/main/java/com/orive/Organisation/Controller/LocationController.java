@@ -49,7 +49,7 @@ public class LocationController {
     
  // Create a new Department
     @PostMapping("/create/location")
-  //@PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
   public ResponseEntity<?> createLocation(@Valid @RequestBody LocationDto locationDto) {
       try {
           // Check if the location name already exists
@@ -76,7 +76,7 @@ public class LocationController {
 
       // Get all Location  
       @GetMapping("/get/location")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<LocationDto>> getAllLocation() {
           List<LocationDto> location = locationService.getAllLocation();
           logger.info("Retrieved {} Location from the database", location.size());
@@ -85,7 +85,7 @@ public class LocationController {
 
       // Get Location by ID
       @GetMapping("/get/{locationId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<LocationDto> getLocationById(@PathVariable Long locationId) {
           Optional<LocationDto> location = locationService.getLocationById(locationId);
           if (location.isPresent()) {
@@ -99,7 +99,7 @@ public class LocationController {
       
       // Get the Location by company name
   	  @GetMapping("/{companyName}")
-  	// @PreAuthorize("hasRole('client_admin')")
+  	// @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<LocationEntity>> getLocationsByCompanyName(@PathVariable String companyName) {
           try {
         	  logger.info("Request to get locations for company: " + companyName);
@@ -117,7 +117,7 @@ public class LocationController {
 
       // Update Location by ID
       @PutMapping("/update/{locationId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<LocationDto> updateLocation(@PathVariable Long locationId, @RequestBody LocationDto updatedLocationDto) {
     	  LocationDto updatedLocation = locationService.updateLocation(locationId, updatedLocationDto);
           if (updatedLocation != null) {
@@ -133,7 +133,7 @@ public class LocationController {
 
       // Delete Location by ID
       @DeleteMapping("/delete/{locationId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<Void> deleteLocation(@PathVariable Long locationId) {
     	  locationService.deleteLocation(locationId);
           logger.info("Deleted Location with ID: {}", locationId);
@@ -142,7 +142,7 @@ public class LocationController {
       
       //Count the total Location 
   	    @GetMapping("/count/location")
-  	// @PreAuthorize("hasRole('client_admin')")
+  	// @PreAuthorize("hasRole('client_HR')")
   	    public Long countLocation()
   	    {
   	    	return locationService.countLocation();

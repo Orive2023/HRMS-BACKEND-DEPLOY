@@ -37,7 +37,7 @@ public class PerformanceAppraisalController {
     
  // Create a new PerformanceAppraisal
     @PostMapping("/create/performanceappraisal")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<PerformanceAppraisalDto> createPerformanceAppraisal(@RequestBody PerformanceAppraisalDto performanceAppraisalDto) {
     	PerformanceAppraisalDto createdPerformanceAppraisal = performanceAppraisalService.createPerformanceAppraisal(performanceAppraisalDto);
         logger.info("Created PerformanceAppraisal with name: {}", createdPerformanceAppraisal.getEmployeeName());
@@ -45,9 +45,8 @@ public class PerformanceAppraisalController {
     }
 
     // Get all PerformanceAppraisal
-    
     @GetMapping("/get/performanceappraisal")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<PerformanceAppraisalDto>> getAllPerformanceAppraisal() {
         List<PerformanceAppraisalDto> performanceAppraisal = performanceAppraisalService.getAllPerformanceAppraisal();
         logger.info("Retrieved {} PerformanceAppraisal from the database", performanceAppraisal.size());
@@ -56,6 +55,7 @@ public class PerformanceAppraisalController {
 
     // Get PerformanceAppraisalbyId
     @GetMapping("/get/{performanceAppraisalId}")
+    // @PreAuthorize("hasRole('client_HR')")
     // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
     public ResponseEntity<PerformanceAppraisalDto> getPerformanceAppraisalbyId(@PathVariable String performanceAppraisalId) {
         Optional<PerformanceAppraisalDto> performanceAppraisal = performanceAppraisalService.getPerformanceAppraisalById(performanceAppraisalId);
@@ -72,6 +72,7 @@ public class PerformanceAppraisalController {
     
  // Get PerformanceAppraisal by EmployeeId
     @GetMapping("/byId/{employeeId}")
+ // @PreAuthorize("hasRole('client_HR')")
     // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
     public ResponseEntity<List<PerformanceAppraisalEntity>> getPerformanceAppraisalByEmployeeId(@PathVariable Long employeeId) {
         try {
@@ -87,7 +88,7 @@ public class PerformanceAppraisalController {
 
     // Update PerformanceAppraisal by PerformanceAppraisalbyId
     @PutMapping("/update/{performanceAppraisalId}")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<PerformanceAppraisalDto> updatePerformanceAppraisal(@PathVariable String performanceAppraisalId, @RequestBody PerformanceAppraisalDto updatedPerformanceAppraisalDto) {
     	PerformanceAppraisalDto updatedPerformanceAppraisal = performanceAppraisalService.updatePerformanceAppraisal(performanceAppraisalId, updatedPerformanceAppraisalDto);
         if (updatedPerformanceAppraisal != null) {
@@ -103,7 +104,7 @@ public class PerformanceAppraisalController {
 
     // Delete PerformanceAppraisal by ID
     @DeleteMapping("/delete/{performanceAppraisalId}")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deletePerformanceAppraisal(@PathVariable String performanceAppraisalId) {
   	  performanceAppraisalService.deletePerformanceAppraisal(performanceAppraisalId);
         logger.info("Deleted PerformanceAppraisal with ID: {}", performanceAppraisalId);
@@ -111,7 +112,7 @@ public class PerformanceAppraisalController {
     }
 	    
 	    @GetMapping("/count/performanceappraisal")
-	    // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countPerformanceAppraisal()
 	    {
 	    	return performanceAppraisalService.countPerformanceAppraisal();

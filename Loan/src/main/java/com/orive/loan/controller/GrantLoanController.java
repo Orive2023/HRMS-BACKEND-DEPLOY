@@ -34,7 +34,7 @@ public class GrantLoanController {
 	
 	// Create a new GrantLoan
     @PostMapping("/create/grantloan")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<GrantLoanDto> createGrantLoan(@RequestBody GrantLoanDto grantLoanDto) {
     	GrantLoanDto createdGrantLoan = grantLoanService.createGrantLoan(grantLoanDto);
         logger.info("Created GrantLoan with name: {}", createdGrantLoan.getEmployeeName());
@@ -43,7 +43,7 @@ public class GrantLoanController {
 
     // Get all GrantLoan   
     @GetMapping("/get/grantloan")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<GrantLoanDto>> getAllGrantLoan() {
         List<GrantLoanDto> grantLoan = grantLoanService.getAllGrantLoan();
         logger.info("Retrieved {} GrantLoan from the database", grantLoan.size());
@@ -52,7 +52,7 @@ public class GrantLoanController {
 
     // Get GrantLoan by ID
     @GetMapping("/get/{grantLoanId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<GrantLoanDto> getGrantLoanById(@PathVariable String grantLoanId) {
         Optional<GrantLoanDto> grantLoan = grantLoanService.getGrantLoanById(grantLoanId);
         if (grantLoan.isPresent()) {
@@ -66,7 +66,7 @@ public class GrantLoanController {
 
     // Update GrantLoan by ID
     @PutMapping("/update/{grantLoanId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<GrantLoanDto> updateGrantLoan(@PathVariable String grantLoanId, @RequestBody GrantLoanDto updatedGrantLoanDto) {
     	GrantLoanDto updatedGrantLoan = grantLoanService.updateGrantLoan(grantLoanId, updatedGrantLoanDto);
         if (updatedGrantLoan != null) {
@@ -82,7 +82,7 @@ public class GrantLoanController {
 
     // Delete GrantLoan by ID
     @DeleteMapping("/delete/{grantLoanId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteGrantLoan(@PathVariable String grantLoanId) {
     	grantLoanService.deleteGrantLoan(grantLoanId);
         logger.info("Deleted GrantLoan with ID: {}", grantLoanId);
@@ -91,7 +91,7 @@ public class GrantLoanController {
 	    
     // Count the total GrantLoan
 	    @GetMapping("/count/grantloan")
-	 // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countGrantLoan()
 	    {
 	    	return grantLoanService.countGrantLoan();

@@ -37,7 +37,7 @@ public class AdvanceSaleryController {
     
  // Create a new AdvanceSalery
     @PostMapping("/create/advancesalery")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<AdvanceSaleryDto> createAdvanceSalery(@RequestBody AdvanceSaleryDto advanceSaleryDto ) {
     	AdvanceSaleryDto createdadvanceSalery = advanceSaleryService.createAdvanceSalery(advanceSaleryDto);
         logger.info("Created AdvanceSalery with name: {}", createdadvanceSalery.getEmployeeName());
@@ -56,7 +56,7 @@ public class AdvanceSaleryController {
 
     // Get AdvanceSalery by ID
     @GetMapping("/get/{advanceSaleryId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<AdvanceSaleryDto> getAdvanceSaleryById(@PathVariable String advanceSaleryId) {
         Optional<AdvanceSaleryDto> advanceSalery = advanceSaleryService.getAdvanceSaleryById(advanceSaleryId);
         if (advanceSalery.isPresent()) {
@@ -70,7 +70,7 @@ public class AdvanceSaleryController {
 
     // Update AdvanceSalery by ID
     @PutMapping("/update/{advanceSaleryId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<AdvanceSaleryDto> updateAdvanceSalery(@PathVariable String advanceSaleryId, @RequestBody AdvanceSaleryDto updatedAdvanceSaleryDto) {
     	AdvanceSaleryDto updatedAdvanceSalery = advanceSaleryService.updateAdvanceSalery(advanceSaleryId, updatedAdvanceSaleryDto);
         if (updatedAdvanceSalery != null) {
@@ -86,7 +86,7 @@ public class AdvanceSaleryController {
 
     // Delete AdvanceSalery by ID
     @DeleteMapping("/delete/{advanceSaleryId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteAdvanceSalery(@PathVariable String advanceSaleryId) {
   	  advanceSaleryService.deleteAdvanceSalery(advanceSaleryId);
         logger.info("Deleted AdvanceSalery with ID: {}", advanceSaleryId);
@@ -94,7 +94,7 @@ public class AdvanceSaleryController {
     }
 	    
 	    @GetMapping("/count/advancesalery")
-	 // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countAdvanceSalery()
 	    {
 	    	return advanceSaleryService.countAdvanceSalery();

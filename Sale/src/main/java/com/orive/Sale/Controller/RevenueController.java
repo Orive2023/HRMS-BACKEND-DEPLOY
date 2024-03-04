@@ -38,7 +38,7 @@ public class RevenueController {
 		
 		// Create a new WorkSheet
 			  @PostMapping("/create/Revenue")
-			  // @PreAuthorize("hasRole('client_admin')")
+			// @PreAuthorize("hasRole('client_HR')")
 			  public ResponseEntity<RevenueDto> createSale(@RequestBody RevenueDto saleDto) {
 				  RevenueDto createdWorkSheet = revenueService.createRevenue(saleDto);
 			      logger.info("Created Revenue with id: {}", createdWorkSheet.getRevenueId());
@@ -48,7 +48,7 @@ public class RevenueController {
 			  
 			  // Get all WorkSheet  
 			  @GetMapping("/get/Revenue")
-			  // @PreAuthorize("hasRole('client_admin')")
+			// @PreAuthorize("hasRole('client_HR')")
 			  public ResponseEntity<List<RevenueDto>> getAllSale() {
 			      List<RevenueDto> workSheet = revenueService.getAllRevenue();
 			      logger.info("Retrieved {} Revenue from the database", workSheet.size());
@@ -57,6 +57,7 @@ public class RevenueController {
 
 			  // Get WorkSheet by ID
 			  @GetMapping("/get/{revenueId}")
+			// @PreAuthorize("hasRole('client_HR')")
 			    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
 			  public ResponseEntity<RevenueDto> getSaleId(@PathVariable Long revenueId) {
 			      Optional<RevenueDto> workSheet = revenueService.getRevenueId(revenueId);
@@ -74,7 +75,7 @@ public class RevenueController {
 			  
 			  // Update WorkSheet by ID
 			  @PutMapping("/update/{revenueId}")
-			  // @PreAuthorize("hasRole('client_admin')")
+			// @PreAuthorize("hasRole('client_HR')")
 			  public ResponseEntity<RevenueDto> updateSale(@PathVariable Long revenueId, @RequestBody RevenueDto saleDto) {
 				  RevenueDto updatedWorkSheet = revenueService.updateRevenue(revenueId, saleDto);
 			      if (updatedWorkSheet != null) {
@@ -88,7 +89,7 @@ public class RevenueController {
 			  
 			  // Delete WorkSheet by ID
 			  @DeleteMapping("/delete/{revenueId}")
-			  // @PreAuthorize("hasRole('client_admin')")
+			// @PreAuthorize("hasRole('client_HR')")
 			  public ResponseEntity<Void> deleteSale(@PathVariable Long revenueId) {
 				  revenueService.deleteRevenue(revenueId);
 			      logger.info("Deleted Revenue with ID: {}", revenueId);
@@ -96,18 +97,20 @@ public class RevenueController {
 			  }
 				    
 				    @GetMapping("/count/Revenue")
-				    // @PreAuthorize("hasRole('client_admin')")
+				 // @PreAuthorize("hasRole('client_HR')")
 				    public long countSale()
 				    {
 				    	return revenueService.countRevenue();
 				    }
 				    
 				    @GetMapping("/revenue/total-net")
+				 // @PreAuthorize("hasRole('client_HR')")
 				    public Double getTotalNetRevenueForMonth(@RequestParam int month) {
 				        return revenueService.getTotalNetRevenueForMonth(month);
 				    }
 
 				    @GetMapping("/revenue/net-in-month")
+				 // @PreAuthorize("hasRole('client_HR')")
 				    public List<RevenueEntity> getNetRevenuesInMonth(@RequestParam String startDate, @RequestParam String endDate) {
 				        LocalDate start = LocalDate.parse(startDate);
 				        LocalDate end = LocalDate.parse(endDate);
@@ -115,36 +118,39 @@ public class RevenueController {
 				    }	
 				    
 				    @GetMapping("/total-money-added")
+				 // @PreAuthorize("hasRole('client_HR')")
 				    public String getTotalMoneyAddedInBank(@RequestParam String moneyAddedBankName) {
 				        Optional<Double> totalMoneyAdded = revenueService.getTotalMoneyAddedInBank(moneyAddedBankName);
 				        return totalMoneyAdded.map(String::valueOf).orElse("Bank not found or no revenue added yet.");
 				    }
 				    
 				    @GetMapping("/total-sales")
+				 // @PreAuthorize("hasRole('client_HR')")
 				    public String getTotalSalesForProductInYear(@RequestParam int year, @RequestParam String productName) {
 				        Optional<Double> totalSales = revenueService.getTotalSalesForProductInYear(year, productName);
 				        return totalSales.map(String::valueOf).orElse("Product not found or no sales recorded for the year.");
 				    }
 				    
 				    @GetMapping("/profitLoss/{currentMonth}")
+				 // @PreAuthorize("hasRole('client_HR')")
 				    public ResponseEntity<String> calculateProfitOrLossMessageForMonth(@PathVariable int currentMonth) {
 				        String profitLossMessage = revenueService.calculateProfitOrLossMessageForMonth(currentMonth);
 				        return new ResponseEntity<>(profitLossMessage, HttpStatus.OK);
 				    }
 				    
 				    @GetMapping("/netrevenuepercentage")
+				 // @PreAuthorize("hasRole('client_HR')")
 				    public ResponseEntity<Double> getNetRevenuePercentage() {
 				        Double netRevenuePercentage = revenueService.calculateNetRevenuePercentage();
 				        return new ResponseEntity<>(netRevenuePercentage, HttpStatus.OK);
 				    }
 				    
 				    @GetMapping("/totalNetRevenue")
+				 // @PreAuthorize("hasRole('client_HR')")
 				    public ResponseEntity<Double> getTotalNetRevenue() {
 				        Double totalNetRevenue = revenueService.calculateTotalNetRevenue();
 				        return new ResponseEntity<>(totalNetRevenue, HttpStatus.OK);
-				    }
-				    
-				    
+				    }			    
 				    
 }
 

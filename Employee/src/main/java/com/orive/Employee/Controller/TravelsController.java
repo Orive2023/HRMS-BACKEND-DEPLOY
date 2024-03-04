@@ -35,7 +35,7 @@ public class TravelsController {
 	 
 	// Create a new Travels
     @PostMapping("/create/travels")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<TravelsDto> createTravels(@RequestBody TravelsDto travelsDto) {
     	TravelsDto createdTravel = travelsService.createTravels(travelsDto);
         logger.info("Created Travels with id: {}", createdTravel.getEmployeeName());
@@ -45,7 +45,7 @@ public class TravelsController {
     // Get all Travels
     
     @GetMapping("/get/travels")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<TravelsDto>> getAllTravels() {
         List<TravelsDto> travels = travelsService.getAllTravels();
         logger.info("Retrieved {} Travels from the database", travels.size());
@@ -54,7 +54,7 @@ public class TravelsController {
 
     // Get Travels by ID
     @GetMapping("/get/{travelsId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<TravelsDto> getTravelsId(@PathVariable Long travelsId) {
         Optional<TravelsDto> travels = travelsService.getTravelsById(travelsId);
         if (travels.isPresent()) {
@@ -68,7 +68,7 @@ public class TravelsController {
 
     // Update Travels by ID
     @PutMapping("/update/{travelsId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<TravelsDto> updateTravels(@PathVariable Long travelsId, @RequestBody TravelsDto updatedTravelsDTO) {
     	TravelsDto updatedTravels = travelsService.updateTravels(travelsId, updatedTravelsDTO);
         if (updatedTravels != null) {
@@ -82,7 +82,7 @@ public class TravelsController {
     
     // Delete Travels by ID
     @DeleteMapping("/delete/{travelsId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteTravels(@PathVariable Long travelsId) {
    	 travelsService.deleteTravels(travelsId);
         logger.info("Deleted Travels with ID: {}", travelsId);
@@ -91,7 +91,7 @@ public class TravelsController {
 	    
  // Count the total  Travels
 	    @GetMapping("/count/travels")
-	 // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countTravels()
 	    {
 	    	return travelsService.countTravels();

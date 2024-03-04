@@ -57,7 +57,7 @@ public class EmployeesController {
     
  // Create a new Employees  
     @PostMapping(value = "/create/employee" , consumes = "multipart/form-data")
-  //@PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
   public ResponseEntity<?> uploadEmployeeData(
 		  
           @RequestParam("employeeName") String employeeName,
@@ -149,7 +149,7 @@ public class EmployeesController {
     
   //Get Employees logo by Employee 
     @GetMapping("/downloadImage/{username}")
-  //@PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<byte[]> downloadImage(@PathVariable String username) {
         byte[] imageData = employeesService.downloadImage(username);
         if (imageData != null) {
@@ -265,7 +265,7 @@ public class EmployeesController {
       
       
       @GetMapping("/login")
-    //@PreAuthorize("hasRole('client_admin')")
+      // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<EmployeesDto> login(@RequestParam String userEmailOrName, @RequestParam String password) {
           EmployeesDto employeeDto = employeesService.getEmployeeByCredentials(userEmailOrName, password);
 
@@ -298,7 +298,7 @@ public class EmployeesController {
       
    // Update Employees by EmployeeID
       @PutMapping("/update/ID/{username}")
-    //@PreAuthorize("hasRole('client_admin')")
+      // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<EmployeesDto> updateEmployee(@PathVariable String username, @RequestBody EmployeesDto updatedEmployeesDto) {
           EmployeesDto updatedEmployees = employeesService.updateEmployees(username, updatedEmployeesDto);
 
@@ -325,7 +325,7 @@ public class EmployeesController {
       
       // Delete Employees By EmployeeId 
       @DeleteMapping("/delete/ID/{username}")
-    //@PreAuthorize("hasRole('client_admin')")
+      // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<Void> deleteEmployeeByemployeeId(@PathVariable String username) {
           employeesService.deleteEmployeeByEmployeeId(username);
           logger.info("Deleted Employees with EmployeeID: {}", username);
@@ -335,7 +335,7 @@ public class EmployeesController {
       
       // Count the total Employees 
   	    @GetMapping("/count/employee")
-  	//@PreAuthorize("hasRole('client_admin')")
+  	  // @PreAuthorize("hasRole('client_HR')")
   	    public long countEmployees()
   	    {
   	    	return employeesService.countEmployees();
@@ -344,7 +344,7 @@ public class EmployeesController {
   	    
   	// Count the male from employee
   	    @GetMapping("/count/malemployee")
-  	//@PreAuthorize("hasRole('client_admin')")
+  	  // @PreAuthorize("hasRole('client_HR')")
   	    public long countEmployeesByMale()
   	    {
   	    	return employeesService.countEmployeesByMale();
@@ -353,7 +353,7 @@ public class EmployeesController {
   	    
   		// Count the Female from employee
   	    @GetMapping("/count/femalemployee")
-  	//@PreAuthorize("hasRole('client_admin')")
+  	  // @PreAuthorize("hasRole('client_HR')")
   	    public long countEmployeesByFemale()
   	    {
   	    	return employeesService.countEmployeesByFemale();
@@ -361,6 +361,7 @@ public class EmployeesController {
   	    
   	    //count how many roles 
   	  @GetMapping("/distinct-roles/count")
+  	 // @PreAuthorize("hasRole('client_HR')")
       public long countDistinctEmployeeRoles() {
           return employeesService.countDistinctEmployeeRoles();
       }

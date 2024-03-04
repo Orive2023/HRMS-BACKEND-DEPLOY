@@ -38,7 +38,7 @@ public class VendorController {
     
  // Create a new Request
     @PostMapping("/create/vendor")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<VendorDto> createVendor(@RequestBody VendorDto vendorDto) {
     	VendorDto createdVendor = vendorService.createVendor(vendorDto);
         logger.info("Created vendor with name: {}", createdVendor.getVendorName());
@@ -48,7 +48,7 @@ public class VendorController {
     // Get all vendor
     
     @GetMapping("/get/vendor")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<VendorDto>> getAllVendor() {
         List<VendorDto> vendor = vendorService.getAllVendor();
         logger.info("Retrieved {} vendor from the database", vendor.size());
@@ -57,7 +57,7 @@ public class VendorController {
 
     // Get vendorbyId
     @GetMapping("/get/{vendorId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<VendorDto> getVendorbyId(@PathVariable Long vendorId) {
         Optional<VendorDto> vendor = vendorService.getVendorById(vendorId);
         if (vendor.isPresent()) {
@@ -71,7 +71,7 @@ public class VendorController {
 
     // Update Vendor by ID
     @PutMapping("/update/{vendorId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<VendorDto> updateVendor(@PathVariable Long vendorId, @RequestBody VendorDto updatedVendorDto) {
     	VendorDto updatedvendor = vendorService.updateVendor(vendorId, updatedVendorDto);
         if (updatedvendor != null) {
@@ -86,7 +86,7 @@ public class VendorController {
 
     // Delete Vendor by ID
     @DeleteMapping("/delete/{vendorId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteVendor(@PathVariable Long vendorId) {
   	  vendorService.deleteVendor(vendorId);
         logger.info("Deleted vendor with ID: {}", vendorId);
@@ -94,7 +94,7 @@ public class VendorController {
     }
 	    
 	    @GetMapping("/count/vendor")
-	 // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countVendor()
 	    {
 	    	return vendorService.countVendor();

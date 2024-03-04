@@ -41,6 +41,7 @@ public class CommitteesController {
 	
 	// Create a new Committees
 //    @PostMapping("/create/committees")
+	// @PreAuthorize("hasRole('client_HR')")
 //    public ResponseEntity<CommitteesDto> createCommittees(@RequestBody CommitteesDto committeesDto) {
 //    	CommitteesDto createdCommittees = committeesService.createCommittees(committeesDto);
 //        logger.info("Created Committees with name: {}", createdCommittees.getName());
@@ -51,7 +52,7 @@ public class CommitteesController {
 	
  	// Create a new Committees
     @PostMapping(value = "/create/company",consumes = "multipart/form-data")
-//    @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<?> saveCompanyEntity(
   		  @RequestParam("name") String name,
           @RequestParam(value = "signature", required = false) MultipartFile file,
@@ -70,7 +71,7 @@ public class CommitteesController {
     
 //Get Committees signature by Name
     @GetMapping("/download/{name}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
 	public ResponseEntity<?> downloadImage(@PathVariable String name){
 		byte[] imageData=committeesService.downloadImage(name);
 		return ResponseEntity.status(HttpStatus.OK)
@@ -83,7 +84,7 @@ public class CommitteesController {
 
     // Get all Committees
     @GetMapping("/get/committees")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<CommitteesDto>> getAllCommittees() {
         List<CommitteesDto> committees = committeesService.getAllCommittees();
         logger.info("Retrieved {} Committees from the database", committees.size());
@@ -92,7 +93,7 @@ public class CommitteesController {
 
     // Get CommitteesbyId
     @GetMapping("/get/{committeesId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<CommitteesDto> getCommitteesbyId(@PathVariable Long committeesId) {
         Optional<CommitteesDto> committees = committeesService.getCommitteesById(committeesId);
         if (committees.isPresent()) {
@@ -106,7 +107,7 @@ public class CommitteesController {
 
     // Update Committees by ID
     @PutMapping("/update/{committeesId}")
-//  @PreAuthorize("hasRole('client_admin')")
+// @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<CommitteesDto> updateCommittees(@PathVariable Long committeesId, @RequestBody CommitteesDto updatedCommitteesDto) {
     	CommitteesDto updatedCommittees = committeesService.updateCommittees(committeesId, updatedCommitteesDto);
         if (updatedCommittees != null) {
@@ -122,7 +123,7 @@ public class CommitteesController {
 
     // Delete Committees by ID
     @DeleteMapping("/delete/{committeesId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteCommittees(@PathVariable Long committeesId) {
   	  committeesService.deleteCommittees(committeesId);
         logger.info("Deleted Committees with ID: {}", committeesId);
@@ -131,7 +132,7 @@ public class CommitteesController {
 	   
     
 	    @GetMapping("/count/committees")
-//	    @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countCommittees()
 	    {
 	    	return committeesService.countCommittees();

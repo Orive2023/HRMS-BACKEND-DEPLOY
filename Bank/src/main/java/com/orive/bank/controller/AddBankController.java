@@ -46,7 +46,7 @@ public class AddBankController {
 	
 	// Create a new Bank
     @PostMapping("/create/bank")
-  //@PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
   public ResponseEntity<?> createBank(@Valid @RequestBody AddBankDto addBankDto) {
       try {
           // Check if the Bank name already exists
@@ -73,7 +73,7 @@ public class AddBankController {
 
     // Get all AddBank   
     @GetMapping("/get/addbank")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<AddBankDto>> getAllAddBank() {
         List<AddBankDto> addBank = addBankService.getAllAddBank();
         logger.info("Retrieved {} AddBank from the database", addBank.size());
@@ -82,7 +82,7 @@ public class AddBankController {
 
     // Get AddBank by ID
     @GetMapping("/get/{addBankId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<AddBankDto> getAddBankById(@PathVariable String addBankId) {
         Optional<AddBankDto> addBank = addBankService.getAddBankById(addBankId);
         if (addBank.isPresent()) {
@@ -96,7 +96,7 @@ public class AddBankController {
 
     // Update AddBank by ID
     @PutMapping("/update/{addBankId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<AddBankDto> updateAddBank(@PathVariable String addBankId, @RequestBody AddBankDto updatedAddBankDto) {
     	AddBankDto updatedAddBank = addBankService.updateAddBank(addBankId, updatedAddBankDto);
         if (updatedAddBank != null) {
@@ -112,7 +112,7 @@ public class AddBankController {
 
     // Delete AddBank by ID
     @DeleteMapping("/delete/{addBankId}")
- // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteAddBank(@PathVariable String addBankId) {
     	addBankService.deleteAddBank(addBankId);
         logger.info("Deleted AddBank with ID: {}", addBankId);
@@ -121,7 +121,7 @@ public class AddBankController {
     
    // count the total AddBank
 	    @GetMapping("/count/addbank")
-	 // @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countAddBank()
 	    {
 	    	return addBankService.countAddBank();

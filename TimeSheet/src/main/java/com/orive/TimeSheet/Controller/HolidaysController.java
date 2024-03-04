@@ -39,7 +39,7 @@ public class HolidaysController {
   
 //  	// Create a new Holidays
 //      @PostMapping("/create/holidays")
-//   // @PreAuthorize("hasRole('client_admin')")
+//   // @PreAuthorize("hasRole('client_HR')")
 //      public ResponseEntity<HolidaysDto> createHolidays(@RequestBody HolidaysDto holidaysDto) {
 //    	  HolidaysDto createdHoliday = holidaysService.createHolidays(holidaysDto);
 //          logger.info("Created Holidays with name: {}", createdHoliday.getEventName());
@@ -49,7 +49,7 @@ public class HolidaysController {
     
  // Create a new Holidays
     @PostMapping("/create/holidays")
-  //@PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
   public ResponseEntity<?> createDesignation(@Valid @RequestBody HolidaysDto holidaysDto) {
       try {
           // Check if the EventName name already exists
@@ -78,7 +78,7 @@ public class HolidaysController {
 
       // Get all Holidays   
       @GetMapping("/get/holidays")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<HolidaysDto>> getAllHolidays() {
           List<HolidaysDto> holidays = holidaysService.getAllHolidays();
           logger.info("Retrieved {} Holidays from the database", holidays.size());
@@ -87,7 +87,7 @@ public class HolidaysController {
 
       // Get Holidays by ID
       @GetMapping("/get/{holidaysId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<HolidaysDto> getHolidaysById(@PathVariable String holidaysId) {
           Optional<HolidaysDto> holidays = holidaysService.getHolidaysById(holidaysId);
           if (holidays.isPresent()) {
@@ -102,7 +102,7 @@ public class HolidaysController {
       
       // Get Holidays by EventName
       @GetMapping("/get/name/{eventName}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<HolidaysDto> getHolidaysByEventName(@PathVariable String eventName) {
           Optional<HolidaysDto> holidays = holidaysService.getHolidaysByEventName(eventName);
           if (holidays.isPresent()) {
@@ -117,7 +117,7 @@ public class HolidaysController {
       
       // Update Holidays by ID
       @PutMapping("/update/{holidaysId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<HolidaysDto> updateHolidays(@PathVariable String holidaysId, @RequestBody HolidaysDto updatedHolidaysDto) {
     	  HolidaysDto updatedHolidays = holidaysService.updateHolidays(holidaysId, updatedHolidaysDto);
           if (updatedHolidays != null) {
@@ -133,7 +133,7 @@ public class HolidaysController {
 
       // Delete Holidays by ID
       @DeleteMapping("/delete/{holidaysId}")
-   // @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<Void> deleteHolidays(@PathVariable String holidaysId) {
     	  holidaysService.deleteHolidays(holidaysId);
           logger.info("Deleted Holidays with ID: {}", holidaysId);
@@ -141,7 +141,7 @@ public class HolidaysController {
       }
   	    
   	    @GetMapping("/count/holidays")
-  	// @PreAuthorize("hasRole('client_admin')")
+  	// @PreAuthorize("hasRole('client_HR')")
   	    public long countHolidays()
   	    {
   	    	return holidaysService.countHolidays();

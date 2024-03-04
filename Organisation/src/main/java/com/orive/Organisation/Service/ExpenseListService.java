@@ -22,6 +22,7 @@ private  static final Logger logger=LoggerFactory.getLogger(ExpenseListService.c
 	@Autowired
 	private ExpenseListRepository expenseListRepository;
 	
+	//create method
 	 public void saveExpenseList(ExpenseListEntity expenseList) {
 	        try {
 	        	expenseListRepository.save(expenseList);

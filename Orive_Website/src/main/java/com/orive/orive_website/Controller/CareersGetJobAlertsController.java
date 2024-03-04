@@ -34,7 +34,7 @@ private static final Logger logger = LoggerFactory.getLogger(CareersGetJobAlerts
 	
 //	// Create a new CareersGetJobAlerts
 //		  @PostMapping("/create/careersgetjobAlerts")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		  // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<CareersGetJobAlertsDto> createCareersGetJobAlerts(@RequestBody CareersGetJobAlertsDto careersGetJobAlertsDto) {
 //			  CareersGetJobAlertsDto createdCareersGetJobAlerts = careersGetJobAlertsService.createCareersGetJobAlerts(careersGetJobAlertsDto);
 //		      logger.info("Created CareersGetJobAlerts with id: {}", createdCareersGetJobAlerts.getName());
@@ -45,7 +45,7 @@ private static final Logger logger = LoggerFactory.getLogger(CareersGetJobAlerts
 	
 		  // Get all CareersGetJobAlerts  
 		  @GetMapping("/get/careersgetjobAlerts")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<List<CareersGetJobAlertsDto>> getAllCareersGetJobAlerts() {
 		      List<CareersGetJobAlertsDto> careersGetJobAlerts = careersGetJobAlertsService.getAllCareersGetJobAlerts();
 		      logger.info("Retrieved {} CareersGetJobAlerts from the database", careersGetJobAlerts.size());
@@ -55,7 +55,7 @@ private static final Logger logger = LoggerFactory.getLogger(CareersGetJobAlerts
 		  
 //		  // Get CareersGetJobAlerts by ID
 //		  @GetMapping("/get/{careersGetJobAlertsId}")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		  // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<CareersGetJobAlertsDto> getCareersGetJobAlertsId(@PathVariable Long careersGetJobAlertsId) {
 //		      Optional<CareersGetJobAlertsDto> careersGetJobAlerts = careersGetJobAlertsService.getCareersGetJobAlertsId(careersGetJobAlertsId);
 //		      if (careersGetJobAlerts.isPresent()) {
@@ -72,7 +72,7 @@ private static final Logger logger = LoggerFactory.getLogger(CareersGetJobAlerts
 		  
 //		  // Update CareersGetJobAlerts by ID
 //		  @PutMapping("/update/{careersGetJobAlertsId}")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		 // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<CareersGetJobAlertsDto> updateCareersGetJobAlerts(@PathVariable Long careersGetJobAlertsId, @RequestBody CareersGetJobAlertsDto updatedCareersGetJobAlertsDto) {
 //			  CareersGetJobAlertsDto updatedCareersGetJobAlerts = careersGetJobAlertsService.updateCareersGetJobAlerts(careersGetJobAlertsId, updatedCareersGetJobAlertsDto);
 //		      if (updatedCareersGetJobAlerts != null) {
@@ -88,7 +88,7 @@ private static final Logger logger = LoggerFactory.getLogger(CareersGetJobAlerts
 		  
 		  // Delete CareersGetJobAlerts by ID
 		  @DeleteMapping("/delete/{careersGetJobAlertsId}")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<Void> deleteCareersGetJobAlerts(@PathVariable Long careersGetJobAlertsId) {
 			  careersGetJobAlertsService.deleteCareersGetJobAlerts(careersGetJobAlertsId);
 		      logger.info("Deleted CareersGetJobAlerts with ID: {}", careersGetJobAlertsId);
@@ -98,7 +98,7 @@ private static final Logger logger = LoggerFactory.getLogger(CareersGetJobAlerts
 		  
 //		  //count all CareersGetJobAlerts
 //			    @GetMapping("/count/careersgetjobAlerts")
-//			    // @PreAuthorize("hasRole('client_admin')")
+//			    // @PreAuthorize("hasRole('client_HR')")
 //			    public long countCareersGetJobAlerts()
 //			    {
 //			    	return careersGetJobAlertsService.countCareersGetJobAlerts();

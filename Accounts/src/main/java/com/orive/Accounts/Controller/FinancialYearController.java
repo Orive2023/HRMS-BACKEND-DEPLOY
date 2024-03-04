@@ -36,6 +36,7 @@ public class FinancialYearController {
 	
 	// Create a new FinancialYear
     @PostMapping("/create/financialYear")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<FinancialYearDto> createFinancialYearList(@RequestBody FinancialYearDto financialYearDto) {
     	FinancialYearDto createdFinancialYear = financialYearService.createFinancialYearList(financialYearDto);
         logger.info("Created FinancialYear with year: {}", createdFinancialYear.getFinancialYear());
@@ -44,6 +45,7 @@ public class FinancialYearController {
 
     // Get all FinancialYear   
     @GetMapping("/get/financialYear")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<FinancialYearDto>> getAllFinancialYearList() {
         List<FinancialYearDto> financialYear = financialYearService.getAllFinancialYearList();
         logger.info("Retrieved {} FinancialYear from the database", financialYear.size());
@@ -52,6 +54,7 @@ public class FinancialYearController {
 
     // Get FinancialYear by ID
     @GetMapping("/get/{financialYearId}")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<FinancialYearDto> getFinancialYearListById(@PathVariable Long financialYearId) {
         Optional<FinancialYearDto> financialYear = financialYearService.getFinancialYearById(financialYearId);
         if (financialYear.isPresent()) {
@@ -65,6 +68,7 @@ public class FinancialYearController {
 
     // Update FinancialYear by ID
     @PutMapping("/update/{financialYearId}")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<FinancialYearDto> updateFinancialYearList(@PathVariable Long financialYearId, @RequestBody FinancialYearDto updatedFinancialYearDto) {
     	FinancialYearDto updatedFinancialYear = financialYearService.updateFinancialYearList(financialYearId, updatedFinancialYearDto);
         if (updatedFinancialYear != null) {
@@ -80,6 +84,7 @@ public class FinancialYearController {
 
     // Delete FinancialYear by ID
     @DeleteMapping("/delete/{financialYearId}")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteFinancialYearList(@PathVariable Long financialYearId) {
     	financialYearService.deleteFinancialYearList(financialYearId);
         logger.info("Deleted AccountList with ID: {}", financialYearId);
@@ -88,6 +93,7 @@ public class FinancialYearController {
 	    
     // Count the total FinancialYear 
 	    @GetMapping("/count/financialYear")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countFinancialYearList()
 	    {
 	    	return financialYearService.countFinancialYearList();

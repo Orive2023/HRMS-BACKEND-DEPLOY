@@ -51,7 +51,7 @@ public class GoodReceivedController {
     
     //  Create a new GoodReceived
     @PostMapping(value = "/create/goodreceived", consumes = "multipart/form-data")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> saveGoodReceivedEntity(
             @RequestParam("purchaseOrder") String purchaseOrder,
             @RequestParam("paymentSource") String paymentSource,
@@ -76,6 +76,7 @@ public class GoodReceivedController {
     
 ////Get GoodReceived signatureAndStamp by VendorName
 //    @GetMapping("/download/{vendorName}")
+ // @PreAuthorize("hasRole('client_HR')")
 //	public ResponseEntity<?> downloadImage(@PathVariable String vendorName){
 //		byte[] imageData=goodReceivedService.downloadImage(vendorName);
 //		return ResponseEntity.status(HttpStatus.OK)
@@ -86,7 +87,7 @@ public class GoodReceivedController {
     
 //Get GoodReceived signatureAndStamp by VendorName  
     @GetMapping("/download/{vendorName}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable String vendorName) {
         byte[] pdf = goodReceivedService.downloadPdf(vendorName);
 
@@ -103,7 +104,7 @@ public class GoodReceivedController {
 
     // Get all GoodReceived   
     @GetMapping("/get/goodreceived")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<GoodReceivedDto>> getAllGoodReceived() {
         List<GoodReceivedDto> goodReceived = goodReceivedService.getAllGoodReceived();
         logger.info("Retrieved {} GoodReceived from the database", goodReceived.size());
@@ -113,6 +114,7 @@ public class GoodReceivedController {
 
     // Get GoodReceivedbyId
 //    @GetMapping("/get/{goodReceivedId}")
+ // @PreAuthorize("hasRole('client_HR')")
 //    public ResponseEntity<GoodReceivedDto> getGoodReceivedbyId(@PathVariable Long goodReceivedId) {
 //        Optional<GoodReceivedDto> goodReceived = goodReceivedService.getGoodReceivedById(goodReceivedId);
 //        if (goodReceived.isPresent()) {
@@ -127,7 +129,7 @@ public class GoodReceivedController {
     
     // Get GoodReceivedbyId
     @GetMapping("/get/{goodReceivedId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<GoodReceivedEntity> getGoodReceivedByGoodReceivedId(@PathVariable Long goodReceivedId) {
   	  logger.info("Received GoodReceived to get GoodReceived by ID: {}", goodReceivedId);
   	GoodReceivedEntity goodReceived = goodReceivedService.getByGoodReceivedId(goodReceivedId);
@@ -137,7 +139,7 @@ public class GoodReceivedController {
 
     // Update GoodReceived by ID
     @PutMapping("/update/{goodReceivedId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<GoodReceivedDto> updateGoodReceived(@PathVariable Long goodReceivedId, @RequestBody GoodReceivedDto updatedGoodReceivedDto) {
     	GoodReceivedDto updatedGoodReceived = goodReceivedService.updateGoodReceived(goodReceivedId, updatedGoodReceivedDto);
         if (updatedGoodReceived != null) {
@@ -153,7 +155,7 @@ public class GoodReceivedController {
 
     // Delete GoodReceived by ID
     @DeleteMapping("/delete/{goodReceivedId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteGoodReceived(@PathVariable Long goodReceivedId) {
   	  goodReceivedService.deleteGoodReceived(goodReceivedId);
         logger.info("Deleted GoodReceived with ID: {}", goodReceivedId);
@@ -162,7 +164,7 @@ public class GoodReceivedController {
 	    
     //Count the total GoodReceived
 	    @GetMapping("/count/goodreceived")
-	//  @PreAuthorize("hasRole('client_admin')")
+	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countGoodReceived()
 	    {
 	    	return goodReceivedService.countGoodReceived();

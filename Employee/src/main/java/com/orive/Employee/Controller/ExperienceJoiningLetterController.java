@@ -34,7 +34,7 @@ public class ExperienceJoiningLetterController {
 	
 	// Create a new ExperienceJoiningLetter
     @PostMapping("/create/experiencejoiningletter")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<ExperienceJoiningLetterDto> createExperienceJoiningLetter(@RequestBody ExperienceJoiningLetterDto experienceJoiningLetterDto) {
     	ExperienceJoiningLetterDto createdExperienceJoiningLetter = experienceJoiningLetterService.createExperienceJoiningLetter(experienceJoiningLetterDto);
         logger.info("Created ExperienceJoiningLetter with id: {}", createdExperienceJoiningLetter.getEmployeeName());
@@ -44,7 +44,7 @@ public class ExperienceJoiningLetterController {
     
     // Get all ExperienceJoiningLetter   
     @GetMapping("/get/experiencejoiningletter")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<ExperienceJoiningLetterDto>> getAllExperienceJoiningLetter() {
         List<ExperienceJoiningLetterDto> experienceJoiningLetter = experienceJoiningLetterService.getAllExperienceJoiningLetter();
         logger.info("Retrieved {} ExperienceJoiningLetter from the database", experienceJoiningLetter.size());
@@ -83,7 +83,7 @@ public class ExperienceJoiningLetterController {
 
     // Delete ExperienceJoiningLetter by ID
     @DeleteMapping("/delete/{experienceJoiningLetterId}")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deleteExperienceJoiningLetter(@PathVariable Long experienceJoiningLetterId) {
    	 experienceJoiningLetterService.deleteExperienceJoiningLetter(experienceJoiningLetterId);
         logger.info("Deleted ExperienceJoiningLetter with ID: {}", experienceJoiningLetterId);
@@ -92,7 +92,7 @@ public class ExperienceJoiningLetterController {
 	    
  // Count the total  ExperienceJoiningLetter
 	    @GetMapping("/count/experiencejoiningletter")
-	   // @PreAuthorize("hasRole('client_admin')")
+	    // @PreAuthorize("hasRole('client_HR')")
 	    public long countExperienceJoiningLetter()
 	    {
 	    	return experienceJoiningLetterService.countExperienceJoiningLetter();

@@ -32,7 +32,7 @@ public class CandidateController {
     private CandidateService candidateService;
 
     @PostMapping(value = "/create/candidates", consumes = "multipart/form-data")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> savePoliciesEntity(
     		 @RequestParam String name,
     		 @RequestParam String address,
@@ -57,7 +57,7 @@ public class CandidateController {
     
     
     @GetMapping("/download/{id}")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long id) {
         byte[] pdf = candidateService.downloadPdf(id);
 
@@ -73,13 +73,14 @@ public class CandidateController {
     		
 
     @GetMapping("/getCandidate/{email}")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public HttpEntity<CandidateDto> getCandidate(@PathVariable String email) {
         CandidateDto candidate = candidateService.getCandidate(email);
         return new ResponseEntity<>(candidate, HttpStatus.OK);
     }
     
     @GetMapping("/getAllCandidate")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<CandidateDto>> getAllCandidates() {
         List<CandidateDto> candidates = candidateService.getAllCandidates();
         return new ResponseEntity<>(candidates, HttpStatus.OK);

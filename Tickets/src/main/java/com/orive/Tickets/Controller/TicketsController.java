@@ -37,7 +37,7 @@ public class TicketsController {
 	
 //	// Create a new Tickets
 //	  @PostMapping("/create/tickets")
-//	  // @PreAuthorize("hasRole('client_admin')")
+//	 // @PreAuthorize("hasRole('client_HR')")
 //	  public ResponseEntity<TicketsDto> createTickets(@RequestBody TicketsDto ticketsDto) {
 //		  TicketsDto createdTickets = ticketsService.createTickets(ticketsDto);
 //	      logger.info("Created Tickets with id: {}", createdTickets.getTicketsCode());
@@ -48,7 +48,7 @@ public class TicketsController {
 	
 	// Create a new  Tickets
     @PostMapping("/create/tickets")
-  //@PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
   public ResponseEntity<?> createTickets(@Valid @RequestBody TicketsDto ticketsDto) {
       try {
           // Check if the TicketsCode And ProjectTitle already exists
@@ -77,7 +77,7 @@ public class TicketsController {
 	  
 	  // Get all Tickets  
 	  @GetMapping("/get/tickets")
-	  // @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
 	  public ResponseEntity<List<TicketsDto>> getAllTickets() {
 	      List<TicketsDto> tickets = ticketsService.getAllTickets();
 	      logger.info("Retrieved {} Tickets from the database", tickets.size());
@@ -132,7 +132,7 @@ public class TicketsController {
 	  
 	  // Update Tickets by ID
 	  @PutMapping("/update/{ticketsId}")
-	  // @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
 	  public ResponseEntity<TicketsDto> updateTickets(@PathVariable String ticketsId, @RequestBody TicketsDto updatedTicketsDto) {
 		  TicketsDto updatedTickets = ticketsService.updateTickets(ticketsId, updatedTicketsDto);
 	      if (updatedTickets != null) {
@@ -146,7 +146,7 @@ public class TicketsController {
 	  
 	  // Delete Tickets by ID
 	  @DeleteMapping("/delete/{ticketsId}")
-	  // @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')")
 	  public ResponseEntity<Void> deleteTickets(@PathVariable String ticketsId) {
 		   ticketsService.deleteTickets(ticketsId);
 	      logger.info("Deleted Tickets with ID: {}", ticketsId);
@@ -154,7 +154,7 @@ public class TicketsController {
 	  }
 		    
 		    @GetMapping("/count/tickets")
-		    // @PreAuthorize("hasRole('client_admin')")
+		 // @PreAuthorize("hasRole('client_HR')")
 		    public long countTickets()
 		    {
 		    	return ticketsService.countTickets();

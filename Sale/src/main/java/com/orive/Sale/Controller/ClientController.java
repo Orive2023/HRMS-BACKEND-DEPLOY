@@ -35,7 +35,7 @@ private static final Logger logger = LoggerFactory.getLogger(ClientController.cl
 	
 	// Create a new WorkSheet
 		  @PostMapping("/create/Client")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<ClientDto> createClient(@RequestBody ClientDto clientDto) {
 			  ClientDto createdWorkSheet = clientService.createClient(clientDto);
 		      logger.info("Created Sale with id: {}", createdWorkSheet.getClientId());
@@ -45,7 +45,7 @@ private static final Logger logger = LoggerFactory.getLogger(ClientController.cl
 		  
 		  // Get all WorkSheet  
 		  @GetMapping("/get/Client")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<List<ClientDto>> getAllClient() {
 		      List<ClientDto> workSheet = clientService.getAllClient();
 		      logger.info("Retrieved {} Sale from the database", workSheet.size());
@@ -54,6 +54,7 @@ private static final Logger logger = LoggerFactory.getLogger(ClientController.cl
 
 		  // Get WorkSheet by ID
 		  @GetMapping("/get/{clientId}")
+		// @PreAuthorize("hasRole('client_HR')")
 		    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
 		  public ResponseEntity<ClientDto> getClientId(@PathVariable String clientId) {
 		      Optional<ClientDto> workSheet = clientService.getClientId(clientId);
@@ -71,7 +72,7 @@ private static final Logger logger = LoggerFactory.getLogger(ClientController.cl
 		  
 		  // Update WorkSheet by ID
 		  @PutMapping("/update/{clientId}")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<ClientDto> updateClient(@PathVariable String clientId, @RequestBody ClientDto clientDto) {
 			  ClientDto updatedWorkSheet = clientService.updateClient(clientId, clientDto);
 		      if (updatedWorkSheet != null) {
@@ -85,7 +86,7 @@ private static final Logger logger = LoggerFactory.getLogger(ClientController.cl
 		  
 		  // Delete WorkSheet by ID
 		  @DeleteMapping("/delete/{clientId}")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<Void> deleteClient(@PathVariable String clientId) {
 			  clientService.deleteClient(clientId);
 		      logger.info("Deleted Sale with ID: {}", clientId);
@@ -93,7 +94,7 @@ private static final Logger logger = LoggerFactory.getLogger(ClientController.cl
 		  }
 			    
 			    @GetMapping("/count/Client")
-			    // @PreAuthorize("hasRole('client_admin')")
+			 // @PreAuthorize("hasRole('client_HR')")
 			    public long countClient()
 			    {
 			    	return clientService.countClient();

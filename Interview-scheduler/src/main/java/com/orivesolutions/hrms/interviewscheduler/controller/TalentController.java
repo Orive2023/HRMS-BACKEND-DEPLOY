@@ -27,7 +27,7 @@ public class TalentController {
     private TalentService talentService;
 
     @PostMapping("/createTalent")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public HttpEntity<ResponseDto> createTalent(@RequestBody TalentDto talentDto) {
         talentDto = talentService.createTalent(talentDto);
         return new ResponseEntity<>(ResponseUtil.getSuccessResponse(talentDto), HttpStatus.CREATED);
@@ -36,7 +36,7 @@ public class TalentController {
    
     
     @GetMapping("/getAll")
-    // @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<TalentDto>> getAll() {
         List<TalentDto> talentDtos = talentService.findAll();
         return new ResponseEntity<>(talentDtos, HttpStatus.OK);

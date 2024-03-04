@@ -35,7 +35,7 @@ private static final Logger logger = LoggerFactory.getLogger(LandingPagePopUpCon
 	
 //	// Create a new LandingPagePopUp
 //		  @PostMapping("/create/landingpagepopup")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		  // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<LandingPagePopUpDto> createLandingPagePopUp(@RequestBody LandingPagePopUpDto landingPagePopUpDto) {
 //			  LandingPagePopUpDto createdLandingPagePopUp = landingPagePopUpService.createLandingPagePopUp(landingPagePopUpDto);
 //		      logger.info("Created LandingPagePopUp with id: {}", createdLandingPagePopUp.getLandingPagePopUpId());
@@ -46,7 +46,7 @@ private static final Logger logger = LoggerFactory.getLogger(LandingPagePopUpCon
 	
 		  // Get all LandingPagePopUp  
 		  @GetMapping("/get/landingpagepopup")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<List<LandingPagePopUpDto>> getAllLandingPagePopUp() {
 		      List<LandingPagePopUpDto> landingPagePopUp = landingPagePopUpService.getAllLandingPagePopUp();
 		      logger.info("Retrieved {} LandingPagePopUp from the database", landingPagePopUp.size());
@@ -57,7 +57,7 @@ private static final Logger logger = LoggerFactory.getLogger(LandingPagePopUpCon
 		  
 //		  // Get LandingPagePopUp by ID
 //		  @GetMapping("/get/{landingPagePopUpId}")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		  // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<LandingPagePopUpDto> getLandingPagePopUpId(@PathVariable Long landingPagePopUpId) {
 //		      Optional<LandingPagePopUpDto> landingPagePopUp = landingPagePopUpService.getLandingPagePopUpId(landingPagePopUpId);
 //		      if (landingPagePopUp.isPresent()) {
@@ -75,7 +75,7 @@ private static final Logger logger = LoggerFactory.getLogger(LandingPagePopUpCon
 		  
 //		  // Update LandingPagePopUp by ID
 //		  @PutMapping("/update/{landingPagePopUpId}")
-//		  // @PreAuthorize("hasRole('client_admin')")
+//		  // @PreAuthorize("hasRole('client_HR')")
 //		  public ResponseEntity<LandingPagePopUpDto> updateLandingPagePopUp(@PathVariable Long landingPagePopUpId, @RequestBody LandingPagePopUpDto updatedLandingPagePopUpDto) {
 //			  LandingPagePopUpDto updatedLandingPagePopUp = landingPagePopUpService.updateLandingPagePopUp(landingPagePopUpId, updatedLandingPagePopUpDto);
 //		      if (updatedLandingPagePopUp != null) {
@@ -91,7 +91,7 @@ private static final Logger logger = LoggerFactory.getLogger(LandingPagePopUpCon
 		  
 		  // Delete LandingPagePopUp by ID
 		  @DeleteMapping("/delete/{landingPagePopUpId}")
-		  // @PreAuthorize("hasRole('client_admin')")
+		// @PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<Void> deleteLandingPagePopUp(@PathVariable Long landingPagePopUpId) {
 			  landingPagePopUpService.deleteLandingPagePopUp(landingPagePopUpId);
 		      logger.info("Deleted LandingPagePopUp with ID: {}", landingPagePopUpId);
@@ -102,7 +102,7 @@ private static final Logger logger = LoggerFactory.getLogger(LandingPagePopUpCon
 //		  
 //		// count total LandingPagePopUp
 //			    @GetMapping("/count/landingpagepopup")
-//			    // @PreAuthorize("hasRole('client_admin')")
+//			    // @PreAuthorize("hasRole('client_HR')")
 //			    public long countLandingPagePopUp()
 //			    {
 //			    	return landingPagePopUpService.countLandingPagePopUp();

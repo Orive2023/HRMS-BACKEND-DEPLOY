@@ -37,7 +37,8 @@ public class ExperienceJoiningLetterDto {
 	private Long probationPeriod;
 	private String aaddharcardNo;
 	private String pancardNo;
-	private byte[] marksheets;
+//	private byte[] marksheets;
+	private String marksheets;
 	private String reportingManager;
 	private Long casualSickLeaves;
 	private Long earnedLeaves;

@@ -42,7 +42,7 @@ public class QuotationController {
  
     // Create a new Quotation
     @PostMapping("/create/quotation")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<String> saveQuotationEntity(
             @RequestParam("nameOfCompany") String nameOfCompany,
             @RequestParam("address") String address,
@@ -67,7 +67,7 @@ public class QuotationController {
     
  // Get Quotation pdf by id  
     @GetMapping("/download/{quotationId}")
-//  @PreAuthorize("hasRole('client_admin')")
+ // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long quotationId) {
         byte[] pdf = quotationService.downloadPdf(quotationId);
 
@@ -83,7 +83,7 @@ public class QuotationController {
     		
       // Get all Quotation
       @GetMapping("/get/quotation")
-  //  @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<QuotationDto>> getAllQuotation() {
           List<QuotationDto> quotation = quotationService.getAllQuotation();
           logger.info("Retrieved {} Quotation from the database", quotation.size());
@@ -92,7 +92,7 @@ public class QuotationController {
 
       // Get quotationId
       @GetMapping("/get/{quotationId}")
-  //  @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<QuotationEntity> getQuotationByQuotationId(@PathVariable Long quotationId) {
     	  logger.info("Received Quotation to get Quotation by ID: {}", quotationId);
     	  QuotationEntity quotation = quotationService.getByQuotationId(quotationId);
@@ -105,7 +105,7 @@ public class QuotationController {
 
       // Delete Quotation by ID
       @DeleteMapping("/delete/{quotationId}")
-  //  @PreAuthorize("hasRole('client_admin')")
+   // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<Void> deleteQuotation(@PathVariable Long quotationId) {
     	  quotationService.deleteQuotation(quotationId);
           logger.info("Deleted Quotation with ID: {}", quotationId);
@@ -114,7 +114,7 @@ public class QuotationController {
   	    
       //Count the total Quotation
   	    @GetMapping("/count/quotation")
-  	//  @PreAuthorize("hasRole('client_admin')")
+  	// @PreAuthorize("hasRole('client_HR')")
   	    public long countQuotation()
   	    {
   	    	return quotationService.countQuotation();
