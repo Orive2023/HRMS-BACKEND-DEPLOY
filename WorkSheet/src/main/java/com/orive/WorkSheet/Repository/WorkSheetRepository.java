@@ -14,7 +14,7 @@ public interface WorkSheetRepository extends JpaRepository<WorkSheetEntity, Stri
 	
 	//Query for find by employeeId
 	@Query("SELECT w FROM WorkSheetEntity w WHERE w.username = :username")
-	List<WorkSheetEntity> findByUsername(@Param("username") String username);
+	List<WorkSheetEntity> findByEmployeeId(@Param("username") String username);
 	
 	
 	//Query for find duplicate using workSheetTitle And project
