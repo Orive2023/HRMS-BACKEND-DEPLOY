@@ -18,8 +18,8 @@ public interface TicketsRepository extends JpaRepository<TicketsEntity, String> 
 
 
 	
-	@Query("SELECT t FROM TicketsEntity t WHERE t.employeeId = :employeeId")
-	List<TicketsEntity> findByEmployeeId(@Param("employeeId") Long employeeId);
+	@Query("SELECT t FROM TicketsEntity t WHERE t.username = :username")
+	List<TicketsEntity> findByEmployeeId(@Param("username") String username);
 	
 	//Query for find duplicate using ticketsCode And projectTitle
 	@Query("SELECT t FROM TicketsEntity t WHERE t.ticketsCode = :ticketsCode AND t.projectTitle = :projectTitle")

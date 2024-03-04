@@ -20,7 +20,7 @@ import lombok.ToString;
 public class LeaveDto {
 
     private String leaveId;
-	private Long employeeId;
+	private String username;
 	private String employeeName;
 	private String leaveType;
 	private LocalDate startDate;

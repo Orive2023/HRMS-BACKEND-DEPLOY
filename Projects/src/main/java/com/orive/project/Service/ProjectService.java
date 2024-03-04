@@ -87,8 +87,8 @@ public class ProjectService {
        
     
     // Get employee details by employeeId
-    public Optional<List<EmployeeProjectManagementEntity>> getEmployeeDetailsByEmployeeId(Long employeeId) {
-        return projectRepository.findEmployeeDetailsByEmployeeId(employeeId);
+    public Optional<List<EmployeeProjectManagementEntity>> getEmployeeDetailsByEmployeeId(String username) {
+        return projectRepository.findEmployeeDetailsByEmployeeId(username);
     }
     
     

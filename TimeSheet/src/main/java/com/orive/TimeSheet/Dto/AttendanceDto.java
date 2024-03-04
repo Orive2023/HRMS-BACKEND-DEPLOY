@@ -29,7 +29,7 @@ public class AttendanceDto {
 	private String officeClockIn;
 	private String officeClockOut;
 	private String employeeName;
-	private Long employeeId;
+	private String username;
 	private String clockIn;
 	private String clockOut;
 	private String late;

@@ -97,7 +97,7 @@ public class ExcelHelper {
                     	        attendanceEntity.setEmployeeName(getStringValue(currentCell));
                              break;
                              case 2:
-                            	 attendanceEntity.setEmployeeId(getNumericValue(currentCell));
+                            	 attendanceEntity.setUsername(getStringValue(currentCell));
                              break;
                              case 3:
                          	    attendanceEntity.setOfficeClockIn(getStringValue(currentCell));

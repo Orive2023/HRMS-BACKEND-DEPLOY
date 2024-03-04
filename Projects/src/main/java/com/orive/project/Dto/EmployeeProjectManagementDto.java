@@ -27,7 +27,7 @@ public class EmployeeProjectManagementDto {
 
 	
     private Long employeeProjectManagementId;
-	private Long employeeId;
+    private String username;
 	private String projectName;
 	private String employeeName;
 	private String taskAssignedFor;

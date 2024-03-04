@@ -25,7 +25,7 @@ public class TicketsDto {
 	private String ticketsCode;
 	private String subject;
 	private String employeeName;
-	private Long employeeId;
+	private String username;
 	private String priority;
 	private String createdBy;
 	private LocalDate date;

@@ -137,11 +137,11 @@ public class AttendanceService {
     }
     
     //get by employeeId
-    public List<AttendanceDto> getEmployeeId(Long employeeId) {
-        List<AttendanceEntity> employees = attendanceRepository.findByEmployeeId(employeeId);
+    public List<AttendanceDto> getEmployeeId(String username) {
+        List<AttendanceEntity> employees = attendanceRepository.findByEmployeeId(username);
 
         if (employees.isEmpty()) {
-            logger.warn("Attendance with ID {} not found", employeeId);
+            logger.warn("Attendance with ID {} not found", username);
             return Collections.emptyList();
         }
 
@@ -194,8 +194,8 @@ public class AttendanceService {
     
     
     // Update list by EmployeeId And Date
-    public AttendanceDto updateAttendancesByEmployeeIdAndDate(Long employeeId, LocalDate date, AttendanceDto attendanceDto) {
-        Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findByEmployeeIdAndDate(employeeId,date);
+    public AttendanceDto updateAttendancesByEmployeeIdAndDate(String username, LocalDate date, AttendanceDto attendanceDto) {
+        Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findByEmployeeIdAndDate(username,date);
         if (existingAttendanceOptional.isPresent()) {
         	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
 //            existingAttendance.setClockIn(attendanceDto.getClockIn());
@@ -207,7 +207,7 @@ public class AttendanceService {
             logger.info("Updated Attendance with name and date: {}", updatedAttendance.getAttendanceId());
             return convertToDTO(updatedAttendance);
         } else {
-            logger.warn("Attendance with name and date {} not found for update", employeeId);
+            logger.warn("Attendance with name and date {} not found for update", username);
             return null;
         }
     }
@@ -232,11 +232,11 @@ public class AttendanceService {
 	 }
     
     //count the total overtime for particular month and date fetch by employeeId
-    public String getTotalOvertimeInMonth(Long employeeId, int year, int month) {
+    public String getTotalOvertimeInMonth(String username, int year, int month) {
         LocalDate startOfMonth = LocalDate.of(year, month, 1);
         LocalDate endOfMonth = startOfMonth.plusMonths(1).minusDays(1);
 
-        List<AttendanceEntity> attendanceList = attendanceRepository.findByEmployeeIdAndDateBetween(employeeId, startOfMonth, endOfMonth);
+        List<AttendanceEntity> attendanceList = attendanceRepository.findByEmployeeIdAndDateBetween(username, startOfMonth, endOfMonth);
 
         long totalOvertimeMinutes = attendanceList.stream()
                 .filter(attendance -> attendance.getOverTime() != null)
@@ -255,8 +255,8 @@ public class AttendanceService {
     }
     
     //count total login times in a month
-    public int getNumberOfLoginDaysForMonth(int month, int year, Long employeeId) {
-        List<LocalDate> loginDates = attendanceRepository.getDistinctLoginDatesForMonth(month, year, employeeId);
+    public int getNumberOfLoginDaysForMonth(int month, int year, String username) {
+        List<LocalDate> loginDates = attendanceRepository.getDistinctLoginDatesForMonth(month, year, username);
         return loginDates.size();
     }                    
       

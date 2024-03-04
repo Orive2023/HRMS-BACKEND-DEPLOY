@@ -12,7 +12,7 @@ import com.orive.TimeSheet.Entity.LeavesEntity;
 public interface LeavesRepository extends JpaRepository<LeavesEntity, String>{
 	
 	//find by employeeId
-		@Query("SELECT l FROM LeavesEntity l WHERE l.employeeId = :employeeId")
-		List<LeavesEntity> findByEmployeeId(@Param("employeeId") Long employeeId);
+		@Query("SELECT l FROM LeavesEntity l WHERE l.username = :username")
+		List<LeavesEntity> findByEmployeeId(@Param("username") String username);
 
 }

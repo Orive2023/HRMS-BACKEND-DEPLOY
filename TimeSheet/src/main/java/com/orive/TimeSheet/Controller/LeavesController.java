@@ -71,10 +71,10 @@ public class LeavesController {
 
       
   	// Get Employee by ID
-	  @GetMapping("/employee/get/{employeeId}")
+	  @GetMapping("/employee/get/{username}")
 	// @PreAuthorize("hasRole('client_HR')")
-	    public ResponseEntity<List<LeaveDto>> getLeavesByEmployeeId(@PathVariable Long employeeId) {
-	        List<LeaveDto> leaves = leavesService.getLeavesByEmployeeId(employeeId);
+	    public ResponseEntity<List<LeaveDto>> getLeavesByEmployeeId(@PathVariable String username) {
+	        List<LeaveDto> leaves = leavesService.getLeavesByEmployeeId(username);
 
 	        if (leaves.isEmpty()) {
 	            return ResponseEntity.notFound().build();
@@ -99,17 +99,17 @@ public class LeavesController {
          
       
    // Update projects by EmployeeId
-      @PutMapping("/update/employee/{employeeId}")
+      @PutMapping("/update/employee/{username}")
    // @PreAuthorize("hasRole('client_HR')")
-      public ResponseEntity<List<LeavesEntity>> updateLeavesByEmployeeId( @PathVariable Long employeeId,@RequestBody List<LeavesEntity> updatedLeaves) {
+      public ResponseEntity<List<LeavesEntity>> updateLeavesByEmployeeId( @PathVariable String username,@RequestBody List<LeavesEntity> updatedLeaves) {
 
-          List<LeavesEntity> updatedLeaveEntities = leavesService.updateLeavesByEmployeeId(employeeId, updatedLeaves);
+          List<LeavesEntity> updatedLeaveEntities = leavesService.updateLeavesByEmployeeId(username, updatedLeaves);
 
           if (!updatedLeaveEntities.isEmpty()) {
-        	  logger.info("Updated Leaves with employeeId: {}", employeeId);
+        	  logger.info("Updated Leaves with employeeId: {}", username);
               return new ResponseEntity<>(updatedLeaveEntities, HttpStatus.OK);
           } else {
-        	  logger.warn("Leaves with employeeId {} not found for update", employeeId);
+        	  logger.warn("Leaves with employeeId {} not found for update", username);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }

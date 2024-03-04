@@ -17,7 +17,7 @@ public interface ProjectRepository extends JpaRepository<ProjectEntity, String> 
 	List<ProjectEntity> findByManagerEmployeeId(@Param("managerEmployeeId") Long managerEmployeeId);
 	
 	//find by employeeId
-	@Query("SELECT p.employeeProjectManagementEntities FROM ProjectEntity p JOIN p.employeeProjectManagementEntities e WHERE e.employeeId = :employeeId")
-    Optional<List<EmployeeProjectManagementEntity>> findEmployeeDetailsByEmployeeId(@Param("employeeId") Long employeeId);
+	@Query("SELECT p.employeeProjectManagementEntities FROM ProjectEntity p JOIN p.employeeProjectManagementEntities e WHERE e.username = :username")
+    Optional<List<EmployeeProjectManagementEntity>> findEmployeeDetailsByEmployeeId(@Param("username") String username);
 	
 }

@@ -37,9 +37,9 @@ public class EmployeeProjectManagementEntity {
 //    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.project.Entity.EmployeeProjectManagementCustomIdGenerator")
 	private Long employeeProjectManagementId;
 	
-	@Column(name = "employee_id")
+	@Column(name = "username")
 	@Convert(converter = AesEncryptor.class)
-	private Long employeeId;
+	private String username;
 	
 	@Column(name = "project_name")
 	@Convert(converter = AesEncryptor.class)
