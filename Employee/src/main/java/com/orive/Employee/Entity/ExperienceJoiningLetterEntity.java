@@ -1,6 +1,9 @@
 package com.orive.Employee.Entity;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Random;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.TypedQuery;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,8 +36,7 @@ public class ExperienceJoiningLetterEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long experienceJoiningLetterId;
 	
-//	@Column(name = "referrence_no")
-	@Column(name = "referrence_no", length = 5)
+	@Column(name = "referrence_no")
 	private String referrenceNo;
 	
 	@Column(name = "form_release_date")
@@ -100,44 +103,25 @@ public class ExperienceJoiningLetterEntity {
 	@Column(name = "department")
 	private String department;
 	
-//	@PrePersist
-//    @PreUpdate
-//    private void generateReferenceNumber() {
-//        if (referrenceNo == null) {
-//            // Generate the specific number based on your requirements
-//            String datePart = LocalDate.now().toString().replace("-", "");
-//            String randomPart = String.format("%05d", (int) (Math.random() * 10000)); // 5-digit random number
-//            referrenceNo = "REF-" + datePart + "-" + randomPart;
-//        }
-//      }
 	 
+
+//// Method for auto generated  reference number
+//	private static int lastRandomPart = 0;
+//
 //	@PrePersist
-//	@PreUpdate
-//	private void generateReferenceNumber() {
-//	    if (referrenceNo == null) {
-//	        // Generate the specific number based on your requirements
-//	        
-//	        // Generate a random part (e.g., 8 characters)
-//	        String randomPart = generateRandomString(8);
-//	        
-//	        // Combine randomPart with a prefix to form the reference number
-//	        referrenceNo = "REF-" + randomPart;
-//
-//	        // Truncate the reference number if it exceeds the allowed length
-//	        if (referrenceNo.length() > 15) {
-//	            referrenceNo = referrenceNo.substring(0, 15);
-//	        }
-//	    }
+//	public void generateReferenceNumber() {
+//	    // Generate reference number logic
+//	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-");
+//	    String currentDate = dateFormat.format(new Date());
+//	    String randomPart = String.format("%03d", getNextRandomPart()); // Adjust length as per requirement
+//	    this.referrenceNo = "REF-" + currentDate + randomPart;
 //	}
 //
-//	private String generateRandomString(int length) {
-//	    StringBuilder randomStringBuilder = new StringBuilder();
-//	    for (int i = 0; i < length; i++) {
-//	        char randomChar = (char) ('a' + Math.random() * ('z' - 'a' + 1));
-//	        randomStringBuilder.append(randomChar);
-//	    }
-//	    return randomStringBuilder.toString().toUpperCase(); // Convert to uppercase if needed
+//	private synchronized int getNextRandomPart() {
+//	    // Increment lastRandomPart and return it as a formatted string
+//	    lastRandomPart = (lastRandomPart % 999) + 1; // Reset to 1 if exceeds 999
+//	    return lastRandomPart;
 //	}
-	
-	}
+
+}
 
