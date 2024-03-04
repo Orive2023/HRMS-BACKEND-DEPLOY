@@ -29,6 +29,7 @@ public class ProjectDto {
 	
 	private String projectsId;
 	private String projectTitle;
+	private String projectName;
 	private Long managerEmployeeId;
 	private String clientName;
 	private String companyName;

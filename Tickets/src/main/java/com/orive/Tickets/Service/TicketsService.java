@@ -89,11 +89,11 @@ public class TicketsService {
     
  
   //get by employeeId
-    public List<TicketsDto> getEmployeeId(Long employeeId) {
-        List<TicketsEntity> employees = ticketsRepository.findByEmployeeId(employeeId);
+    public List<TicketsDto> getEmployeeId(String username) {
+        List<TicketsEntity> employees = ticketsRepository.findByEmployeeId(username);
 
         if (employees.isEmpty()) {
-            logger.warn("Tickets with ID {} not found", employeeId);
+            logger.warn("Tickets with ID {} not found", username);
             return Collections.emptyList();
         }
 

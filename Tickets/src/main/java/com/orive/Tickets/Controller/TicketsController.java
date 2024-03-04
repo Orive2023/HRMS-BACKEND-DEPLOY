@@ -117,10 +117,10 @@ public class TicketsController {
 
 	  
 	// Get Employee by ID
-	  @GetMapping("/{employeeId}")
+	  @GetMapping("/{username}")
 	  // @PreAuthorize("hasRole('client_admin')")
-	    public ResponseEntity<List<TicketsDto>> getTicketsByEmployeeId(@PathVariable Long employeeId) {
-	        List<TicketsDto> tickets = ticketsService.getEmployeeId(employeeId);
+	    public ResponseEntity<List<TicketsDto>> getTicketsByEmployeeId(@PathVariable String username) {
+	        List<TicketsDto> tickets = ticketsService.getEmployeeId(username);
 
 	        if (tickets.isEmpty()) {
 	            return ResponseEntity.notFound().build();

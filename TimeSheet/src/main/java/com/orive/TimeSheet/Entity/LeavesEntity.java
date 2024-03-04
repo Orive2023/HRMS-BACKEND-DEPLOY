@@ -36,9 +36,9 @@ public class LeavesEntity {
     @GenericGenerator(name = "custom-sequence", strategy = "com.orive.TimeSheet.Entity.LeavesCustomIdGenerator")
 	private String leaveId;
 	
-	@Column(name = "employee_id")
+	@Column(name = "username")
 	@Convert(converter = AesEncryptor.class)
-	private Long employeeId;
+	private String username;
 	
 	@Column(name = "employee_name")
 	@Convert(converter = AesEncryptor.class)

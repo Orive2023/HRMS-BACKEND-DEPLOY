@@ -101,11 +101,11 @@ public class ProjectController {
     
 
  	// Get employee details by employeeId
- 	    @GetMapping("/employee/details/{employeeId}")
+ 	    @GetMapping("/employee/details/{username;}")
  	// @PreAuthorize("hasRole('client_HR')")
  	    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
- 	    public ResponseEntity<List<EmployeeProjectManagementEntity>> getEmployeeDetailsByEmployeeId(@PathVariable Long employeeId) {
- 	        Optional<List<EmployeeProjectManagementEntity>> employeeDetails = projectService.getEmployeeDetailsByEmployeeId(employeeId);
+ 	    public ResponseEntity<List<EmployeeProjectManagementEntity>> getEmployeeDetailsByEmployeeId(@PathVariable String username) {
+ 	        Optional<List<EmployeeProjectManagementEntity>> employeeDetails = projectService.getEmployeeDetailsByEmployeeId(username);
 
  	        return employeeDetails.map(ResponseEntity::ok)
  	                .orElse(ResponseEntity.notFound().build());

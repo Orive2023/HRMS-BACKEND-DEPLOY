@@ -52,9 +52,9 @@ public class TicketsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
-	@Column(name = "employee_id")
+	@Column(name = "username")
 	@Convert(converter = AesEncryptor.class)
-	private Long employeeId;
+	private String username;
 	
 	@Column(name = "priority")
 	@Convert(converter = AesEncryptor.class)

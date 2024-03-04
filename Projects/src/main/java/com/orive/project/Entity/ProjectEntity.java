@@ -49,6 +49,10 @@ public class ProjectEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String projectTitle;
 	
+	@Column(name = "project_name")
+	@Convert(converter = AesEncryptor.class)
+	private String projectName;
+	
 	@Column(name = "manager_employee_id")
 	@Convert(converter = AesEncryptor.class)
 	private Long managerEmployeeId;

@@ -146,11 +146,11 @@ public class AttendanceController {
     
     
  // Get Employee by ID
-	  @GetMapping("/{employeeId}")
+	  @GetMapping("/{username}")
 	// @PreAuthorize("hasRole('client_HR')")
 	  // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
-	    public ResponseEntity<List<AttendanceDto>> getAttendanceByEmployeeId(@PathVariable Long employeeId) {
-	        List<AttendanceDto> attendance = attendanceService.getEmployeeId(employeeId);
+	    public ResponseEntity<List<AttendanceDto>> getAttendanceByEmployeeId(@PathVariable String username) {
+	        List<AttendanceDto> attendance = attendanceService.getEmployeeId(username);
 	        if (attendance.isEmpty()) {
 	            return ResponseEntity.notFound().build();
 	        } else {
@@ -190,15 +190,15 @@ public class AttendanceController {
     
     
  // Update Attendance by Id And Date
-    @PutMapping("/update/Id/{employeeId}/{date}")
+    @PutMapping("/update/Id/{username}/{date}")
  // @PreAuthorize("hasRole('client_HR')")
-    public ResponseEntity<AttendanceDto> updateAttendanceByEmployeeIdAndDate(@PathVariable Long employeeId, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) {
-    	AttendanceDto updatedAttendance = attendanceService.updateAttendancesByEmployeeIdAndDate(employeeId, date, updatedAttendanceDto);
+    public ResponseEntity<AttendanceDto> updateAttendanceByEmployeeIdAndDate(@PathVariable String username, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) {
+    	AttendanceDto updatedAttendance = attendanceService.updateAttendancesByEmployeeIdAndDate(username, date, updatedAttendanceDto);
         if (updatedAttendance != null) {
-            logger.info("Updated Attendance with name and date: {}", employeeId,date);
+            logger.info("Updated Attendance with name and date: {}", username,date);
             return new ResponseEntity<>(updatedAttendance, HttpStatus.OK);
         } else {
-            logger.warn("Attendance with name and date {} not found for update", employeeId,date);
+            logger.warn("Attendance with name and date {} not found for update", username,date);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -230,26 +230,26 @@ public class AttendanceController {
 	    }
 	    
 	    //count the totalOvertime on a particular month and year
-	    @GetMapping("/total-overtime/{employeeId}/{year}/{month}")
+	    @GetMapping("/total-overtime/{username}/{year}/{month}")
 	 // @PreAuthorize("hasRole('client_HR')")
 	    public ResponseEntity<String> getTotalOvertimeInMonth(
-	            @PathVariable Long employeeId,
+	            @PathVariable String username,
 	            @PathVariable int year,
 	            @PathVariable int month) {
 
-	        String totalOvertime = attendanceService.getTotalOvertimeInMonth(employeeId, year, month);
+	        String totalOvertime = attendanceService.getTotalOvertimeInMonth(username, year, month);
 	        return ResponseEntity.ok(totalOvertime);
 	    }
 
 	    
 	    //count the total times login in a month
-	    @GetMapping("/login-days/{employeeId}/{month}/{year}")
+	    @GetMapping("/login-days/{username}/{month}/{year}")
 	 // @PreAuthorize("hasRole('client_HR')")
 	    public int getNumberOfLoginDaysForMonth(
-	            @PathVariable Long employeeId,
+	            @PathVariable String username,
 	            @PathVariable int month,
 	            @PathVariable int year
 	    ) {
-	        return attendanceService.getNumberOfLoginDaysForMonth(month, year, employeeId);
+	        return attendanceService.getNumberOfLoginDaysForMonth(month, year, username);
 	    }
 }

@@ -58,11 +58,11 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
     }
     
     //get by employeeId
-    public List<LeaveDto> getLeavesByEmployeeId(Long employeeId) {
-        List<LeavesEntity> leaves = leavesRepository.findByEmployeeId(employeeId);
+    public List<LeaveDto> getLeavesByEmployeeId(String username) {
+        List<LeavesEntity> leaves = leavesRepository.findByEmployeeId(username);
 
         if (leaves.isEmpty()) {
-            logger.warn("Leaves with ID {} not found", employeeId);
+            logger.warn("Leaves with ID {} not found", username);
             return Collections.emptyList();
         }
         return leaves.stream()
@@ -92,8 +92,8 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
     
     
     // Update projects by employeeId
-    public List<LeavesEntity> updateLeavesByEmployeeId(Long employeeId, List<LeavesEntity> updatedLeaves) {
-        List<LeavesEntity> existingLeavesList = leavesRepository.findByEmployeeId(employeeId);
+    public List<LeavesEntity> updateLeavesByEmployeeId(String username, List<LeavesEntity> updatedLeaves) {
+        List<LeavesEntity> existingLeavesList = leavesRepository.findByEmployeeId(username);
 
         if (!existingLeavesList.isEmpty()) {
             for (LeavesEntity existingLeaves : existingLeavesList) {
@@ -115,8 +115,8 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
 
             return updatedLeaves;
         } else {
-            logger.warn("Leaves with EmployeeId {} not found for update", employeeId);
-            throw new EntityNotFoundException("Leaves not found with EmployeeId: " + employeeId);
+            logger.warn("Leaves with EmployeeId {} not found for update", username);
+            throw new EntityNotFoundException("Leaves not found with EmployeeId: " + username);
         }
     }
     
