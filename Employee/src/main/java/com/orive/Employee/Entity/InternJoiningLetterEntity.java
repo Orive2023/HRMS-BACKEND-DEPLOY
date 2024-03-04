@@ -1,12 +1,15 @@
 package com.orive.Employee.Entity;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -82,4 +85,23 @@ public class InternJoiningLetterEntity {
 	
 	@Column(name = "sign_bond_with_company_for_months")
 	private String signBondWithCompanyForMonths;
+	
+//	// Method for auto generated  reference number
+//			private static int lastRandomPart = 0;
+//
+//			@PrePersist
+//			public void generateReferenceNumber() {
+//			    // Generate reference number logic
+//			    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-");
+//			    String currentDate = dateFormat.format(new Date());
+//			    String randomPart = String.format("%03d", getNextRandomPart()); // Adjust length as per requirement
+//			    this.referenceNo = "REF-" + currentDate + randomPart;
+//			}
+//
+//			private synchronized int getNextRandomPart() {
+//			    // Increment lastRandomPart and return it as a formatted string
+//			    lastRandomPart = (lastRandomPart % 999) + 1; // Reset to 1 if exceeds 999
+//			    return lastRandomPart;
+//			}
+
 }
