@@ -27,8 +27,9 @@ public interface AttendanceRepository extends JpaRepository<AttendanceEntity, St
 		@Query("SELECT a FROM AttendanceEntity a WHERE a.username = :username AND a.date = :date")
 		Optional<AttendanceEntity> findByEmployeeIdAndDate(@Param("username") String username, @Param("date") LocalDate date);
 		
-		//count the total overtime for particular month and date fetch by employeeId
-		List<AttendanceEntity> findByEmployeeIdAndDateBetween(String username, LocalDate startOfMonth, LocalDate endOfMonth);
+		// Count the total overtime for particular month and date fetch by username
+	    @Query("SELECT a FROM AttendanceEntity a WHERE a.username = :username AND a.date BETWEEN :startOfMonth AND :endOfMonth")
+	    List<AttendanceEntity> findByEmployeeIdAndDateBetween(@Param("username") String username, @Param("startOfMonth") LocalDate startOfMonth, @Param("endOfMonth") LocalDate endOfMonth);
 
 		//count total login times in a month
 		 @Query("SELECT DISTINCT a.date FROM AttendanceEntity a WHERE MONTH(a.date) = :month AND YEAR(a.date) = :year AND a.username = :username")

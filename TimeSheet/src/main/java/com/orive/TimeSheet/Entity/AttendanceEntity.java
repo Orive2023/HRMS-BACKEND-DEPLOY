@@ -55,7 +55,7 @@ public class AttendanceEntity {
 	private String employeeName;
 	
 	@Column(name = "username")
-	@Convert(converter = AesEncryptor.class)
+	//@Convert(converter = AesEncryptor.class)
 	private String username;
 	
 	@Column(name = "clock_in")

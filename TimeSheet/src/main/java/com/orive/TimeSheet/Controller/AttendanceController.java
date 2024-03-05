@@ -146,7 +146,7 @@ public class AttendanceController {
     
     
  // Get Employee by ID
-	  @GetMapping("/{username}")
+	  @GetMapping("/get/username/{username}")
 	// @PreAuthorize("hasRole('client_HR')")
 	  // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
 	    public ResponseEntity<List<AttendanceDto>> getAttendanceByEmployeeId(@PathVariable String username) {
