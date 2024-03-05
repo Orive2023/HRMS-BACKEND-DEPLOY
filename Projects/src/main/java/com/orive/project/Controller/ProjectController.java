@@ -101,7 +101,7 @@ public class ProjectController {
     
 
  	// Get employee details by employeeId
- 	    @GetMapping("/employee/details/{username;}")
+ 	    @GetMapping("/employee/details/{username}")
  	// @PreAuthorize("hasRole('client_HR')")
  	    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
  	    public ResponseEntity<List<EmployeeProjectManagementEntity>> getEmployeeDetailsByEmployeeId(@PathVariable String username) {
