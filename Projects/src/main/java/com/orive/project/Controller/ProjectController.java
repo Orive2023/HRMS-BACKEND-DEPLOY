@@ -59,8 +59,7 @@ public class ProjectController {
 
     // Get projects by ID
     @GetMapping("/get/{projectsId}")
- // @PreAuthorize("hasRole('client_HR')")
-    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
+    // @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")
     public ResponseEntity<ProjectDto> getProjectById(@PathVariable String projectsId) {
         Optional<ProjectDto> project = projectService.getProjectById(projectsId);
         if (project.isPresent()) {
@@ -76,8 +75,7 @@ public class ProjectController {
     
  // Get Manager by ID
  	  @GetMapping("/{managerEmployeeId}")
- 	// @PreAuthorize("hasRole('client_HR')")
- 	    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
+ 	// @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")
  	    public ResponseEntity<List<ProjectDto>> getProjectsByManagerEmployeeId(@PathVariable Long managerEmployeeId) {
  	        List<ProjectDto> projects = projectService.getManagerEmployeeId(managerEmployeeId);
 

@@ -86,7 +86,7 @@ public class TicketsController {
 
 	  // Get Tickets by ID
 	  @GetMapping("/get/{ticketsId}")
-	  // @PreAuthorize("hasRole('client_admin')")
+	// @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")
 	  public ResponseEntity<TicketsDto> getTicketsId(@PathVariable String ticketsId) {
 	      Optional<TicketsDto> tickets = ticketsService.getTicketsId(ticketsId);
 	      if (tickets.isPresent()) {
@@ -102,7 +102,7 @@ public class TicketsController {
 	  
 	// Get Tickets by TicketsCode And ProjectTitle
       @GetMapping("/get/name/{ticketsCode}/{projectTitle}")
-   // @PreAuthorize("hasRole('client_admin')")
+      // @PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<TicketsDto> getTicketsByTicketsCodeAndProjectTitle(@PathVariable String ticketsCode, @PathVariable String projectTitle) {
           Optional<TicketsDto> tickets = ticketsService.getTicketsByTicketsCodeAndProjectTitle(ticketsCode,projectTitle);
           if (tickets.isPresent()) {
@@ -118,7 +118,7 @@ public class TicketsController {
 	  
 	// Get Employee by ID
 	  @GetMapping("/{username}")
-	  // @PreAuthorize("hasRole('client_admin')")
+	  // @PreAuthorize("hasRole('client_HR')")
 	    public ResponseEntity<List<TicketsDto>> getTicketsByEmployeeId(@PathVariable String username) {
 	        List<TicketsDto> tickets = ticketsService.getEmployeeId(username);
 
