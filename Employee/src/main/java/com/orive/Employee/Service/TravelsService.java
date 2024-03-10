@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.orive.Employee.Dto.ResignationsDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Dto.TravelsDto;
 import com.orive.Employee.Entity.ResignationsEntity;
+import com.orive.Employee.Entity.TransfersEntity;
 import com.orive.Employee.Entity.TravelsEntity;
 import com.orive.Employee.Repository.TravelsRepository;
 
@@ -57,6 +59,12 @@ public class TravelsService {
         }
     }
     
+    public List<TravelsDto> getTravelsByUsername(String username) {
+        List<TravelsEntity> transfersEntities = travelsRepository.findByUsername(username);
+        return transfersEntities.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
+    }
  // Update list by id
     public TravelsDto updateTravels(Long travelsId, TravelsDto travelsDto) {
         Optional<TravelsEntity> existingTravelsOptional = travelsRepository.findById(travelsId);

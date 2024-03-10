@@ -39,6 +39,10 @@ public class TravelsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
+	@Column(name = "username")
+	@Convert(converter = AesEncryptor.class)
+	private String username;
+	
 	@Column(name = "start_date")
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate startDate;
@@ -71,7 +75,7 @@ public class TravelsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private double actualTravelBudget;
 	
-	@Column(name = "description")
+	@Column(name = "description", length = 2000)
 	@Convert(converter = AesEncryptor.class)
 	private String description;
 	

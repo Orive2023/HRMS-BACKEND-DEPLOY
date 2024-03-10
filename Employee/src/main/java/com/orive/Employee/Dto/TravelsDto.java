@@ -22,6 +22,7 @@ public class TravelsDto {
 	
     private Long travelId;
 	private String employeeName;
+	private String username;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private String purposeOfVisit;

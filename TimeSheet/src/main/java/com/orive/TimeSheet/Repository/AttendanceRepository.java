@@ -10,6 +10,9 @@ import com.orive.TimeSheet.Entity.AttendanceEntity;
 
 
 public interface AttendanceRepository extends JpaRepository<AttendanceEntity, String> {
+	
+	
+	boolean existsByUsernameAndDate(String username, LocalDate date);
 
 	//Get method by using employeeId
 	@Query("SELECT a FROM AttendanceEntity a WHERE a.username = :username")

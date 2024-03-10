@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.ComplaintsDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Dto.WarningsDto;
 import com.orive.Employee.Service.WarningsService;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -66,6 +67,14 @@ public class WarningsController {
 	          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	      }
 	  }
+	  
+	  @GetMapping("/findwarnings/{username}")
+      public ResponseEntity<List<WarningsDto>> getWarningsByUsername(@PathVariable String username) {
+          logger.info("Getting Warnings for username: {}", username);
+          List<WarningsDto> transfers = warningsService.getTransfersByUsername(username);
+          logger.info("Found {} Warnings for username: {}", transfers.size(), username);
+          return ResponseEntity.ok(transfers);
+      }
 
 	  // Update Complaints by ID
 	  @PutMapping("/update/{warningsId}")

@@ -26,7 +26,7 @@ public class WorkSheetDto {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private double estimateHour;
-	private String project;
+	private String projectName;
 	private String employeeName;
 	private String username;
 	private String assignedTo;

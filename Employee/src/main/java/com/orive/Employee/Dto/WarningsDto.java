@@ -20,6 +20,7 @@ public class WarningsDto {
 	
 	private Long warningsId;
 	private String warningToEmployee;
+	private String username;
 	private String warningType;
 	private String subject;
 	private String warningByEmployee;

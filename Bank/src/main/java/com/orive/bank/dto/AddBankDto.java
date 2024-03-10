@@ -23,6 +23,7 @@ public class AddBankDto {
 	private String addBankId;
 	private String bankName;
 	private String accountName;
+	//private String phoneNumber;
 	private Long accountNumber;
 	private String branchName;
 	private String accountType;

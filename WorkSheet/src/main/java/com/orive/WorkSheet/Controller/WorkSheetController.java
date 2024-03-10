@@ -51,15 +51,15 @@ public class WorkSheetController {
   public ResponseEntity<?> createDepartment(@Valid @RequestBody WorkSheetDto workSheetDto) {
       try {
           // Check if the WorkSheetTitle And Project already exists
-          Optional<WorkSheetDto> existingWorkSheetTitleAndProject = workSheetService.getWorkSheetByWorkSheetTitleAndProject(workSheetDto.getWorkSheetTitle(), workSheetDto.getProject());
+          Optional<WorkSheetDto> existingWorkSheetTitleAndProject = workSheetService.getWorkSheetByWorkSheetTitleAndProject(workSheetDto.getWorkSheetTitle(), workSheetDto.getProjectName());
           if (existingWorkSheetTitleAndProject.isPresent()) {
               // WorkSheetTitle And Project already exists, return a bad request response with the error message
-              return ResponseEntity.badRequest().body(" WorkSheet with WorkSheetTitle '" + workSheetDto.getWorkSheetTitle() + " And Project Name " + workSheetDto.getProject() + "' already exists");
+              return ResponseEntity.badRequest().body(" WorkSheet with WorkSheetTitle '" + workSheetDto.getWorkSheetTitle() + " And Project Name " + workSheetDto.getProjectName() + "' already exists");
           }
 
           // WorkSheetTitle And Project name is unique, proceed with creating the WorkSheet
           WorkSheetDto createdWorkSheet = workSheetService.createWorkSheet(workSheetDto);
-          logger.info("Created WorkSheet with WorkSheetTitle And Project name: {}",  createdWorkSheet.getWorkSheetTitle() , createdWorkSheet.getProject());
+          logger.info("Created WorkSheet with WorkSheetTitle And Project name: {}",  createdWorkSheet.getWorkSheetTitle() , createdWorkSheet.getProjectName());
           
           // Return the created WorkSheet with a success status code
           return new ResponseEntity<>(createdWorkSheet, HttpStatus.CREATED);
@@ -102,15 +102,15 @@ public class WorkSheetController {
 		  
 		  
 	// Get WorkSheet by WorkSheetTitle And Project
-	      @GetMapping("/get/name/{workSheetTitle}/{project}")
+	      @GetMapping("/get/name/{workSheetTitle}/{projectName}")
 	   // @PreAuthorize("hasRole('client_HR')")
-	      public ResponseEntity<WorkSheetDto> getWorkSheetByWorkSheetTitleAndProject(@PathVariable String workSheetTitle, @PathVariable String project) {
-	          Optional<WorkSheetDto> workSheet = workSheetService.getWorkSheetByWorkSheetTitleAndProject(workSheetTitle,project);
+	      public ResponseEntity<WorkSheetDto> getWorkSheetByWorkSheetTitleAndProject(@PathVariable String workSheetTitle, @PathVariable String projectName) {
+	          Optional<WorkSheetDto> workSheet = workSheetService.getWorkSheetByWorkSheetTitleAndProject(workSheetTitle,projectName);
 	          if (workSheet.isPresent()) {
-	              logger.info("Retrieved WorkSheet with WorkSheetTitle And Project: {}", workSheetTitle,project);
+	              logger.info("Retrieved WorkSheet with WorkSheetTitle And Project: {}", workSheetTitle,projectName);
 	              return new ResponseEntity<>(workSheet.get(), HttpStatus.OK);
 	          } else {
-	              logger.warn("WorkSheet with WorkSheetTitle And Project {} not found", workSheetTitle,project);
+	              logger.warn("WorkSheet with WorkSheetTitle And Project {} not found", workSheetTitle,projectName);
 	              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	          }
 	      }
@@ -118,7 +118,7 @@ public class WorkSheetController {
 		  
 		  
 	// Get Employee by ID
-		  @GetMapping("/{employeeId}")
+		  @GetMapping("/getdetails/{username}")
 		  // @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")
 		    public ResponseEntity<List<WorkSheetDto>> getWorkSheetsByEmployeeId(@PathVariable String username) {
 		        List<WorkSheetDto> workSheet = workSheetService.getEmployeeId(username);

@@ -25,6 +25,7 @@ public class ResignationsDto {
 	
     private Long resignationId;
 	private String employeeName;
+	private String username;
 	private LocalDate noticeDate;
 	private LocalDate resignationDate;
 	private String resignationReason;

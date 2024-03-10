@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.ComplaintsDto;
 import com.orive.Employee.Dto.PromotionsDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Service.ComplaintsService;
 import com.orive.Employee.Service.PromotionsService;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -64,6 +65,14 @@ public class ComplaintsController {
           logger.warn("Complaints with ID {} not found", complaintsId);
           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
       }
+  }
+  
+  @GetMapping("/findcomplaints/{username}")
+  public ResponseEntity<List<ComplaintsDto>> getComplaintsByUsername(@PathVariable String username) {
+      logger.info("Getting Complaints for username: {}", username);
+      List<ComplaintsDto> transfers = complaintsService.getTransfersByUsername(username);
+      logger.info("Found {} Complaints for username: {}", transfers.size(), username);
+      return ResponseEntity.ok(transfers);
   }
 
   // Update Complaints by ID

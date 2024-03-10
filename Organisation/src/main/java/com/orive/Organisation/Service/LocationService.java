@@ -91,6 +91,7 @@ public class LocationService {
         	existingLocation.setCompanyName(locationDto.getCompanyName());
         	existingLocation.setLocationName(locationDto.getLocationName());
         	existingLocation.setEmail(locationDto.getEmail());
+        	existingLocation.setStatus(locationDto.getStatus());
             modelMapper.map(locationDto, existingLocationOptional);
             LocationEntity updatedLocation = locationRepository.save(existingLocation);
             logger.info("Updated Location with ID: {}", updatedLocation.getLocationId());

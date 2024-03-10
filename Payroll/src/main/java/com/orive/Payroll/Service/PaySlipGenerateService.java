@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.orive.Payroll.Dto.PaySlipGenerateDto;
 import com.orive.Payroll.Entity.PaySlipGenerateEntity;
 import com.orive.Payroll.Repository.PaySlipGenerateRepository;
@@ -56,6 +57,15 @@ private static final Logger logger=LoggerFactory.getLogger(PaySlipGenerateServic
             logger.warn("PaySlip Generate with ID {} not found", PaySlipGenerateId);
             return Optional.empty();
         }
+    }
+    
+    
+    //get details by username
+    public List<PaySlipGenerateDto> getPaySlipGenerateByUsername(String username) {
+        List<PaySlipGenerateEntity> transfersEntities = paySlipGenerateRepository.findByUsername(username);
+        return transfersEntities.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
     }
     
 // // Update list by id

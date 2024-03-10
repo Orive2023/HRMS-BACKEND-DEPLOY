@@ -60,7 +60,7 @@ public class ProjectController {
     // Get projects by ID
     @GetMapping("/get/{projectsId}")
     // @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")
-    public ResponseEntity<ProjectDto> getProjectById(@PathVariable String projectsId) {
+    public ResponseEntity<ProjectDto> getProjectById(@PathVariable Long projectsId) {
         Optional<ProjectDto> project = projectService.getProjectById(projectsId);
         if (project.isPresent()) {
             logger.info("Retrieved project with ID: {}", projectsId);
@@ -113,7 +113,7 @@ public class ProjectController {
     // Update project by ID
     @PutMapping("/update/{projectsId}")
  // @PreAuthorize("hasRole('client_HR')")
-    public ResponseEntity<ProjectDto> updateProject(@PathVariable String projectsId, @RequestBody ProjectDto updatedProjectDTO) {
+    public ResponseEntity<ProjectDto> updateProject(@PathVariable Long projectsId, @RequestBody ProjectDto updatedProjectDTO) {
     	ProjectDto updatedProject = projectService.updateProject(projectsId, updatedProjectDTO);
         if (updatedProject != null) {
             logger.info("Updated project with ID: {}", projectsId);
@@ -145,7 +145,7 @@ public class ProjectController {
     // Delete Project by ID
     @DeleteMapping("/delete/{projectsId}")
  // @PreAuthorize("hasRole('client_HR')")
-    public ResponseEntity<Void> deleteProject(@PathVariable String projectsId) {
+    public ResponseEntity<Void> deleteProject(@PathVariable Long projectsId) {
   	  projectService.deleteProject(projectsId);
         logger.info("Deleted project with ID: {}", projectsId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

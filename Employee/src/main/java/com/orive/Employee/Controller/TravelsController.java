@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Dto.TravelsDto;
 import com.orive.Employee.Service.TravelsService;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -64,6 +65,14 @@ public class TravelsController {
             logger.warn("travels with ID {} not found", travelsId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    
+    @GetMapping("/findtravels/{username}")
+    public ResponseEntity<List<TravelsDto>> getTravelsByUsername(@PathVariable String username) {
+        logger.info("Getting Travels for username: {}", username);
+        List<TravelsDto> transfers = travelsService.getTravelsByUsername(username);
+        logger.info("Found {} Travels for username: {}", transfers.size(), username);
+        return ResponseEntity.ok(transfers);
     }
 
     // Update Travels by ID

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.orive.Employee.Dto.TerminationsDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Service.TerminationsService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -50,29 +51,18 @@ public class TerminationsController {
 	 // Create a new Department
 	    @PostMapping("/create/terminations")
 	 // @PreAuthorize("hasRole('client_HR')")
-	  public ResponseEntity<?> createTerminations(@Valid @RequestBody TerminationsDto terminationsDto) {
-	      try {
-	          // Check if the Terminations name already exists
-	          Optional<TerminationsDto> existingDepartment = terminationsService.getTerminationsByName(terminationsDto.getEmployeeName());
-	          if (existingDepartment.isPresent()) {
-	              // Terminations name already exists, return a bad request response with the error message
-	              return ResponseEntity.badRequest().body("Resignation with name '" + terminationsDto.getEmployeeName() + "' already exists");
-	          }
+	    public ResponseEntity<TerminationsDto> createTermination(@RequestBody TerminationsDto terminationsDto) {
+	        logger.info("Received request to create termination for Employee: {}", terminationsDto.getEmployeeName());
 
-	          // Terminations name is unique, proceed with creating the Terminations
-	          TerminationsDto createdDepartment = terminationsService.createTermination(terminationsDto);
-	          logger.info("Created Resignation with name: {}", createdDepartment.getEmployeeName());
-	          
-	          // Return the created Terminations with a success status code
-	          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
-	      } catch (Exception e) {
-	          // Handle any unexpected errors
-	          logger.error("Error creating Terminations: {}", e.getMessage());
-	          
-	          // Return an internal server error response with a generic error message
-	          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Terminations");
-	      }
-	  }
+	        TerminationsDto createdTermination = terminationsService.createTermination(terminationsDto);
+	        if (createdTermination != null) {
+	            logger.info("Termination created successfully with ID: {}", createdTermination.getTerminationId());
+	            return new ResponseEntity<>(createdTermination, HttpStatus.CREATED);
+	        } else {
+	            logger.warn("Failed to create termination for Employee: {}", terminationsDto.getEmployeeName());
+	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	        }
+	    }
 
      // Get all Terminations  
      @GetMapping("/get/terminationsId")
@@ -95,6 +85,14 @@ public class TerminationsController {
              logger.warn("Terminations with ID {} not found", terminationsId);
              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
          }
+     }
+     
+     @GetMapping("/findterminations/{username}")
+     public ResponseEntity<List<TerminationsDto>> getTerminationsByUsername(@PathVariable String username) {
+         logger.info("Getting Terminations for username: {}", username);
+         List<TerminationsDto> transfers = terminationsService.getTransfersByUsername(username);
+         logger.info("Found {} Terminations for username: {}", transfers.size(), username);
+         return ResponseEntity.ok(transfers);
      }
 
      // Update Terminations by ID

@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.orive.Employee.Dto.ExperienceJoiningLetterDto;
 import com.orive.Employee.Dto.TerminationsDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Entity.ExperienceJoiningLetterEntity;
 import com.orive.Employee.Entity.TerminationsEntity;
+import com.orive.Employee.Entity.TransfersEntity;
 import com.orive.Employee.Repository.ExperienceJoiningLetterRepository;
 
 @Service
@@ -53,6 +55,14 @@ public class ExperienceJoiningLetterService {
             logger.warn("ExperienceJoiningLetter with ID {} not found", experienceJoiningLetterId);
             return Optional.empty();
         }
+    }
+    
+    //get details by username
+    public List<ExperienceJoiningLetterDto> getExperienceJoiningLetterByUsername(String username) {
+        List<ExperienceJoiningLetterEntity> transfersEntities = experienceJoiningLetterRepository.findByUsername(username);
+        return transfersEntities.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
     }
     
  // Update list by id

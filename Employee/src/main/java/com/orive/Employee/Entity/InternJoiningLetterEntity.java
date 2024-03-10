@@ -44,6 +44,9 @@ public class InternJoiningLetterEntity {
 	@Column(name = "candidate_name")
 	private String candidateName;
 	
+	@Column(name = "username")
+	private String username;
+	
 	@Column(name = "college_name")
 	private String collegeName;
 	

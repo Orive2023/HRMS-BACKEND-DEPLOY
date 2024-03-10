@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.InternJoiningLetterDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Service.InternJoiningLetterService;
 
 @RestController
@@ -61,6 +62,14 @@ public class InternJoiningLetterController {
             logger.warn("InternJoiningLetter with ID {} not found", internJoiningLetterId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    
+    @GetMapping("/findInternJoiningLetter/{username}")
+    public ResponseEntity<List<InternJoiningLetterDto>> getInternJoiningLetterByUsername(@PathVariable String username) {
+        logger.info("Getting InternJoiningLetter for username: {}", username);
+        List<InternJoiningLetterDto> transfers = internJoiningLetterService.getInternJoiningLetterByUsername(username);
+        logger.info("Found {} InternJoiningLetter for username: {}", transfers.size(), username);
+        return ResponseEntity.ok(transfers);
     }
 
     

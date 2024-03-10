@@ -70,6 +70,15 @@ public class AddBankController {
           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Department");
       }
   }
+	
+	
+//	 @PostMapping("/create")
+//	    public ResponseEntity<AddBankDto> createPromotions(@Valid @RequestBody AddBankDto promotionsDto) {
+//	        logger.info("Received request to create bank: {}", promotionsDto);
+//	        AddBankDto createdPromotions = addBankService.createPromotions(promotionsDto);
+//	        logger.info("Created promotion with ID: {}", createdPromotions.getAddBankId());
+//	        return new ResponseEntity<>(createdPromotions, HttpStatus.CREATED);
+//	    }
 
     // Get all AddBank   
     @GetMapping("/get/addbank")

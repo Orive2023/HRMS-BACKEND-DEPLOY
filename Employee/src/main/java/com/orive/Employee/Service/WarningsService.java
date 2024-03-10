@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Dto.WarningsDto;
+import com.orive.Employee.Entity.TransfersEntity;
 import com.orive.Employee.Entity.WarningsEntity;
 import com.orive.Employee.Repository.WarningsRepository;
 
@@ -53,6 +55,14 @@ private static final Logger logger=LoggerFactory.getLogger(WarningsService.class
             logger.warn("Warnings with ID {} not found", warningsId);
             return Optional.empty();
         }
+    }
+    
+    //get details by username
+    public List<WarningsDto> getTransfersByUsername(String username) {
+        List<WarningsEntity> transfersEntities = warningsRepository.findByUsername(username);
+        return transfersEntities.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
     }
     
  // Update list by id

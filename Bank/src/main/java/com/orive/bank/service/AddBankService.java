@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 import com.orive.bank.dto.AddBankDto;
 import com.orive.bank.entities.AddBankEntity;
 import com.orive.bank.repository.AddBankRepository;
+//import com.twilio.Twilio;
+//import com.twilio.rest.api.v2010.account.Message;
+//import com.twilio.type.PhoneNumber;
+//import org.springframework.core.env.Environment;
 
 @Service
 public class AddBankService {
@@ -25,6 +29,9 @@ public class AddBankService {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
+//	 @Autowired
+//	    private Environment env; 
 	
 	
 //	// Create
@@ -49,6 +56,26 @@ public class AddBankService {
 			    logger.info("Created Designation with ID: {}", savedDepartment.getAddBankId());
 			    return convertToDTO(savedDepartment);
 			}
+	 
+//	// Create
+//	 public AddBankDto createPromotions(AddBankDto promotionsDto) {
+//		 AddBankEntity promotionsEntity = convertToEntity(promotionsDto);
+//
+////	     // Generate a unique email token
+////	     String emailToken = UUID.randomUUID().toString();
+////	     promotionsEntity.setEmailToken(emailToken);
+//
+//		 AddBankEntity savedPromotions = addBankRepository.save(promotionsEntity);
+//	     logger.info("Created bank with ID: {}", savedPromotions.getAddBankId());
+//
+////	     // Send promotion email
+////	     sendPromotionEmail(savedPromotions);
+//
+//	     // Send SMS message
+//	     sendPromotionSMS(savedPromotions);
+//
+//	     return convertToDTO(savedPromotions);
+//	 }
 
     // Read
     public List<AddBankDto> getAllAddBank() {
@@ -111,6 +138,24 @@ public class AddBankService {
 	 {
 		 return addBankRepository.count();
 	 }
+    
+    
+//    private void sendPromotionSMS(AddBankEntity promotionsEntity) {
+//        String messageBody = "Congratulations  your bank information added on orive hrms software to " + promotionsEntity.getAccountNumber() + "!";
+//
+//        Twilio.init(
+//            env.getProperty("twilio.account.sid"),
+//            env.getProperty("twilio.auth.token")
+//        );
+//
+//        Message message = Message.creator(
+//                new PhoneNumber(promotionsEntity.getPhoneNumber()), // Employee's phone number
+//                new PhoneNumber(env.getProperty("twilio.from.number")),
+//                messageBody
+//            ).create();
+//
+//        logger.info("Sent SMS message to {}: {}", promotionsEntity.getPhoneNumber(), message.getSid());
+//    }
     
 	// Helper method to convert AddBankDTo to AddBankEntity
     private AddBankEntity convertToEntity(AddBankDto addBankDto )

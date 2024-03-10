@@ -65,6 +65,14 @@ public class TransfersController {
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
+      
+      @GetMapping("/findtransfer/{username}")
+      public ResponseEntity<List<TransfersDto>> getTransfersByUsername(@PathVariable String username) {
+          logger.info("Getting transfers for username: {}", username);
+          List<TransfersDto> transfers = transfersService.getTransfersByUsername(username);
+          logger.info("Found {} transfers for username: {}", transfers.size(), username);
+          return ResponseEntity.ok(transfers);
+      }
 
       // Update Transfers by ID
       @PutMapping("/update/{transferId}")

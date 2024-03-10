@@ -38,6 +38,10 @@ public class ResignationsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
+	@Column(name = "username")
+	@Convert(converter = AesEncryptor.class)
+	private String username;
+	
 	@Column(name = "notice_date")
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate noticeDate;

@@ -39,6 +39,16 @@ public class PromotionsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
+	
+	@Column(name = "username")
+	@Convert(converter = AesEncryptor.class)
+	private String username;
+	
+	
+	@Column(name = "email")
+	@Convert(converter = AesEncryptor.class)
+	private String email;
+	
 
 	@Column(name = "promotion_title")
 	@Convert(converter = AesEncryptor.class)
@@ -50,7 +60,7 @@ public class PromotionsEntity {
 	private LocalDate promotionDate;
 	
 	
-	@Column(name = "description")
+	@Column(name = "description",length = 3000)
 	@Convert(converter = AesEncryptor.class)
 	private String description;
 

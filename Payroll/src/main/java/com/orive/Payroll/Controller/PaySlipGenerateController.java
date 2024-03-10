@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.orive.Payroll.Dto.PaySlipGenerateDto;
 import com.orive.Payroll.Service.PaySlipGenerateService;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,7 +41,7 @@ public class PaySlipGenerateController {
  // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<PaySlipGenerateDto> createAdvanceSalery(@RequestBody PaySlipGenerateDto advanceSaleryDto ) {
     	PaySlipGenerateDto createdadvanceSalery = paySlipGenerateService.createPaySlipGenerate(advanceSaleryDto);
-        logger.info("Created AdvanceSalery with name: {}", createdadvanceSalery.getEmployeeName());
+        logger.info("Created payslipgenerate with name: {}", createdadvanceSalery.getEmployeeName());
         return new ResponseEntity<>(createdadvanceSalery, HttpStatus.CREATED);
     }
 
@@ -50,7 +51,7 @@ public class PaySlipGenerateController {
  // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<PaySlipGenerateDto>> getAllAdvanceSalery() {
         List<PaySlipGenerateDto> advanceSalery = paySlipGenerateService.getAllPaySlipGenerate();
-        logger.info("Retrieved {} AdvanceSalery from the database", advanceSalery.size());
+        logger.info("Retrieved {} payslipgenerate from the database", advanceSalery.size());
         return new ResponseEntity<>(advanceSalery, HttpStatus.OK);
     }
 
@@ -60,12 +61,20 @@ public class PaySlipGenerateController {
     public ResponseEntity<PaySlipGenerateDto> getAdvanceSaleryById(@PathVariable String PaySlipGenerateId) {
         Optional<PaySlipGenerateDto> advanceSalery = paySlipGenerateService.getPaySlipGenerateById(PaySlipGenerateId);
         if (advanceSalery.isPresent()) {
-            logger.info("Retrieved AdvanceSalery with ID: {}", PaySlipGenerateId);
+            logger.info("Retrieved payslipgenerate with ID: {}", PaySlipGenerateId);
             return new ResponseEntity<>(advanceSalery.get(), HttpStatus.OK);
         } else {
-            logger.warn("AdvanceSalery with ID {} not found", PaySlipGenerateId);
+            logger.warn("payslipgenerate with ID {} not found", PaySlipGenerateId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    
+    @GetMapping("/findpayslipgenerate/{username}")
+    public ResponseEntity<List<PaySlipGenerateDto>> getPaySlipGenerateByUsername(@PathVariable String username) {
+        logger.info("Getting payslipgenerate for username: {}", username);
+        List<PaySlipGenerateDto> transfers = paySlipGenerateService.getPaySlipGenerateByUsername(username);
+        logger.info("Found {} payslipgenerate for username: {}", transfers.size(), username);
+        return ResponseEntity.ok(transfers);
     }
 
 //    // Update AdvanceSalery by ID
@@ -89,7 +98,7 @@ public class PaySlipGenerateController {
  // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<Void> deletePaySlipGenerate(@PathVariable String PaySlipGenerateId) {
   	  paySlipGenerateService.deletePaySlipGenerate(PaySlipGenerateId);
-        logger.info("Deleted AdvanceSalery with ID: {}", PaySlipGenerateId);
+        logger.info("Deleted payslipgenerate with ID: {}", PaySlipGenerateId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    

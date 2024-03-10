@@ -24,6 +24,7 @@ public class GrantLoanDto {
 	
 	private String grantLoanId;
 	private String employeeName;
+	private String username;
 	private String permittedBy;
 	private String loanDetails;
 	private LocalDate approveDate;

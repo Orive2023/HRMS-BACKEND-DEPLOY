@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.orive.loan.dto.GrantLoanDto;
 import com.orive.loan.service.GrantLoanService;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -62,6 +63,14 @@ public class GrantLoanController {
             logger.warn("GrantLoan with ID {} not found", grantLoanId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    
+    @GetMapping("/findGrantLoan/{username}")
+    public ResponseEntity<List<GrantLoanDto>> getGrantLoanByUsername(@PathVariable String username) {
+        logger.info("Getting GrantLoan for username: {}", username);
+        List<GrantLoanDto> transfers = grantLoanService.getGrantLoanByUsername(username);
+        logger.info("Found {} GrantLoan for username: {}", transfers.size(), username);
+        return ResponseEntity.ok(transfers);
     }
 
     // Update GrantLoan by ID

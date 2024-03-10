@@ -38,11 +38,19 @@ public class TerminationsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
+	@Column(name = "username")
+	@Convert(converter = AesEncryptor.class)
+	private String username;
+	
+	@Column(name = "email")
+	@Convert(converter = AesEncryptor.class)
+	private String email;
+	
 	@Column(name = "terminate_date")
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate terminateDate;
 	
-	@Column(name = "reason_for_termination")
+	@Column(name = "reason_for_termination", length = 3000)
 	@Convert(converter = AesEncryptor.class)
 	private String reasonForTermination;
 	

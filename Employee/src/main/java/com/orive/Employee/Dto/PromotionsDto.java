@@ -24,6 +24,8 @@ public class PromotionsDto {
 	
     private Long promotionsId;
 	private String employeeName;
+	private String username;
+	private String email;
 	private String promotionTitle;
 	private LocalDate promotionDate;
 	private String description;

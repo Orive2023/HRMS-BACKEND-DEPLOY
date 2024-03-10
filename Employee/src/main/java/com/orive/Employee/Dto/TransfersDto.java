@@ -22,6 +22,8 @@ public class TransfersDto {
 
 	private Long transferId;
 	private String employeeName;
+	private String username;
+	private String email;
 	private LocalDate transferDate;
 	private String departmentName;
 	private String locationName;

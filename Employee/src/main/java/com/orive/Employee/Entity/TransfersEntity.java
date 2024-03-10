@@ -38,6 +38,14 @@ public class TransfersEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
+	@Column(name = "username")
+	@Convert(converter = AesEncryptor.class)
+	private String username;
+	
+	@Column(name = "email")
+	@Convert(converter = AesEncryptor.class)
+	private String email;
+	
 	@Column(name = "transfer_date")
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate transferDate;

@@ -44,6 +44,10 @@ public class GrantLoanEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
+	@Column(name = "username")
+	@Convert(converter = AesEncryptor.class)
+	private String username;
+	
 	@Column(name = "permitted_by")
 	@Convert(converter = AesEncryptor.class)
 	private String permittedBy;

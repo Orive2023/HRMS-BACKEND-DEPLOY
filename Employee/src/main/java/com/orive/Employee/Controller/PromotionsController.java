@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.PromotionsDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Service.PromotionsService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -65,6 +66,14 @@ public class PromotionsController {
            logger.warn("Promotions with ID {} not found", promotionsId);
            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
        }
+   }
+   
+   @GetMapping("/findpromotions/{username}")
+   public ResponseEntity<List<PromotionsDto>> getTransfersByUsername(@PathVariable String username) {
+       logger.info("Getting Promotions for username: {}", username);
+       List<PromotionsDto> transfers = promotionsService.getPromotionsByUsername(username);
+       logger.info("Found {} Promotions for username: {}", transfers.size(), username);
+       return ResponseEntity.ok(transfers);
    }
 
    // Update promotions by ID

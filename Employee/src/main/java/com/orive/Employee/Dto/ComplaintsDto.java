@@ -24,6 +24,7 @@ public class ComplaintsDto {
 		
 	    private Long complaintsId;
 		private String complaintFrom;
+		private String username;
 		private String complaintTitle;
 		private LocalDate complaintDate;
 		private String complaintAgainst;

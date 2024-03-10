@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.orive.loan.dto.GrantLoanDto;
 import com.orive.loan.entities.GrantLoanEntity;
 import com.orive.loan.repositories.GrantLoanRepository;
@@ -71,6 +72,14 @@ public class GrantLoanService {
         }
     }
     
+    //get details by username
+    public List<GrantLoanDto> getGrantLoanByUsername(String username) {
+        List<GrantLoanEntity> transfersEntities = grantLoanRepository.findByUsername(username);
+        return transfersEntities.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
+    }
+    
  // Update list by id
     public GrantLoanDto updateGrantLoan(String grantLoanId, GrantLoanDto grantLoanDto) {
         Optional<GrantLoanEntity> existingGrantLoanOptional = grantLoanRepository.findById(grantLoanId);
@@ -79,6 +88,7 @@ public class GrantLoanService {
         	existingGrantLoan.setAmount(grantLoanDto.getAmount());
         	existingGrantLoan.setInterestPersentage(grantLoanDto.getInterestPersentage());
         	existingGrantLoan.setInstallmentPeriod(grantLoanDto.getInstallmentPeriod());
+        	existingGrantLoan.setInstallmentCleared(grantLoanDto.getInstallmentCleared());
         	existingGrantLoan.setStatus(grantLoanDto.getStatus());
         	modelMapper.map(grantLoanDto, existingGrantLoanOptional);
             GrantLoanEntity updatedGrantLoan = grantLoanRepository.save(existingGrantLoan);

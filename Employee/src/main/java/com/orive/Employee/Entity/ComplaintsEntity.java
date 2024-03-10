@@ -38,6 +38,10 @@ public class ComplaintsEntity {
 	@Column(name = "complaint_from")
 	@Convert(converter = AesEncryptor.class)
 	private String complaintFrom;
+	
+	@Column(name = "username")
+	@Convert(converter = AesEncryptor.class)
+	private String username;
 
 	@Column(name = "complaint_title")
 	@Convert(converter = AesEncryptor.class)
@@ -51,7 +55,7 @@ public class ComplaintsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String complaintAgainst;
 	
-	@Column(name = "description")
+	@Column(name = "description", length = 3000)
 	@Convert(converter = AesEncryptor.class)
 	private String description;
 }

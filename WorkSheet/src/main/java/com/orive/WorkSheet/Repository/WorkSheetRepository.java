@@ -18,6 +18,6 @@ public interface WorkSheetRepository extends JpaRepository<WorkSheetEntity, Stri
 	
 	
 	//Query for find duplicate using workSheetTitle And project
-	@Query("SELECT w FROM WorkSheetEntity w WHERE w.workSheetTitle = :workSheetTitle AND w.project = :project")
-	Optional<WorkSheetEntity> findByWorkSheetTitleAndProject(@Param("workSheetTitle") String workSheetTitle, @Param("project") String project);
+	@Query("SELECT w FROM WorkSheetEntity w WHERE w.workSheetTitle = :workSheetTitle AND w.projectName = :projectName")
+	Optional<WorkSheetEntity> findByWorkSheetTitleAndProjectName(@Param("workSheetTitle") String workSheetTitle, @Param("projectName") String projectName);
 }

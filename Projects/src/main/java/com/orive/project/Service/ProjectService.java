@@ -48,7 +48,7 @@ public class ProjectService {
     }
     
     //get by ProjectId
-    public Optional<ProjectDto> getProjectById(String projectsId) {
+    public Optional<ProjectDto> getProjectById(Long projectsId) {
         Optional<ProjectEntity> project = projectRepository.findById(projectsId);
         if (project.isPresent()) {
             return Optional.of(convertToDTO(project.get()));
@@ -94,7 +94,7 @@ public class ProjectService {
     
     
  // Update list by id
-    public ProjectDto updateProject(String projectsId, ProjectDto projectDto) {
+    public ProjectDto updateProject(Long projectsId, ProjectDto projectDto) {
         Optional<ProjectEntity> existingProjectOptional =projectRepository.findById(projectsId);
         if (existingProjectOptional.isPresent()) {
         	ProjectEntity existingProject = existingProjectOptional.get();
@@ -161,7 +161,7 @@ public class ProjectService {
     
     
     // Delete
-    public void deleteProject(String projectsId) {
+    public void deleteProject(Long projectsId) {
     	projectRepository.deleteById(projectsId);
         logger.info("Deleted project with ID: {}", projectsId);
     }

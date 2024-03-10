@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+
 import com.orive.Payroll.Entity.PaySlipGenerateEntity;
 
 public interface PaySlipGenerateRepository extends JpaRepository<PaySlipGenerateEntity, String> {
@@ -15,4 +16,6 @@ public interface PaySlipGenerateRepository extends JpaRepository<PaySlipGenerate
             "AND MONTH(p.createdDate) = :month " +
             "GROUP BY p.department")
     List<Object[]> getTotalNetSalaryForDepartmentsInMonth(@Param("year") int year, @Param("month") int month);
+    
+    List<PaySlipGenerateEntity> findByUsername(String username);
 }

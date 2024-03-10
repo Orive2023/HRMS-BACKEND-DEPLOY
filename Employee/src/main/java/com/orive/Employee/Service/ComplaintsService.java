@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.orive.Employee.Dto.ComplaintsDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Entity.ComplaintsEntity;
+import com.orive.Employee.Entity.TransfersEntity;
 import com.orive.Employee.Repository.ComplaintsRepository;
 
 @Service
@@ -53,6 +55,13 @@ private static final Logger logger=LoggerFactory.getLogger(ComplaintsService.cla
         }
     }
     
+    //get complaints by username
+    public List<ComplaintsDto> getTransfersByUsername(String username) {
+        List<ComplaintsEntity> transfersEntities = complaintsRepository.findByUsername(username);
+        return transfersEntities.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
+    }
  // Update list by id
     public ComplaintsDto updateComplaints(Long complaintsId, ComplaintsDto complaintsDto) {
         Optional<ComplaintsEntity> existingComplaintsOptional = complaintsRepository.findById(complaintsId);

@@ -55,9 +55,9 @@ public class WorkSheetEntity {
 	@Convert(converter = AesEncryptor.class)
 	private double estimateHour;
 	
-	@Column(name = "project")
+	@Column(name = "project_name")
 	@Convert(converter = AesEncryptor.class)
-	private String project;
+	private String projectName;
 	
 	@Column(name = "employee_name")
 	@Convert(converter = AesEncryptor.class)

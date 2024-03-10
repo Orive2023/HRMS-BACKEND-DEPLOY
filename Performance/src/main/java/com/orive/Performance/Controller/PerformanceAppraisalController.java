@@ -70,7 +70,7 @@ public class PerformanceAppraisalController {
     
     
  // Get PerformanceAppraisal by EmployeeId
-    @GetMapping("/byId/{employeeId}")
+    @GetMapping("/byId/{username}")
  // @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")
     public ResponseEntity<List<PerformanceAppraisalEntity>> getPerformanceAppraisalByEmployeeId(@PathVariable String username) {
         try {

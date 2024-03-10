@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.orive.Employee.Dto.InternJoiningLetterDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Entity.InternJoiningLetterEntity;
+import com.orive.Employee.Entity.TransfersEntity;
 import com.orive.Employee.Repository.InternJoiningLetterRepository;
 
 @Service
@@ -52,6 +54,14 @@ public class InternJoiningLetterService {
             logger.warn(" InternJoiningLetter with ID {} not found", internJoiningLetterId);
             return Optional.empty();
         }
+    }
+    
+    //get details by username
+    public List<InternJoiningLetterDto> getInternJoiningLetterByUsername(String username) {
+        List<InternJoiningLetterEntity> transfersEntities = internJoiningLetterRepository.findByUsername(username);
+        return transfersEntities.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
     }
     
  // Update list by id

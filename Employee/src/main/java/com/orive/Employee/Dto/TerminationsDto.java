@@ -22,6 +22,8 @@ public class TerminationsDto {
 	
     private Long terminationId;
 	private String employeeName;
+	private String username;
+	private String email;
 	private LocalDate terminateDate;
 	private String reasonForTermination;
 	private String terminatedBy;

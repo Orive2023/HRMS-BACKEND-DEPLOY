@@ -38,10 +38,10 @@ public class WorkSheetService {
 	// Create
 		public WorkSheetDto createWorkSheet(WorkSheetDto workSheetDto) {
 		    // Check if the workSheetTitle And project already exists
-		    Optional<WorkSheetEntity> existingWorkSheetTitleAndProject = workSheetRepository.findByWorkSheetTitleAndProject(workSheetDto.getWorkSheetTitle(), workSheetDto.getProject());
+		    Optional<WorkSheetEntity> existingWorkSheetTitleAndProject = workSheetRepository.findByWorkSheetTitleAndProjectName(workSheetDto.getWorkSheetTitle(), workSheetDto.getProjectName());
 		    if (existingWorkSheetTitleAndProject.isPresent()) {
 		        // workSheetTitle And project name already exists, handle the error as needed
-		        throw new RuntimeException("WorkSheetTitle And Project with name '" + workSheetDto.getWorkSheetTitle() + workSheetDto.getProject() + "' already exists");
+		        throw new RuntimeException("WorkSheetTitle And Project with name '" + workSheetDto.getWorkSheetTitle() + workSheetDto.getProjectName() + "' already exists");
 		    }
 		    // WorkSheetTitle And Project  name is unique, proceed with saving
 		    WorkSheetEntity workSheetEntity = convertToEntity(workSheetDto);
@@ -75,12 +75,12 @@ public class WorkSheetService {
     
     
     //get by WorkSheetByWorkSheetTitleAndProject
-    public Optional<WorkSheetDto> getWorkSheetByWorkSheetTitleAndProject(String workSheetTitle, String project) {
-        Optional<WorkSheetEntity> workSheet = workSheetRepository.findByWorkSheetTitleAndProject(workSheetTitle,project);
+    public Optional<WorkSheetDto> getWorkSheetByWorkSheetTitleAndProject(String workSheetTitle, String projectName) {
+        Optional<WorkSheetEntity> workSheet = workSheetRepository.findByWorkSheetTitleAndProjectName(workSheetTitle,projectName);
         if (workSheet.isPresent()) {
             return Optional.of(convertToDTO(workSheet.get()));
         } else {
-            logger.warn("WorkSheet with Name {} not found", workSheetTitle,project);
+            logger.warn("WorkSheet with Name {} not found", workSheetTitle,projectName);
             return Optional.empty();
         }
     }

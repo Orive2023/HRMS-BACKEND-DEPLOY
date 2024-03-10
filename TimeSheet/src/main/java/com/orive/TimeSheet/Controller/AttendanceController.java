@@ -44,14 +44,20 @@ public class AttendanceController {
 	@Autowired
 	private AttendanceService attendanceService;
 	
-	 //Create a new Attendance
-    @PostMapping("/create/attendance")
- // @PreAuthorize("hasRole('client_HR')")
-    public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
-    	AttendanceDto createdAttendance = attendanceService.createsAttendances(attendanceDto);
-        logger.info("Created Attendance with name: {}", createdAttendance.getEmployeeName());
-        return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED);
-    }
+	 @PostMapping("/create")
+	 // @PreAuthorize("hasRole('client_HR')")
+	    public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
+	        logger.info("Received request to create attendance for Username: {} and Date: {}", attendanceDto.getUsername(), attendanceDto.getDate());
+
+	        AttendanceDto createdAttendance = attendanceService.createsAttendances(attendanceDto);
+	        if (createdAttendance != null) {
+	            logger.info("Attendance created successfully with ID: {}", createdAttendance.getAttendanceId());
+	            return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED);
+	        } else {
+	            logger.warn("Attendance already exists for Username: {} and Date: {}", attendanceDto.getUsername(), attendanceDto.getDate());
+	            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	        }
+	    }
 	
 	
 //	 @PostMapping("/upload/attendance")

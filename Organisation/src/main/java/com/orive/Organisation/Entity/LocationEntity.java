@@ -84,8 +84,8 @@ public class LocationEntity {
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate date;
 	
-//	@Column(name = "status")
-//	private String status;
+	@Column(name = "status")
+	private String status;
 //	
 //	@Column(name = "approved_by")
 //	private String approvedBy;

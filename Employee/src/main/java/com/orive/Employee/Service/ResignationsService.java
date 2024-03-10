@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.orive.Employee.Dto.AwardsDto;
 import com.orive.Employee.Dto.ResignationsDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Entity.AwardsEntity;
 import com.orive.Employee.Entity.ResignationsEntity;
+import com.orive.Employee.Entity.TransfersEntity;
 import com.orive.Employee.Repository.ResignationsRepository;
 
 
@@ -82,6 +84,14 @@ public class ResignationsService {
             logger.warn("Employee with Name {} not found", employeeName);
             return Optional.empty();
         }
+    }
+    
+    //get resignationdetails by username
+    public List<ResignationsDto> getTransfersByUsername(String username) {
+        List<ResignationsEntity> transfersEntities = resignationsRepository.findByUsername(username);
+        return transfersEntities.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
     }
     
  // Update list by id

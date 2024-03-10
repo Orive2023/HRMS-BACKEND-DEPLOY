@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.ResignationsDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Service.ResignationsService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -64,10 +65,10 @@ public class ResignationsController {
 	          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
 	      } catch (Exception e) {
 	          // Handle any unexpected errors
-	          logger.error("Error creating department: {}", e.getMessage());
+	          logger.error("Error creating Resignation: {}", e.getMessage());
 	          
 	          // Return an internal server error response with a generic error message
-	          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Designation");
+	          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Resignation");
 	      }
 	  }
 
@@ -92,6 +93,14 @@ public class ResignationsController {
              logger.warn("resignations with ID {} not found", resignationId);
              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
          }
+     }
+     
+     @GetMapping("/findresignation/{username}")
+     public ResponseEntity<List<ResignationsDto>> getResignationByUsername(@PathVariable String username) {
+         logger.info("Getting Resignation for username: {}", username);
+         List<ResignationsDto> transfers = resignationsService.getTransfersByUsername(username);
+         logger.info("Found {} Resignation for username: {}", transfers.size(), username);
+         return ResponseEntity.ok(transfers);
      }
 
      // Update resignation by ID

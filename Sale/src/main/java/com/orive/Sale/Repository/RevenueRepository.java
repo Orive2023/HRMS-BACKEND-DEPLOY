@@ -17,7 +17,7 @@ public interface RevenueRepository extends JpaRepository<RevenueEntity, Long>{
 
     List<RevenueEntity> findBySaleDateBetween(LocalDate startDate, LocalDate endDate);
     
-    @Query("SELECT SUM(r.grossRevenue) FROM RevenueEntity r WHERE r.moneyAddedBankName = :moneyAddedBankName")
+    @Query("SELECT SUM(r.netRevenue) FROM RevenueEntity r WHERE r.moneyAddedBankName = :moneyAddedBankName")
     Optional<Double> getTotalMoneyAddedInBank(@Param("moneyAddedBankName") String moneyAddedBankName);
     
     @Query("SELECT SUM(r.noOfClients) FROM RevenueEntity r WHERE YEAR(r.saleDate) = :year AND r.productName = :productName")

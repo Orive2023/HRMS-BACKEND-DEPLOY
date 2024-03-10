@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Employee.Dto.ExperienceLetterDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Service.ExperienceLetterService;
 
 @RestController
@@ -62,6 +63,14 @@ public class ExperienceLetterController {
 	           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	       }
 	   }
+	   
+	   @GetMapping("/findexperienceletter/{username}")
+	      public ResponseEntity<List<ExperienceLetterDto>> getExperienceLetterByUsername(@PathVariable String username) {
+	          logger.info("Getting ExperienceLetter for username: {}", username);
+	          List<ExperienceLetterDto> transfers = experienceLetterService.getTransfersByUsername(username);
+	          logger.info("Found {} ExperienceLetter for username: {}", transfers.size(), username);
+	          return ResponseEntity.ok(transfers);
+	      }
 
 	   
 	   // Update ExperienceLetter by ID

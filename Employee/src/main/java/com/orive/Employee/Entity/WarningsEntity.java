@@ -38,6 +38,10 @@ public class WarningsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String warningToEmployee;
 	
+	@Column(name = "username")
+	@Convert(converter = AesEncryptor.class)
+	private String username;
+	
 	@Column(name = "warning_type")
 	@Convert(converter = AesEncryptor.class)
 	private String warningType;
@@ -54,7 +58,7 @@ public class WarningsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate warningDate;
 	
-	@Column(name = "description")
+	@Column(name = "description", length = 3000)
 	@Convert(converter = AesEncryptor.class)
 	private String description;
 }

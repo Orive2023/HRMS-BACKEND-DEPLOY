@@ -48,6 +48,10 @@ public class AddBankEntity {
 	@Convert(converter = AesEncryptor.class)
 	private Long accountNumber;
 	
+//	@Column(name = "phone_number")
+//	@Convert(converter = AesEncryptor.class)
+//	private String phoneNumber;
+	
 	@Column(name = "branch_name")
 	@Convert(converter = AesEncryptor.class)
 	private String branchName;

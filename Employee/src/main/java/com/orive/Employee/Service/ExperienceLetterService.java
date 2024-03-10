@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.orive.Employee.Dto.ExperienceLetterDto;
+import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Entity.ExperienceLetterEntity;
+import com.orive.Employee.Entity.TransfersEntity;
 import com.orive.Employee.Repository.ExperienceLetterRepository;
 
 @Service
@@ -51,6 +53,14 @@ public class ExperienceLetterService {
             logger.warn("ExperienceLetter with ID {} not found", experienceLetterId);
             return Optional.empty();
         }
+    }
+    
+    //get letter details by username
+    public List<ExperienceLetterDto> getTransfersByUsername(String username) {
+        List<ExperienceLetterEntity> transfersEntities = experienceLetterRepository.findByUsername(username);
+        return transfersEntities.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
     }
     
  // Update list by id

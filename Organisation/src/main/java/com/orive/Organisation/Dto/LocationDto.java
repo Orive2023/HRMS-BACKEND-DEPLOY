@@ -33,7 +33,7 @@ public class LocationDto {
 	private int zipCode;
 	private String country;
 	private LocalDate date;
-//	private String status;
+	private String status;
 //	private String approvedBy;
 
 }

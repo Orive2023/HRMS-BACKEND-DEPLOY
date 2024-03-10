@@ -41,9 +41,9 @@ import lombok.ToString;
 public class ProjectEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
-    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.project.Entity.ProjectCustomIdGenerator")
-	private String projectsId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
+	private Long projectsId;
 	
 	@Column(name = "project_title")
 	@Convert(converter = AesEncryptor.class)
@@ -85,11 +85,11 @@ public class ProjectEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String projectManagers;
 	
-	@Column(name = "summary")
+	@Column(name = "summary", length = 2000)
 	@Convert(converter = AesEncryptor.class)
 	private String summary;
 	
-	@Column(name = "description")
+	@Column(name = "description", length = 2000)
 	@Convert(converter = AesEncryptor.class)
 	private String description;
 	

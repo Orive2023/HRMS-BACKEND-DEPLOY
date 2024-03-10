@@ -80,7 +80,7 @@ public class Talent {
     //@Convert(converter = AesEncryptor.class)
     private String qualification;
     
-    @Column(name = "description")
+    @Column(name = "description", length = 3000)
     //@Convert(converter = AesEncryptor.class)
     private String description;
 }

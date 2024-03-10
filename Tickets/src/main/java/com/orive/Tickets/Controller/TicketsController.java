@@ -117,7 +117,7 @@ public class TicketsController {
 
 	  
 	// Get Employee by ID
-	  @GetMapping("/{username}")
+	  @GetMapping("/getticketdetails/{username}")
 	  // @PreAuthorize("hasRole('client_HR')")
 	    public ResponseEntity<List<TicketsDto>> getTicketsByEmployeeId(@PathVariable String username) {
 	        List<TicketsDto> tickets = ticketsService.getEmployeeId(username);

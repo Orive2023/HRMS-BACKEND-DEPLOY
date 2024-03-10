@@ -36,12 +36,24 @@ public class AttendanceService {
 	private ModelMapper modelMapper;
 	
 	// Create
-    public AttendanceDto createsAttendances(AttendanceDto attendanceDto) {
-    	AttendanceEntity attendanceEntity = convertToEntity(attendanceDto);
-    	AttendanceEntity savedAttendances = attendanceRepository.save(attendanceEntity);
-        logger.info("Created Attendance with ID: {}", savedAttendances.getAttendanceId());
-        return convertToDTO(savedAttendances);
-    }
+	public AttendanceDto createsAttendances(AttendanceDto attendanceDto) {
+	    String username = attendanceDto.getUsername();
+	    LocalDate date = attendanceDto.getDate();
+
+	    // Check if entry already exists for the same username and date
+	    if (attendanceRepository.existsByUsernameAndDate(username, date)) {
+	        logger.warn("Attendance for Username: {} and Date: {} already exists.", username, date);
+	        // You can handle this situation as needed, for example, throw an exception or return null
+	        // For now, I'll return null as an example
+	        return null;
+	    }
+
+	    AttendanceEntity attendanceEntity = convertToEntity(attendanceDto);
+	    AttendanceEntity savedAttendances = attendanceRepository.save(attendanceEntity);
+	    logger.info("Created Attendance with ID: {}", savedAttendances.getAttendanceId());
+	    return convertToDTO(savedAttendances);
+	}
+
 	
 	
 //	
