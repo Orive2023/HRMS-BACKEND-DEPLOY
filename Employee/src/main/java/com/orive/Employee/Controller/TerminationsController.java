@@ -87,7 +87,9 @@ public class TerminationsController {
          }
      }
      
+   //Get Complaints by Employee ID
      @GetMapping("/findterminations/{username}")
+   //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
      public ResponseEntity<List<TerminationsDto>> getTerminationsByUsername(@PathVariable String username) {
          logger.info("Getting Terminations for username: {}", username);
          List<TerminationsDto> transfers = terminationsService.getTransfersByUsername(username);

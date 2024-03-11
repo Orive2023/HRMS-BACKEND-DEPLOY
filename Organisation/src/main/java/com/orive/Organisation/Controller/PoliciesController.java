@@ -83,7 +83,7 @@ public class PoliciesController {
 
       // Get all Policies  
       @GetMapping("/get/policies")
-   // @PreAuthorize("hasRole('client_HR')")
+   // @PreAuthorize("hasRole('client_HR')||hasRole('client_Employee')")
       public ResponseEntity<List<PoliciesDto>> getAllPolicies() {
           List<PoliciesDto> policies = policiesService.getAllPolicies();
           logger.info("Retrieved {} Policies from the database", policies.size());

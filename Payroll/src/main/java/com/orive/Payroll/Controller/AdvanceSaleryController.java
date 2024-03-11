@@ -44,10 +44,9 @@ public class AdvanceSaleryController {
         return new ResponseEntity<>(createdadvanceSalery, HttpStatus.CREATED);
     }
 
-    // Get all AdvanceSalery
-    
+    // Get all AdvanceSalery    
     @GetMapping("/get/advancesalery")
- // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<AdvanceSaleryDto>> getAllAdvanceSalery() {
         List<AdvanceSaleryDto> advanceSalery = advanceSaleryService.getAllAdvanceSalerys();
         logger.info("Retrieved {} AdvanceSalery from the database", advanceSalery.size());

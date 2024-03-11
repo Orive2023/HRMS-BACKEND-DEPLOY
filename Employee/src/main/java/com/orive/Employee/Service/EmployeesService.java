@@ -323,6 +323,7 @@ public class EmployeesService {
 	            existingEmployees.setMedicalAllowances(employeesDto.getMedicalAllowances());
 	            existingEmployees.setOtherInsurance(employeesDto.getOtherInsurance());
 	            existingEmployees.setTax(employeesDto.getTax());
+	            existingEmployees.setStatus(employeesDto.getStatus());
 
 	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
 	            logger.info("Updated Employees with username: {}", updatedEmployees.getUsername());

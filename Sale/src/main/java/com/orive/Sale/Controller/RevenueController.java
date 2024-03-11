@@ -57,8 +57,7 @@ public class RevenueController {
 
 			  // Get WorkSheet by ID
 			  @GetMapping("/get/{revenueId}")
-			// @PreAuthorize("hasRole('client_HR')")
-			    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
+			  //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
 			  public ResponseEntity<RevenueDto> getSaleId(@PathVariable Long revenueId) {
 			      Optional<RevenueDto> workSheet = revenueService.getRevenueId(revenueId);
 			      if (workSheet.isPresent()) {

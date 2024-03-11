@@ -65,7 +65,9 @@ public class GrantLoanController {
         }
     }
     
+    // Get GrantLoan by Employee ID
     @GetMapping("/findGrantLoan/{username}")
+  //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
     public ResponseEntity<List<GrantLoanDto>> getGrantLoanByUsername(@PathVariable String username) {
         logger.info("Getting GrantLoan for username: {}", username);
         List<GrantLoanDto> transfers = grantLoanService.getGrantLoanByUsername(username);

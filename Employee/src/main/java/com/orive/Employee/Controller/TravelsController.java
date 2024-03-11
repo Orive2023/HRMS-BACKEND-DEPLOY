@@ -43,8 +43,7 @@ public class TravelsController {
         return new ResponseEntity<>(createdTravel, HttpStatus.CREATED);
     }
 
-    // Get all Travels
-    
+    // Get all Travels 
     @GetMapping("/get/travels")
  // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<TravelsDto>> getAllTravels() {
@@ -67,7 +66,9 @@ public class TravelsController {
         }
     }
     
+ // Get Travels by Employee ID
     @GetMapping("/findtravels/{username}")
+    //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
     public ResponseEntity<List<TravelsDto>> getTravelsByUsername(@PathVariable String username) {
         logger.info("Getting Travels for username: {}", username);
         List<TravelsDto> transfers = travelsService.getTravelsByUsername(username);

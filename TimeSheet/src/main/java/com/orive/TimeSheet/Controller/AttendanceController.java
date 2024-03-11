@@ -137,7 +137,7 @@ public class AttendanceController {
 
     // Get Attendance by ID
     @GetMapping("/get/{attendanceId}")
- // @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")	
+  //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
     public ResponseEntity<AttendanceDto> getAttendanceById(@PathVariable String attendanceId) {
         Optional<AttendanceDto> attendance = attendanceService.getAttendanceById(attendanceId);
         if (attendance.isPresent()) {
@@ -152,7 +152,7 @@ public class AttendanceController {
     
  // Get Employee by ID
 	  @GetMapping("/get/username/{username}")
-	// @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")	 
+	//@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")	 
 	    public ResponseEntity<List<AttendanceDto>> getAttendanceByEmployeeId(@PathVariable String username) {
 	        List<AttendanceDto> attendance = attendanceService.getEmployeeId(username);
 	        if (attendance.isEmpty()) {

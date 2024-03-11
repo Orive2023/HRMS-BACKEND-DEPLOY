@@ -86,7 +86,7 @@ public class TicketsController {
 
 	  // Get Tickets by ID
 	  @GetMapping("/get/{ticketsId}")
-	// @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")
+	  //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
 	  public ResponseEntity<TicketsDto> getTicketsId(@PathVariable String ticketsId) {
 	      Optional<TicketsDto> tickets = ticketsService.getTicketsId(ticketsId);
 	      if (tickets.isPresent()) {

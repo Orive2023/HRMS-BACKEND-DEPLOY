@@ -78,7 +78,7 @@ public class HolidaysController {
 
       // Get all Holidays   
       @GetMapping("/get/holidays")
-   // @PreAuthorize("hasRole('client_HR')")
+    //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
       public ResponseEntity<List<HolidaysDto>> getAllHolidays() {
           List<HolidaysDto> holidays = holidaysService.getAllHolidays();
           logger.info("Retrieved {} Holidays from the database", holidays.size());

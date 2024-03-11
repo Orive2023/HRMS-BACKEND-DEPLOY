@@ -54,8 +54,7 @@ private static final Logger logger = LoggerFactory.getLogger(ClientController.cl
 
 		  // Get WorkSheet by ID
 		  @GetMapping("/get/{clientId}")
-		// @PreAuthorize("hasRole('client_HR')")
-		    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
+		  //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
 		  public ResponseEntity<ClientDto> getClientId(@PathVariable String clientId) {
 		      Optional<ClientDto> workSheet = clientService.getClientId(clientId);
 		      if (workSheet.isPresent()) {

@@ -54,7 +54,7 @@ public class ExperienceJoiningLetterController {
 
     // Get ExperienceJoiningLetter by ID
     @GetMapping("/get/{experienceJoiningLetterId}")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<ExperienceJoiningLetterDto> getExperienceJoiningLetterId(@PathVariable Long experienceJoiningLetterId) {
         Optional<ExperienceJoiningLetterDto> experienceJoiningLetter = experienceJoiningLetterService.getExperienceJoiningLetterById(experienceJoiningLetterId);
         if (experienceJoiningLetter.isPresent()) {
@@ -66,7 +66,9 @@ public class ExperienceJoiningLetterController {
         }
     }
     
+    //Get Complaints by Employee ID
     @GetMapping("/findexperiencejoiningletter/{username}")
+    //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
     public ResponseEntity<List<ExperienceJoiningLetterDto>> getTransfersByUsername(@PathVariable String username) {
         logger.info("Getting ExperienceJoiningLetter for username: {}", username);
         List<ExperienceJoiningLetterDto> transfers = experienceJoiningLetterService.getExperienceJoiningLetterByUsername(username);
@@ -76,7 +78,7 @@ public class ExperienceJoiningLetterController {
 
     // Update ExperienceJoiningLetter by ID
     @PutMapping("/update/{experienceJoiningLetterId}")
-    // @PreAuthorize("hasRole('client_admin')")
+    // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<ExperienceJoiningLetterDto> updateExperienceJoiningLetter(@PathVariable Long experienceJoiningLetterId, @RequestBody ExperienceJoiningLetterDto updatedExperienceJoiningLetterDto) {
     	ExperienceJoiningLetterDto updatedExperienceJoiningLetter = experienceJoiningLetterService.updateExperienceJoiningLetter(experienceJoiningLetterId, updatedExperienceJoiningLetterDto);
         if (updatedExperienceJoiningLetter != null) {

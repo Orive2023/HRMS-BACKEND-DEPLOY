@@ -54,8 +54,7 @@ public class SaleController {
 
 		  // Get WorkSheet by ID
 		  @GetMapping("/get/{saleId}")
-		// @PreAuthorize("hasRole('client_HR')")
-		    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
+		  //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
 		  public ResponseEntity<SaleDto> getSaleId(@PathVariable String saleId) {
 		      Optional<SaleDto> workSheet = saleService.getSaleId(saleId);
 		      if (workSheet.isPresent()) {

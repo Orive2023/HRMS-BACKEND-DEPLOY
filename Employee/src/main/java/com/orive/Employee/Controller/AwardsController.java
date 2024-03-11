@@ -71,7 +71,7 @@ public class AwardsController {
       
   	// Get Award By EmployeeID
 	  @GetMapping("/employee/get/{username}")
-	  // @PreAuthorize("hasRole('client_HR')")
+	//@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
 	    public ResponseEntity<List<AwardsDto>> getAwardsByEmployeeId(@PathVariable String username) {
 	        List<AwardsDto> award = awardsService.getAwardsByEmployeeId(username);
 
