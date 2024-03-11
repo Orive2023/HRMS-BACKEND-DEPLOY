@@ -45,7 +45,7 @@ public class AnnoucementsController {
 
       // Get all Annoucement     
       @GetMapping("/get/announcement")
-   // @PreAuthorize("hasRole('client_HR')")
+   // @PreAuthorize("hasRole('client_HR')|| hasRole('client_Employee')")
       public ResponseEntity<List<AnnoucementDto>> getAllAnnoucement() {
           List<AnnoucementDto> announcement = annoucementService.getAllAnnouncements();
           logger.info("Retrieved {} Annoucement from the database", announcement.size());

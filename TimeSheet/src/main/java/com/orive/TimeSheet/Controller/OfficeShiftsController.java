@@ -45,7 +45,7 @@ public class OfficeShiftsController {
 
       // Get all OfficeShifts   
       @GetMapping("/get/officeShifts")
-   // @PreAuthorize("hasRole('client_HR')")
+    //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
       public ResponseEntity<List<OfficeShiftsDto>> getAllOfficeShifts() {
           List<OfficeShiftsDto> officeShifts = officeShiftsService.getAllOfficeShifts();
           logger.info("Retrieved {} OfficeShifts from the database", officeShifts.size());

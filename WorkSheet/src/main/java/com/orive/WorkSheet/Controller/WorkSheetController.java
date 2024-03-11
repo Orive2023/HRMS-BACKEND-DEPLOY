@@ -87,7 +87,7 @@ public class WorkSheetController {
 
 	// Get WorkSheet by ID
 		  @GetMapping("/get/{workSheetId}")
-		    // @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")
+		//@PreAuthorize("hasRole('client_HR')")
 		  public ResponseEntity<WorkSheetDto> getWorkSheetDtoId(@PathVariable String workSheetId) {
 		      Optional<WorkSheetDto> workSheet = workSheetService.getWorkSheetId(workSheetId);
 		      if (workSheet.isPresent()) {
@@ -117,9 +117,9 @@ public class WorkSheetController {
 		  
 		  
 		  
-	// Get Employee by ID
+	// Get Worksheet by EmployeeID
 		  @GetMapping("/getdetails/{username}")
-		  // @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")
+		//@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
 		    public ResponseEntity<List<WorkSheetDto>> getWorkSheetsByEmployeeId(@PathVariable String username) {
 		        List<WorkSheetDto> workSheet = workSheetService.getEmployeeId(username);
 

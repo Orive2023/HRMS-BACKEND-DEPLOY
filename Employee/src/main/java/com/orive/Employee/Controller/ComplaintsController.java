@@ -67,7 +67,9 @@ public class ComplaintsController {
       }
   }
   
+//Get Complaints by Employee ID
   @GetMapping("/findcomplaints/{username}")
+  //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
   public ResponseEntity<List<ComplaintsDto>> getComplaintsByUsername(@PathVariable String username) {
       logger.info("Getting Complaints for username: {}", username);
       List<ComplaintsDto> transfers = complaintsService.getTransfersByUsername(username);

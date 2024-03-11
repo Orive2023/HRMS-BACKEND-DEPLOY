@@ -72,7 +72,7 @@ public class LeavesController {
       
   	// Get Employee by ID
 	  @GetMapping("/employee/get/{username}")
-	// @PreAuthorize("hasRole('client_HR')")
+	//@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
 	    public ResponseEntity<List<LeaveDto>> getLeavesByEmployeeId(@PathVariable String username) {
 	        List<LeaveDto> leaves = leavesService.getLeavesByEmployeeId(username);
 

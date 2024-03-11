@@ -95,7 +95,9 @@ public class ResignationsController {
          }
      }
      
+     // Get resignation by Employee ID
      @GetMapping("/findresignation/{username}")
+   //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
      public ResponseEntity<List<ResignationsDto>> getResignationByUsername(@PathVariable String username) {
          logger.info("Getting Resignation for username: {}", username);
          List<ResignationsDto> transfers = resignationsService.getTransfersByUsername(username);

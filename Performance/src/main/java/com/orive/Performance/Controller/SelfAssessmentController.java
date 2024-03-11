@@ -54,7 +54,7 @@ public class SelfAssessmentController {
 
    // Get SelfAssessment by ID
    @GetMapping("/get/{selfAssessmentId}")
-   // @PreAuthorize("hasRole('client_HR')|| hasRole('client_user')")
+	 //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
    public ResponseEntity<SelfAssessmentDto> getSelfAssessmentId(@PathVariable String selfAssessmentId) {
        Optional<SelfAssessmentDto> selfAssessment = selfAssessmentService.getSelfAssessmentById(selfAssessmentId);
        if (selfAssessment.isPresent()) {

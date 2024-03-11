@@ -68,7 +68,9 @@ public class WarningsController {
 	      }
 	  }
 	  
+	//Get Complaints by Employee ID
 	  @GetMapping("/findwarnings/{username}")
+	//@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
       public ResponseEntity<List<WarningsDto>> getWarningsByUsername(@PathVariable String username) {
           logger.info("Getting Warnings for username: {}", username);
           List<WarningsDto> transfers = warningsService.getTransfersByUsername(username);

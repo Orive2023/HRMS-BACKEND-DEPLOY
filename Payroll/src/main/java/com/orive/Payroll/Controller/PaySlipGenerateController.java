@@ -45,8 +45,7 @@ public class PaySlipGenerateController {
         return new ResponseEntity<>(createdadvanceSalery, HttpStatus.CREATED);
     }
 
-    // Get all AdvanceSalery
-    
+    // Get all AdvanceSalery   
     @GetMapping("/get/paySlipGenerate")
  // @PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<List<PaySlipGenerateDto>> getAllAdvanceSalery() {
@@ -69,7 +68,9 @@ public class PaySlipGenerateController {
         }
     }
     
+ // Get AdvanceSalery by Employee ID
     @GetMapping("/findpayslipgenerate/{username}")
+  //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
     public ResponseEntity<List<PaySlipGenerateDto>> getPaySlipGenerateByUsername(@PathVariable String username) {
         logger.info("Getting payslipgenerate for username: {}", username);
         List<PaySlipGenerateDto> transfers = paySlipGenerateService.getPaySlipGenerateByUsername(username);
@@ -102,6 +103,7 @@ public class PaySlipGenerateController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+ // Count AdvanceSalery 
 	    @GetMapping("/count/paySlipGenerate")
 	 // @PreAuthorize("hasRole('client_HR')")
 	    public long countPaySlipGenerate()
@@ -109,6 +111,7 @@ public class PaySlipGenerateController {
 	    	return paySlipGenerateService.countPaySlipGenerate();
 	    }
 	    
+	 // Get total AdvanceSalery for departments in month
 	    @GetMapping("/total-net-salary/{year}/{month}")
 	    public Map<String, Double> getTotalNetSalaryForDepartmentsInMonth(@PathVariable int year, @PathVariable int month) {
 	        return paySlipGenerateService.getTotalNetSalaryForDepartmentsInMonth(year, month);

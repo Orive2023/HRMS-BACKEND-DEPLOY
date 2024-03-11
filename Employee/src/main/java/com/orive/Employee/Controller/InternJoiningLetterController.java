@@ -64,7 +64,9 @@ public class InternJoiningLetterController {
         }
     }
     
+    //Get Complaints by Employee ID
     @GetMapping("/findInternJoiningLetter/{username}")
+  //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
     public ResponseEntity<List<InternJoiningLetterDto>> getInternJoiningLetterByUsername(@PathVariable String username) {
         logger.info("Getting InternJoiningLetter for username: {}", username);
         List<InternJoiningLetterDto> transfers = internJoiningLetterService.getInternJoiningLetterByUsername(username);

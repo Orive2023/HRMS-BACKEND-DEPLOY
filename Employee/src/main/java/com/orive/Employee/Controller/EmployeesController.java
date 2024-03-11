@@ -186,7 +186,7 @@ public class EmployeesController {
     
   //Get Employees pdf by id  
     @GetMapping("/downloadPdf/{username}")
-  //@PreAuthorize("hasRole('client_admin')")
+  //@PreAuthorize("hasRole('client_HR')")
     public ResponseEntity<byte[]> downloadPdf(@PathVariable String username) {
         byte[] pdfData = employeesService.downloadPdf(username);
 
@@ -211,7 +211,7 @@ public class EmployeesController {
     
       // Get all Employees
       @GetMapping("/get/employee")
-    //@PreAuthorize("hasRole('client_admin')")
+    //@PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<EmployeesDto>> getAllEmployees() {
           List<EmployeesDto> employee = employeesService.getAllEmployees();
           logger.info("Retrieved {} Employees from the database", employee.size());
@@ -235,7 +235,7 @@ public class EmployeesController {
       
       // Get Employees by EmployeeName
       @GetMapping("/byName/{employeeName}")
-    //@PreAuthorize("hasRole('client_admin')")
+    //@PreAuthorize("hasRole('client_HR')")
       public ResponseEntity<List<EmployeesEntity>> getEmployeesByName(@PathVariable String employeeName) {
           try {
               List<EmployeesEntity> employees = employeesService.getEmployeesByName(employeeName);
@@ -250,7 +250,7 @@ public class EmployeesController {
       
    // Get Employees by EmployeeId
       @GetMapping("/byId/{username}")
-    //@PreAuthorize("hasRole('client_admin')")
+    //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
       public ResponseEntity<List<EmployeesEntity>> getEmployeesByEmployeeId(@PathVariable String username) {
           try {
               List<EmployeesEntity> employees = employeesService.getEmployeesByEmployeeId(username);
@@ -298,7 +298,8 @@ public class EmployeesController {
       
    // Update Employees by EmployeeID
       @PutMapping("/update/ID/{username}")
-      // @PreAuthorize("hasRole('client_HR')")
+      //@PreAuthorize("hasRole('client_HR')")
+      //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
       public ResponseEntity<EmployeesDto> updateEmployee(@PathVariable String username, @RequestBody EmployeesDto updatedEmployeesDto) {
           EmployeesDto updatedEmployees = employeesService.updateEmployees(username, updatedEmployeesDto);
 

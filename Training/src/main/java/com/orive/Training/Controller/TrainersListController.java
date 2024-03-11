@@ -52,8 +52,7 @@ public class TrainersListController {
 
     // Get TrainersList by ID
     @GetMapping("/get/{trainersListId}")
- // @PreAuthorize("hasRole('client_HR')")
-    // @PreAuthorize("hasRole('client_admin')|| hasRole('client_user')")
+    // @PreAuthorize("hasRole('client_HR')|| hasRole('client_Employee')")
     public ResponseEntity<TrainersListDto> getTrainersListById(@PathVariable String trainersListId) {
         Optional<TrainersListDto> trainersList = trainersListService.getTrainersListById(trainersListId);
         if (trainersList.isPresent()) {

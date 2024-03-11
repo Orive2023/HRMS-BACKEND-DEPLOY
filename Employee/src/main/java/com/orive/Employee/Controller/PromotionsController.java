@@ -68,7 +68,9 @@ public class PromotionsController {
        }
    }
    
+// Get Travels by Employee ID
    @GetMapping("/findpromotions/{username}")
+   //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
    public ResponseEntity<List<PromotionsDto>> getTransfersByUsername(@PathVariable String username) {
        logger.info("Getting Promotions for username: {}", username);
        List<PromotionsDto> transfers = promotionsService.getPromotionsByUsername(username);

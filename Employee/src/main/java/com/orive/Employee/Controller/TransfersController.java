@@ -66,7 +66,9 @@ public class TransfersController {
           }
       }
       
+      // Get Transfers by Employee ID
       @GetMapping("/findtransfer/{username}")
+    //@PreAuthorize("hasRole('client_Employee')||hasRole('client_HR')")
       public ResponseEntity<List<TransfersDto>> getTransfersByUsername(@PathVariable String username) {
           logger.info("Getting transfers for username: {}", username);
           List<TransfersDto> transfers = transfersService.getTransfersByUsername(username);
