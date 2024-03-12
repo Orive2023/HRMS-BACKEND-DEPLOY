@@ -9,7 +9,7 @@ spring:
       - id: BANK-SERVICE
         uri: lb://BANK-SERVICE
         predicates:
-          - Path=/addbank/**
+          - Path=/addbank/**,/event/**,/trainerslist/**,/worksheet/**
       - id: ORGANISATION-SERVICE
         uri: lb://ORGANISATION-SERVICE
         predicates:
@@ -38,10 +38,6 @@ spring:
         uri: lb://TICKETS-SERVICE
         predicates:
           - Path=/tickets/**
-      - id: WORKSHEET-SERVICE
-        uri: lb://WORKSHEET-SERVICE
-        predicates:
-          - Path=/worksheet/**
       - id: ACCOUNTS-SERVICE
         uri: lb://ACCOUNTS-SERVICE
         predicates:
@@ -54,14 +50,6 @@ spring:
         uri: lb://TIMESHEET-SERVICE
         predicates:
           - Path=/attendance/**,/holidays/**,/leaves/**,/officeshifts/**
-      - id: TRAINING-SERVICE
-        uri: lb://TRAINING-SERVICE
-        predicates:
-          - Path=/trainerslist/**
-      - id: EVENT-SERVICE
-        uri: lb://EVENT-SERVICE
-        predicates:
-          - Path=/event/**
       - id: INTERVIEW-SCHEDULER
         uri: lb://INTERVIEW-SCHEDULER
         predicates:

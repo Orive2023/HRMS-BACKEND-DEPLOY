@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.orive.Employee.Dto.ComplaintsDto;
-import com.orive.Employee.Dto.TransfersDto;
 import com.orive.Employee.Entity.ComplaintsEntity;
-import com.orive.Employee.Entity.TransfersEntity;
 import com.orive.Employee.Repository.ComplaintsRepository;
 
 @Service
@@ -67,7 +65,7 @@ private static final Logger logger=LoggerFactory.getLogger(ComplaintsService.cla
         Optional<ComplaintsEntity> existingComplaintsOptional = complaintsRepository.findById(complaintsId);
         if (existingComplaintsOptional.isPresent()) {
         	ComplaintsEntity existingComplaints = existingComplaintsOptional.get();
-        	existingComplaints.setComplaintFrom(complaintsDto.getComplaintFrom());
+        	existingComplaints.setEmployeeName(existingComplaints.getEmployeeName());
         	existingComplaints.setComplaintAgainst(complaintsDto.getComplaintAgainst());
             modelMapper.map(complaintsDto, existingComplaintsOptional);
             ComplaintsEntity updatedComplaints = complaintsRepository.save(existingComplaints);

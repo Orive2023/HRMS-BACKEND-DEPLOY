@@ -1,10 +1,7 @@
 package com.orive.Employee.Dto;
 
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.Date;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +16,8 @@ import lombok.ToString;
 public class EmployeesExitDto {
 	
     private Long employeeExitId;
-	private String employeeToExit;
+    private String employeeName;
+    private String username;
 	private LocalDate exitDate;
 	private String typeOfExit;
 	private String exitInterview;
