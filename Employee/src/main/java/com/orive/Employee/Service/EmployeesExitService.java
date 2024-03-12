@@ -55,12 +55,19 @@ private static final Logger logger=LoggerFactory.getLogger(EmployeesExitService.
         }
     }
     
+    public List<EmployeesExitDto> getEmployeesExitByUsername(String username) {
+        List<EmployeesExitEntity> transfersEntities = employeesExitRepository.findByUsername(username);
+        return transfersEntities.stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
+    }
+    
  // Update list by id
     public EmployeesExitDto updateEmployeesExit(Long employeesExitId, EmployeesExitDto employeesExitDto) {
         Optional<EmployeesExitEntity> existingEmployeeExitOptional = employeesExitRepository.findById(employeesExitId);
         if (existingEmployeeExitOptional.isPresent()) {
         	EmployeesExitEntity existingEmployeesExit = existingEmployeeExitOptional.get();
-        	existingEmployeesExit.setEmployeeToExit(employeesExitDto.getEmployeeToExit());
+        	existingEmployeesExit.setEmployeeName(employeesExitDto.getEmployeeName());
         	existingEmployeesExit.setExitDate(employeesExitDto.getExitDate());
         	existingEmployeesExit.setTypeOfExit(employeesExitDto.getTypeOfExit());
             modelMapper.map(employeesExitDto, existingEmployeeExitOptional);

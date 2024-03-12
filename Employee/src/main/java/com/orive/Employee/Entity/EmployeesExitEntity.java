@@ -34,9 +34,13 @@ public class EmployeesExitEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long employeeExitId;
 	
-	@Column(name = "employee_to_exit")
+	@Column(name = "employee_name")
 	@Convert(converter = AesEncryptor.class)
-	private String employeeToExit;
+	private String employeeName;
+	
+	@Column(name = "username")
+	@Convert(converter = AesEncryptor.class)
+	private String username;
 	
 	@Column(name = "exit_date")
 	@Convert(converter = AesEncryptor.class)

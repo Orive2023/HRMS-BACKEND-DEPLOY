@@ -35,9 +35,9 @@ public class ComplaintsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long complaintsId;
 	
-	@Column(name = "complaint_from")
+	@Column(name = "employee_name")
 	@Convert(converter = AesEncryptor.class)
-	private String complaintFrom;
+	private String employeeName;
 	
 	@Column(name = "username")
 	@Convert(converter = AesEncryptor.class)

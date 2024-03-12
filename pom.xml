@@ -32,9 +32,6 @@
         <module>Payroll</module>
         <module>Projects</module>
         <module>Tickets</module>
-        <module>WorkSheet</module>
-        <module>Training</module>
-        <module>Event</module>
         <module>Sale</module>
         <module>Orive_Website</module>
         <module>Hrm-Gateway</module>

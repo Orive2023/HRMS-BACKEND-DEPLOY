@@ -1,8 +1,6 @@
 package com.orive.Employee.Entity;
 
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.Date;
 
 import com.orive.Employee.Configuration.AesEncryptor;
 
@@ -34,9 +32,9 @@ public class WarningsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long warningsId;
 	
-	@Column(name = "warning_to_employee")
+	@Column(name = "employee_name")
 	@Convert(converter = AesEncryptor.class)
-	private String warningToEmployee;
+	private String employeeName;
 	
 	@Column(name = "username")
 	@Convert(converter = AesEncryptor.class)

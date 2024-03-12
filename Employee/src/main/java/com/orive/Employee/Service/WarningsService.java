@@ -70,7 +70,7 @@ private static final Logger logger=LoggerFactory.getLogger(WarningsService.class
         Optional<WarningsEntity> existingWarningsOptional = warningsRepository.findById(warningsId);
         if (existingWarningsOptional.isPresent()) {
         	WarningsEntity existingWarnings = existingWarningsOptional.get();
-        	existingWarnings.setWarningToEmployee(warningsDto.getWarningToEmployee());
+        	existingWarnings.setEmployeeName(warningsDto.getEmployeeName());
         	existingWarnings.setWarningByEmployee(warningsDto.getWarningByEmployee());
             modelMapper.map(warningsDto, existingWarningsOptional);
             WarningsEntity updatedWarnings = warningsRepository.save(existingWarnings);

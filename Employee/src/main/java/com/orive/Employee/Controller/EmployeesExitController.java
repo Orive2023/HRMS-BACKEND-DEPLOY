@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.orive.Employee.Dto.ComplaintsDto;
 import com.orive.Employee.Dto.EmployeesExitDto;
 import com.orive.Employee.Service.EmployeesExitService;
 //import org.springframework.security.access.prepost.PreAuthorize;
@@ -41,7 +40,7 @@ public class EmployeesExitController {
 	  // @PreAuthorize("hasRole('client_HR')")
 	  public ResponseEntity<EmployeesExitDto> createEmployeesExit(@RequestBody EmployeesExitDto employeesExitDto) {
 		  EmployeesExitDto createdEmployeesExit = employeesExitService.createEmployeesExit(employeesExitDto);
-	      logger.info("Created EmployeeExit with id: {}", createdEmployeesExit.getEmployeeToExit());
+	      logger.info("Created EmployeeExit with id: {}", createdEmployeesExit.getEmployeeExitId());
 	      return new ResponseEntity<>(createdEmployeesExit, HttpStatus.CREATED);
 	  }
 	  
@@ -69,6 +68,14 @@ public class EmployeesExitController {
 	          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	      }
 	  }
+	  
+	  @GetMapping("/findemployeesexit/{username}")
+      public ResponseEntity<List<EmployeesExitDto>> getEmployeesExitByUsername(@PathVariable String username) {
+          logger.info("Getting EmployeesExit for username: {}", username);
+          List<EmployeesExitDto> transfers = employeesExitService.getEmployeesExitByUsername(username);
+          logger.info("Found {} EmployeesExit for username: {}", transfers.size(), username);
+          return ResponseEntity.ok(transfers);
+      }
 
 	  // Update EmployeeExit by ID
 	  @PutMapping("/update/{employeesExitId}")

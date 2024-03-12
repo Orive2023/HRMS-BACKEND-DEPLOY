@@ -1,15 +1,16 @@
-package com.orive.TimeSheet.Entity;
+package com.orive.bank.entities;
 
-import java.time.LocalDate;
-import java.util.Date;
+
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.orive.TimeSheet.Configuration.AesEncryptor;
+import com.orive.bank.configuration.AesEncryptor;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,32 +24,35 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "officeshift")
-public class OfficeShiftsEntity {
+@Table(name = "events")
+public class EventEntity {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "custom-sequence")
-    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.TimeSheet.Entity.OfficeShiftsCustomIdGenerator")
-	private String officeShiftsId;
+    @GenericGenerator(name = "custom-sequence", strategy = "com.orive.bank.entities.EventCustomIdGenerator")
+	private String eventId;
 	
-	@Column(name = "created_date")
+	@Column(name = "date")
 	@Convert(converter = AesEncryptor.class)
-	private LocalDate createdDate;
+	private String date;
 	
-	@Column(name = "day")
+	@Column(name = "title")
 	@Convert(converter = AesEncryptor.class)
-	private String day;
+	private String title;
 	
-	@Column(name = "office_clock_in")
+	@Column(name = "class_name")
 	@Convert(converter = AesEncryptor.class)
-	private String officeClockIn;
+	private String className;
 	
-	@Column(name = "office_clock_out")
-	@Convert(converter = AesEncryptor.class)
-	private String officeClockOut;
+	@Column(name = "status")
+	private String status;
+	
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "status")
+//	private Status status;
 }
