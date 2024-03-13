@@ -49,8 +49,8 @@ public class EventEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String className;
 	
-	@Column(name = "status")
-	private String status;
+//	@Column(name = "status")
+//	private String status;
 	
 //	@Enumerated(EnumType.STRING)
 //	@Column(name = "status")
