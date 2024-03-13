@@ -20,5 +20,5 @@ public class EventDto {
 	private String date;
 	private String title;
 	private String className;
-	private String status;
+//	private String status;
 }
