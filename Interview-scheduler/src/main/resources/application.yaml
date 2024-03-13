@@ -30,8 +30,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: smrutisouravmoharana222@gmail.com
-    password: cxly ntva zujx znkg
+    username: hr.orivesolutions@gmail.com
+    password: ieyh njde yroo ebij
     smtp:
       connectiontimeout: 5000
       timeout: 5000
