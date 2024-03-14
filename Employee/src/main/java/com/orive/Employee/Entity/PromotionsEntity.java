@@ -54,11 +54,17 @@ public class PromotionsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String promotionTitle;
 	
+//	@Column(name = "salary_hike")
+//	@Convert(converter = AesEncryptor.class)
+//	private Integer salaryHike;
 	
 	@Column(name = "promotion_date")
 	@Convert(converter = AesEncryptor.class)
 	private LocalDate promotionDate;
 	
+//	@Column(name = "hr_name")
+//	@Convert(converter = AesEncryptor.class)
+//	private String hrName;
 	
 	@Column(name = "description",length = 3000)
 	@Convert(converter = AesEncryptor.class)
