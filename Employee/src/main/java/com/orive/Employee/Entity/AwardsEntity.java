@@ -58,6 +58,10 @@ public class AwardsEntity {
 	@Convert(converter = AesEncryptor.class)
 	private String employeeName;
 	
+	@Column(name = "email")
+	@Convert(converter = AesEncryptor.class)
+	private String email;
+	
 	@Column(name = "award_by")
 	@Convert(converter = AesEncryptor.class)
 	private String awardBy;

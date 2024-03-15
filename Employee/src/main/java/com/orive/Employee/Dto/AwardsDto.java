@@ -28,6 +28,7 @@ public class AwardsDto {
 	private String awardDescription;
 	private String giftItem;
 	private LocalDate date;
+	private String email;
 	private String employeeName;
 	private String awardBy;
 }
