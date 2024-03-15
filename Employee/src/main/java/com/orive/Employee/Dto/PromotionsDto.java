@@ -27,8 +27,8 @@ public class PromotionsDto {
 	private String username;
 	private String email;
 	private String promotionTitle;
-//	private Integer salaryHike;
+	private Integer salaryHike;
 	private LocalDate promotionDate;
-//	private String hrName;
+	private String hrName;
 	private String description;
 }
