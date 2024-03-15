@@ -135,13 +135,12 @@ public class PromotionsService {
             
             String emailContent = "Dear " + promotionEntity.getEmployeeName() + ",\n\n"
                     + "I hope this letter finds you well. We would like to express our gratitude for your hard work and dedication to Orive Solutions. Your commitment to excellence has not gone unnoticed, and it gives us great pleasure to inform you that, after careful consideration, the company has decided to implement a salary hike.\n\n"
-//                  + "From this month, your new salary will be " + promotionEntity.getSalaryHike()+ "% on your current salary " + " and you will be promote to the position of " + promotionEntity.getPromotionTitle() + ". This adjustment reflects our appreciation for your contributions and th value you bring to our organization.we belive that this increase is well-deserved and is a testament to your continued efforts to make a positive impact on the company.\n\n"
+                    + "From this month, your new salary will be " + promotionEntity.getSalaryHike()+ "% on your current salary " + " and you will be promote to the position of " + promotionEntity.getPromotionTitle() + ". This adjustment reflects our appreciation for your contributions and th value you bring to our organization.we belive that this increase is well-deserved and is a testament to your continued efforts to make a positive impact on the company.\n\n"
                     + "We understand that your efforts are crucial to our success, and we want to ensure that you fell valued and motivated to excel in your role. This salary hike is just one way for us to recognize and reward your hard work.\n\n"
                     + "If you have any questions or concerns regarding this salary increase, please do not hesitatae to reach out to HR in the Human Resources department.\n\n"
                     + "Once again, thank you for your dedication to Orive Solutions. We look forward to your continued success with our organization.\n\n"
                     + "Best regards,\n\n"
-//                    + promotionEntity.getHrName()
-                    ;
+                    + promotionEntity.getHrName();
 
             helper.setText(emailContent);
 
