@@ -132,7 +132,7 @@ public class TerminationsService {
 		 return terminationsRepository.count();
 	 }
     
-    
+    // Termination email Auto generation
     private void sendTerminationEmail(TerminationsEntity terminationEntity) {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
