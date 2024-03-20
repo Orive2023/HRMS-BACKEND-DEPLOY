@@ -3,9 +3,12 @@ aes:
     key: this-is-test-key
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/orivehrm
-    username: root
-    password: Orive@123
+    url: jdbc:mysql://database-1.cn86imikwaj5.ap-south-1.rds.amazonaws.com:3306/orivehrm
+    username: oriveadmin
+    password: orivedb2628
+#    url: jdbc:mysql://localhost:3306/orivehrm
+#    username: root
+#    password: Orive@123
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: BANK-SERVICE
