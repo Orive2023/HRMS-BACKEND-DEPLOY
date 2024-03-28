@@ -1,7 +1,5 @@
-package com.orive.project.Configruration;
+package com.orivesolutions.hrms.interviewscheduler.config;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -9,14 +7,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-public class ProjectConfigruration implements WebMvcConfigurer{
+public class InterviewSchedulerConfig implements WebMvcConfigurer{
 
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
-	
-	@Override
+
+    @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Apply CORS configuration to all paths
                 .allowedOrigins("*") // Allow requests from all origins

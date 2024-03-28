@@ -11,9 +11,15 @@ public class CorsConfiguration {
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
+        	
+        	
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**");
+                registry.addMapping("/**") // Apply CORS configuration to all paths
+                .allowedOrigins("*") // Allow requests from all origins
+                .allowedMethods("*") // Allow all HTTP methods
+                .allowedHeaders("*") // Allow all headers
+                .allowCredentials(true); // Allow credentials such as cookies, authorization headers
             }
         };
     }
